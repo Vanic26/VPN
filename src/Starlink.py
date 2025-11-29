@@ -17,10 +17,10 @@ from urllib.parse import unquote, urlparse, parse_qs
 # ---------------- Config ----------------
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 OUTPUT_FILE = os.path.join(REPO_ROOT, "Starlink")
-SOURCES_FILE = os.path.join(REPO_ROOT, "SOURCES_STARLINKk")
+SOURCES_FILE = os.path.join(REPO_ROOT, "SOURCES_STARLINK")
 TEMPLATE_URL = "https://raw.githubusercontent.com/Vanic24/VPN/refs/heads/main/ClashTemplate.ini"
 TEXTDB_API = "https://textdb.online/update/?key=Starlink_SHFX&value={}"
-URL_Starlink = "https://raw.githubusercontent.com/Vanic24/VPN/refs/heads/main/StarLink"
+URL_Starlink = "https://raw.githubusercontent.com/Vanic24/VPN/refs/heads/main/Starlink"
 CN_TO_CC = json.loads(os.getenv("CN_TO_CC", "{}"))
 USE_ONLY_GEOIP = os.getenv("USE_ONLY_GEOIP", "false").lower() == "true"
 

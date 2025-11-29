@@ -588,10 +588,10 @@ def rename_node(p, country_counter, CN_TO_CC):
         country_counter[cc] += 1
         index = country_counter[cc]
         if ipv6_tag:
-                p["name"] = f"{flag} {cc}-{index} [ipv6] | Starlink"
-            else:
-                p["name"] = f"{flag} {cc}-{index} | Starlink"
-            return p
+            p["name"] = f"{flag} {cc}-{index} [ipv6] | Starlink"
+        else:
+            p["name"] = f"{flag} {cc}-{index} | Starlink"
+        return p
 
     # 5️⃣ Skip node entirely if no assignment possible
     return None

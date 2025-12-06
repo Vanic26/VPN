@@ -1,4 +1,4 @@
-# Last update: 06.12.2025 10:58:19
+# Last update: 06.12.2025 15:00:41
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -227,7 +227,7 @@ proxies:
   network: grpc
   servername: www.hun.fi
   skip-cert-verify: false
-  client-fingerprint: qq
+  client-fingerprint: safari
   grpc-opts:
     grpc-service-name: dfw
   alterId: 0
@@ -265,7 +265,7 @@ proxies:
   network: grpc
   servername: thehubdayton.officernd.com
   skip-cert-verify: false
-  client-fingerprint: chrome
+  client-fingerprint: safari
   grpc-opts:
     grpc-service-name: dfw
   alterId: 0
@@ -445,7 +445,7 @@ proxies:
   network: grpc
   servername: www.python.org
   skip-cert-verify: true
-  client-fingerprint: firefox
+  client-fingerprint: chrome
   grpc-opts:
     grpc-service-name: img
   alterId: 0
@@ -464,7 +464,7 @@ proxies:
   network: grpc
   servername: web.yujiaep.com
   skip-cert-verify: false
-  client-fingerprint: qq
+  client-fingerprint: safari
   grpc-opts:
     grpc-service-name: css
   alterId: 0

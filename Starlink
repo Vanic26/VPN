@@ -1,4 +1,4 @@
-# Last update: 09.12.2025 08:29:07
+# Last update: 09.12.2025 11:03:07
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -129,6 +129,46 @@ proxies:
   cipher: aes-128-gcm
   udp: true
 - name: 🇺🇸 US-1 | Starlink
+  type: ss
+  server: 8.8.8.8
+  port: 53
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  cipher: aes-128-gcm
+  udp: true
+- name: 🇺🇸 US-2 | Starlink
+  type: ss
+  server: 8.8.8.8
+  port: 53
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  cipher: aes-128-gcm
+  udp: true
+- name: 🇺🇸 US-3 | Starlink
+  type: ss
+  server: 8.8.8.8
+  port: 53
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  cipher: aes-128-gcm
+  udp: true
+- name: 🇺🇸 US-4 | Starlink
+  type: vless
+  server: 194.113.37.75
+  port: 443
+  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  network: grpc
+  servername: thehubdayton.officernd.com
+  skip-cert-verify: false
+  client-fingerprint: edge
+  grpc-opts:
+    grpc-service-name: dfw
+  alterId: 0
+  cipher: auto
+  udp: true
+  flow: null
+  tls: true
+  reality-opts:
+    public-key: susXbe6rSBJVVGMeXtEKh59ZH4W_zNoSFyY3qmeyYhE
+    short-id: 4f317ec7
+- name: 🇺🇸 US-5 | Starlink
   type: tuic
   server: 136.0.41.79
   port: 36901
@@ -141,6 +181,13 @@ proxies:
   - h3
   congestion-controller: bbr
   udp-relay-mode: native
+- name: 🇺🇸 US-6 | Starlink
+  type: ss
+  server: 8.8.8.8
+  port: 53
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  cipher: aes-128-gcm
+  udp: true
 - name: 🇩🇪 DE-1 | Starlink
   type: tuic
   server: 82.27.2.253
@@ -154,7 +201,33 @@ proxies:
   - h3
   congestion-controller: bbr
   udp-relay-mode: native
-- name: 🇺🇸 US-2 | Starlink
+- name: 🇺🇸 US-7 [ipv6] | Starlink
+  type: tuic
+  server: 2602:f9f3:0000:0002:0000:0000:0000:0926
+  port: 20000
+  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  sni: www.python.org
+  skip-cert-verify: true
+  udp: true
+  alpn:
+  - h3
+  congestion-controller: bbr
+  udp-relay-mode: native
+- name: 🇺🇸 US-8 [ipv6] | Starlink
+  type: tuic
+  server: 2602:f9f3:0000:0002:0000:0000:0000:0926
+  port: 30000
+  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  sni: www.python.org
+  skip-cert-verify: true
+  udp: true
+  alpn:
+  - h3
+  congestion-controller: bbr
+  udp-relay-mode: native
+- name: 🇺🇸 US-9 | Starlink
   type: tuic
   server: 107.150.1.135
   port: 35000
@@ -167,7 +240,7 @@ proxies:
   - h3
   congestion-controller: bbr
   udp-relay-mode: native
-- name: 🇺🇸 US-3 | Starlink
+- name: 🇺🇸 US-10 | Starlink
   type: tuic
   server: 107.150.1.135
   port: 45000
@@ -219,7 +292,7 @@ proxies:
   - h3
   congestion-controller: bbr
   udp-relay-mode: native
-- name: 🇺🇸 US-4 | Starlink
+- name: 🇺🇸 US-11 | Starlink
   type: tuic
   server: 136.0.41.79
   port: 60000
@@ -262,6 +335,58 @@ proxies:
   type: tuic
   server: 51.75.167.7
   port: 24311
+  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  sni: www.python.org
+  skip-cert-verify: true
+  udp: true
+  alpn:
+  - h3
+  congestion-controller: bbr
+  udp-relay-mode: native
+- name: 🇺🇸 US-12 | Starlink
+  type: tuic
+  server: 166.0.192.239
+  port: 46972
+  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  sni: python.org
+  skip-cert-verify: true
+  udp: true
+  alpn:
+  - h3
+  congestion-controller: bbr
+  udp-relay-mode: native
+- name: 🇺🇸 US-13 | Starlink
+  type: tuic
+  server: 166.0.192.239
+  port: 64231
+  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  sni: python.org
+  skip-cert-verify: true
+  udp: true
+  alpn:
+  - h3
+  congestion-controller: bbr
+  udp-relay-mode: native
+- name: 🇺🇸 US-14 [ipv6] | Starlink
+  type: tuic
+  server: 2602:f9f3:0000:0002:0000:0000:0000:0926
+  port: 46951
+  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  sni: www.python.org
+  skip-cert-verify: true
+  udp: true
+  alpn:
+  - h3
+  congestion-controller: bbr
+  udp-relay-mode: native
+- name: 🇺🇸 US-15 [ipv6] | Starlink
+  type: tuic
+  server: 2602:f9f3:0000:0002:0000:0000:0000:0926
+  port: 47691
   uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
   password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
   sni: www.python.org
@@ -348,7 +473,7 @@ proxies:
   reality-opts:
     public-key: 36n16ab10_J-blvmQZHswSvVIBUplTikdqTZgvt8mzs
     short-id: 99387dfbd8
-- name: 🇺🇸 US-5 | Starlink
+- name: 🇺🇸 US-16 | Starlink
   type: hysteria2
   server: 38.135.25.44
   port: 50000
@@ -359,6 +484,13 @@ proxies:
   down: null
   obfs: salamander
   obfs-password: 7GINH1LD6c5kcT69
+- name: 🇺🇸 US-17 | Starlink
+  type: ss
+  server: 8.8.8.8
+  port: 53
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  cipher: aes-128-gcm
+  udp: true
 - name: 🇩🇪 DE-3 | Starlink
   type: vless
   server: germany.usdone.one
@@ -396,7 +528,7 @@ proxies:
   down: null
   obfs: salamander
   obfs-password: o4JIMAp9SxLIKMcR
-- name: 🇺🇸 US-6 | Starlink
+- name: 🇺🇸 US-18 | Starlink
   type: tuic
   server: 136.0.41.47
   port: 40000
@@ -409,7 +541,7 @@ proxies:
   - h3
   congestion-controller: bbr
   udp-relay-mode: native
-- name: 🇺🇸 US-7 | Starlink
+- name: 🇺🇸 US-19 | Starlink
   type: tuic
   server: 136.0.41.47
   port: 50000
@@ -422,7 +554,7 @@ proxies:
   - h3
   congestion-controller: bbr
   udp-relay-mode: native
-- name: 🇺🇸 US-8 | Starlink
+- name: 🇺🇸 US-20 | Starlink
   type: tuic
   server: 136.0.41.47
   port: 60000
@@ -467,7 +599,7 @@ proxies:
   - h3
   congestion-controller: bbr
   udp-relay-mode: native
-- name: 🇺🇸 US-9 | Starlink
+- name: 🇺🇸 US-21 | Starlink
   type: hysteria2
   server: 207.174.28.26
   port: 51371
@@ -478,7 +610,20 @@ proxies:
   down: null
   obfs: salamander
   obfs-password: nDneuR2isso8k79O
-- name: 🇺🇸 US-10 | Starlink
+- name: 🇺🇸 US-22 | Starlink
+  type: tuic
+  server: 107.172.250.169
+  port: 60000
+  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  sni: linux.fb7ba4.www.python.org
+  skip-cert-verify: true
+  udp: true
+  alpn:
+  - h3
+  congestion-controller: bbr
+  udp-relay-mode: native
+- name: 🇺🇸 US-23 | Starlink
   type: tuic
   server: 207.174.28.26
   port: 31841
@@ -491,7 +636,33 @@ proxies:
   - h3
   congestion-controller: bbr
   udp-relay-mode: native
-- name: 🇺🇸 US-11 | Starlink
+- name: 🇺🇸 US-24 | Starlink
+  type: tuic
+  server: 192.227.153.87
+  port: 40000
+  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  sni: www.python.org
+  skip-cert-verify: true
+  udp: true
+  alpn:
+  - h3
+  congestion-controller: bbr
+  udp-relay-mode: native
+- name: 🇺🇸 US-25 | Starlink
+  type: tuic
+  server: 192.227.153.87
+  port: 60000
+  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  sni: www.python.org
+  skip-cert-verify: true
+  udp: true
+  alpn:
+  - h3
+  congestion-controller: bbr
+  udp-relay-mode: native
+- name: 🇺🇸 US-26 | Starlink
   type: tuic
   server: 107.175.6.66
   port: 61000
@@ -543,7 +714,20 @@ proxies:
   - h3
   congestion-controller: bbr
   udp-relay-mode: native
-- name: 🇺🇸 US-12 | Starlink
+- name: 🇺🇸 US-27 | Starlink
+  type: tuic
+  server: 198.23.213.19
+  port: 60000
+  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  sni: www.python.org
+  skip-cert-verify: true
+  udp: true
+  alpn:
+  - h3
+  congestion-controller: bbr
+  udp-relay-mode: native
+- name: 🇺🇸 US-28 | Starlink
   type: tuic
   server: 192.3.105.7
   port: 40000
@@ -569,10 +753,36 @@ proxies:
   - h3
   congestion-controller: bbr
   udp-relay-mode: native
-- name: 🇺🇸 US-13 | Starlink
+- name: 🇺🇸 US-29 | Starlink
   type: tuic
   server: 107.175.6.66
   port: 40000
+  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  sni: www.python.org
+  skip-cert-verify: true
+  udp: true
+  alpn:
+  - h3
+  congestion-controller: bbr
+  udp-relay-mode: native
+- name: 🇺🇸 US-30 | Starlink
+  type: tuic
+  server: 107.172.250.191
+  port: 40000
+  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
+  sni: www.python.org
+  skip-cert-verify: true
+  udp: true
+  alpn:
+  - h3
+  congestion-controller: bbr
+  udp-relay-mode: native
+- name: 🇺🇸 US-31 | Starlink
+  type: tuic
+  server: 107.172.250.191
+  port: 20000
   uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
   password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
   sni: www.python.org
@@ -603,78 +813,114 @@ proxy-groups:
       - 自动选择⚡️
       - 🇬🇧 GB-1 | Starlink
       - 🇺🇸 US-1 | Starlink
-      - 🇩🇪 DE-1 | Starlink
       - 🇺🇸 US-2 | Starlink
       - 🇺🇸 US-3 | Starlink
+      - 🇺🇸 US-4 | Starlink
+      - 🇺🇸 US-5 | Starlink
+      - 🇺🇸 US-6 | Starlink
+      - 🇩🇪 DE-1 | Starlink
+      - 🇺🇸 US-7 [ipv6] | Starlink
+      - 🇺🇸 US-8 [ipv6] | Starlink
+      - 🇺🇸 US-9 | Starlink
+      - 🇺🇸 US-10 | Starlink
       - 🇳🇱 NL-1 | Starlink
       - 🇳🇱 NL-2 | Starlink
       - 🇳🇱 NL-3 | Starlink
-      - 🇺🇸 US-4 | Starlink
+      - 🇺🇸 US-11 | Starlink
       - 🇳🇱 NL-4 | Starlink
       - 🇬🇧 GB-2 | Starlink
       - 🇬🇧 GB-3 | Starlink
+      - 🇺🇸 US-12 | Starlink
+      - 🇺🇸 US-13 | Starlink
+      - 🇺🇸 US-14 [ipv6] | Starlink
+      - 🇺🇸 US-15 [ipv6] | Starlink
       - 🇩🇪 DE-2 | Starlink
       - 🇭🇰 HK-1 | Starlink
       - 🇺🇦 UA-1 | Starlink
       - 🇫🇮 FI-1 | Starlink
       - 🇭🇰 HK-2 | Starlink
-      - 🇺🇸 US-5 | Starlink
+      - 🇺🇸 US-16 | Starlink
+      - 🇺🇸 US-17 | Starlink
       - 🇩🇪 DE-3 | Starlink
       - 🇫🇷 FR-1 | Starlink
       - 🇫🇷 FR-2 | Starlink
-      - 🇺🇸 US-6 | Starlink
-      - 🇺🇸 US-7 | Starlink
-      - 🇺🇸 US-8 | Starlink
+      - 🇺🇸 US-18 | Starlink
+      - 🇺🇸 US-19 | Starlink
+      - 🇺🇸 US-20 | Starlink
       - 🇫🇮 FI-2 | Starlink
       - 🇭🇰 HK-3 | Starlink
-      - 🇺🇸 US-9 | Starlink
-      - 🇺🇸 US-10 | Starlink
-      - 🇺🇸 US-11 | Starlink
+      - 🇺🇸 US-21 | Starlink
+      - 🇺🇸 US-22 | Starlink
+      - 🇺🇸 US-23 | Starlink
+      - 🇺🇸 US-24 | Starlink
+      - 🇺🇸 US-25 | Starlink
+      - 🇺🇸 US-26 | Starlink
       - 🇸🇪 SE-1 | Starlink
       - 🇬🇷 GR-1 | Starlink
       - 🇹🇷 TR-1 | Starlink
-      - 🇺🇸 US-12 | Starlink
+      - 🇺🇸 US-27 | Starlink
+      - 🇺🇸 US-28 | Starlink
       - 🇸🇪 SE-2 | Starlink
-      - 🇺🇸 US-13 | Starlink
+      - 🇺🇸 US-29 | Starlink
+      - 🇺🇸 US-30 | Starlink
+      - 🇺🇸 US-31 | Starlink
       - 🇧🇷 BR-1 | Starlink
   - name: 自动选择⚡️
     type: url-test
     proxies:
       - 🇬🇧 GB-1 | Starlink
       - 🇺🇸 US-1 | Starlink
-      - 🇩🇪 DE-1 | Starlink
       - 🇺🇸 US-2 | Starlink
       - 🇺🇸 US-3 | Starlink
+      - 🇺🇸 US-4 | Starlink
+      - 🇺🇸 US-5 | Starlink
+      - 🇺🇸 US-6 | Starlink
+      - 🇩🇪 DE-1 | Starlink
+      - 🇺🇸 US-7 [ipv6] | Starlink
+      - 🇺🇸 US-8 [ipv6] | Starlink
+      - 🇺🇸 US-9 | Starlink
+      - 🇺🇸 US-10 | Starlink
       - 🇳🇱 NL-1 | Starlink
       - 🇳🇱 NL-2 | Starlink
       - 🇳🇱 NL-3 | Starlink
-      - 🇺🇸 US-4 | Starlink
+      - 🇺🇸 US-11 | Starlink
       - 🇳🇱 NL-4 | Starlink
       - 🇬🇧 GB-2 | Starlink
       - 🇬🇧 GB-3 | Starlink
+      - 🇺🇸 US-12 | Starlink
+      - 🇺🇸 US-13 | Starlink
+      - 🇺🇸 US-14 [ipv6] | Starlink
+      - 🇺🇸 US-15 [ipv6] | Starlink
       - 🇩🇪 DE-2 | Starlink
       - 🇭🇰 HK-1 | Starlink
       - 🇺🇦 UA-1 | Starlink
       - 🇫🇮 FI-1 | Starlink
       - 🇭🇰 HK-2 | Starlink
-      - 🇺🇸 US-5 | Starlink
+      - 🇺🇸 US-16 | Starlink
+      - 🇺🇸 US-17 | Starlink
       - 🇩🇪 DE-3 | Starlink
       - 🇫🇷 FR-1 | Starlink
       - 🇫🇷 FR-2 | Starlink
-      - 🇺🇸 US-6 | Starlink
-      - 🇺🇸 US-7 | Starlink
-      - 🇺🇸 US-8 | Starlink
+      - 🇺🇸 US-18 | Starlink
+      - 🇺🇸 US-19 | Starlink
+      - 🇺🇸 US-20 | Starlink
       - 🇫🇮 FI-2 | Starlink
       - 🇭🇰 HK-3 | Starlink
-      - 🇺🇸 US-9 | Starlink
-      - 🇺🇸 US-10 | Starlink
-      - 🇺🇸 US-11 | Starlink
+      - 🇺🇸 US-21 | Starlink
+      - 🇺🇸 US-22 | Starlink
+      - 🇺🇸 US-23 | Starlink
+      - 🇺🇸 US-24 | Starlink
+      - 🇺🇸 US-25 | Starlink
+      - 🇺🇸 US-26 | Starlink
       - 🇸🇪 SE-1 | Starlink
       - 🇬🇷 GR-1 | Starlink
       - 🇹🇷 TR-1 | Starlink
-      - 🇺🇸 US-12 | Starlink
+      - 🇺🇸 US-27 | Starlink
+      - 🇺🇸 US-28 | Starlink
       - 🇸🇪 SE-2 | Starlink
-      - 🇺🇸 US-13 | Starlink
+      - 🇺🇸 US-29 | Starlink
+      - 🇺🇸 US-30 | Starlink
+      - 🇺🇸 US-31 | Starlink
       - 🇧🇷 BR-1 | Starlink
     url: https://www.gstatic.com/generate_204
     interval: 300

@@ -1,4 +1,4 @@
-# Last update: 10.12.2025 16:36:35
+# Last update: 10.12.2025 17:13:51
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -123,192 +123,276 @@ dns:
 proxies:
 - name: 🇨🇳 CN-1 | Starlink
   type: ss
+  server: dafeizhu.whtjdasha.com
+  port: 29527
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
+- name: 🇨🇳 CN-2 | Starlink
+  type: ss
   server: zhuzhu01.sssyun.xyz
   port: 29527
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇭🇰 HK-1 [ipv6] | Starlink
+  type: ss
+  server: dafeizhu.whtjdasha.com
+  port: 29527
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
+- name: 🇭🇰 HK-2 [ipv6] | Starlink
   type: ss
   server: xiaofeizhu.idsduf.com
   port: 40010
-- name: 🇭🇰 HK-2 [ipv6] | Starlink
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
+- name: 🇭🇰 HK-3 [ipv6] | Starlink
   type: ss
   server: dafeizhu.whtjdasha.com
   port: 19527
-- name: 🇭🇰 HK-3 [ipv6] | Starlink
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
+- name: 🇭🇰 HK-4 [ipv6] | Starlink
   type: ss
   server: xiaofeizhu.idsduf.com
   port: 40023
-- name: 🇭🇰 HK-4 | Starlink
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
+- name: 🇭🇰 HK-5 | Starlink
   type: ss
   server: dafeizhu.whtjdasha.com
   port: 39301
-- name: 🇭🇰 HK-5 | Starlink
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
+- name: 🇭🇰 HK-6 | Starlink
   type: ss
   server: xiaofeizhu.idsduf.com
   port: 40011
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇸🇬 SG-1 | Starlink
   type: ss
   server: dafeizhu.whtjdasha.com
   port: 39204
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇸🇬 SG-2 | Starlink
   type: ss
   server: xiaofeizhu.idsduf.com
   port: 40013
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇸🇬 SG-3 | Starlink
   type: ss
   server: dafeizhu.whtjdasha.com
   port: 39505
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
+- name: 🇸🇬 SG-4 | Starlink
+  type: ss
+  server: xiaofeizhu.idsduf.com
+  port: 44014
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇰🇷 KR-1 | Starlink
   type: ss
   server: dafeizhu.whtjdasha.com
   port: 39206
+  password: NjVhMWE2YmVmNzg4MTcwMA==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇰🇷 KR-2 | Starlink
   type: ss
   server: xiaofeizhu.idsduf.com
   port: 20116
+  password: NjVhMWE2YmVmNzg4MTcwMA==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇹🇼 TW-1 | Starlink
   type: ss
   server: dafeizhu.whtjdasha.com
   port: 32207
+  password: NjVhMWE2YmVmNzg4MTcwMA==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇹🇼 TW-2 | Starlink
   type: ss
   server: xiaofeizhu.idsduf.com
   port: 40017
+  password: NjVhMWE2YmVmNzg4MTcwMA==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇯🇵 JP-1 | Starlink
   type: ss
   server: dafeizhu.whtjdasha.com
   port: 19529
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇯🇵 JP-2 | Starlink
   type: ss
   server: xiaofeizhu.idsduf.com
   port: 40019
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
+- name: 🇯🇵 JP-3 | Starlink
+  type: ss
+  server: dafeizhu.whtjdasha.com
+  port: 49207
+  password: MDhhMTdjZDI0MjI2ZWRlNjE5OWQyNDYxZjM1MjA0OTg=:NjQzMzNlZGQtMDE4YS00ZDgxLWFjYTMtNzA5ZGUxNGE=
+  cipher: 2022-blake3-aes-256-gcm
+  udp: true
+- name: 🇯🇵 JP-4 | Starlink
+  type: ss
+  server: xiaofeizhu.idsduf.com
+  port: 40020
+  password: MDhhMTdjZDI0MjI2ZWRlNjE5OWQyNDYxZjM1MjA0OTg=:NjQzMzNlZGQtMDE4YS00ZDgxLWFjYTMtNzA5ZGUxNGE=
+  cipher: 2022-blake3-aes-256-gcm
+  udp: true
 - name: 🇬🇧 GB-1 | Starlink
   type: ss
   server: dafeizhu.whtjdasha.com
   port: 39209
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇬🇧 GB-2 | Starlink
   type: ss
   server: xiaofeizhu.idsduf.com
   port: 40021
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇺🇸 US-1 | Starlink
   type: ss
   server: dafeizhu.whtjdasha.com
   port: 12980
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇺🇸 US-2 | Starlink
+  type: ss
+  server: xiaofeizhu.idsduf.com
+  port: 12981
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
+- name: 🇺🇸 US-3 | Starlink
   type: ss
   server: dafeizhu.whtjdasha.com
   port: 12983
-- name: 🇺🇸 US-3 | Starlink
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
+- name: 🇺🇸 US-4 | Starlink
   type: ss
   server: xiaofeizhu.idsduf.com
   port: 12984
-- name: 🇺🇸 US-4 | Starlink
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
+- name: 🇺🇸 US-5 | Starlink
   type: ss
   server: dafeizhu.whtjdasha.com
   port: 39203
-- name: 🇺🇸 US-5 | Starlink
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
+- name: 🇺🇸 US-6 | Starlink
   type: ss
   server: xiaofeizhu.idsduf.com
   port: 40022
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇨🇦 CA-1 | Starlink
   type: ss
   server: dafeizhu.whtjdasha.com
   port: 39985
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇨🇦 CA-2 | Starlink
   type: ss
   server: xiaofeizhu.idsduf.com
   port: 39986
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇩🇪 DE-1 | Starlink
   type: ss
   server: dafeizhu.whtjdasha.com
   port: 39987
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇩🇪 DE-2 | Starlink
   type: ss
   server: xiaofeizhu.idsduf.com
   port: 39981
-- name: 🇭🇰 HK-6 | Starlink
-  type: hysteria
-  server: 64333edd-018a-4d81-aca3-709de14ae66d@hk1.jueduibupao.top
-  port: 50001
-  skip-cert-verify: true
-  protocol: hysteria
-- name: 🇭🇰 HK-7 | Starlink
-  type: hysteria
-  server: 64333edd-018a-4d81-aca3-709de14ae66d@hk2.jueduibupao.top
-  port: 47167
-  skip-cert-verify: true
-  protocol: hysteria
-- name: 🇸🇬 SG-4 | Starlink
-  type: hysteria
-  server: 64333edd-018a-4d81-aca3-709de14ae66d@linsg1.jueduibupao.top
-  port: 40830
-  skip-cert-verify: true
-  protocol: hysteria
-- name: 🇹🇼 TW-3 | Starlink
-  type: hysteria
-  server: 64333edd-018a-4d81-aca3-709de14ae66d@tw2.jueduibupao.top
-  port: 30078
-  skip-cert-verify: true
-  protocol: hysteria
-- name: 🇹🇼 TW-4 | Starlink
-  type: hysteria
-  server: 64333edd-018a-4d81-aca3-709de14ae66d@tw3.jueduibupao.top
-  port: 48817
-  skip-cert-verify: true
-  protocol: hysteria
-- name: 🇯🇵 JP-3 | Starlink
-  type: hysteria
-  server: 64333edd-018a-4d81-aca3-709de14ae66d@linjp2.jueduibupao.top
-  port: 30000
-  skip-cert-verify: true
-  protocol: hysteria
-- name: 🇰🇷 KR-3 | Starlink
-  type: hysteria
-  server: 64333edd-018a-4d81-aca3-709de14ae66d@6bkr1.6bnw.top
-  port: 10100
-  skip-cert-verify: true
-  protocol: hysteria
-- name: 🇰🇷 KR-4 | Starlink
-  type: hysteria
-  server: 64333edd-018a-4d81-aca3-709de14ae66d@kr2.jueduibupao.top
-  port: 30000
-  skip-cert-verify: true
-  protocol: hysteria
-- name: 🇹🇭 TH-1 | Starlink
-  type: hysteria
-  server: 64333edd-018a-4d81-aca3-709de14ae66d@th1.jueduibupao.top
-  port: 30000
-  skip-cert-verify: true
-  protocol: hysteria
-- name: 🇺🇸 US-6 | Starlink
-  type: hysteria
-  server: 64333edd-018a-4d81-aca3-709de14ae66d@lvs.jueduibupao.top
-  port: 50001
-  skip-cert-verify: true
-  protocol: hysteria
+  password: MDhhMTdjZDI0MjI2ZWRlNg==:NjQzMzNlZGQtMDE4YS00ZA==
+  cipher: 2022-blake3-aes-128-gcm
+  udp: true
 - name: 🇺🇸 US-7 | Starlink
-  type: hysteria
-  server: 64333edd-018a-4d81-aca3-709de14ae66d@ny.jueduibupao.top
-  port: 50001
-  skip-cert-verify: true
-  protocol: hysteria
+  type: vmess
+  server: best.cdn.sqeven.cn
+  port: 8080
+  uuid: 3866b264-8126-45f6-b51a-9f13e897f753
+  network: ws
+  ws-opts:
+    path: /?ed=2560
+    headers:
+      Host: best.cdn.sqeven.cn
+  alterId: 0
+  cipher: auto
+  udp: true
+  ws-path: /?ed=2560
+  ws-headers:
+    Host: best.cdn.sqeven.cn
 - name: 🇺🇸 US-8 | Starlink
-  type: hysteria
-  server: 64333edd-018a-4d81-aca3-709de14ae66d@azcus1.jueduibupao.top
-  port: 20101
-  skip-cert-verify: true
-  protocol: hysteria
-- name: 🇩🇪 DE-3 | Starlink
-  type: hysteria
-  server: 64333edd-018a-4d81-aca3-709de14ae66d@de1.jueduibupao.top
-  port: 40788
-  skip-cert-verify: true
-  protocol: hysteria
-- name: 🇬🇧 GB-3 | Starlink
-  type: hysteria
-  server: 64333edd-018a-4d81-aca3-709de14ae66d@uk1.jueduibupao.top
-  port: 49122
-  skip-cert-verify: true
-  protocol: hysteria
+  type: vmess
+  server: mugen33.6bnw.top
+  port: 8080
+  uuid: 3866b264-8126-45f6-b51a-9f13e897f753
+  network: ws
+  ws-opts:
+    path: /?ed=2560
+    headers:
+      Host: buyvmus2.6bnw.top
+  alterId: 0
+  cipher: auto
+  udp: true
+  ws-path: /?ed=2560
+  ws-headers:
+    Host: buyvmus2.6bnw.top
+- name: 🇺🇸 US-9 | Starlink
+  type: vmess
+  server: mugen44.6bnw.top
+  port: 8080
+  uuid: 3866b264-8126-45f6-b51a-9f13e897f753
+  network: ws
+  ws-opts:
+    path: /?ed=2560
+    headers:
+      Host: buyvmus2.6bnw.top
+  alterId: 0
+  cipher: auto
+  udp: true
+  ws-path: /?ed=2560
+  ws-headers:
+    Host: buyvmus2.6bnw.top
 
 proxy-groups:
   - name: 选择线路
@@ -316,20 +400,25 @@ proxy-groups:
     proxies:
       - 自动选择⚡️
       - 🇨🇳 CN-1 | Starlink
+      - 🇨🇳 CN-2 | Starlink
       - 🇭🇰 HK-1 [ipv6] | Starlink
       - 🇭🇰 HK-2 [ipv6] | Starlink
       - 🇭🇰 HK-3 [ipv6] | Starlink
-      - 🇭🇰 HK-4 | Starlink
+      - 🇭🇰 HK-4 [ipv6] | Starlink
       - 🇭🇰 HK-5 | Starlink
+      - 🇭🇰 HK-6 | Starlink
       - 🇸🇬 SG-1 | Starlink
       - 🇸🇬 SG-2 | Starlink
       - 🇸🇬 SG-3 | Starlink
+      - 🇸🇬 SG-4 | Starlink
       - 🇰🇷 KR-1 | Starlink
       - 🇰🇷 KR-2 | Starlink
       - 🇹🇼 TW-1 | Starlink
       - 🇹🇼 TW-2 | Starlink
       - 🇯🇵 JP-1 | Starlink
       - 🇯🇵 JP-2 | Starlink
+      - 🇯🇵 JP-3 | Starlink
+      - 🇯🇵 JP-4 | Starlink
       - 🇬🇧 GB-1 | Starlink
       - 🇬🇧 GB-2 | Starlink
       - 🇺🇸 US-1 | Starlink
@@ -337,42 +426,37 @@ proxy-groups:
       - 🇺🇸 US-3 | Starlink
       - 🇺🇸 US-4 | Starlink
       - 🇺🇸 US-5 | Starlink
+      - 🇺🇸 US-6 | Starlink
       - 🇨🇦 CA-1 | Starlink
       - 🇨🇦 CA-2 | Starlink
       - 🇩🇪 DE-1 | Starlink
       - 🇩🇪 DE-2 | Starlink
-      - 🇭🇰 HK-6 | Starlink
-      - 🇭🇰 HK-7 | Starlink
-      - 🇸🇬 SG-4 | Starlink
-      - 🇹🇼 TW-3 | Starlink
-      - 🇹🇼 TW-4 | Starlink
-      - 🇯🇵 JP-3 | Starlink
-      - 🇰🇷 KR-3 | Starlink
-      - 🇰🇷 KR-4 | Starlink
-      - 🇹🇭 TH-1 | Starlink
-      - 🇺🇸 US-6 | Starlink
       - 🇺🇸 US-7 | Starlink
       - 🇺🇸 US-8 | Starlink
-      - 🇩🇪 DE-3 | Starlink
-      - 🇬🇧 GB-3 | Starlink
+      - 🇺🇸 US-9 | Starlink
   - name: 自动选择⚡️
     type: url-test
     proxies:
       - 🇨🇳 CN-1 | Starlink
+      - 🇨🇳 CN-2 | Starlink
       - 🇭🇰 HK-1 [ipv6] | Starlink
       - 🇭🇰 HK-2 [ipv6] | Starlink
       - 🇭🇰 HK-3 [ipv6] | Starlink
-      - 🇭🇰 HK-4 | Starlink
+      - 🇭🇰 HK-4 [ipv6] | Starlink
       - 🇭🇰 HK-5 | Starlink
+      - 🇭🇰 HK-6 | Starlink
       - 🇸🇬 SG-1 | Starlink
       - 🇸🇬 SG-2 | Starlink
       - 🇸🇬 SG-3 | Starlink
+      - 🇸🇬 SG-4 | Starlink
       - 🇰🇷 KR-1 | Starlink
       - 🇰🇷 KR-2 | Starlink
       - 🇹🇼 TW-1 | Starlink
       - 🇹🇼 TW-2 | Starlink
       - 🇯🇵 JP-1 | Starlink
       - 🇯🇵 JP-2 | Starlink
+      - 🇯🇵 JP-3 | Starlink
+      - 🇯🇵 JP-4 | Starlink
       - 🇬🇧 GB-1 | Starlink
       - 🇬🇧 GB-2 | Starlink
       - 🇺🇸 US-1 | Starlink
@@ -380,24 +464,14 @@ proxy-groups:
       - 🇺🇸 US-3 | Starlink
       - 🇺🇸 US-4 | Starlink
       - 🇺🇸 US-5 | Starlink
+      - 🇺🇸 US-6 | Starlink
       - 🇨🇦 CA-1 | Starlink
       - 🇨🇦 CA-2 | Starlink
       - 🇩🇪 DE-1 | Starlink
       - 🇩🇪 DE-2 | Starlink
-      - 🇭🇰 HK-6 | Starlink
-      - 🇭🇰 HK-7 | Starlink
-      - 🇸🇬 SG-4 | Starlink
-      - 🇹🇼 TW-3 | Starlink
-      - 🇹🇼 TW-4 | Starlink
-      - 🇯🇵 JP-3 | Starlink
-      - 🇰🇷 KR-3 | Starlink
-      - 🇰🇷 KR-4 | Starlink
-      - 🇹🇭 TH-1 | Starlink
-      - 🇺🇸 US-6 | Starlink
       - 🇺🇸 US-7 | Starlink
       - 🇺🇸 US-8 | Starlink
-      - 🇩🇪 DE-3 | Starlink
-      - 🇬🇧 GB-3 | Starlink
+      - 🇺🇸 US-9 | Starlink
     url: https://www.gstatic.com/generate_204
     interval: 300
 rules:

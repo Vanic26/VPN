@@ -1,4 +1,4 @@
-# Last update: 10.12.2025 11:07:18
+# Last update: 10.12.2025 16:36:35
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -121,807 +121,283 @@ dns:
       - +.googleapis.com
       - +.gvt1.com
 proxies:
+- name: 🇨🇳 CN-1 | Starlink
+  type: ss
+  server: zhuzhu01.sssyun.xyz
+  port: 29527
+- name: 🇭🇰 HK-1 [ipv6] | Starlink
+  type: ss
+  server: xiaofeizhu.idsduf.com
+  port: 40010
+- name: 🇭🇰 HK-2 [ipv6] | Starlink
+  type: ss
+  server: dafeizhu.whtjdasha.com
+  port: 19527
+- name: 🇭🇰 HK-3 [ipv6] | Starlink
+  type: ss
+  server: xiaofeizhu.idsduf.com
+  port: 40023
+- name: 🇭🇰 HK-4 | Starlink
+  type: ss
+  server: dafeizhu.whtjdasha.com
+  port: 39301
+- name: 🇭🇰 HK-5 | Starlink
+  type: ss
+  server: xiaofeizhu.idsduf.com
+  port: 40011
+- name: 🇸🇬 SG-1 | Starlink
+  type: ss
+  server: dafeizhu.whtjdasha.com
+  port: 39204
+- name: 🇸🇬 SG-2 | Starlink
+  type: ss
+  server: xiaofeizhu.idsduf.com
+  port: 40013
+- name: 🇸🇬 SG-3 | Starlink
+  type: ss
+  server: dafeizhu.whtjdasha.com
+  port: 39505
+- name: 🇰🇷 KR-1 | Starlink
+  type: ss
+  server: dafeizhu.whtjdasha.com
+  port: 39206
+- name: 🇰🇷 KR-2 | Starlink
+  type: ss
+  server: xiaofeizhu.idsduf.com
+  port: 20116
+- name: 🇹🇼 TW-1 | Starlink
+  type: ss
+  server: dafeizhu.whtjdasha.com
+  port: 32207
+- name: 🇹🇼 TW-2 | Starlink
+  type: ss
+  server: xiaofeizhu.idsduf.com
+  port: 40017
+- name: 🇯🇵 JP-1 | Starlink
+  type: ss
+  server: dafeizhu.whtjdasha.com
+  port: 19529
+- name: 🇯🇵 JP-2 | Starlink
+  type: ss
+  server: xiaofeizhu.idsduf.com
+  port: 40019
 - name: 🇬🇧 GB-1 | Starlink
   type: ss
-  server: 8.8.8.8
-  port: 53
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  cipher: aes-128-gcm
-  udp: true
+  server: dafeizhu.whtjdasha.com
+  port: 39209
+- name: 🇬🇧 GB-2 | Starlink
+  type: ss
+  server: xiaofeizhu.idsduf.com
+  port: 40021
 - name: 🇺🇸 US-1 | Starlink
   type: ss
-  server: 8.8.8.8
-  port: 53
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  cipher: aes-128-gcm
-  udp: true
+  server: dafeizhu.whtjdasha.com
+  port: 12980
 - name: 🇺🇸 US-2 | Starlink
   type: ss
-  server: 8.8.8.8
-  port: 53
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  cipher: aes-128-gcm
-  udp: true
+  server: dafeizhu.whtjdasha.com
+  port: 12983
 - name: 🇺🇸 US-3 | Starlink
   type: ss
-  server: 8.8.8.8
-  port: 53
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  cipher: aes-128-gcm
-  udp: true
+  server: xiaofeizhu.idsduf.com
+  port: 12984
 - name: 🇺🇸 US-4 | Starlink
-  type: vless
-  server: 194.113.37.75
-  port: 443
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  network: grpc
-  servername: thehubdayton.officernd.com
-  skip-cert-verify: false
-  client-fingerprint: edge
-  grpc-opts:
-    grpc-service-name: dfw
-  alterId: 0
-  cipher: auto
-  udp: true
-  flow: null
-  tls: true
-  reality-opts:
-    public-key: susXbe6rSBJVVGMeXtEKh59ZH4W_zNoSFyY3qmeyYhE
-    short-id: 4f317ec7
+  type: ss
+  server: dafeizhu.whtjdasha.com
+  port: 39203
 - name: 🇺🇸 US-5 | Starlink
-  type: tuic
-  server: 136.0.41.79
-  port: 36901
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-6 | Starlink
   type: ss
-  server: 8.8.8.8
-  port: 53
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  cipher: aes-128-gcm
-  udp: true
+  server: xiaofeizhu.idsduf.com
+  port: 40022
+- name: 🇨🇦 CA-1 | Starlink
+  type: ss
+  server: dafeizhu.whtjdasha.com
+  port: 39985
+- name: 🇨🇦 CA-2 | Starlink
+  type: ss
+  server: xiaofeizhu.idsduf.com
+  port: 39986
 - name: 🇩🇪 DE-1 | Starlink
-  type: tuic
-  server: 82.27.2.253
-  port: 50000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-7 [ipv6] | Starlink
-  type: tuic
-  server: 2602:f9f3:0000:0002:0000:0000:0000:0926
-  port: 20000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-8 [ipv6] | Starlink
-  type: tuic
-  server: 2602:f9f3:0000:0002:0000:0000:0000:0926
-  port: 30000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-9 | Starlink
-  type: tuic
-  server: 107.150.1.135
-  port: 35000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-10 | Starlink
-  type: tuic
-  server: 107.150.1.135
-  port: 45000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇳🇱 NL-1 | Starlink
-  type: tuic
-  server: 185.34.144.18
-  port: 39001
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇳🇱 NL-2 | Starlink
-  type: tuic
-  server: 185.34.144.18
-  port: 39004
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇳🇱 NL-3 | Starlink
-  type: tuic
-  server: 146.0.74.104
-  port: 39781
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-11 | Starlink
-  type: tuic
-  server: 136.0.41.79
-  port: 60000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇳🇱 NL-4 | Starlink
-  type: tuic
-  server: 146.0.74.104
-  port: 63145
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇬🇧 GB-2 | Starlink
-  type: tuic
-  server: 51.75.167.7
-  port: 40000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇬🇧 GB-3 | Starlink
-  type: tuic
-  server: 51.75.167.7
-  port: 24311
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-12 | Starlink
-  type: tuic
-  server: 166.0.192.239
-  port: 46972
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-13 | Starlink
-  type: tuic
-  server: 166.0.192.239
-  port: 64231
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-14 [ipv6] | Starlink
-  type: tuic
-  server: 2602:f9f3:0000:0002:0000:0000:0000:0926
-  port: 46951
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-15 [ipv6] | Starlink
-  type: tuic
-  server: 2602:f9f3:0000:0002:0000:0000:0000:0926
-  port: 47691
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇩🇪 DE-2 | Starlink
-  type: tuic
-  server: 185.244.195.86
-  port: 47961
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇭🇰 HK-1 | Starlink
-  type: tuic
-  server: 45.144.174.61
-  port: 60000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇦 UA-1 | Starlink
-  type: tuic
-  server: 88.151.195.34
-  port: 60000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇫🇮 FI-1 | Starlink
-  type: vless
-  server: 31.56.113.145
-  port: 3256
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  network: grpc
-  servername: www.hun.fi
-  skip-cert-verify: false
-  client-fingerprint: chrome
-  grpc-opts:
-    grpc-service-name: dfw
-  alterId: 0
-  cipher: auto
-  udp: true
-  flow: null
-  tls: true
-  reality-opts:
-    public-key: 7NfDLpSL1yzlW_ZM_3dR-3DqzxuGzdmEIFaNsgiJJXA
-    short-id: b054414a
-- name: 🇭🇰 HK-2 | Starlink
-  type: vless
-  server: 45.144.174.61
-  port: 443
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  network: grpc
-  servername: web.yujiaep.com
-  skip-cert-verify: false
-  client-fingerprint: edge
-  grpc-opts:
-    grpc-service-name: css
-  alterId: 0
-  cipher: auto
-  udp: true
-  flow: null
-  tls: true
-  reality-opts:
-    public-key: 36n16ab10_J-blvmQZHswSvVIBUplTikdqTZgvt8mzs
-    short-id: 99387dfbd8
-- name: 🇺🇸 US-16 | Starlink
-  type: hysteria2
-  server: 38.135.25.44
-  port: 50000
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  up: null
-  down: null
-  obfs: salamander
-  obfs-password: 7GINH1LD6c5kcT69
-- name: 🇺🇸 US-17 | Starlink
   type: ss
-  server: 8.8.8.8
-  port: 53
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  cipher: aes-128-gcm
-  udp: true
-- name: 🇩🇪 DE-3 | Starlink
-  type: vless
-  server: germany.usdone.one
-  port: 443
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  network: ws
-  servername: germany.usdone.one
+  server: dafeizhu.whtjdasha.com
+  port: 39987
+- name: 🇩🇪 DE-2 | Starlink
+  type: ss
+  server: xiaofeizhu.idsduf.com
+  port: 39981
+- name: 🇭🇰 HK-6 | Starlink
+  type: hysteria
+  server: 64333edd-018a-4d81-aca3-709de14ae66d@hk1.jueduibupao.top
+  port: 50001
   skip-cert-verify: true
-  ws-opts:
-    path: /jss
-  alterId: 0
-  cipher: auto
-  udp: true
-  flow: null
-  tls: true
-- name: 🇫🇷 FR-1 | Starlink
-  type: hysteria2
-  server: 31.56.48.133
-  port: 50005
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
+  protocol: hysteria
+- name: 🇭🇰 HK-7 | Starlink
+  type: hysteria
+  server: 64333edd-018a-4d81-aca3-709de14ae66d@hk2.jueduibupao.top
+  port: 47167
   skip-cert-verify: true
-  up: null
-  down: null
-  obfs: salamander
-  obfs-password: CIsRKi5rK49pIRAl
-- name: 🇫🇷 FR-2 | Starlink
-  type: hysteria2
-  server: 31.56.48.133
-  port: 30035
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
+  protocol: hysteria
+- name: 🇸🇬 SG-4 | Starlink
+  type: hysteria
+  server: 64333edd-018a-4d81-aca3-709de14ae66d@linsg1.jueduibupao.top
+  port: 40830
   skip-cert-verify: true
-  up: null
-  down: null
-  obfs: salamander
-  obfs-password: o4JIMAp9SxLIKMcR
-- name: 🇺🇸 US-18 | Starlink
-  type: tuic
-  server: 136.0.41.47
-  port: 40000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
+  protocol: hysteria
+- name: 🇹🇼 TW-3 | Starlink
+  type: hysteria
+  server: 64333edd-018a-4d81-aca3-709de14ae66d@tw2.jueduibupao.top
+  port: 30078
   skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-19 | Starlink
-  type: tuic
-  server: 136.0.41.47
-  port: 50000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
+  protocol: hysteria
+- name: 🇹🇼 TW-4 | Starlink
+  type: hysteria
+  server: 64333edd-018a-4d81-aca3-709de14ae66d@tw3.jueduibupao.top
+  port: 48817
   skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-20 | Starlink
-  type: tuic
-  server: 136.0.41.47
-  port: 60000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇫🇮 FI-2 | Starlink
-  type: vless
-  server: 31.56.113.145
-  port: 49861
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  network: grpc
-  servername: www.hun.fi
-  skip-cert-verify: false
-  client-fingerprint: chrome
-  grpc-opts:
-    grpc-service-name: dfw
-  alterId: 0
-  cipher: auto
-  udp: true
-  flow: null
-  tls: true
-  reality-opts:
-    public-key: d-LG_ns3Nrh5GeWnEMpn2zbzD2TT8f8KhKnHU8z9XxE
-    short-id: 58d89cd76d58
-- name: 🇭🇰 HK-3 | Starlink
-  type: tuic
-  server: 217.60.38.130
-  port: 47954
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-21 | Starlink
-  type: hysteria2
-  server: 207.174.28.26
-  port: 51371
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: apple.com
-  skip-cert-verify: true
-  up: null
-  down: null
-  obfs: salamander
-  obfs-password: nDneuR2isso8k79O
-- name: 🇺🇸 US-22 | Starlink
-  type: tuic
-  server: 107.172.250.169
-  port: 60000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: linux.fb7ba4.www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-23 | Starlink
-  type: tuic
-  server: 207.174.28.26
-  port: 31841
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: apple.com
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-24 | Starlink
-  type: tuic
-  server: 192.227.153.87
-  port: 40000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-25 | Starlink
-  type: tuic
-  server: 192.227.153.87
-  port: 60000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-26 | Starlink
-  type: tuic
-  server: 107.175.6.66
-  port: 61000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇸🇪 SE-1 | Starlink
-  type: tuic
-  server: 148.135.207.26
-  port: 50000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇬🇷 GR-1 | Starlink
-  type: tuic
-  server: 103.83.87.119
-  port: 60000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
-  skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇹🇷 TR-1 | Starlink
-  type: tuic
-  server: 103.83.87.119
+  protocol: hysteria
+- name: 🇯🇵 JP-3 | Starlink
+  type: hysteria
+  server: 64333edd-018a-4d81-aca3-709de14ae66d@linjp2.jueduibupao.top
   port: 30000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
   skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-27 | Starlink
-  type: tuic
-  server: 198.23.213.19
-  port: 60000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
+  protocol: hysteria
+- name: 🇰🇷 KR-3 | Starlink
+  type: hysteria
+  server: 64333edd-018a-4d81-aca3-709de14ae66d@6bkr1.6bnw.top
+  port: 10100
   skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-28 | Starlink
-  type: tuic
-  server: 192.3.105.7
-  port: 40000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
+  protocol: hysteria
+- name: 🇰🇷 KR-4 | Starlink
+  type: hysteria
+  server: 64333edd-018a-4d81-aca3-709de14ae66d@kr2.jueduibupao.top
+  port: 30000
   skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇸🇪 SE-2 | Starlink
-  type: tuic
-  server: 148.135.207.26
-  port: 40000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
+  protocol: hysteria
+- name: 🇹🇭 TH-1 | Starlink
+  type: hysteria
+  server: 64333edd-018a-4d81-aca3-709de14ae66d@th1.jueduibupao.top
+  port: 30000
   skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-29 | Starlink
-  type: tuic
-  server: 107.175.6.66
-  port: 40000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
+  protocol: hysteria
+- name: 🇺🇸 US-6 | Starlink
+  type: hysteria
+  server: 64333edd-018a-4d81-aca3-709de14ae66d@lvs.jueduibupao.top
+  port: 50001
   skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-30 | Starlink
-  type: tuic
-  server: 107.172.250.191
-  port: 40000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
+  protocol: hysteria
+- name: 🇺🇸 US-7 | Starlink
+  type: hysteria
+  server: 64333edd-018a-4d81-aca3-709de14ae66d@ny.jueduibupao.top
+  port: 50001
   skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇺🇸 US-31 | Starlink
-  type: tuic
-  server: 107.172.250.191
-  port: 20000
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
+  protocol: hysteria
+- name: 🇺🇸 US-8 | Starlink
+  type: hysteria
+  server: 64333edd-018a-4d81-aca3-709de14ae66d@azcus1.jueduibupao.top
+  port: 20101
   skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
-- name: 🇧🇷 BR-1 | Starlink
-  type: tuic
-  server: 194.58.38.67
-  port: 31597
-  uuid: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  password: 98a34d7a-43eb-4971-b4c8-eb3a474b0add
-  sni: www.python.org
+  protocol: hysteria
+- name: 🇩🇪 DE-3 | Starlink
+  type: hysteria
+  server: 64333edd-018a-4d81-aca3-709de14ae66d@de1.jueduibupao.top
+  port: 40788
   skip-cert-verify: true
-  udp: true
-  alpn:
-  - h3
-  congestion-controller: bbr
-  udp-relay-mode: native
+  protocol: hysteria
+- name: 🇬🇧 GB-3 | Starlink
+  type: hysteria
+  server: 64333edd-018a-4d81-aca3-709de14ae66d@uk1.jueduibupao.top
+  port: 49122
+  skip-cert-verify: true
+  protocol: hysteria
 
 proxy-groups:
   - name: 选择线路
     type: select
     proxies:
       - 自动选择⚡️
+      - 🇨🇳 CN-1 | Starlink
+      - 🇭🇰 HK-1 [ipv6] | Starlink
+      - 🇭🇰 HK-2 [ipv6] | Starlink
+      - 🇭🇰 HK-3 [ipv6] | Starlink
+      - 🇭🇰 HK-4 | Starlink
+      - 🇭🇰 HK-5 | Starlink
+      - 🇸🇬 SG-1 | Starlink
+      - 🇸🇬 SG-2 | Starlink
+      - 🇸🇬 SG-3 | Starlink
+      - 🇰🇷 KR-1 | Starlink
+      - 🇰🇷 KR-2 | Starlink
+      - 🇹🇼 TW-1 | Starlink
+      - 🇹🇼 TW-2 | Starlink
+      - 🇯🇵 JP-1 | Starlink
+      - 🇯🇵 JP-2 | Starlink
       - 🇬🇧 GB-1 | Starlink
+      - 🇬🇧 GB-2 | Starlink
       - 🇺🇸 US-1 | Starlink
       - 🇺🇸 US-2 | Starlink
       - 🇺🇸 US-3 | Starlink
       - 🇺🇸 US-4 | Starlink
       - 🇺🇸 US-5 | Starlink
-      - 🇺🇸 US-6 | Starlink
+      - 🇨🇦 CA-1 | Starlink
+      - 🇨🇦 CA-2 | Starlink
       - 🇩🇪 DE-1 | Starlink
-      - 🇺🇸 US-7 [ipv6] | Starlink
-      - 🇺🇸 US-8 [ipv6] | Starlink
-      - 🇺🇸 US-9 | Starlink
-      - 🇺🇸 US-10 | Starlink
-      - 🇳🇱 NL-1 | Starlink
-      - 🇳🇱 NL-2 | Starlink
-      - 🇳🇱 NL-3 | Starlink
-      - 🇺🇸 US-11 | Starlink
-      - 🇳🇱 NL-4 | Starlink
-      - 🇬🇧 GB-2 | Starlink
-      - 🇬🇧 GB-3 | Starlink
-      - 🇺🇸 US-12 | Starlink
-      - 🇺🇸 US-13 | Starlink
-      - 🇺🇸 US-14 [ipv6] | Starlink
-      - 🇺🇸 US-15 [ipv6] | Starlink
       - 🇩🇪 DE-2 | Starlink
-      - 🇭🇰 HK-1 | Starlink
-      - 🇺🇦 UA-1 | Starlink
-      - 🇫🇮 FI-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇺🇸 US-16 | Starlink
-      - 🇺🇸 US-17 | Starlink
+      - 🇭🇰 HK-6 | Starlink
+      - 🇭🇰 HK-7 | Starlink
+      - 🇸🇬 SG-4 | Starlink
+      - 🇹🇼 TW-3 | Starlink
+      - 🇹🇼 TW-4 | Starlink
+      - 🇯🇵 JP-3 | Starlink
+      - 🇰🇷 KR-3 | Starlink
+      - 🇰🇷 KR-4 | Starlink
+      - 🇹🇭 TH-1 | Starlink
+      - 🇺🇸 US-6 | Starlink
+      - 🇺🇸 US-7 | Starlink
+      - 🇺🇸 US-8 | Starlink
       - 🇩🇪 DE-3 | Starlink
-      - 🇫🇷 FR-1 | Starlink
-      - 🇫🇷 FR-2 | Starlink
-      - 🇺🇸 US-18 | Starlink
-      - 🇺🇸 US-19 | Starlink
-      - 🇺🇸 US-20 | Starlink
-      - 🇫🇮 FI-2 | Starlink
-      - 🇭🇰 HK-3 | Starlink
-      - 🇺🇸 US-21 | Starlink
-      - 🇺🇸 US-22 | Starlink
-      - 🇺🇸 US-23 | Starlink
-      - 🇺🇸 US-24 | Starlink
-      - 🇺🇸 US-25 | Starlink
-      - 🇺🇸 US-26 | Starlink
-      - 🇸🇪 SE-1 | Starlink
-      - 🇬🇷 GR-1 | Starlink
-      - 🇹🇷 TR-1 | Starlink
-      - 🇺🇸 US-27 | Starlink
-      - 🇺🇸 US-28 | Starlink
-      - 🇸🇪 SE-2 | Starlink
-      - 🇺🇸 US-29 | Starlink
-      - 🇺🇸 US-30 | Starlink
-      - 🇺🇸 US-31 | Starlink
-      - 🇧🇷 BR-1 | Starlink
+      - 🇬🇧 GB-3 | Starlink
   - name: 自动选择⚡️
     type: url-test
     proxies:
+      - 🇨🇳 CN-1 | Starlink
+      - 🇭🇰 HK-1 [ipv6] | Starlink
+      - 🇭🇰 HK-2 [ipv6] | Starlink
+      - 🇭🇰 HK-3 [ipv6] | Starlink
+      - 🇭🇰 HK-4 | Starlink
+      - 🇭🇰 HK-5 | Starlink
+      - 🇸🇬 SG-1 | Starlink
+      - 🇸🇬 SG-2 | Starlink
+      - 🇸🇬 SG-3 | Starlink
+      - 🇰🇷 KR-1 | Starlink
+      - 🇰🇷 KR-2 | Starlink
+      - 🇹🇼 TW-1 | Starlink
+      - 🇹🇼 TW-2 | Starlink
+      - 🇯🇵 JP-1 | Starlink
+      - 🇯🇵 JP-2 | Starlink
       - 🇬🇧 GB-1 | Starlink
+      - 🇬🇧 GB-2 | Starlink
       - 🇺🇸 US-1 | Starlink
       - 🇺🇸 US-2 | Starlink
       - 🇺🇸 US-3 | Starlink
       - 🇺🇸 US-4 | Starlink
       - 🇺🇸 US-5 | Starlink
-      - 🇺🇸 US-6 | Starlink
+      - 🇨🇦 CA-1 | Starlink
+      - 🇨🇦 CA-2 | Starlink
       - 🇩🇪 DE-1 | Starlink
-      - 🇺🇸 US-7 [ipv6] | Starlink
-      - 🇺🇸 US-8 [ipv6] | Starlink
-      - 🇺🇸 US-9 | Starlink
-      - 🇺🇸 US-10 | Starlink
-      - 🇳🇱 NL-1 | Starlink
-      - 🇳🇱 NL-2 | Starlink
-      - 🇳🇱 NL-3 | Starlink
-      - 🇺🇸 US-11 | Starlink
-      - 🇳🇱 NL-4 | Starlink
-      - 🇬🇧 GB-2 | Starlink
-      - 🇬🇧 GB-3 | Starlink
-      - 🇺🇸 US-12 | Starlink
-      - 🇺🇸 US-13 | Starlink
-      - 🇺🇸 US-14 [ipv6] | Starlink
-      - 🇺🇸 US-15 [ipv6] | Starlink
       - 🇩🇪 DE-2 | Starlink
-      - 🇭🇰 HK-1 | Starlink
-      - 🇺🇦 UA-1 | Starlink
-      - 🇫🇮 FI-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇺🇸 US-16 | Starlink
-      - 🇺🇸 US-17 | Starlink
+      - 🇭🇰 HK-6 | Starlink
+      - 🇭🇰 HK-7 | Starlink
+      - 🇸🇬 SG-4 | Starlink
+      - 🇹🇼 TW-3 | Starlink
+      - 🇹🇼 TW-4 | Starlink
+      - 🇯🇵 JP-3 | Starlink
+      - 🇰🇷 KR-3 | Starlink
+      - 🇰🇷 KR-4 | Starlink
+      - 🇹🇭 TH-1 | Starlink
+      - 🇺🇸 US-6 | Starlink
+      - 🇺🇸 US-7 | Starlink
+      - 🇺🇸 US-8 | Starlink
       - 🇩🇪 DE-3 | Starlink
-      - 🇫🇷 FR-1 | Starlink
-      - 🇫🇷 FR-2 | Starlink
-      - 🇺🇸 US-18 | Starlink
-      - 🇺🇸 US-19 | Starlink
-      - 🇺🇸 US-20 | Starlink
-      - 🇫🇮 FI-2 | Starlink
-      - 🇭🇰 HK-3 | Starlink
-      - 🇺🇸 US-21 | Starlink
-      - 🇺🇸 US-22 | Starlink
-      - 🇺🇸 US-23 | Starlink
-      - 🇺🇸 US-24 | Starlink
-      - 🇺🇸 US-25 | Starlink
-      - 🇺🇸 US-26 | Starlink
-      - 🇸🇪 SE-1 | Starlink
-      - 🇬🇷 GR-1 | Starlink
-      - 🇹🇷 TR-1 | Starlink
-      - 🇺🇸 US-27 | Starlink
-      - 🇺🇸 US-28 | Starlink
-      - 🇸🇪 SE-2 | Starlink
-      - 🇺🇸 US-29 | Starlink
-      - 🇺🇸 US-30 | Starlink
-      - 🇺🇸 US-31 | Starlink
-      - 🇧🇷 BR-1 | Starlink
+      - 🇬🇧 GB-3 | Starlink
     url: https://www.gstatic.com/generate_204
     interval: 300
 rules:

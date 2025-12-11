@@ -752,8 +752,28 @@ def main():
         info_ordered = [reorder_info(n) for n in renamed_nodes]
         info_ordered_dicts = [dict(n) for n in info_ordered]
 
+        def make_single_line_yaml(proxies):
+            lines = []
+            for p in proxies:
+                # Convert nested dicts safely
+                def to_yaml_value(v):
+                    if isinstance(v, dict):
+                        inner = ", ".join(f"{k}: {json.dumps(vv, ensure_ascii=False)}" for k, vv in v.items())
+                        return "{" + inner + "}"
+                    else:
+                        return json.dumps(v, ensure_ascii=False)
+        
+                parts = []
+                for k, v in p.items():
+                    parts.append(f"{k}: {to_yaml_value(v)}")
+        
+                line = "- {" + ", ".join(parts) + "}"
+                lines.append(line)
+        
+            return "\n".join(lines)
+
         # ---------------- Convert to YAML ----------------
-        proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
+        proxies_yaml_block = make_single_line_yaml(info_ordered_dicts)
         proxy_names_block = "\n".join([f"      - {unquote(p['name'])}" for p in info_ordered_dicts])
 
         # ---------------- Replace placeholders ----------------

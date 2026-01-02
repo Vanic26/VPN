@@ -71,6 +71,7 @@ jobs:
           CN_TO_CC: ${{ secrets.CN_TO_CC }}
           LATENCY_FILTER: ${{ env.LATENCY_FILTER }}
           LATENCY_THRESHOLD: ${{ env.LATENCY_THRESHOLD }}
+          DUPLICATE_FILTER: ${{ inputs.use_duplicate_filter }}
           USE_ONLY_GEOIP: ${{ env.USE_ONLY_GEOIP }}
 
       - name: Generate GMT+6:30 timestamp

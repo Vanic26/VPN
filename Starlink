@@ -1,4 +1,4 @@
-# Last update: 02.01.2026 11:16:44
+# Last update: 02.01.2026 15:06:49
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -121,47 +121,23 @@ dns:
       - +.googleapis.com
       - +.gvt1.com
 proxies:
-- {name: "🇬🇧 GB-1 | Starlink", type: "vless", server: "Dont.use.this.node", port: 8888, uuid: "b567df32-39d5-499c-9b09-05277c57a1a8", servername: "hkust.edu.hk", skip-cert-verify: true, client-fingerprint: "qq", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "5TM09ctr75RTSK0hIuZU5Zt416ISpdszeFaz2rEcMFE", short-id: "47b59b8ac0"}}
-- {name: "🇭🇰 HK-1 | Starlink", type: "vless", server: "free-hk1.trumpyun.pro", port: 16000, uuid: "b567df32-39d5-499c-9b09-05277c57a1a8", servername: "hkust.edu.hk", skip-cert-verify: true, client-fingerprint: "safari", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "oOrhlfTNZu6RVRyogAiehhQaHcXTNNBE2WnY4JSisTE", short-id: "6535dc5828"}}
-- {name: "🇭🇰 HK-2 | Starlink", type: "vless", server: "free-hk2.trumpyun.pro", port: 16001, uuid: "b567df32-39d5-499c-9b09-05277c57a1a8", servername: "hkust.edu.hk", skip-cert-verify: true, client-fingerprint: "qq", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "oOrhlfTNZu6RVRyogAiehhQaHcXTNNBE2WnY4JSisTE", short-id: "6535dc5828"}}
-- {name: "🇹🇼 TW-1 | Starlink", type: "vless", server: "free-tw1.trumpyun.pro", port: 26810, uuid: "b567df32-39d5-499c-9b09-05277c57a1a8", servername: "hkust.edu.hk", skip-cert-verify: true, client-fingerprint: "firefox", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "D4zSagXG0L11YVIYvDSO-1QQUT1mcbmdZGGrtglaqHw", short-id: "f3a1d5680bbe"}}
-- {name: "🇹🇼 TW-2 | Starlink", type: "vless", server: "free-tw2.trumpyun.pro", port: 26811, uuid: "b567df32-39d5-499c-9b09-05277c57a1a8", servername: "hkust.edu.hk", skip-cert-verify: true, client-fingerprint: "ios", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "D4zSagXG0L11YVIYvDSO-1QQUT1mcbmdZGGrtglaqHw", short-id: "f3a1d5680bbe"}}
+- {name: "🇬🇧 GB-1 | Starlink", type: "vless", server: "Dont.use.this.node", port: 8888, uuid: "b567df32-39d5-499c-9b09-05277c57a1a8", servername: "hkust.edu.hk", skip-cert-verify: true, client-fingerprint: "ios", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "5TM09ctr75RTSK0hIuZU5Zt416ISpdszeFaz2rEcMFE", short-id: "47b59b8ac0"}}
 - {name: "🇯🇵 JP-1 | Starlink", type: "vless", server: "free-jp1.trumpyun.pro", port: 35684, uuid: "b567df32-39d5-499c-9b09-05277c57a1a8", servername: "blog.api.www.cloudflare.com", skip-cert-verify: true, client-fingerprint: "safari", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "ur9fjV3O9tgc0gVIt1cF_aU0u6l5czNL71cuG94ps28", short-id: "c50edabe7618fc50"}}
-- {name: "🇯🇵 JP-2 | Starlink", type: "vless", server: "free-jp2.trumpyun.pro", port: 35685, uuid: "b567df32-39d5-499c-9b09-05277c57a1a8", servername: "blog.api.www.cloudflare.com", skip-cert-verify: true, client-fingerprint: "ios", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "ur9fjV3O9tgc0gVIt1cF_aU0u6l5czNL71cuG94ps28", short-id: "c50edabe7618fc50"}}
-- {name: "🇰🇷 KR-1 | Starlink", type: "vless", server: "free-kr1.trumpyun.pro", port: 16811, uuid: "b567df32-39d5-499c-9b09-05277c57a1a8", servername: "superbook.kr", skip-cert-verify: true, client-fingerprint: "qq", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "EDdtCAZjCIZQPBTt8iPs_0pmXapn8JPuySeSrm0VkA4", short-id: "a68d1d88"}}
-- {name: "🇰🇷 KR-2 | Starlink", type: "vless", server: "free-kr2.trumpyun.pro", port: 16812, uuid: "b567df32-39d5-499c-9b09-05277c57a1a8", servername: "superbook.kr", skip-cert-verify: true, client-fingerprint: "safari", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "EDdtCAZjCIZQPBTt8iPs_0pmXapn8JPuySeSrm0VkA4", short-id: "a68d1d88"}}
-- {name: "🇸🇬 SG-1 | Starlink", type: "vless", server: "free-sg1.trumpyun.pro", port: 16611, uuid: "b567df32-39d5-499c-9b09-05277c57a1a8", servername: "www.ntu.edu.sg", skip-cert-verify: true, client-fingerprint: "qq", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "hTs75vEO_d-_BOxka-PTviPKxLFGCSbMf38fLp19fnU", short-id: "1e215934f1"}}
-- {name: "🇸🇬 SG-2 | Starlink", type: "vless", server: "free-sg2.trumpyun.pro", port: 16612, uuid: "b567df32-39d5-499c-9b09-05277c57a1a8", servername: "www.ntu.edu.sg", skip-cert-verify: true, client-fingerprint: "chrome", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "hTs75vEO_d-_BOxka-PTviPKxLFGCSbMf38fLp19fnU", short-id: "1e215934f1"}}
+- {name: "🇰🇷 KR-1 | Starlink", type: "vless", server: "free-kr1.trumpyun.pro", port: 16811, uuid: "b567df32-39d5-499c-9b09-05277c57a1a8", servername: "superbook.kr", skip-cert-verify: true, client-fingerprint: "chrome", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "EDdtCAZjCIZQPBTt8iPs_0pmXapn8JPuySeSrm0VkA4", short-id: "a68d1d88"}}
 proxy-groups:
   - name: 选择线路
     type: select
     proxies:
       - 自动选择⚡️
       - 🇬🇧 GB-1 | Starlink
-      - 🇭🇰 HK-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇹🇼 TW-1 | Starlink
-      - 🇹🇼 TW-2 | Starlink
       - 🇯🇵 JP-1 | Starlink
-      - 🇯🇵 JP-2 | Starlink
       - 🇰🇷 KR-1 | Starlink
-      - 🇰🇷 KR-2 | Starlink
-      - 🇸🇬 SG-1 | Starlink
-      - 🇸🇬 SG-2 | Starlink
   - name: 自动选择⚡️
     type: url-test
     proxies:
       - 🇬🇧 GB-1 | Starlink
-      - 🇭🇰 HK-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇹🇼 TW-1 | Starlink
-      - 🇹🇼 TW-2 | Starlink
       - 🇯🇵 JP-1 | Starlink
-      - 🇯🇵 JP-2 | Starlink
       - 🇰🇷 KR-1 | Starlink
-      - 🇰🇷 KR-2 | Starlink
-      - 🇸🇬 SG-1 | Starlink
-      - 🇸🇬 SG-2 | Starlink
     url: https://www.gstatic.com/generate_204
     interval: 300
 rules:

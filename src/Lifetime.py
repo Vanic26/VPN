@@ -33,6 +33,9 @@ try:
 except ValueError:
     LATENCY_THRESHOLD = 100
 
+use_dup_env = os.environ.get("DUPLICATE_FILTER", "false").lower()
+USE_DUPLICATE_FILTER = use_dup_env == "true"
+
 # ---------------- Helper ----------------
 def resolve_ip(host):
     try:
@@ -48,6 +51,43 @@ def tcp_latency_ms(host, port, timeout=2.0):
         return int((time.time() - start) * 1000)
     except:
         return 9999
+
+def deduplicate_nodes(nodes):
+    """
+    Remove duplicate nodes based on:
+    - (server, port, uuid) OR
+    - (server, port, password)
+
+    Server string must match EXACTLY.
+    """
+    seen = set()
+    unique_nodes = []
+    removed = 0
+
+    for n in nodes:
+        server = str(n.get("server", "")).strip()
+        port = int(n.get("port", 0))
+        uuid = str(n.get("uuid", "")).strip()
+        password = str(n.get("password", "")).strip()
+
+        # Build key
+        if uuid:
+            key = ("uuid", server, port, uuid)
+        elif password:
+            key = ("password", server, port, password)
+        else:
+            # No dedup key → keep it
+            unique_nodes.append(n)
+            continue
+
+        if key in seen:
+            removed += 1
+            continue
+
+        seen.add(key)
+        unique_nodes.append(n)
+
+    return unique_nodes, removed
 
 def geo_ip(ip):
     try:
@@ -691,6 +731,17 @@ def main():
             filtered_nodes = all_nodes
             country_counter = defaultdict(int)
             print(f"[latency] 🚀 Latency filtering 🚫, {len(filtered_nodes)} nodes remain")
+
+        # ---------------- Duplicate filter ----------------
+        if USE_DUPLICATE_FILTER:
+            print("[dedup] 🧹 Removing duplicate nodes (server + port + uuid/password)")
+            before = len(filtered_nodes)
+            filtered_nodes, removed = deduplicate_nodes(filtered_nodes)
+            after = len(filtered_nodes)
+            print(f"[dedup] ❗Removed {removed} duplicate nodes")
+            print(f"[dedup] 🖨️ Total {after} nodes remain after deduplication")
+        else:
+            print("[dedup] 🚫 Duplicate filtering disabled")
 
         # ---------------- Renamed nodes ----------------
         renamed_nodes = []

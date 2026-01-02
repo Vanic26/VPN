@@ -645,35 +645,32 @@ def load_proxies(url, retries=10):
             r.raise_for_status()
             text = r.text.strip()
 
-            print(f"[fetch] 📥 {len(text.splitlines())} lines fetched from subscription link")
+            print(f"[fetch] 📥 {len(text.splitlines())} lines fetched from subscription link", flush=True)
             for line in text.splitlines()[:5]:
-                print("       ", line[:80])
+                print("       ", line[:80], flush=True)
 
             nodes = []
 
-            # Base64 decode if single line and looks like Base64
             if len(text.splitlines()) == 1 and re.match(r'^[A-Za-z0-9+/=]+$', text):
                 try:
                     decoded = base64.b64decode(text + "=" * (-len(text) % 4)).decode("utf-8")
                     text = decoded
-                    print(f"[decode] 🔓 Base64 decoded -> {len(text.splitlines())} lines")
+                    print(f"[decode] 🔓 Base64 decoded -> {len(text.splitlines())} lines", flush=True)
                 except Exception as e:
-                    print(f"[warn] 😭 Base64 decode failed for {url}: {e}")
+                    print(f"[warn] 😭 Base64 decode failed: {e}", flush=True)
 
-            # Parse as YAML (Clash format)
             if text.startswith("proxies:") or "proxies:" in text:
                 try:
                     data = yaml.safe_load(text)
                     if data and "proxies" in data:
                         for p in data["proxies"]:
                             nodes.append(p)
-                            print(f"[parse] 🔎 YAML node: {p.get('name', '')}")
+                            print(f"[parse] 🔎 YAML node: {p.get('name', '')}", flush=True)
                     else:
-                        print(f"[warn] 😭 YAML structure invalid or empty: {url}")
+                        print("[warn] 😭 YAML structure invalid or empty", flush=True)
                 except Exception as e:
-                    print(f"[warn] 😭 YAML parsing failed for {url}: {e}")
+                    print(f"[warn] 😭 YAML parsing failed: {e}", flush=True)
             else:
-                # Parse as individual subscription lines (Vmess/Vless/Trojan/etc.)
                 for line in text.splitlines():
                     line = line.strip()
                     if not line:
@@ -681,21 +678,22 @@ def load_proxies(url, retries=10):
                     try:
                         node = parse_node_line(line)
                         if node:
-                            print(f"[parsed] 🔎 {json.dumps(node, ensure_ascii=False)}")
+                            print(f"[parsed] 🔎 {json.dumps(node, ensure_ascii=False)}", flush=True)
                             nodes.append(node)
                         else:
-                            print(f"[skip] ⛔ Invalid or unsupported line -> {line[:60]}...")
+                            print(f"[skip] ⛔ Invalid or unsupported line -> {line[:60]}...", flush=True)
                     except Exception as e:
-                        print(f"[warn] 😭 Error parsing line: {e}")
+                        print(f"[warn] 😭 Error parsing line: {e}", flush=True)
 
             return nodes
 
         except Exception as e:
             attempt += 1
-            print(f"[warn] 😭 Failed to fetch from current subscription link")
-            print(f"[attempt] 🔄️ Try to fetch again (attempt {attempt}/{retries}) -> {e}")
+            print("[warn] 😭 Failed to fetch from current subscription link", flush=True)
+            print(f"[attempt] 🔄️ Try to fetch again (attempt {attempt}/{retries})", flush=True)
+
             if attempt >= retries:
-                print("[abort] 🚫 Max retries reached. Aborting process.")
+                print("[abort] 🚫 Max retries reached. Aborting process.", flush=True)
                 exit(1)
 
 # ---------------- Main ----------------

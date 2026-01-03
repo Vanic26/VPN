@@ -85,6 +85,10 @@ def load_cn_to_cc():
         print(f"[error] 😭 Failed to parse CN_TO_CC secret: {e}")
         return {}
 
+def build_name(flag, cc, index):
+        suffix = " [ipv6]" if ipv6_tag else ""
+        return f"{flag} {cc}-{index}{suffix} | Starlink"
+
 # ---------------- Load sources ----------------
 def load_sources():
     if not os.path.exists(SOURCES_FILE):
@@ -517,98 +521,83 @@ def rename_node(p, country_counter, CN_TO_CC):
 
     # ----------If GEOIP-ONLY Mode Is Set----------
     if USE_ONLY_GEOIP:
+        
+        # 1️⃣ GeoIP first
         ip = resolve_ip(host) or host
         cc_lower, cc_upper = geo_ip(ip)
-
         if cc_upper and cc_upper != "UN":
             cc = cc_upper
             flag = country_to_flag(cc)
-            country_counter[cc] += 1
-            index = country_counter[cc]
-            print(f"[geoip] 🌍 {host} -> {cc}")
+            
+        # 2️⃣ Chinese mapping (cn_name)
+        name_for_match = unquote(original_name)
+        cc = flag =None
+        for cn_name, code in CN_TO_CC.items():
+            if cn_name and cn_name in name_for_match:
+                cc = code.upper()
+                flag = country_to_flag(cc)
+                break
 
-        else:
-            # Fallback instead of dropping node
-            cc = "ZZ"
-            flag = "🏳️"
-            country_counter[cc] += 1
-            index = country_counter[cc]
-            print(f"[geoip] ❌ Failed GeoIP for {host}, using ZZ")
+        # 3️⃣ Emoji flag in name (flag_match)
+        if not cc:
+            flag_match = re.search(r'[\U0001F1E6-\U0001F1FF]{2}', name_for_match)
+            if flag_match:
+                flag = flag_match.group(0)
+                cc = flag_to_country_code(flag)
+                if cc:
+                    cc = cc.upper()
 
-        if ipv6_tag:
-            p["name"] = f"{flag} {cc}-{index} [ipv6] | Starlink"
-        else:
-            p["name"] = f"{flag} {cc}-{index} | Starlink"
+        # 4️⃣ Two-letter ISO code (iso_match))
+        if not cc:
+            iso_match = re.search(r'\b([A-Z]{2})\b', original_name)
+            if iso_match:
+                cc = iso_match.group(1).upper()
+                flag = country_to_flag(cc)
 
-        return p
+        if not cc:
+            return None    # ❌ truly unnameable → skip
 
     # ----------If GEOIP-ONLY Mode Is Not Set----------
-    name_for_match = unquote(original_name)
-
-    cc = flag =None
-
-    # 1️⃣ Chinese mapping (substring match)
-    for cn_name, code in CN_TO_CC.items():
-        if cn_name and cn_name in name_for_match:
-            cc = code.upper()
-            flag = country_to_flag(cc)
-            country_counter[cc] += 1
-            index = country_counter[cc]
-            # Only update the name field
-            if ipv6_tag:
-                p["name"] = f"{flag} {cc}-{index} [ipv6] | Starlink"
-            else:
-                p["name"] = f"{flag} {cc}-{index} | Starlink"
-            return p
-
-    # 2️⃣ Emoji flag in name
-    flag_match = re.search(r'[\U0001F1E6-\U0001F1FF]{2}', name_for_match)
-    if flag_match:
-        flag = flag_match.group(0)
-        cc = flag_to_country_code(flag)
-        if cc:
-            cc = cc.upper()
-            country_counter[cc] += 1
-            index = country_counter[cc]
-            if ipv6_tag:
-                p["name"] = f"{flag} {cc}-{index} [ipv6] | Starlink"
-            else:
-                p["name"] = f"{flag} {cc}-{index} | Starlink"
-            return p
-
-    # 3️⃣ Two-letter ISO code (UPPER CASE)
-    iso_match = re.search(r'\b([A-Z]{2})\b', original_name)
-    if iso_match:
-        cc = iso_match.group(1).upper()
-        flag = country_to_flag(cc)
-        country_counter[cc] += 1
-        index = country_counter[cc]
-        if ipv6_tag:
-            p["name"] = f"{flag} {cc}-{index} [ipv6] | Starlink"
-        else:
-            p["name"] = f"{flag} {cc}-{index} | Starlink"
-        return p
-
-    # 4️⃣ GeoIP fallback
-    if not cc:
-        ip = resolve_ip(host) or host
-        cc_lower, cc_upper = geo_ip(ip)
-        if cc_upper and cc_upper != "UN":
-            cc = cc_upper
-            flag = country_to_flag(cc)
-            country_counter[cc] += 1
-            index = country_counter[cc]
-        else:
-            cc = "ZZ"
-            flag = "🏳️"
-            country_counter[cc] += 1
-            index = country_counter[cc]
-
-    if ipv6_tag:
-        p["name"] = f"{flag} {cc}-{index} [ipv6] | Starlink"
     else:
-        p["name"] = f"{flag} {cc}-{index} | Starlink"
+        # 1️⃣ Chinese mapping (cn_name)
+        name_for_match = unquote(original_name)
+        cc = flag =None
+        for cn_name, code in CN_TO_CC.items():
+            if cn_name and cn_name in name_for_match:
+                cc = code.upper()
+                flag = country_to_flag(cc)
+                break
+    
+        # 2️⃣ Emoji flag in name (flag_match)
+        if not cc:
+            flag_match = re.search(r'[\U0001F1E6-\U0001F1FF]{2}', name_for_match)
+            if flag_match:
+                flag = flag_match.group(0)
+                cc = flag_to_country_code(flag)
+                if cc:
+                    cc = cc.upper()
+                
+        # 3️⃣ Two-letter ISO code (iso_match))
+        if not cc:
+            iso_match = re.search(r'\b([A-Z]{2})\b', original_name)
+            if iso_match:
+                cc = iso_match.group(1).upper()
+                flag = country_to_flag(cc)
+            
+        # 4️⃣ GeoIP fallback
+        if not cc:
+            ip = resolve_ip(host) or host
+            cc_lower, cc_upper = geo_ip(ip)
+            if cc_upper and cc_upper != "UN":
+                cc = cc_upper
+                flag = country_to_flag(cc)
 
+        if not cc:
+            return None    # ❌ truly unnameable → skip
+
+    country_counter[cc] += 1
+    index = country_counter[cc]
+    p["name"] = build_name(flag, cc, index)
     return p
 
 # ---------------- Load proxies ----------------

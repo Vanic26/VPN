@@ -33,6 +33,9 @@ try:
 except ValueError:
     LATENCY_THRESHOLD = 100
 
+use_dup_env = os.environ.get("DUPLICATE_FILTER", "false").lower()
+USE_DUPLICATE_FILTER = use_dup_env == "true"
+
 # ---------------- Helper ----------------
 def resolve_ip(host):
     try:

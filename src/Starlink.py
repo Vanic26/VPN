@@ -512,30 +512,40 @@ def rename_node(p, country_counter, CN_TO_CC):
     graphemes = list(original_name)
 
     # Skip nodes with empty names or containing any forbidden emoji
-    if not original_name or any(g in FORBIDDEN_EMOJIS for g in graphemes):
+    if any(g in FORBIDDEN_EMOJIS for g in graphemes):
         return None
 
-    # Decode %xx escapes in case node name came from URL fragment
-    name_for_match = unquote(original_name)
-
-    cc = None
-    flag = None
-
-    # 🚨 If option is set, only do GeoIP
+    # ----------If GEOIP-ONLY Mode Is Set----------
     if USE_ONLY_GEOIP:
         ip = resolve_ip(host) or host
         cc_lower, cc_upper = geo_ip(ip)
+
         if cc_upper and cc_upper != "UN":
             cc = cc_upper
             flag = country_to_flag(cc)
             country_counter[cc] += 1
             index = country_counter[cc]
-            if ipv6_tag:
-                p["name"] = f"{flag} {cc}-{index} [ipv6] | Starlink"
-            else:
-                p["name"] = f"{flag} {cc}-{index} | Starlink"
-            return p
-        return None
+            print(f"[geoip] 🌍 {host} -> {cc}")
+
+        else:
+            # Fallback instead of dropping node
+            cc = "ZZ"
+            flag = "🏳️"
+            country_counter[cc] += 1
+            index = country_counter[cc]
+            print(f"[geoip] ❌ Failed GeoIP for {host}, using ZZ")
+
+        if ipv6_tag:
+            p["name"] = f"{flag} {cc}-{index} [ipv6] | Starlink"
+        else:
+            p["name"] = f"{flag} {cc}-{index} | Starlink"
+
+        return p
+
+    # ----------If GEOIP-ONLY Mode Is Not Set----------
+    name_for_match = unquote(original_name)
+
+    cc = flag =None
 
     # 1️⃣ Chinese mapping (substring match)
     for cn_name, code in CN_TO_CC.items():
@@ -580,21 +590,26 @@ def rename_node(p, country_counter, CN_TO_CC):
         return p
 
     # 4️⃣ GeoIP fallback
-    ip = resolve_ip(host) or host
-    cc_lower, cc_upper = geo_ip(ip)
-    if cc_upper and cc_upper != "UN":
-        cc = cc_upper
-        flag = country_to_flag(cc)
-        country_counter[cc] += 1
-        index = country_counter[cc]
-        if ipv6_tag:
-            p["name"] = f"{flag} {cc}-{index} [ipv6] | Starlink"
+    if not cc:
+        ip = resolve_ip(host) or host
+        cc_lower, cc_upper = geo_ip(ip)
+        if cc_upper and cc_upper != "UN":
+            cc = cc_upper
+            flag = country_to_flag(cc)
+            country_counter[cc] += 1
+            index = country_counter[cc]
         else:
-            p["name"] = f"{flag} {cc}-{index} | Starlink"
-        return p
+            cc = "ZZ"
+            flag = "🏳️"
+            country_counter[cc] += 1
+            index = country_counter[cc]
 
-    # 5️⃣ Skip node entirely if no assignment possible
-    return None
+    if ipv6_tag:
+        p["name"] = f"{flag} {cc}-{index} [ipv6] | Starlink"
+    else:
+        p["name"] = f"{flag} {cc}-{index} | Starlink"
+
+    return p
 
 # ---------------- Load proxies ----------------
 def load_proxies(url, retries=3):

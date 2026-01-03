@@ -20,7 +20,6 @@ OUTPUT_FILE = os.path.join(REPO_ROOT, "Starlink")
 SOURCES_FILE = os.path.join(REPO_ROOT, "SOURCES_STARLINK")
 TEMPLATE_URL = "https://raw.githubusercontent.com/Vanic24/VPN/refs/heads/main/ClashTemplate.ini"
 TEXTDB_API = "https://textdb.online/update/?key=Starlink_SHFX&value={}"
-URL_Starlink = "https://raw.githubusercontent.com/Vanic24/VPN/refs/heads/main/Starlink"
 CN_TO_CC = json.loads(os.getenv("CN_TO_CC", "{}"))
 USE_ONLY_GEOIP = os.getenv("USE_ONLY_GEOIP", "false").lower() == "true"
 
@@ -51,6 +50,43 @@ def tcp_latency_ms(host, port, timeout=2.0):
         return int((time.time() - start) * 1000)
     except:
         return 9999
+
+def deduplicate_nodes(nodes):
+    """
+    Remove duplicate nodes based on:
+    - (server, port, uuid) OR
+    - (server, port, password)
+
+    Server string must match EXACTLY.
+    """
+    seen = set()
+    unique_nodes = []
+    removed = 0
+
+    for n in nodes:
+        server = str(n.get("server", "")).strip()
+        port = int(n.get("port", 0))
+        uuid = str(n.get("uuid", "")).strip()
+        password = str(n.get("password", "")).strip()
+
+        # Build key
+        if uuid:
+            key = ("uuid", server, port, uuid)
+        elif password:
+            key = ("password", server, port, password)
+        else:
+            # No dedup key → keep it
+            unique_nodes.append(n)
+            continue
+
+        if key in seen:
+            removed += 1
+            continue
+
+        seen.add(key)
+        unique_nodes.append(n)
+
+    return unique_nodes, removed
 
 def geo_ip(ip):
     try:
@@ -524,24 +560,28 @@ def rename_node(p, country_counter, CN_TO_CC):
 
     # ----------If GEOIP-ONLY Mode Is Set----------
     if USE_ONLY_GEOIP:
-        
+    
         # 1️⃣ GeoIP first
         ip = resolve_ip(host) or host
+        cc = flag = None
         cc_lower, cc_upper = geo_ip(ip)
+    
         if cc_upper and cc_upper != "UN":
             cc = cc_upper
             flag = country_to_flag(cc)
-            
-        # 2️⃣ Chinese mapping (cn_name)
+    
+        # Prepare name once
         name_for_match = unquote(original_name)
-        cc = flag =None
-        for cn_name, code in CN_TO_CC.items():
-            if cn_name and cn_name in name_for_match:
-                cc = code.upper()
-                flag = country_to_flag(cc)
-                break
-
-        # 3️⃣ Emoji flag in name (flag_match)
+    
+        # 2️⃣ Chinese mapping
+        if not cc:
+            for cn_name, code in CN_TO_CC.items():
+                if cn_name and cn_name in name_for_match:
+                    cc = code.upper()
+                    flag = country_to_flag(cc)
+                    break
+    
+        # 3️⃣ Emoji flag
         if not cc:
             flag_match = re.search(r'[\U0001F1E6-\U0001F1FF]{2}', name_for_match)
             if flag_match:
@@ -549,29 +589,39 @@ def rename_node(p, country_counter, CN_TO_CC):
                 cc = flag_to_country_code(flag)
                 if cc:
                     cc = cc.upper()
-
-        # 4️⃣ Two-letter ISO code (iso_match))
+    
+        # 4️⃣ Two-letter ISO code (context-aware, unit-safe)
         if not cc:
-            iso_match = re.search(r'\b([A-Z]{2})\b', original_name)
-            if iso_match:
-                cc = iso_match.group(1).upper()
+            iso_iter = re.finditer(r'\b([A-Z]{2})\b', original_name)
+        
+            for iso_match in iso_iter:
+                iso = iso_match.group(1)
+        
+                before = original_name[:iso_match.start()]
+        
+                # Reject units like "100GB" or "100 GB"
+                if re.search(r'\d\s*$', before):
+                    continue
+        
+                cc = iso
                 flag = country_to_flag(cc)
-
+    
         if not cc:
             return None    # ❌ truly unnameable → skip
-
+    
     # ----------If GEOIP-ONLY Mode Is Not Set----------
     else:
-        # 1️⃣ Chinese mapping (cn_name)
         name_for_match = unquote(original_name)
-        cc = flag =None
+        cc = flag = None
+    
+        # 1️⃣ Chinese mapping
         for cn_name, code in CN_TO_CC.items():
             if cn_name and cn_name in name_for_match:
                 cc = code.upper()
                 flag = country_to_flag(cc)
                 break
     
-        # 2️⃣ Emoji flag in name (flag_match)
+        # 2️⃣ Emoji flag
         if not cc:
             flag_match = re.search(r'[\U0001F1E6-\U0001F1FF]{2}', name_for_match)
             if flag_match:
@@ -579,14 +629,23 @@ def rename_node(p, country_counter, CN_TO_CC):
                 cc = flag_to_country_code(flag)
                 if cc:
                     cc = cc.upper()
-                
-        # 3️⃣ Two-letter ISO code (iso_match))
+    
+        # 3️⃣ Two-letter ISO code (unit-safe)
         if not cc:
-            iso_match = re.search(r'\b([A-Z]{2})\b', original_name)
-            if iso_match:
-                cc = iso_match.group(1).upper()
+            iso_iter = re.finditer(r'\b([A-Z]{2})\b', original_name)
+        
+            for iso_match in iso_iter:
+                iso = iso_match.group(1)
+        
+                before = original_name[:iso_match.start()]
+        
+                # Reject units like "100GB" or "100 GB"
+                if re.search(r'\d\s*$', before):
+                    continue
+        
+                cc = iso
                 flag = country_to_flag(cc)
-            
+    
         # 4️⃣ GeoIP fallback
         if not cc:
             ip = resolve_ip(host) or host
@@ -594,14 +653,15 @@ def rename_node(p, country_counter, CN_TO_CC):
             if cc_upper and cc_upper != "UN":
                 cc = cc_upper
                 flag = country_to_flag(cc)
-
+    
         if not cc:
             return None    # ❌ truly unnameable → skip
-
-    country_counter[cc] += 1
-    index = country_counter[cc]
-    p["name"] = build_name(flag, cc, index, ipv6_tag)
-    return p
+    
+        # ----------Final naming----------
+        country_counter[cc] += 1
+        index = country_counter[cc]
+        p["name"] = build_name(flag, cc, index, ipv6_tag)
+        return p
 
 # ---------------- Load proxies ----------------
 def load_proxies(url, retries=3):
@@ -698,6 +758,17 @@ def main():
             filtered_nodes = all_nodes
             country_counter = defaultdict(int)
             print(f"[latency] 🚀 Latency filtering 🚫, {len(filtered_nodes)} nodes remain")
+
+        # ---------------- Duplicate filter ----------------
+        if USE_DUPLICATE_FILTER:
+            print("[dedup] 🧹 Removing duplicate nodes (server + port + uuid/password)")
+            before = len(filtered_nodes)
+            filtered_nodes, removed = deduplicate_nodes(filtered_nodes)
+            after = len(filtered_nodes)
+            print(f"[dedup] ®️emoved {removed} duplicate nodes")
+            print(f"[dedup] 🖨️ Total {after} nodes remain after deduplication")
+        else:
+            print("[dedup] 🈁 Duplicate filtering disabled")
 
         # ---------------- Renamed nodes ----------------
         renamed_nodes = []

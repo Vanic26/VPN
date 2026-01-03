@@ -85,9 +85,9 @@ def load_cn_to_cc():
         print(f"[error] 😭 Failed to parse CN_TO_CC secret: {e}")
         return {}
 
-def build_name(flag, cc, index):
-        suffix = " [ipv6]" if ipv6_tag else ""
-        return f"{flag} {cc}-{index}{suffix} | Starlink"
+def build_name(flag, cc, index, ipv6_tag=False):
+    suffix = " [ipv6]" if ipv6_tag else ""
+    return f"{flag} {cc}-{index}{suffix} | Starlink"
 
 # ---------------- Load sources ----------------
 def load_sources():
@@ -597,7 +597,7 @@ def rename_node(p, country_counter, CN_TO_CC):
 
     country_counter[cc] += 1
     index = country_counter[cc]
-    p["name"] = build_name(flag, cc, index)
+    p["name"] = build_name(flag, cc, index, ipv6_tag)
     return p
 
 # ---------------- Load proxies ----------------

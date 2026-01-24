@@ -20,7 +20,6 @@ OUTPUT_FILE = os.path.join(REPO_ROOT, "Lifetime")
 SOURCES_FILE = os.path.join(REPO_ROOT, "SUB_LIFETIME")
 TEMPLATE_URL = "https://raw.githubusercontent.com/Vanic24/VPN/refs/heads/main/ClashTemplate.ini"
 TEXTDB_API = "https://textdb.online/update/?key=Lifetime2_SHFX&value={}"
-URL_8EB = "https://raw.githubusercontent.com/Vanic24/VPN/refs/heads/main/Lifetime"
 CN_TO_CC = json.loads(os.getenv("CN_TO_CC", "{}"))
 USE_ONLY_GEOIP = os.getenv("USE_ONLY_GEOIP", "false").lower() == "true"
 
@@ -100,7 +99,7 @@ def geo_ip(ip):
     except:
         pass
     return "unknown", "UN"
-    
+
 def country_to_flag(cc):
     """Convert ISO 3166 two-letter code to emoji flag"""
     if not cc or len(cc) != 2:
@@ -124,6 +123,10 @@ def load_cn_to_cc():
     except Exception as e:
         print(f"[error] 😭 Failed to parse CN_TO_CC secret: {e}")
         return {}
+
+def build_name(flag, cc, index, ipv6_tag=False):
+    suffix = " [ipv6]" if ipv6_tag else ""
+    return f"{flag} {cc}-{index}{suffix} | Lifetime"
 
 # ---------------- Load sources ----------------
 def load_sources():
@@ -527,8 +530,15 @@ def parse_node_line(line):
             return node
     return None
 
+# ----------------------------
+# Global counters for rename fallback
+# ----------------------------
+geoip_primary_fail = 0   # counts nodes where GeoIP mode failed but fallback succeeded
+name_primary_fail = 0    # counts nodes where name-based mode failed but fallback succeeded
+
 # ---------------- Rename node ----------------
 def rename_node(p, country_counter, CN_TO_CC):
+    global geoip_primary_fail, name_primary_fail
     """
     Assign a standardized name to the node without changing any other fields.
     Skip nodes with forbidden emojis or empty names.
@@ -552,89 +562,129 @@ def rename_node(p, country_counter, CN_TO_CC):
     graphemes = list(original_name)
 
     # Skip nodes with empty names or containing any forbidden emoji
-    if not original_name or any(g in FORBIDDEN_EMOJIS for g in graphemes):
+    if any(g in FORBIDDEN_EMOJIS for g in graphemes):
         return None
 
-    # Decode %xx escapes in case node name came from URL fragment
-    name_for_match = unquote(original_name)
+    # Initialize fallback flags for counters
+    geoip_failed = False
+    name_failed = False
 
-    cc = None
-    flag = None
-
-    # 🚨 If option is set, only do GeoIP
+    # ----------If GEOIP-ONLY Mode Is Set----------
     if USE_ONLY_GEOIP:
+
+        # 1️⃣ GeoIP first
         ip = resolve_ip(host) or host
+        cc = flag = None
+
         cc_lower, cc_upper = geo_ip(ip)
         if cc_upper and cc_upper != "UN":
             cc = cc_upper
             flag = country_to_flag(cc)
-            country_counter[cc] += 1
-            index = country_counter[cc]
-            if ipv6_tag:
-                p["name"] = f"{flag} {cc}-{index} [ipv6] | Lifetime"
-            else:
-                p["name"] = f"{flag} {cc}-{index} | Lifetime"
-            return p
-        return None
+        else:
+            geoip_failed = True
 
-    # 1️⃣ Chinese mapping (substring match)
-    for cn_name, code in CN_TO_CC.items():
-        if cn_name and cn_name in name_for_match:
-            cc = code.upper()
-            flag = country_to_flag(cc)
-            country_counter[cc] += 1
-            index = country_counter[cc]
-            # Only update the name field
-            if ipv6_tag:
-                p["name"] = f"{flag} {cc}-{index} [ipv6] | Lifetime"
-            else:
-                p["name"] = f"{flag} {cc}-{index} | Lifetime"
-            return p
-            
-    # 2️⃣ Emoji flag in name
-    flag_match = re.search(r'[\U0001F1E6-\U0001F1FF]{2}', name_for_match)
-    if flag_match:
-        flag = flag_match.group(0)
-        cc = flag_to_country_code(flag)
-        if cc:
-            cc = cc.upper()
-            country_counter[cc] += 1
-            index = country_counter[cc]
-            if ipv6_tag:
-                p["name"] = f"{flag} {cc}-{index} [ipv6] | Lifetime"
-            else:
-                p["name"] = f"{flag} {cc}-{index} | Lifetime"
-            return p
+        # Prepare name once
+        name_for_match = unquote(original_name)
 
-    # 3️⃣ Two-letter ISO code (UPPER CASE)
-    iso_match = re.search(r'\b([A-Z]{2})\b', original_name)
-    if iso_match:
-        cc = iso_match.group(1).upper()
-        flag = country_to_flag(cc)
+        # 2️⃣ Chinese mapping
+        if not cc:
+            for cn_name, code in CN_TO_CC.items():
+                if cn_name and cn_name in name_for_match:
+                    cc = code.upper()
+                    flag = country_to_flag(cc)
+                    break
+
+        # 3️⃣ Emoji flag
+        if not cc:
+            flag_match = re.search(r'[\U0001F1E6-\U0001F1FF]{2}', name_for_match)
+            if flag_match:
+                flag = flag_match.group(0)
+                cc = flag_to_country_code(flag)
+                if cc:
+                    cc = cc.upper()
+
+        # 4️⃣ Two-letter ISO code (context-aware, unit-safe)
+        if not cc:
+            iso_iter = re.finditer(r'\b([A-Z]{2})\b', original_name)
+            for iso_match in iso_iter:
+                iso = iso_match.group(1)
+                before = original_name[:iso_match.start()]
+                if re.search(r'\d\s*$', before):
+                    continue
+                cc = iso
+                flag = country_to_flag(cc)
+                break
+
+        if not cc:
+            return None    # ❌ truly unnameable → skip
+
+        # 📊 GeoIP fallback success count
+        if geoip_failed:
+            geoip_primary_fail += 1
+
+        # ----------Final naming----------
         country_counter[cc] += 1
         index = country_counter[cc]
-        if ipv6_tag:
-            p["name"] = f"{flag} {cc}-{index} [ipv6] | Lifetime"
-        else:
-            p["name"] = f"{flag} {cc}-{index} | Lifetime"
+        p["name"] = build_name(flag, cc, index, ipv6_tag)
         return p
 
-    # 4️⃣ GeoIP fallback
-    ip = resolve_ip(host) or host
-    cc_lower, cc_upper = geo_ip(ip)
-    if cc_upper and cc_upper != "UN":
-        cc = cc_upper
-        flag = country_to_flag(cc)
+    # ----------If GEOIP-ONLY Mode Is Not Set----------
+    else:
+        name_for_match = unquote(original_name)
+        cc = flag = None
+
+        # 1️⃣ Chinese mapping
+        for cn_name, code in CN_TO_CC.items():
+            if cn_name and cn_name in name_for_match:
+                cc = code.upper()
+                flag = country_to_flag(cc)
+                break
+
+        # 2️⃣ Emoji flag
+        if not cc:
+            flag_match = re.search(r'[\U0001F1E6-\U0001F1FF]{2}', name_for_match)
+            if flag_match:
+                flag = flag_match.group(0)
+                cc = flag_to_country_code(flag)
+                if cc:
+                    cc = cc.upper()
+
+        # 3️⃣ Two-letter ISO code (unit-safe)
+        if not cc:
+            iso_iter = re.finditer(r'\b([A-Z]{2})\b', original_name)
+            for iso_match in iso_iter:
+                iso = iso_match.group(1)
+                before = original_name[:iso_match.start()]
+                if re.search(r'\d\s*$', before):
+                    continue
+                cc = iso
+                flag = country_to_flag(cc)
+                break
+
+        # Mark name-based failure BEFORE GeoIP
+        if not cc:
+            name_failed = True
+
+        # 4️⃣ GeoIP fallback
+        if not cc:
+            ip = resolve_ip(host) or host
+            cc_lower, cc_upper = geo_ip(ip)
+            if cc_upper and cc_upper != "UN":
+                cc = cc_upper
+                flag = country_to_flag(cc)
+
+        if not cc:
+            return None    # ❌ truly unnameable → skip
+
+        # 📊 Name-based fallback success count
+        if name_failed:
+            name_primary_fail += 1
+
+        # ----------Final naming----------
         country_counter[cc] += 1
         index = country_counter[cc]
-        if ipv6_tag:
-            p["name"] = f"{flag} {cc}-{index} [ipv6] | Lifetime"
-        else:
-            p["name"] = f"{flag} {cc}-{index} | Lifetime"
+        p["name"] = build_name(flag, cc, index, ipv6_tag)
         return p
-
-    # 5️⃣ Skip node entirely if no assignment possible
-    return None
 
 # ---------------- Load proxies ----------------
 def load_proxies(url, retries=10):
@@ -728,7 +778,7 @@ def main():
         else:
             filtered_nodes = all_nodes
             country_counter = defaultdict(int)
-            print(f"[latency] 🚀 Latency filtering 🚫, {len(filtered_nodes)} nodes remain")
+            print(f"[latency] 🚀 Latency filtering disabled, {len(filtered_nodes)} nodes remain")
 
         # ---------------- Duplicate filter ----------------
         if USE_DUPLICATE_FILTER:
@@ -736,10 +786,10 @@ def main():
             before = len(filtered_nodes)
             filtered_nodes, removed = deduplicate_nodes(filtered_nodes)
             after = len(filtered_nodes)
-            print(f"[dedup] ❗Removed {removed} duplicate nodes")
+            print(f"[dedup] ®️emoved {removed} duplicate nodes")
             print(f"[dedup] 🖨️ Total {after} nodes remain after deduplication")
         else:
-            print("[dedup] 🚫 Duplicate filtering disabled")
+            print("[dedup] 🈁 Duplicate filtering disabled")
 
         # ---------------- Renamed nodes ----------------
         renamed_nodes = []
@@ -751,6 +801,15 @@ def main():
                 renamed_nodes.append(res)
             else:
                 skipped_nodes += 1
+
+        if USE_ONLY_GEOIP:
+            print(
+                f"[rename] 🌍 GeoIP-only mode: Failed to rename {geoip_primary_fail} nodes and fallback to Name-based detection"
+            )
+        else:
+            print(
+                f"[rename] 🏷️ Name-based mode: Failed to rename {name_primary_fail} nodes and fallback to GeoIP detection"
+            )
 
         if skipped_nodes > 0:
             print(f"[rename] ⚠️ Skipped {skipped_nodes} nodes that could not be assigned a name or include forbidden emoji")

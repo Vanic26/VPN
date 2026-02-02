@@ -1,4 +1,4 @@
-# Last update: 25.01.2026 00:03:29
+# Last update: 02.02.2026 22:08:08
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -121,29 +121,128 @@ dns:
       - +.googleapis.com
       - +.gvt1.com
 proxies:
-- {name: "🇺🇸 US-1 | Lifetime", type: "trojan", server: "109.234.211.66", port: 2087, password: "df0077a0-0605-4461-83f1-46bb853f2555", network: "ws", sni: "store.timimi.dpdns.org", skip-cert-verify: true, ws-opts: {path: "/", headers: {"Host": "store.timimi.dpdns.org"}}, udp: true}
-- {name: "🇺🇸 US-2 | Lifetime", type: "trojan", server: "135.125.232.253", port: 2053, password: "df0077a0-0605-4461-83f1-46bb853f2555", network: "ws", sni: "nodes.830901.xyz", skip-cert-verify: true, ws-opts: {path: "/?ed=2560", headers: {"Host": "nodes.830901.xyz"}}, udp: true}
-- {name: "🇺🇸 US-3 | Lifetime", type: "trojan", server: "141.94.68.216", port: 2053, password: "df0077a0-0605-4461-83f1-46bb853f2555", network: "ws", sni: "nodes.830901.xyz", skip-cert-verify: true, ws-opts: {path: "/?ed=2560", headers: {"Host": "nodes.830901.xyz"}}, udp: true}
+- {name: "🇺🇸 US-1 | Lifetime", type: "trojan", server: "vip3.kaixincloud.top", port: 8443, password: "df0077a0-0605-4461-83f1-46bb853f2555", network: "ws", sni: "sweden.vmaxpanel.com", skip-cert-verify: true, ws-opts: {path: "/amd", headers: {"Host": "sweden.vmaxpanel.com"}}, udp: true}
+- {name: "🇩🇪 DE-1 | Lifetime", type: "trojan", server: "vip1.kaixincloud.top", port: 8443, password: "df0077a0-0605-4461-83f1-46bb853f2555", network: "ws", sni: "sweden.vmaxpanel.com", skip-cert-verify: true, ws-opts: {path: "/amd", headers: {"Host": "sweden.vmaxpanel.com"}}, udp: true}
+- {name: "🇩🇪 DE-2 | Lifetime", type: "trojan", server: "v3.dabache.top", port: 8443, password: "df0077a0-0605-4461-83f1-46bb853f2555", network: "ws", sni: "sweden.vmaxpanel.com", skip-cert-verify: true, ws-opts: {path: "/amd", headers: {"Host": "sweden.vmaxpanel.com"}}, udp: true}
+- {name: "🇩🇪 DE-3 | Lifetime", type: "vless", server: "vip2.kaixincloud.top", port: 443, uuid: "22e7f0d3-8d3b-40c7-a1c5-8a912f6a16b3", network: "ws", servername: "cdn.55994421.xyz", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/memo", headers: {"Host": "cdn.55994421.xyz"}}, udp: true, tls: true, flow: ""}
+- {name: "🇩🇪 DE-4 | Lifetime", type: "vless", server: "v3.dabache.top", port: 80, uuid: "e31085f9-7f55-4a7d-b00e-ce94149477cb", network: "ws", ws-opts: {path: "/?ed", headers: {"Host": "PrICKLy-AdverTisEMEnt6OaD5Z64MK.onEEaT.cO"}}, udp: true}
+- {name: "🇩🇪 DE-5 | Lifetime", type: "vless", server: "45.15.178.124", port: 80, uuid: "75e1fde7-6bf6-48ef-ba43-400e960e185b", network: "ws", ws-opts: {path: "/vless/", headers: {"Host": "45.15.178.124"}}, udp: true}
 - {name: "🇸🇬 SG-1 | Lifetime", type: "vless", server: "167.172.83.42", port: 11441, uuid: "d7a84b8a-66c3-4b9c-b1b7-d576058c489f", network: "ws", ws-opts: {path: "/FREE By Tharuwa (0767597317)", headers: {"Host": "zoom.us"}}, udp: true}
-- {name: "🇬🇧 GB-1 | Lifetime", type: "vless", server: "25.129.197.138", port: 2096, uuid: "0e0bf934-1942-4379-9c98-5cd9aa93140a", network: "ws", servername: "speed1.best-cloud.ir", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "speed1.best-cloud.ir"}}, udp: true, tls: true, flow: ""}
+- {name: "🇩🇪 DE-6 | Lifetime", type: "vless", server: "cname3.sonamii.com", port: 2083, uuid: "844e0f15-6ea4-4dd7-8f08-11311c9c23e8", network: "ws", servername: "sina.sonami.site", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/?ed", headers: {"Host": "sina.sonami.site"}}, udp: true, tls: true, flow: ""}
+- {name: "🇩🇪 DE-7 | Lifetime", type: "vless", server: "194.247.187.244", port: 443, uuid: "a2a396c3-f40e-4dee-bdbb-b1201f12dc1c", network: "ws", servername: "snippet.fgfw.cc.cd", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "snippet.fgfw.cc.cd"}}, udp: true, tls: true, flow: ""}
+- {name: "🇺🇸 US-2 | Lifetime", type: "vless", server: "154.21.85.83", port: 443, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇺🇸 US-3 | Lifetime", type: "vless", server: "154.17.3.200", port: 443, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇬🇧 GB-1 | Lifetime", type: "vless", server: "94.23.153.168", port: 8443, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇯🇵 JP-1 | Lifetime", type: "vless", server: "138.2.45.232", port: 443, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇺🇸 US-4 | Lifetime", type: "vless", server: "vip2.kaixincloud.top", port: 443, uuid: "8388434b-bbc8-4e00-b497-69a7f56f6e24", network: "ws", servername: "rAyAn-cOnFiG-it-1.pAriSa.dPdNs.oRg", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/ws", headers: {"Host": "rAyAn-cOnFiG-it-1.pAriSa.dPdNs.oRg"}}, udp: true, tls: true, flow: ""}
+- {name: "🇺🇸 US-5 | Lifetime", type: "vless", server: "v1.dabache.top", port: 443, uuid: "21f9985c-d363-4eee-957f-720e9e9f9b8d", network: "ws", servername: "teams.live.com.afrcloud1.c01.kr", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "teams.live.com.afrcloud1.c01.kr"}}, udp: true, tls: true, flow: ""}
+- {name: "🇸🇬 SG-2 | Lifetime", type: "vless", server: "8.223.63.150", port: 443, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇷🇺 RU-1 | Lifetime", type: "vless", server: "109.120.186.137", port: 2053, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇸🇬 SG-3 | Lifetime", type: "vless", server: "43.128.111.158", port: 4439, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇸🇬 SG-4 | Lifetime", type: "vless", server: "47.130.35.116", port: 8888, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇩🇪 DE-8 | Lifetime", type: "vless", server: "vip1.kaixincloud.top", port: 443, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇯🇵 JP-2 | Lifetime", type: "vless", server: "8.216.121.234", port: 51922, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇺🇸 US-6 | Lifetime", type: "vless", server: "vip1.kaixincloud.top", port: 443, uuid: "85462399-8624-4e5c-bbb0-f95d84ca8256", network: "ws", servername: "rAyAn-cOnFiG-fr-1.pAriSa.dPdNs.oRg", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/ws", headers: {"Host": "rAyAn-cOnFiG-fr-1.pAriSa.dPdNs.oRg"}}, udp: true, tls: true, flow: ""}
+- {name: "🇺🇸 US-7 | Lifetime", type: "vless", server: "vip2.kaixincloud.top", port: 443, uuid: "a44e0875-210f-4941-9062-89b6361a14c6", network: "ws", servername: "teams.live.com.afrcloud1.c01.kr", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "teams.live.com.afrcloud1.c01.kr"}}, udp: true, tls: true, flow: ""}
+- {name: "🇷🇺 RU-2 | Lifetime", type: "vless", server: "nl-78w-c.southnetworks.cloud", port: 80, uuid: "094e66a9-8d92-41fe-85ad-8e7bf9b5fcaa", network: "ws", ws-opts: {path: "/getWorkerUpdates", headers: {"Host": "nl-78w-c.southnetworks.cloud"}}, udp: true}
+- {name: "🇫🇷 FR-1 | Lifetime", type: "vless", server: "57.129.137.201", port: 8443, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇰🇷 KR-1 | Lifetime", type: "vless", server: "211.228.64.93", port: 12504, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇸🇬 SG-5 | Lifetime", type: "vless", server: "43.165.188.165", port: 8443, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇸🇬 SG-6 | Lifetime", type: "vless", server: "27.50.48.50", port: 2053, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇺🇸 US-8 | Lifetime", type: "vless", server: "13.192.181.130", port: 443, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇬🇧 GB-2 | Lifetime", type: "vless", server: "51.89.226.133", port: 2053, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇭🇰 HK-1 | Lifetime", type: "vless", server: "45.121.138.23", port: 26688, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇯🇵 JP-3 | Lifetime", type: "vless", server: "132.145.123.25", port: 1235, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇰🇷 KR-2 | Lifetime", type: "vless", server: "121.182.148.222", port: 35524, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇭🇰 HK-2 | Lifetime", type: "vless", server: "8.212.21.219", port: 443, uuid: "995e3bbd-6189-456f-bb1c-dff5e86e4466", network: "ws", servername: "snippets.sosoco.ggff.net", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/proxyip=sjc.o00o.ooo", headers: {"Host": "snippets.sosoco.ggff.net"}}, udp: true, tls: true, flow: ""}
+- {name: "🇭🇰 HK-3 | Lifetime", type: "vless", server: "vip3.kaixincloud.top", port: 443, uuid: "9523a24b-f6bf-339e-9950-32829162ffc2", network: "ws", servername: "dabaif0.webn.cc", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/db1024f4e56f542c", headers: {"Host": "dabaif0.webn.cc"}}, udp: true, tls: true, flow: ""}
+- {name: "🇭🇰 HK-4 | Lifetime", type: "vless", server: "vip1.kaixincloud.top", port: 443, uuid: "9523a24b-f6bf-339e-9950-32829162ffc2", network: "ws", servername: "dabaihk.webn.cc", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/db1024532f9883c8", headers: {"Host": "dabaihk.webn.cc"}}, udp: true, tls: true, flow: ""}
+- {name: "🇺🇸 US-9 | Lifetime", type: "vless", server: "vip2.kaixincloud.top", port: 443, uuid: "53cddd30-34a1-32dd-b598-c1c4c8a0f813", network: "ws", servername: "dabaihk.webn.cc", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/db1024a105975707", headers: {"Host": "dabaihk.webn.cc"}}, udp: true, tls: true, flow: ""}
+- {name: "🇺🇸 US-10 | Lifetime", type: "vless", server: "vip1.kaixincloud.top", port: 443, uuid: "1e823993-86ac-3ead-89b5-227e73825fdb", network: "ws", servername: "dabaif0.webn.cc", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/db1024faebdb62e0", headers: {"Host": "dabaif0.webn.cc"}}, udp: true, tls: true, flow: ""}
 proxy-groups:
   - name: 选择线路
     type: select
     proxies:
       - 自动选择⚡️
       - 🇺🇸 US-1 | Lifetime
+      - 🇩🇪 DE-1 | Lifetime
+      - 🇩🇪 DE-2 | Lifetime
+      - 🇩🇪 DE-3 | Lifetime
+      - 🇩🇪 DE-4 | Lifetime
+      - 🇩🇪 DE-5 | Lifetime
+      - 🇸🇬 SG-1 | Lifetime
+      - 🇩🇪 DE-6 | Lifetime
+      - 🇩🇪 DE-7 | Lifetime
       - 🇺🇸 US-2 | Lifetime
       - 🇺🇸 US-3 | Lifetime
-      - 🇸🇬 SG-1 | Lifetime
       - 🇬🇧 GB-1 | Lifetime
+      - 🇯🇵 JP-1 | Lifetime
+      - 🇺🇸 US-4 | Lifetime
+      - 🇺🇸 US-5 | Lifetime
+      - 🇸🇬 SG-2 | Lifetime
+      - 🇷🇺 RU-1 | Lifetime
+      - 🇸🇬 SG-3 | Lifetime
+      - 🇸🇬 SG-4 | Lifetime
+      - 🇩🇪 DE-8 | Lifetime
+      - 🇯🇵 JP-2 | Lifetime
+      - 🇺🇸 US-6 | Lifetime
+      - 🇺🇸 US-7 | Lifetime
+      - 🇷🇺 RU-2 | Lifetime
+      - 🇫🇷 FR-1 | Lifetime
+      - 🇰🇷 KR-1 | Lifetime
+      - 🇸🇬 SG-5 | Lifetime
+      - 🇸🇬 SG-6 | Lifetime
+      - 🇺🇸 US-8 | Lifetime
+      - 🇬🇧 GB-2 | Lifetime
+      - 🇭🇰 HK-1 | Lifetime
+      - 🇯🇵 JP-3 | Lifetime
+      - 🇰🇷 KR-2 | Lifetime
+      - 🇭🇰 HK-2 | Lifetime
+      - 🇭🇰 HK-3 | Lifetime
+      - 🇭🇰 HK-4 | Lifetime
+      - 🇺🇸 US-9 | Lifetime
+      - 🇺🇸 US-10 | Lifetime
   - name: 自动选择⚡️
     type: url-test
     proxies:
       - 🇺🇸 US-1 | Lifetime
+      - 🇩🇪 DE-1 | Lifetime
+      - 🇩🇪 DE-2 | Lifetime
+      - 🇩🇪 DE-3 | Lifetime
+      - 🇩🇪 DE-4 | Lifetime
+      - 🇩🇪 DE-5 | Lifetime
+      - 🇸🇬 SG-1 | Lifetime
+      - 🇩🇪 DE-6 | Lifetime
+      - 🇩🇪 DE-7 | Lifetime
       - 🇺🇸 US-2 | Lifetime
       - 🇺🇸 US-3 | Lifetime
-      - 🇸🇬 SG-1 | Lifetime
       - 🇬🇧 GB-1 | Lifetime
+      - 🇯🇵 JP-1 | Lifetime
+      - 🇺🇸 US-4 | Lifetime
+      - 🇺🇸 US-5 | Lifetime
+      - 🇸🇬 SG-2 | Lifetime
+      - 🇷🇺 RU-1 | Lifetime
+      - 🇸🇬 SG-3 | Lifetime
+      - 🇸🇬 SG-4 | Lifetime
+      - 🇩🇪 DE-8 | Lifetime
+      - 🇯🇵 JP-2 | Lifetime
+      - 🇺🇸 US-6 | Lifetime
+      - 🇺🇸 US-7 | Lifetime
+      - 🇷🇺 RU-2 | Lifetime
+      - 🇫🇷 FR-1 | Lifetime
+      - 🇰🇷 KR-1 | Lifetime
+      - 🇸🇬 SG-5 | Lifetime
+      - 🇸🇬 SG-6 | Lifetime
+      - 🇺🇸 US-8 | Lifetime
+      - 🇬🇧 GB-2 | Lifetime
+      - 🇭🇰 HK-1 | Lifetime
+      - 🇯🇵 JP-3 | Lifetime
+      - 🇰🇷 KR-2 | Lifetime
+      - 🇭🇰 HK-2 | Lifetime
+      - 🇭🇰 HK-3 | Lifetime
+      - 🇭🇰 HK-4 | Lifetime
+      - 🇺🇸 US-9 | Lifetime
+      - 🇺🇸 US-10 | Lifetime
     url: https://www.gstatic.com/generate_204
     interval: 300
 rules:

@@ -1,4 +1,4 @@
-# Last update: 27.03.2026 17:07:14
+# Last update: 27.03.2026 17:11:36
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -121,6 +121,8 @@ dns:
       - +.googleapis.com
       - +.gvt1.com
 proxies:
+- {name: "🇸🇬 SG-1 [ipv6] | Starlink", type: "vless", server: "2a0e:97c0:7d4:39e9:b9c1:4089:a425:d470", port: 10001, uuid: "9c79aceb-4649-44ea-9698-b5e9ecf6d6da", encryption: "none", security: "reality", sni: "www.icloud.com", fp: "chrome", reality-opts: {public-key: "7qP6YKWx5CJXia1qjQoIcD7FRjUBbioaioioI729D34", short-id: "2afe4310", server-name: "www.icloud.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "7qP6YKWx5CJXia1qjQoIcD7FRjUBbioaioioI729D34", sid: "2afe4310", headerType: "none"}
+- {name: "🇸🇬 SG-2 [ipv6] | Starlink", type: "vless", server: "2a0e:97c0:7d4:a398:e199:2e3c:4dc0:7abd", port: 10001, uuid: "9c79aceb-4649-44ea-9698-b5e9ecf6d6da", encryption: "none", security: "reality", sni: "www.icloud.com", fp: "chrome", reality-opts: {public-key: "7qP6YKWx5CJXia1qjQoIcD7FRjUBbioaioioI729D34", short-id: "2afe4310", server-name: "www.icloud.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "7qP6YKWx5CJXia1qjQoIcD7FRjUBbioaioioI729D34", sid: "2afe4310", headerType: "none"}
 - {name: "🇬🇧 GB-1 | Starlink", type: "vless", server: "uk-001.xiaoxiaobujidao.xyz", port: 443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", headerType: "none"}
 - {name: "🇬🇧 GB-2 | Starlink", type: "vless", server: "uk-001.xiaoxiaobujidao.xyz", port: 443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", headerType: "none"}
 - {name: "🇬🇧 GB-3 | Starlink", type: "vless", server: "uk-001.xiaoxiaobujidao.xyz", port: 443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", headerType: "none"}
@@ -138,6 +140,8 @@ proxy-groups:
     type: select
     proxies:
       - 自动选择⚡️
+      - 🇸🇬 SG-1 [ipv6] | Starlink
+      - 🇸🇬 SG-2 [ipv6] | Starlink
       - 🇬🇧 GB-1 | Starlink
       - 🇬🇧 GB-2 | Starlink
       - 🇬🇧 GB-3 | Starlink
@@ -153,6 +157,8 @@ proxy-groups:
   - name: 自动选择⚡️
     type: url-test
     proxies:
+      - 🇸🇬 SG-1 [ipv6] | Starlink
+      - 🇸🇬 SG-2 [ipv6] | Starlink
       - 🇬🇧 GB-1 | Starlink
       - 🇬🇧 GB-2 | Starlink
       - 🇬🇧 GB-3 | Starlink

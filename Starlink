@@ -1,4 +1,4 @@
-# Last update: 27.03.2026 19:52:05
+# Last update: 27.03.2026 20:01:35
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -121,27 +121,45 @@ dns:
       - +.googleapis.com
       - +.gvt1.com
 proxies:
-- {name: "🇭🇰 HK-1 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2095, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", network: "ws", ws-opts: {path: "/xxawedq", headers: {"Host": "huio1dhiuyqgk.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇭🇰 HK-2 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2095, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", network: "ws", ws-opts: {path: "/cxzdsa", headers: {"Host": "hdshau2kk.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇭🇰 HK-3 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2095, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", network: "ws", ws-opts: {path: "/xtqa", headers: {"Host": "hutxtz3k.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇯🇵 JP-1 | Starlink", type: "vless", server: "jp1.892622.xyz", port: 26703, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "ios", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "i3qsDfc_ep-_GGSb1S4BGO0qVLm3q0xzOrMz2r6mr0g", short-id: null}}
-- {name: "🇯🇵 JP-2 | Starlink", type: "vless", server: "jp2.892622.xyz", port: 26704, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "firefox", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "sHHoKne67Tb4jvOBnqkCS0iPJrokq5WB5cAtLfPj9zc", short-id: null}}
-- {name: "🇯🇵 JP-3 | Starlink", type: "vless", server: "jp3.892622.xyz", port: 26705, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "safari", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "_F1mEMAPLxJDeV2NBvaWZPHtx9z1UnkHSJPmisN3AAA", short-id: null}}
-- {name: "🇯🇵 JP-4 | Starlink", type: "hysteria2", server: "jp4.892622.xyz", port: 26702, password: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", sni: "jp4.892622.xyz", skip-cert-verify: false, up: 200, down: 200}
-- {name: "🇯🇵 JP-5 | Starlink", type: "vless", server: "jp5.892622.xyz", port: 8080, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "firefox", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "SzTvjBrZD4CQJ1EmuhcmhBz4nVasDI_9jAWLp551rzo", short-id: null}}
-- {name: "🇯🇵 JP-6 | Starlink", type: "vless", server: "jp6.892622.xyz", port: 26701, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "firefox", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "yUlhkJ1iNg5EwKEhE_pDYhFTdwfO2Xcl5fQYn9pyADk", short-id: null}}
-- {name: "🇸🇬 SG-1 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2086, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", network: "ws", ws-opts: {path: "/cxzcsa", headers: {"Host": "szop1iyqg.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇸🇬 SG-2 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2086, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", network: "ws", ws-opts: {path: "/dsaewqz", headers: {"Host": "suihgyq2g.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇹🇼 TW-1 | Starlink", type: "vless", server: "tw1.892622.xyz", port: 14060, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "chrome", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "OyMvsUjnAiH_uHZO5fX9MvvZVa8ZIuitnq6O0M8QrAA", short-id: null}}
-- {name: "🇺🇸 US-1 | Starlink", type: "hysteria2", server: "us1.892622.xyz", port: 26702, password: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", sni: "us1.892622.xyz", skip-cert-verify: false, up: 200, down: 200}
-- {name: "🇺🇸 US-2 | Starlink", type: "vless", server: "us2.892622.xyz", port: 8080, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "chrome", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "U8qMhMopoDP9qhxcbKuObAGQrCAB_O0bEViDDx9M42E", short-id: null}}
-- {name: "🇺🇸 US-3 | Starlink", type: "vless", server: "us3.892622.xyz", port: 26701, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "firefox", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "Qcx6QrYMozeBOrdzg8I-BfxXxgPP_CbPZgVCzK5vCH4", short-id: null}}
-- {name: "🇺🇸 US-4 | Starlink", type: "vless", server: "us4.892622.xyz", port: 26703, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "edge", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "8jIt-s6bCPR2A0yxDkorwKaM3f4DC6UugoFtAnsxazM", short-id: null}}
-- {name: "🇺🇸 US-5 | Starlink", type: "vless", server: "us5.892622.xyz", port: 26704, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "safari", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "X-7pmY-BGvWb7fr-ASkNAwse47_I-hDe2FWwb2ZxKhE", short-id: null}}
-- {name: "🇺🇸 US-6 | Starlink", type: "vless", server: "us6.892622.xyz", port: 26705, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "qq", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "L1ZF4yLaG7x3Z3F2-VzfnKVBLW098b5dl8qMz7Kbm1k", short-id: null}}
-- {name: "🇩🇪 DE-1 | Starlink", type: "hysteria2", server: "de.892622.xyz", port: 8080, password: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", sni: "de.892622.xyz", skip-cert-verify: false, up: 300, down: 300}
-- {name: "🇷🇺 RU-1 | Starlink", type: "hysteria2", server: "elsxxx.892622.xyz", port: 8080, password: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", sni: "elsxxx.892622.xyz", skip-cert-verify: false, up: 300, down: 300}
-- {name: "🇳🇱 NL-1 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2086, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", network: "ws", ws-opts: {path: "/dsadsa", headers: {"Host": "njighiuq1l.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
+- {name: "🇭🇰 HK-1 | Starlink", type: "anytls", server: "hkaws.ccwink.photos", port: 60001, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-2 | Starlink", type: "anytls", server: "hkaws.ccwink.photos", port: 60001, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-3 | Starlink", type: "anytls", server: "hkaws.ccwink.photos", port: 60001, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇯🇵 JP-1 | Starlink", type: "anytls", server: "hkaws.ccwink.photos", port: 60001, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇯🇵 JP-2 | Starlink", type: "anytls", server: "jpaws.ccwink.photos", port: 60001, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-4 | Starlink", type: "hysteria2", server: "hkt.ccwink.cc", port: 56309, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "hkt.ccwink.cc", skip-cert-verify: true, up: null, down: null}
+- {name: "🇭🇰 HK-5 | Starlink", type: "anytls", server: "hkt.ccwink.cc", port: 6549, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-6 | Starlink", type: "anytls", server: "hkaws.ccwink.photos", port: 60005, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-7 | Starlink", type: "anytls", server: "jpaws.ccwink.photos", port: 60005, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-8 | Starlink", type: "anytls", server: "43.161.240.193", port: 60002, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-9 | Starlink", type: "anytls", server: "43.161.240.193", port: 60001, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-10 | Starlink", type: "anytls", server: "hkaws.ccwink.photos", port: 60001, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-11 | Starlink", type: "anytls", server: "hkaws.ccwink.photos", port: 60001, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-12 | Starlink", type: "anytls", server: "jpaws.ccwink.photos", port: 60001, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-13 | Starlink", type: "anytls", server: "jpaws.ccwink.photos", port: 60001, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇲🇴 MO-1 | Starlink", type: "anytls", server: "hkaws.ccwink.photos", port: 60006, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇲🇴 MO-2 | Starlink", type: "anytls", server: "jpaws.ccwink.photos", port: 60006, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇹🇼 TW-1 | Starlink", type: "hysteria2", server: "tw.ccwink.cc", port: 30102, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "tw.ccwink.cc", skip-cert-verify: true, up: null, down: null}
+- {name: "🇹🇼 TW-2 | Starlink", type: "anytls", server: "tw.ccwink.cc", port: 6549, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇹🇼 TW-3 | Starlink", type: "anytls", server: "hkaws.ccwink.photos", port: 60002, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇹🇼 TW-4 | Starlink", type: "anytls", server: "hkaws.ccwink.photos", port: 60002, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇯🇵 JP-3 | Starlink", type: "anytls", server: "jpyxvm.ccwink.cc", port: 56300, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇯🇵 JP-4 | Starlink", type: "anytls", server: "jpyxvm.ccwink.cc", port: 8048, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇯🇵 JP-5 | Starlink", type: "anytls", server: "hkaws.ccwink.photos", port: 60004, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇯🇵 JP-6 | Starlink", type: "anytls", server: "jpaws.ccwink.photos", port: 60004, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇬 SG-1 | Starlink", type: "anytls", server: "hkaws.ccwink.photos", port: 60003, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇬 SG-2 | Starlink", type: "anytls", server: "jpaws.ccwink.photos", port: 60003, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇬 SG-3 | Starlink", type: "anytls", server: "sggcp.ccwink.cc", port: 60002, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇬 SG-4 | Starlink", type: "anytls", server: "sggcp.ccwink.cc", port: 60003, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇰🇷 KR-1 | Starlink", type: "hysteria2", server: "kr.ccwink.cc", port: 56309, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "kr.ccwink.cc", skip-cert-verify: true, up: null, down: null}
+- {name: "🇰🇷 KR-2 | Starlink", type: "anytls", server: "kr.ccwink.cc", port: 32455, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-1 | Starlink", type: "anytls", server: "43.162.108.172", port: 60002, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-2 | Starlink", type: "anytls", server: "43.162.108.172", port: 60001, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-3 | Starlink", type: "anytls", server: "144.24.7.139", port: 30002, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-4 | Starlink", type: "anytls", server: "hkaws.ccwink.photos", port: 30002, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-5 | Starlink", type: "anytls", server: "jpaws.ccwink.photos", port: 30002, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇩🇪 DE-1 | Starlink", type: "anytls", server: "152.53.133.252", port: 30002, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇩🇪 DE-2 | Starlink", type: "anytls", server: "hkaws.ccwink.photos", port: 30006, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
+- {name: "🇩🇪 DE-3 | Starlink", type: "anytls", server: "jpaws.ccwink.photos", port: 30006, password: "9e0f72bb-7ad6-4383-994a-497569a94d74", sni: "baidu.com", skip-cert-verify: true, udp: true}
 proxy-groups:
   - name: 选择线路
     type: select
@@ -152,22 +170,40 @@ proxy-groups:
       - 🇭🇰 HK-3 | Starlink
       - 🇯🇵 JP-1 | Starlink
       - 🇯🇵 JP-2 | Starlink
+      - 🇭🇰 HK-4 | Starlink
+      - 🇭🇰 HK-5 | Starlink
+      - 🇭🇰 HK-6 | Starlink
+      - 🇭🇰 HK-7 | Starlink
+      - 🇭🇰 HK-8 | Starlink
+      - 🇭🇰 HK-9 | Starlink
+      - 🇭🇰 HK-10 | Starlink
+      - 🇭🇰 HK-11 | Starlink
+      - 🇭🇰 HK-12 | Starlink
+      - 🇭🇰 HK-13 | Starlink
+      - 🇲🇴 MO-1 | Starlink
+      - 🇲🇴 MO-2 | Starlink
+      - 🇹🇼 TW-1 | Starlink
+      - 🇹🇼 TW-2 | Starlink
+      - 🇹🇼 TW-3 | Starlink
+      - 🇹🇼 TW-4 | Starlink
       - 🇯🇵 JP-3 | Starlink
       - 🇯🇵 JP-4 | Starlink
       - 🇯🇵 JP-5 | Starlink
       - 🇯🇵 JP-6 | Starlink
       - 🇸🇬 SG-1 | Starlink
       - 🇸🇬 SG-2 | Starlink
-      - 🇹🇼 TW-1 | Starlink
+      - 🇸🇬 SG-3 | Starlink
+      - 🇸🇬 SG-4 | Starlink
+      - 🇰🇷 KR-1 | Starlink
+      - 🇰🇷 KR-2 | Starlink
       - 🇺🇸 US-1 | Starlink
       - 🇺🇸 US-2 | Starlink
       - 🇺🇸 US-3 | Starlink
       - 🇺🇸 US-4 | Starlink
       - 🇺🇸 US-5 | Starlink
-      - 🇺🇸 US-6 | Starlink
       - 🇩🇪 DE-1 | Starlink
-      - 🇷🇺 RU-1 | Starlink
-      - 🇳🇱 NL-1 | Starlink
+      - 🇩🇪 DE-2 | Starlink
+      - 🇩🇪 DE-3 | Starlink
   - name: 自动选择⚡️
     type: url-test
     proxies:
@@ -176,22 +212,40 @@ proxy-groups:
       - 🇭🇰 HK-3 | Starlink
       - 🇯🇵 JP-1 | Starlink
       - 🇯🇵 JP-2 | Starlink
+      - 🇭🇰 HK-4 | Starlink
+      - 🇭🇰 HK-5 | Starlink
+      - 🇭🇰 HK-6 | Starlink
+      - 🇭🇰 HK-7 | Starlink
+      - 🇭🇰 HK-8 | Starlink
+      - 🇭🇰 HK-9 | Starlink
+      - 🇭🇰 HK-10 | Starlink
+      - 🇭🇰 HK-11 | Starlink
+      - 🇭🇰 HK-12 | Starlink
+      - 🇭🇰 HK-13 | Starlink
+      - 🇲🇴 MO-1 | Starlink
+      - 🇲🇴 MO-2 | Starlink
+      - 🇹🇼 TW-1 | Starlink
+      - 🇹🇼 TW-2 | Starlink
+      - 🇹🇼 TW-3 | Starlink
+      - 🇹🇼 TW-4 | Starlink
       - 🇯🇵 JP-3 | Starlink
       - 🇯🇵 JP-4 | Starlink
       - 🇯🇵 JP-5 | Starlink
       - 🇯🇵 JP-6 | Starlink
       - 🇸🇬 SG-1 | Starlink
       - 🇸🇬 SG-2 | Starlink
-      - 🇹🇼 TW-1 | Starlink
+      - 🇸🇬 SG-3 | Starlink
+      - 🇸🇬 SG-4 | Starlink
+      - 🇰🇷 KR-1 | Starlink
+      - 🇰🇷 KR-2 | Starlink
       - 🇺🇸 US-1 | Starlink
       - 🇺🇸 US-2 | Starlink
       - 🇺🇸 US-3 | Starlink
       - 🇺🇸 US-4 | Starlink
       - 🇺🇸 US-5 | Starlink
-      - 🇺🇸 US-6 | Starlink
       - 🇩🇪 DE-1 | Starlink
-      - 🇷🇺 RU-1 | Starlink
-      - 🇳🇱 NL-1 | Starlink
+      - 🇩🇪 DE-2 | Starlink
+      - 🇩🇪 DE-3 | Starlink
     url: https://www.gstatic.com/generate_204
     interval: 300
 rules:

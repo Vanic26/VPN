@@ -3,7 +3,8 @@ name: Update VPN Subscription (SUB_Starlink)
 on:
   schedule:
     - cron: '0 */4 * * *' # every 4 hours
-    
+
+  # Manual trigger with inputs  
   workflow_dispatch:
     inputs:
       use_latency_filter:
@@ -31,8 +32,8 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write
-      actions: write
+      contents: write  # needed for commit & push
+      actions: write   # needed for deleting artifacts
 
     steps:
       - name: Checkout repo
@@ -71,8 +72,11 @@ jobs:
       - name: Generate GMT+6:30 timestamp
         id: timestamp
         run: |
+          # Get UTC time in seconds since epoch
           utc_seconds=$(date -u +%s)
+          # Get UTC time in seconds since epoch
           local_seconds=$((utc_seconds + 6*3600 + 30*60))
+          # Format as DD.MM.YYYY HH:MM:SS GMT+6:30
           TIMESTAMP=$(date -u -d "@$local_seconds" +"%d.%m.%Y %H:%M:%S")
           echo "TIMESTAMP=$TIMESTAMP" >> $GITHUB_ENV
 
@@ -85,7 +89,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            MAX_RETRIES=3
+            MAX_RETRIES=5
             COUNT=0
             SUCCESS=0
             while [ $COUNT -lt $MAX_RETRIES ]; do
@@ -116,7 +120,7 @@ jobs:
           path: Starlink.yaml
           retention-days: 30
 
-      - name: Cleanup old Starlink artifacts (keep latest 60)
+      - name: Cleanup old artifacts (keep latest 60)
         if: success() && steps.upload_artifact.outcome == 'success'
         uses: actions/github-script@v8
         with:
@@ -127,8 +131,8 @@ jobs:
               per_page: 100
             });
 
-            // Filter only Starlink artifacts and sort newest first
-            const starlinkArtifacts = artifacts.data.artifacts
+            // Filter only matched artifacts and sort newest first
+            const sorted = artifacts.data.artifacts
               .filter(a => a.name === "Starlink")
               .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 

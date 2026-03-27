@@ -1,4 +1,4 @@
-# Last update: 29.01.2026 12:10:13
+# Last update: 27.03.2026 16:51:00
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -121,77 +121,50 @@ dns:
       - +.googleapis.com
       - +.gvt1.com
 proxies:
-- {name: "🇭🇰 HK-1 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2086, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", network: "ws", ws-opts: {path: "/xxawedq", headers: {"Host": "huio1dhiuyqgk.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇭🇰 HK-2 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2086, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", network: "ws", ws-opts: {path: "/cxzdsa", headers: {"Host": "hdshau2kk.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇭🇰 HK-3 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2086, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", network: "ws", ws-opts: {path: "/xtqa", headers: {"Host": "hutxtz3k.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇯🇵 JP-1 | Starlink", type: "vless", server: "jp1.892622.xyz", port: 26703, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "qq", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "i3qsDfc_ep-_GGSb1S4BGO0qVLm3q0xzOrMz2r6mr0g", short-id: null}}
-- {name: "🇯🇵 JP-2 | Starlink", type: "vless", server: "jp2.892622.xyz", port: 26704, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "safari", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "sHHoKne67Tb4jvOBnqkCS0iPJrokq5WB5cAtLfPj9zc", short-id: null}}
-- {name: "🇯🇵 JP-3 | Starlink", type: "vless", server: "jp3.892622.xyz", port: 26705, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "edge", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "_F1mEMAPLxJDeV2NBvaWZPHtx9z1UnkHSJPmisN3AAA", short-id: null}}
-- {name: "🇯🇵 JP-4 | Starlink", type: "hysteria2", server: "jp4.892622.xyz", port: 26702, password: "8b7e48c6-6935-43d1-855e-3b947ec52162", sni: "jp4.892622.xyz", skip-cert-verify: false, up: 200, down: 200}
-- {name: "🇯🇵 JP-5 | Starlink", type: "vless", server: "jp5.892622.xyz", port: 8080, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "ios", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "SzTvjBrZD4CQJ1EmuhcmhBz4nVasDI_9jAWLp551rzo", short-id: null}}
-- {name: "🇯🇵 JP-6 | Starlink", type: "vless", server: "jp6.892622.xyz", port: 26701, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "qq", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "yUlhkJ1iNg5EwKEhE_pDYhFTdwfO2Xcl5fQYn9pyADk", short-id: null}}
-- {name: "🇸🇬 SG-1 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2086, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", network: "ws", ws-opts: {path: "/cxzcsa", headers: {"Host": "szop1iyqg.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇸🇬 SG-2 | Starlink", type: "vless", server: "sgn1.892622.xyz", port: 26703, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", network: "ws", ws-opts: {path: "/dsaewqz", headers: {"Host": "suihgyq2g.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇹🇼 TW-1 | Starlink", type: "vless", server: "tw1.892622.xyz", port: 14060, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "firefox", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "OyMvsUjnAiH_uHZO5fX9MvvZVa8ZIuitnq6O0M8QrAA", short-id: null}}
-- {name: "🇺🇸 US-1 | Starlink", type: "hysteria2", server: "us1.892622.xyz", port: 26702, password: "8b7e48c6-6935-43d1-855e-3b947ec52162", sni: "us1.892622.xyz", skip-cert-verify: false, up: 200, down: 200}
-- {name: "🇺🇸 US-2 | Starlink", type: "vless", server: "us2.892622.xyz", port: 8080, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "edge", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "U8qMhMopoDP9qhxcbKuObAGQrCAB_O0bEViDDx9M42E", short-id: null}}
-- {name: "🇺🇸 US-3 | Starlink", type: "vless", server: "us3.892622.xyz", port: 26701, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "ios", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "Qcx6QrYMozeBOrdzg8I-BfxXxgPP_CbPZgVCzK5vCH4", short-id: null}}
-- {name: "🇺🇸 US-4 | Starlink", type: "vless", server: "us4.892622.xyz", port: 26703, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "firefox", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "8jIt-s6bCPR2A0yxDkorwKaM3f4DC6UugoFtAnsxazM", short-id: null}}
-- {name: "🇺🇸 US-5 | Starlink", type: "vless", server: "us5.892622.xyz", port: 26704, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "chrome", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "X-7pmY-BGvWb7fr-ASkNAwse47_I-hDe2FWwb2ZxKhE", short-id: null}}
-- {name: "🇺🇸 US-6 | Starlink", type: "vless", server: "us6.892622.xyz", port: 26705, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "firefox", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "L1ZF4yLaG7x3Z3F2-VzfnKVBLW098b5dl8qMz7Kbm1k", short-id: null}}
-- {name: "🇩🇪 DE-1 | Starlink", type: "hysteria2", server: "de.892622.xyz", port: 8080, password: "8b7e48c6-6935-43d1-855e-3b947ec52162", sni: "de.892622.xyz", skip-cert-verify: false, up: 300, down: 300}
-- {name: "🇷🇺 RU-1 | Starlink", type: "hysteria2", server: "elsxxx.892622.xyz", port: 8080, password: "8b7e48c6-6935-43d1-855e-3b947ec52162", sni: "elsxxx.892622.xyz", skip-cert-verify: false, up: 300, down: 300}
-- {name: "🇳🇱 NL-1 | Starlink", type: "vless", server: "nl.892622.xyz", port: 8080, uuid: "8b7e48c6-6935-43d1-855e-3b947ec52162", network: "ws", ws-opts: {path: "/dsadsa", headers: {"Host": "njighiuq1l.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
+- {name: "🇬🇧 GB-1 | Starlink", type: "vless", server: "uk-001.xiaoxiaobujidao.xyz", port: 443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", headerType: "none"}
+- {name: "🇬🇧 GB-2 | Starlink", type: "vless", server: "uk-001.xiaoxiaobujidao.xyz", port: 443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", headerType: "none"}
+- {name: "🇬🇧 GB-3 | Starlink", type: "vless", server: "uk-001.xiaoxiaobujidao.xyz", port: 443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", headerType: "none"}
+- {name: "🇬🇧 GB-4 | Starlink", type: "hysteria2", server: "uk-001.xiaoxiaobujidao.xyz", port: 19443, password: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", sni: "uk-001.xiaoxiaobujidao.xyz", skip-cert-verify: true, tls: {enabled: true, server_name: "uk-001.xiaoxiaobujidao.xyz", insecure: true}, insecure: "1"}
+- {name: "🇨🇦 CA-1 | Starlink", type: "vless", server: "ca-x-001.xiaoxiaobujidao.xyz", port: 443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "xhttp", security: "tls", sni: "ca-x-001.xiaoxiaobujidao.xyz", servername: "ca-x-001.xiaoxiaobujidao.xyz", skip-cert-verify: false, tls: true, headerType: "none"}
+- {name: "🇺🇸 US-1 | Starlink", type: "vless", server: "uk-x-001.xiaoxiaobujidao.xyz", port: 443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "xhttp", security: "tls", sni: "uk-x-001.xiaoxiaobujidao.xyz", servername: "uk-x-001.xiaoxiaobujidao.xyz", skip-cert-verify: false, tls: true, headerType: "none"}
+- {name: "🇯🇵 JP-1 | Starlink", type: "vless", server: "tk-X06.xiaoxiaobujidao.xyz", port: 18443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", headerType: "none"}
+- {name: "🇯🇵 JP-2 | Starlink", type: "vless", server: "tk-X07.xiaoxiaobujidao.xyz", port: 12443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", headerType: "none"}
+- {name: "🇺🇸 US-2 | Starlink", type: "vless", server: "px-x01.xiaoxiaobujidao.xyz", port: 23456, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", headerType: "none"}
+- {name: "🇺🇸 US-3 | Starlink", type: "vless", server: "px-x02.xiaoxiaobujidao.xyz", port: 12345, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", headerType: "none"}
+- {name: "🇺🇸 US-4 | Starlink", type: "vless", server: "c1.bujidao.org", port: 2083, uuid: "1ccc1dd8-d8ed-4b69-b0c2-27f6282f9755", encryption: "none", network: "ws", security: "tls", sni: "vl.bujidao.cc", servername: "vl.bujidao.cc", skip-cert-verify: false, path: "/?ed=2048", ws-opts: {path: "/?ed=2048"}, tls: true, headerType: "none"}
+- {name: "🇺🇸 US-5 | Starlink", type: "vless", server: "c2-4.bujidao.org", port: 2083, uuid: "1ccc1dd8-d8ed-4b69-b0c2-27f6282f9755", encryption: "none", network: "ws", security: "tls", sni: "test.bujidao.org", servername: "test.bujidao.org", skip-cert-verify: false, path: "/?ed=2048", ws-opts: {path: "/?ed=2048"}, tls: true, headerType: "none"}
 proxy-groups:
   - name: 选择线路
     type: select
     proxies:
       - 自动选择⚡️
-      - 🇭🇰 HK-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇭🇰 HK-3 | Starlink
+      - 🇬🇧 GB-1 | Starlink
+      - 🇬🇧 GB-2 | Starlink
+      - 🇬🇧 GB-3 | Starlink
+      - 🇬🇧 GB-4 | Starlink
+      - 🇨🇦 CA-1 | Starlink
+      - 🇺🇸 US-1 | Starlink
       - 🇯🇵 JP-1 | Starlink
       - 🇯🇵 JP-2 | Starlink
-      - 🇯🇵 JP-3 | Starlink
-      - 🇯🇵 JP-4 | Starlink
-      - 🇯🇵 JP-5 | Starlink
-      - 🇯🇵 JP-6 | Starlink
-      - 🇸🇬 SG-1 | Starlink
-      - 🇸🇬 SG-2 | Starlink
-      - 🇹🇼 TW-1 | Starlink
-      - 🇺🇸 US-1 | Starlink
       - 🇺🇸 US-2 | Starlink
       - 🇺🇸 US-3 | Starlink
       - 🇺🇸 US-4 | Starlink
       - 🇺🇸 US-5 | Starlink
-      - 🇺🇸 US-6 | Starlink
-      - 🇩🇪 DE-1 | Starlink
-      - 🇷🇺 RU-1 | Starlink
-      - 🇳🇱 NL-1 | Starlink
   - name: 自动选择⚡️
     type: url-test
     proxies:
-      - 🇭🇰 HK-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇭🇰 HK-3 | Starlink
+      - 🇬🇧 GB-1 | Starlink
+      - 🇬🇧 GB-2 | Starlink
+      - 🇬🇧 GB-3 | Starlink
+      - 🇬🇧 GB-4 | Starlink
+      - 🇨🇦 CA-1 | Starlink
+      - 🇺🇸 US-1 | Starlink
       - 🇯🇵 JP-1 | Starlink
       - 🇯🇵 JP-2 | Starlink
-      - 🇯🇵 JP-3 | Starlink
-      - 🇯🇵 JP-4 | Starlink
-      - 🇯🇵 JP-5 | Starlink
-      - 🇯🇵 JP-6 | Starlink
-      - 🇸🇬 SG-1 | Starlink
-      - 🇸🇬 SG-2 | Starlink
-      - 🇹🇼 TW-1 | Starlink
-      - 🇺🇸 US-1 | Starlink
       - 🇺🇸 US-2 | Starlink
       - 🇺🇸 US-3 | Starlink
       - 🇺🇸 US-4 | Starlink
       - 🇺🇸 US-5 | Starlink
-      - 🇺🇸 US-6 | Starlink
-      - 🇩🇪 DE-1 | Starlink
-      - 🇷🇺 RU-1 | Starlink
-      - 🇳🇱 NL-1 | Starlink
     url: https://www.gstatic.com/generate_204
     interval: 300
 rules:

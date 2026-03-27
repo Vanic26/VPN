@@ -225,9 +225,23 @@ def parse_vless(line):
         else:
             host_port = rest
 
-        if ":" not in host_port:
-            return None
-        host, port = host_port.split(":", 1)
+        # ---------------- IPv6 / IPv4 handling ----------------
+        if host_port.startswith("["):  # IPv6
+            end = host_port.find("]")
+            if end == -1:
+                return None
+        
+            host = host_port[1:end]
+        
+            if len(host_port) <= end + 2:
+                return None
+        
+            port = host_port[end + 2:]
+        
+        else:  # IPv4 / domain
+            if ":" not in host_port:
+                return None
+            host, port = host_port.rsplit(":", 1)
 
         node = {
             "type": "vless",

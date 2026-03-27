@@ -137,7 +137,7 @@ jobs:
               .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
             // Keep latest 60, delete the rest
-            const toDelete = starlinkArtifacts.slice(60);
+            const toDelete = sorted.slice(60);
 
             for (const artifact of toDelete) {
               console.log(`Deleting artifact: ${artifact.name} (${artifact.id})`);

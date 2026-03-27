@@ -116,7 +116,7 @@ jobs:
           path: Starlink.yaml
           retention-days: 30
 
-      - name: Cleanup old artifacts (keep latest 60)
+      - name: Cleanup old Starlink artifacts (keep latest 60)
         if: success() && steps.upload_artifact.outcome == 'success'
         uses: actions/github-script@v8
         with:
@@ -126,13 +126,15 @@ jobs:
               repo: context.repo.repo,
               per_page: 100
             });
-            
-            const sorted = artifacts.data.artifacts
-              .filter(a => a.name.startsWith("Starlink"))
+
+            // Filter only Starlink artifacts and sort newest first
+            const starlinkArtifacts = artifacts.data.artifacts
+              .filter(a => a.name === "Starlink")
               .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-            
-            const toDelete = sorted.slice(10);
-            
+
+            // Keep latest 60, delete the rest
+            const toDelete = starlinkArtifacts.slice(60);
+
             for (const artifact of toDelete) {
               console.log(`Deleting artifact: ${artifact.name} (${artifact.id})`);
               await github.rest.actions.deleteArtifact({

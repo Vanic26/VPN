@@ -970,54 +970,98 @@ def load_proxies(url, retries=10):
             r = requests.get(url, timeout=15)
             r.raise_for_status()
             text = r.text.strip()
-
-            print(f"[fetch] 📥 {len(text.splitlines())} lines fetched from subscription link", flush=True)
-            for line in text.splitlines()[:5]:
-                print("       ", line[:30], flush=True)
-
             nodes = []
+            sub_type = None
 
-            # Base64 decode if single line and looks like Base64
-            if len(text.splitlines()) == 1 and re.match(r'^[A-Za-z0-9+/=]+$', text):
+            # ---------- For Base64 (single-line subscription) decode ----------
+            lines = text.splitlines()
+
+            if len(lines) == 1 and re.match(r'^[A-Za-z0-9+/=]+$', text.strip()):
                 try:
-                    decoded = base64.b64decode(text + "=" * (-len(text) % 4)).decode("utf-8")
-                    text = decoded
-                    print(f"[decode] 🔓 Base64 decoded -> {len(text.splitlines())} lines", flush=True)
-                except Exception:
-                    print(f"[warn] 😭 Base64 decode failed", flush=True)
+                    decoded = base64.b64decode(
+                        text.strip() + "=" * (-len(text.strip()) % 4)
+                    ).decode("utf-8", errors="ignore")
 
-            # Parse as YAML (Clash format)
-            if text.startswith("proxies:") or "proxies:" in text:
+                    decoded_lines = decoded.splitlines()
+
+                    if len(decoded_lines) > 3 and "://" in decoded:
+                        text = decoded
+                        sub_type = "BASE64"
+
+                        print("[fetch] 📥 Base64 subscription detected", flush=True)
+
+                    else:
+                        print("[warn] 😭 Not valid Base64 subscription", flush=True)
+
+                except Exception:
+                    print("[warn] 😭 Base64 decode failed", flush=True)
+
+            # ---------- For YAML decode ----------
+            if not sub_type and ("proxies:" in text or text.startswith("proxies:")):
+                sub_type = "YAML"
+                print("[fetch] 📥 YAML subscription detected", flush=True)
+
+            # ---------- For V2Ray decode ----------
+            if not sub_type:
+                sub_type = "V2RAY"
+                print("[fetch] 📥 V2Ray subscription detected", flush=True)
+
+            # ---------- Parse YAML ----------
+            if sub_type == "YAML":
                 try:
                     data = yaml.safe_load(text)
+
                     if data and "proxies" in data:
                         for idx, p in enumerate(data["proxies"], start=1):
                             original_name = str(p.get("name", "") or "").strip()
+
                             if not original_name:
                                 p["name"] = f"Node-{idx}"
                             nodes.append(p)
-                            protocol = str(p.get("type", "YAML")).upper()
-                            print(f"[parse] 🔎 YAML ({protocol}) node {idx} parsed", flush=True)
+                            protocol = str(p.get("type", "NODE")).upper()
+
+                            print(
+                                f"[parse] 🔎 YAML to {protocol} node ({idx}) parsed",
+                                flush=True
+                            )
+
                     else:
-                        print(f"[warn] 😭 YAML structure invalid or empty", flush=True)
+                        print("[warn] 😭 YAML structure invalid or empty", flush=True)
+
                 except Exception:
-                    print(f"[warn] 😭 YAML parsing failed", flush=True)
+                    print("[warn] 😭 YAML parsing failed", flush=True)
+
+            # ---------- Parse Base64 or V2Ray ----------
             else:
-                # Parse as individual subscription lines (Vmess/Vless/Trojan/etc.)
                 for idx, line in enumerate(text.splitlines(), start=1):
                     line = line.strip()
+
                     if not line:
                         continue
+
                     try:
                         node = parse_node_line(line, idx)
+
                         if node:
                             nodes.append(node)
-                            protocol = line.split("://")[0].upper() if "://" in line else "NODE"
-                            print(f"[parse] 🔎 Base64 or {protocol} node {idx} parsed", flush=True)
+                            protocol = (
+                                line.split("://")[0].upper()
+                                if "://" in line
+                                else "NODE"
+                            )
+
+                            if sub_type == "BASE64":
+                                print(
+                                    f"[parse] 🔎 Base64 to {protocol} node ({idx}) parsed", flush=True )
+                            else:
+                                print(f"[parse] 🔎 {protocol} node ({idx}) parsed", flush=True )
+
                         else:
-                            print(f"[skip] ⛔ Invalid or unsupported line -> Check line {idx}", flush=True)
+                            print(f"[skip] ⛔ Invalid or unsupported line {idx}", flush=True)
+
                     except Exception:
-                        print(f"[warn] 😭 Error parsing line: {idx}", flush=True)
+                        print(
+                            f"[warn] 😭 Error parsing line {idx}", flush=True)
 
             return nodes
 
@@ -1223,4 +1267,3 @@ def upload_to_textdb():
 # ---------------- Entry ----------------
 if __name__ == "__main__":
     main()
-    

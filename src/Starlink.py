@@ -170,7 +170,7 @@ def merge_dynamic_fields(node, query):
 # -----------------------------------------------------------
 # VMESS Parser
 # -----------------------------------------------------------
-def parse_vmess(line):
+def parse_vmess(line, line_number=None):
     try:
         if not line.startswith("vmess://"):
             return None
@@ -229,14 +229,14 @@ def parse_vmess(line):
 
         return node
 
-    except Exception as e:
-        print(f"[warn] ❗Vmess parse error -> {e}")
+    except Exception:
+        print(f"[warn] ❗Vmess parse error -> Line {line_number}")
         return None
 
 # -----------------------------------------------------------
 # VLESS Parser
 # -----------------------------------------------------------
-def parse_vless(line):
+def parse_vless(line, line_number=None):
     try:
         if not line.startswith("vless://"):
             return None
@@ -318,13 +318,16 @@ def parse_vless(line):
         return node
 
     except Exception as e:
-        print(f"[warn] ❗VLESS parse error -> {e}")
+        if line_no:
+            print(f"[warn] ❗VLESS parse error -> Line {line_no}")
+        else:
+            print(f"[warn] ❗VLESS parse error -> {e}")
         return None
 
 # -----------------------------------------------------------
 # TROJAN Parser
 # -----------------------------------------------------------
-def parse_trojan(line):
+def parse_trojan(line, line_number=None):
     try:
         if not line.startswith("trojan://"):
             return None
@@ -404,14 +407,14 @@ def parse_trojan(line):
 
         return node
 
-    except Exception as e:
-        print(f"[warn] ❗Trojan parse error -> {e}")
+    except Exception:
+        print(f"[warn] ❗Trojan parse error -> Line {line_number}")
         return None
 
 # -----------------------------------------------------------
 # HYSTERIA2 Parser
 # -----------------------------------------------------------
-def parse_hysteria2(line):
+def parse_hysteria2(line, line_number=None):
     try:
         if not (line.startswith("hysteria2://") or line.startswith("hy2://")):
             return None
@@ -475,13 +478,13 @@ def parse_hysteria2(line):
 
         return node
 
-    except Exception as e:
-        print(f"[warn] ❗Hysteria2 parse error -> {e}")
+    except Exception:
+        print(f"[warn] ❗Hysteria2 parse error -> Line {line_number}")
         return None
 # -----------------------------------------------------------
 # ANYTLS Parser
 # -----------------------------------------------------------
-def parse_anytls(line):
+def parse_anytls(line, line_number=None):
     try:
         if not line.startswith("anytls://"):
             return None
@@ -537,13 +540,13 @@ def parse_anytls(line):
         return node
 
     except Exception as e:
-        print(f"[warn] ❗Anytls parse error -> {e}")
+        print(f"[warn] ❗Anytls parse error -> Line {line_number}")
         return None
 
 # -----------------------------------------------------------
 # TUIC Parser
 # -----------------------------------------------------------
-def parse_tuic(line):
+def parse_tuic(line, line_number=None):
     try:
         if not line.startswith("tuic://"):
             return None
@@ -612,13 +615,13 @@ def parse_tuic(line):
         return node
 
     except Exception as e:
-        print(f"[warn] ❗TUIC parse error -> {e}")
+        print(f"[warn] ❗TUIC parse error -> Line {line_number}")
         return None
 
 # -----------------------------------------------------------
 # SHADOWSOCKS (SS) Parser
 # -----------------------------------------------------------
-def parse_ss(line):
+def parse_ss(line, line_number=None):
     try:
         if not line.startswith("ss://"):
             return None
@@ -702,13 +705,13 @@ def parse_ss(line):
         return node
 
     except Exception as e:
-        print(f"[warn] ❗SS parse error -> {e}")
+        print(f"[warn] ❗SS parse error -> Line {line_number}")
         return None
         
 # -----------------------------------------------------------
 # SHADOWSOCKSR (SSR) Parser
 # -----------------------------------------------------------
-def parse_ssr(line):
+def parse_ssr(line, line_number=None):
     try:
         if not line.startswith("ssr://"):
             return None
@@ -761,13 +764,13 @@ def parse_ssr(line):
         return node
 
     except Exception as e:
-        print(f"[warn] ❗SSR parse error -> {e}")
+        print(f"[warn] ❗SSR parse error -> Line {line_number}")
         return None
 
 # -----------------------------------------------------------
 # Dispatcher
 # -----------------------------------------------------------
-def parse_node_line(line):
+def parse_node_line(line, line_number=None):
     line = line.strip()
 
     if not line:
@@ -778,34 +781,40 @@ def parse_node_line(line):
 
     try:
         if line.startswith("vmess://"):
-            return parse_vmess(line)
-
+            return parse_vmess(line, line_number)
+        
         if line.startswith("vless://"):
-            return parse_vless(line)
-
+            return parse_vless(line, line_number)
+        
         if line.startswith("trojan://"):
-            return parse_trojan(line)
-
+            return parse_trojan(line, line_number)
+        
         if line.startswith("hysteria2://") or line.startswith("hy2://"):
-            return parse_hysteria2(line)
-
+            return parse_hysteria2(line, line_number)
+        
         if line.startswith("anytls://"):
-            return parse_anytls(line)
-
+            return parse_anytls(line, line_number)
+        
         if line.startswith("tuic://"):
-            return parse_tuic(line)
-
+            return parse_tuic(line, line_number)
+        
         if line.startswith("ss://"):
-            return parse_ss(line)
-
+            return parse_ss(line, line_number)
+        
         if line.startswith("ssr://"):
-            return parse_ssr(line)
+            return parse_ssr(line, line_number)
 
         return None
 
     except Exception as e:
-        print(f"[warn] ❗Dispatcher error -> {e}")
+        print(f"[warn] ❗Dispatcher error -> Line {line_number}")
         return None
+
+# ----------------------------
+# Global counters for rename fallback
+# ----------------------------
+geoip_primary_fail = 0   # counts nodes where GeoIP mode failed but fallback succeeded
+name_primary_fail = 0    # counts nodes where name-based mode failed but fallback succeeded
 
 # ---------------- Rename node ----------------
 def rename_node(p, country_counter, CN_TO_CC):
@@ -1050,7 +1059,7 @@ def main():
         else:
             filtered_nodes = all_nodes
             country_counter = defaultdict(int)
-            print(f"[latency] 🚀 Latency filtering 🚫, {len(filtered_nodes)} nodes remain")
+            print(f"[latency] 🚀 Latency filtering disabled, {len(filtered_nodes)} nodes remain")
 
         # ---------------- Duplicate filter ----------------
         if USE_DUPLICATE_FILTER:
@@ -1073,6 +1082,15 @@ def main():
                 renamed_nodes.append(res)
             else:
                 skipped_nodes += 1
+
+        if USE_ONLY_GEOIP:
+            print(
+                f"[rename] 🌍 GeoIP-only mode: Failed to rename {geoip_primary_fail} nodes and fallback to Name-based detection"
+            )
+        else:
+            print(
+                f"[rename] 🏷️ Name-based mode: Failed to rename {name_primary_fail} nodes and fallback to GeoIP detection"
+            )
 
         if skipped_nodes > 0:
             print(f"[rename] ⚠️ Skipped {skipped_nodes} nodes that could not be assigned a name or include forbidden emoji")
@@ -1175,7 +1193,7 @@ def main():
 def upload_to_textdb():
     try:
         # Step 1: Read freshly generated Filter file (local, not GitHub raw)
-        with open("Starlink", "r", encoding="utf-8") as f:
+        with open("Sub3", "r", encoding="utf-8") as f:
             output_text = f.read()
 
         # Step 2: Delete old data
@@ -1203,3 +1221,4 @@ def upload_to_textdb():
 # ---------------- Entry ----------------
 if __name__ == "__main__":
     main()
+    

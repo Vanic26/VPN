@@ -1021,7 +1021,7 @@ def load_proxies(url, retries=10):
                             protocol = str(p.get("type", "NODE")).upper()
 
                             print(
-                                f"[parse] 🔎 YAML to {protocol} node ({idx}) parsed",
+                                f"[parse] 🔎 YAML to {protocol} node: {idx} parsed",
                                 flush=True
                             )
 
@@ -1052,16 +1052,16 @@ def load_proxies(url, retries=10):
 
                             if sub_type == "BASE64":
                                 print(
-                                    f"[parse] 🔎 Base64 to {protocol} node ({idx}) parsed", flush=True )
+                                    f"[parse] 🔎 Base64 to {protocol} node: {idx} parsed", flush=True )
                             else:
-                                print(f"[parse] 🔎 {protocol} node ({idx}) parsed", flush=True )
+                                print(f"[parse] 🔎 {protocol} node: {idx} parsed", flush=True )
 
                         else:
-                            print(f"[skip] ⛔ Invalid or unsupported line {idx}", flush=True)
+                            print(f"[skip] ⛔ Invalid or unsupported line ({idx})", flush=True)
 
                     except Exception:
                         print(
-                            f"[warn] 😭 Error parsing line {idx}", flush=True)
+                            f"[warn] 😭 Error parsing line ({idx})", flush=True)
 
             return nodes
 
@@ -1082,10 +1082,10 @@ def main():
         all_nodes = []
         for url in sources:
             nodes = load_proxies(url)
-            print(f"[source] 📝 {len(nodes)} nodes parsed from current subscription")
+            print(f"[source] 📝 [{len(nodes)}] nodes parsed from current subscription")
             all_nodes.extend(nodes)
 
-        print(f"[collect] 📋 Total {len(all_nodes)} nodes successfully parsed from all subscriptions")
+        print(f"[collect] 📋 Total [{len(all_nodes)}] nodes successfully parsed from all subscriptions")
 
         # ---------------- Latency filter ----------------
         if USE_LATENCY:
@@ -1101,7 +1101,7 @@ def main():
 
             num_filtered = len(all_nodes) - len(filtered_nodes)
             print(f"[latency] ❗Filtered {num_filtered} nodes due to latency")
-            print(f"[latency]  🖨️ Total {len(filtered_nodes)} nodes remain after latency filtering")
+            print(f"[latency]  🖨️ Total [{len(filtered_nodes)}] nodes remain after latency filtering")
         else:
             filtered_nodes = all_nodes
             country_counter = defaultdict(int)
@@ -1114,7 +1114,7 @@ def main():
             filtered_nodes, removed = deduplicate_nodes(filtered_nodes)
             after = len(filtered_nodes)
             print(f"[dedup] ®️emoved {removed} duplicate nodes")
-            print(f"[dedup] 🖨️ Total {after} nodes remain after deduplication")
+            print(f"[dedup] 🖨️ Total [{after}] nodes remain after deduplication")
         else:
             print("[dedup] 🈁 Duplicate filtering disabled")
 
@@ -1135,12 +1135,12 @@ def main():
             )
         else:
             print(
-                f"[rename] 🏷️ Name-based mode: Failed to rename {name_primary_fail} nodes and fallback to GeoIP detection"
+                f"[rename] 🏷️ Name-based mode: Failed to rename ({name_primary_fail}) nodes and fallback to GeoIP detection"
             )
 
         if skipped_nodes > 0:
             print(f"[rename] ⚠️ Skipped {skipped_nodes} nodes that could not be assigned a name or include forbidden emoji")
-        print(f"[rename] 🖨️ Final {len(renamed_nodes)} nodes remain after name correction")
+        print(f"[rename] 🖨️ Final [{len(renamed_nodes)}] nodes remain after name correction")
 
         if not renamed_nodes:
             print("[FATAL] 🅾️ valid nodes after processing. Abort upload.")

@@ -996,7 +996,8 @@ def load_proxies(url, retries=10):
                             if not original_name:
                                 p["name"] = f"Node-{idx}"
                             nodes.append(p)
-                            print(f"[parse] 🔎 YAML node: {idx} parsed", flush=True)
+                            protocol = line.split("://")[0].upper() if "://" in line else "NODE"
+                            print(f"[parse] 🔎 {protocol} node: {idx} parsed", flush=True)
                     else:
                         print(f"[warn] 😭 YAML structure invalid or empty", flush=True)
                 except Exception:

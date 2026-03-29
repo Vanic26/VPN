@@ -1,4 +1,4 @@
-# Last update: 27.03.2026 20:03:14
+# Last update: 29.03.2026 10:56:40
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -121,31 +121,195 @@ dns:
       - +.googleapis.com
       - +.gvt1.com
 proxies:
-- {name: "🇺🇸 US-1 | Starlink", type: "hysteria2", server: "134.195.101.199", port: 443, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.apple.com", skip-cert-verify: true, udp: true}
-- {name: "🇺🇸 US-2 | Starlink", type: "hysteria2", server: "134.195.101.199", port: 443, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.apple.com", skip-cert-verify: true, udp: true}
-- {name: "🇺🇸 US-3 | Starlink", type: "hysteria2", server: "134.195.101.199", port: 443, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.apple.com", skip-cert-verify: true, udp: true}
-- {name: "🇺🇸 US-4 | Starlink", type: "hysteria2", server: "134.195.101.199", port: 443, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.apple.com", skip-cert-verify: true, udp: true}
-- {name: "🇺🇸 US-5 | Starlink", type: "hysteria2", server: "134.195.101.199", port: 443, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.apple.com", skip-cert-verify: true, udp: true}
-- {name: "🇺🇸 US-6 | Starlink", type: "hysteria2", server: "208.87.242.77", port: 35000, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.apple.com", skip-cert-verify: true, ports: "35000-39000", mport: "35000-39000", udp: true}
-- {name: "🇯🇵 JP-1 | Starlink", type: "hysteria2", server: "103.62.49.76", port: 35000, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.apple.com", skip-cert-verify: true, ports: "35000-39000", mport: "35000-39000", udp: true}
-- {name: "🇯🇵 JP-2 | Starlink", type: "hysteria2", server: "103.62.49.76", port: 35000, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.apple.com", skip-cert-verify: true, ports: "35000-39000", mport: "35000-39000", udp: true}
-- {name: "🇧🇷 BR-1 | Starlink", type: "hysteria2", server: "167.234.251.78", port: 35000, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.apple.com", skip-cert-verify: true, ports: "35000-39000", mport: "35000-39000", udp: true}
-- {name: "🇧🇷 BR-2 | Starlink", type: "hysteria2", server: "150.230.89.61", port: 35000, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.apple.com", skip-cert-verify: true, ports: "35000-39000", mport: "35000-39000", udp: true}
-- {name: "🇺🇸 US-7 | Starlink", type: "hysteria2", server: "129.153.25.59", port: 35000, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.lamer.com.hk", skip-cert-verify: true, ports: "35000-39000", mport: "35000-39000", udp: true}
-- {name: "🇭🇰 HK-1 | Starlink", type: "hysteria2", server: "103.197.71.118", port: 35000, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.lamer.com.hk", skip-cert-verify: true, ports: "35000-39000", mport: "35000-39000", udp: true}
-- {name: "🇭🇰 HK-2 | Starlink", type: "hysteria2", server: "103.197.71.118", port: 35000, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.lamer.com.hk", skip-cert-verify: true, ports: "35000-39000", mport: "35000-39000", udp: true}
-- {name: "🇪🇸 ES-1 | Starlink", type: "hysteria2", server: "143.47.56.230", port: 35000, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.lamer.com.hk", skip-cert-verify: true, ports: "35000-39000", mport: "35000-39000", udp: true}
-- {name: "🇫🇷 FR-1 | Starlink", type: "hysteria2", server: "129.151.251.122", port: 35000, password: "38428a74-c651-47a5-b2c9-4bec5a1809cf", sni: "www.lamer.com.hk", skip-cert-verify: true, ports: "35000-39000", mport: "35000-39000", udp: true}
-- {name: "🇯🇵 JP-3 | Starlink", type: "vless", server: "kb.vmjp2.yydjc.top", port: 443, uuid: "38428a74-c651-47a5-b2c9-4bec5a1809cf", servername: "iosapps.itunes.apple.com", skip-cert-verify: false, client-fingerprint: "safari", udp: true, tls: true, flow: "xtls-rprx-vision", reality-opts: {public-key: "yzIdIf5RpR-rTzlULRjJoCgcQdx3-yXKl7eT7IuThn4", short-id: "bb9ab0d5242d53e9"}}
-- {name: "🇯🇵 JP-4 | Starlink", type: "vless", server: "kb.vmjp2.yydjc.top", port: 443, uuid: "38428a74-c651-47a5-b2c9-4bec5a1809cf", servername: "iosapps.itunes.apple.com", skip-cert-verify: false, client-fingerprint: "ios", udp: true, tls: true, flow: "xtls-rprx-vision", reality-opts: {public-key: "yzIdIf5RpR-rTzlULRjJoCgcQdx3-yXKl7eT7IuThn4", short-id: "bb9ab0d5242d53e9"}}
-- {name: "🇩🇪 DE-1 | Starlink", type: "vless", server: "130.162.220.137", port: 443, uuid: "38428a74-c651-47a5-b2c9-4bec5a1809cf", servername: "www.lamer.com", skip-cert-verify: false, client-fingerprint: "safari", udp: true, tls: true, flow: "xtls-rprx-vision", reality-opts: {public-key: "UV34T0S_VyVcChA2Tb9MIbg4tr1mHGMr_Lw5Gvb17F8", short-id: "66ed2fdd"}}
-- {name: "🇹🇼 TW-1 | Starlink", type: "vless", server: "kbgs.hinet.tw1.yydjc.top", port: 443, uuid: "38428a74-c651-47a5-b2c9-4bec5a1809cf", servername: "gopro.com", skip-cert-verify: false, client-fingerprint: "chrome", udp: true, tls: true, flow: "xtls-rprx-vision", reality-opts: {public-key: "TMwVM6Se3KqnJX6ArrqsFyr5wDIuk9weurW38h8zIjQ", short-id: "5a337f9f"}}
-- {name: "🇰🇷 KR-1 | Starlink", type: "vless", server: "193.122.120.203", port: 443, uuid: "38428a74-c651-47a5-b2c9-4bec5a1809cf", servername: "www.lamer.com", skip-cert-verify: false, client-fingerprint: "chrome", udp: true, tls: true, flow: "xtls-rprx-vision", reality-opts: {public-key: "j5tsCQhMqefjOq-shVxsZS195S4R7Ce_prmT8yFsvm8", short-id: "d02456fe"}}
-- {name: "🇺🇸 US-8 | Starlink", type: "vless", server: "104.19.58.118", port: 443, uuid: "38428a74-c651-47a5-b2c9-4bec5a1809cf", network: "ws", servername: "us1-us1.aiopen.sbs", skip-cert-verify: false, client-fingerprint: "chrome", ws-opts: {path: "/kbjc/us1", headers: {"Host": "us1-us1.aiopen.sbs"}}, udp: true, tls: true, flow: ""}
-- {name: "🇺🇸 US-9 | Starlink", type: "vless", server: "104.19.58.118", port: 443, uuid: "38428a74-c651-47a5-b2c9-4bec5a1809cf", network: "ws", servername: "us1-us1.aiopen.sbs", skip-cert-verify: false, client-fingerprint: "chrome", ws-opts: {path: "/kbjc/us1", headers: {"Host": "us1-us1.aiopen.sbs"}}, udp: true, tls: true, flow: ""}
-- {name: "🇯🇵 JP-5 | Starlink", type: "vless", server: "69.84.182.13", port: 443, uuid: "38428a74-c651-47a5-b2c9-4bec5a1809cf", network: "ws", servername: "jp1-jp1.aiopen.sbs", skip-cert-verify: false, client-fingerprint: "chrome", ws-opts: {path: "/kbjc/jp1", headers: {"Host": "jp1-jp1.aiopen.sbs"}}, udp: true, tls: true, flow: ""}
-- {name: "🇯🇵 JP-6 | Starlink", type: "vless", server: "69.84.182.13", port: 443, uuid: "38428a74-c651-47a5-b2c9-4bec5a1809cf", network: "ws", servername: "jp1-jp1.aiopen.sbs", skip-cert-verify: false, client-fingerprint: "chrome", ws-opts: {path: "/kbjc/jp1", headers: {"Host": "jp1-jp1.aiopen.sbs"}}, udp: true, tls: true, flow: ""}
-- {name: "🇫🇷 FR-2 | Starlink", type: "vless", server: "69.84.182.13", port: 443, uuid: "38428a74-c651-47a5-b2c9-4bec5a1809cf", network: "ws", skip-cert-verify: false, client-fingerprint: "chrome", ws-opts: {path: "/kbjc/fr1", headers: {"Host": "fr-1-fr-1.aiopen.sbs"}}, udp: true, tls: true, flow: ""}
+- {name: "🇺🇸 US-1 | Starlink", type: "hysteria2", server: "starlink-us2.mfa.cat", port: 25131, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-2 | Starlink", type: "hysteria2", server: "starlink-us2.mfa.cat", port: 25131, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-3 | Starlink", type: "hysteria2", server: "starlink-us2.mfa.cat", port: 25131, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-4 | Starlink", type: "hysteria2", server: "starlink-us2.mfa.cat", port: 25131, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-5 | Starlink", type: "hysteria2", server: "starlink-us2.mfa.cat", port: 25131, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-6 | Starlink", type: "hysteria2", server: "starlink-us2.mfa.cat", port: 25131, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-7 | Starlink", type: "hysteria2", server: "starlink-us2.mfa.cat", port: 25131, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇬 SG-1 | Starlink", type: "hysteria2", server: "starlink-sg1.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇬 SG-2 | Starlink", type: "hysteria2", server: "starlink-sg2.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇬 SG-3 | Starlink", type: "hysteria2", server: "starlink-sg3.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇬 SG-4 | Starlink", type: "hysteria2", server: "starlink-sg4.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇬 SG-5 | Starlink", type: "hysteria2", server: "starlink-sg5.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇬 SG-6 | Starlink", type: "hysteria2", server: "starlink-sg6.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇬 SG-7 | Starlink", type: "vless", server: "starlink-sg1.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇸🇬 SG-8 | Starlink", type: "vless", server: "starlink-sg2.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇸🇬 SG-9 | Starlink", type: "vless", server: "starlink-sg3.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇸🇬 SG-10 | Starlink", type: "vless", server: "starlink-sg4.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇸🇬 SG-11 | Starlink", type: "vless", server: "starlink-sg5.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇸🇬 SG-12 | Starlink", type: "vless", server: "starlink-sg6.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇯🇵 JP-1 | Starlink", type: "hysteria2", server: "starlink-jp1.mfa.cat", port: 20443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇯🇵 JP-2 | Starlink", type: "hysteria2", server: "starlink-jp2.mfa.cat", port: 20443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇯🇵 JP-3 | Starlink", type: "hysteria2", server: "starlink-jp3.mfa.cat", port: 20443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇯🇵 JP-4 | Starlink", type: "hysteria2", server: "starlink-jp4.mfa.cat", port: 20443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇯🇵 JP-5 | Starlink", type: "hysteria2", server: "starlink-jp5.mfa.cat", port: 20443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇯🇵 JP-6 | Starlink", type: "hysteria2", server: "starlink-jp6.mfa.cat", port: 20443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇯🇵 JP-7 | Starlink", type: "vless", server: "starlink-jp1.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇯🇵 JP-8 | Starlink", type: "vless", server: "starlink-jp2.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇯🇵 JP-9 | Starlink", type: "vless", server: "starlink-jp3.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇯🇵 JP-10 | Starlink", type: "vless", server: "starlink-jp4.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇯🇵 JP-11 | Starlink", type: "vless", server: "starlink-jp5.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇯🇵 JP-12 | Starlink", type: "vless", server: "starlink-jp6.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇭🇰 HK-1 | Starlink", type: "trojan", server: "starlink-hks1.2513142.xyz", port: 21521, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-2 | Starlink", type: "trojan", server: "starlink-hks2.2513142.xyz", port: 21522, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-3 | Starlink", type: "trojan", server: "starlink-hks3.2513142.xyz", port: 21523, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-4 | Starlink", type: "trojan", server: "starlink-hks1.2513142.xyz", port: 21521, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-5 | Starlink", type: "trojan", server: "starlink-hks2.2513142.xyz", port: 21522, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-6 | Starlink", type: "trojan", server: "starlink-hks3.2513142.xyz", port: 21523, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-7 | Starlink", type: "trojan", server: "starlink-hkt1.2513142.xyz", port: 21520, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-8 | Starlink", type: "trojan", server: "starlink-hkt2.2513142.xyz", port: 30000, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-9 | Starlink", type: "trojan", server: "starlink-hks2.2513142.xyz", port: 21520, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-10 | Starlink", type: "hysteria2", server: "starlink-hkt2.2513142.xyz", port: 21520, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-11 | Starlink", type: "hysteria2", server: "starlink-hkt1.2513142.xyz", port: 21520, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-12 | Starlink", type: "hysteria2", server: "starlink-hkt2.2513142.xyz", port: 30000, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇲🇴 MO-1 | Starlink", type: "trojan", server: "z-sg1.mfa.cat", port: 10008, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇲🇴 MO-2 | Starlink", type: "trojan", server: "z-sg2.mfa.cat", port: 10008, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇳 CN-1 | Starlink", type: "hysteria2", server: "starlink-tw1.mfa.cat", port: 12401, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇳 CN-2 | Starlink", type: "hysteria2", server: "starlink-tw2.mfa.cat", port: 20112, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇳 CN-3 | Starlink", type: "hysteria2", server: "starlink-tw3.mfa.cat", port: 12403, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇳 CN-4 | Starlink", type: "hysteria2", server: "starlink-tw4.mfa.cat", port: 20115, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇳 CN-5 | Starlink", type: "hysteria2", server: "starlink-tw5.mfa.cat", port: 12405, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇳 CN-6 | Starlink", type: "hysteria2", server: "starlink-tw6.mfa.cat", port: 20118, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇳 CN-7 | Starlink", type: "trojan", server: "starlink-tw1.mfa.cat", port: 12410, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇳 CN-8 | Starlink", type: "trojan", server: "starlink-tw2.mfa.cat", port: 20110, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇳 CN-9 | Starlink", type: "trojan", server: "starlink-tw3.mfa.cat", port: 12409, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇳 CN-10 | Starlink", type: "trojan", server: "starlink-tw4.mfa.cat", port: 20113, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇳 CN-11 | Starlink", type: "trojan", server: "starlink-tw5.mfa.cat", port: 12408, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇳 CN-12 | Starlink", type: "trojan", server: "starlink-tw6.mfa.cat", port: 20116, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇰🇷 KR-1 | Starlink", type: "hysteria2", server: "starlink-kr1.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇰🇷 KR-2 | Starlink", type: "hysteria2", server: "starlink-kr2.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇰🇷 KR-3 | Starlink", type: "vless", server: "starlink-kr2.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇰🇷 KR-4 | Starlink", type: "vless", server: "starlink-kr2.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇰🇭 KH-1 | Starlink", type: "trojan", server: "starlink-hks1.2513142.xyz", port: 21527, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇰🇭 KH-2 | Starlink", type: "trojan", server: "starlink-hks2.2513142.xyz", port: 21527, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇵🇭 PH-1 | Starlink", type: "trojan", server: "starlink-hks1.2513142.xyz", port: 21525, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇵🇭 PH-2 | Starlink", type: "trojan", server: "starlink-hks2.2513142.xyz", port: 21525, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇻🇳 VN-1 | Starlink", type: "trojan", server: "starlink-hks1.2513142.xyz", port: 21526, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇻🇳 VN-2 | Starlink", type: "trojan", server: "starlink-hks2.2513142.xyz", port: 21526, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇲🇾 MY-1 | Starlink", type: "hysteria2", server: "starlink-my.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇲🇾 MY-2 | Starlink", type: "trojan", server: "starlink-my.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇮🇩 ID-1 | Starlink", type: "hysteria2", server: "starlink-id.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇮🇩 ID-2 | Starlink", type: "trojan", server: "starlink-id.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇹🇭 TH-1 | Starlink", type: "hysteria2", server: "starlink-th.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇹🇭 TH-2 | Starlink", type: "trojan", server: "starlink-th.mfa.cat", port: 44443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇮🇳 IN-1 | Starlink", type: "trojan", server: "z-sg1.mfa.cat", port: 10106, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇮🇳 IN-2 | Starlink", type: "trojan", server: "z-sg2.mfa.cat", port: 10106, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇵🇰 PK-1 | Starlink", type: "trojan", server: "z-sg1.mfa.cat", port: 10011, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇵🇰 PK-2 | Starlink", type: "trojan", server: "z-sg2.mfa.cat", port: 10011, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇧🇩 BD-1 | Starlink", type: "trojan", server: "z-sg1.mfa.cat", port: 10010, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇧🇩 BD-2 | Starlink", type: "trojan", server: "z-sg2.mfa.cat", port: 10010, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-8 | Starlink", type: "hysteria2", server: "starlink-us1.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-9 | Starlink", type: "hysteria2", server: "starlink-us2.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-10 | Starlink", type: "hysteria2", server: "starlink-us3.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-11 | Starlink", type: "hysteria2", server: "starlink-us4.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-12 | Starlink", type: "hysteria2", server: "starlink-us5.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-13 | Starlink", type: "hysteria2", server: "starlink-us6.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-14 | Starlink", type: "hysteria2", server: "starlink-us7.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-15 | Starlink", type: "hysteria2", server: "starlink-us8.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-16 | Starlink", type: "vless", server: "starlink-us1.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇺🇸 US-17 | Starlink", type: "vless", server: "starlink-us2.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇺🇸 US-18 | Starlink", type: "vless", server: "starlink-us3.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇺🇸 US-19 | Starlink", type: "vless", server: "starlink-us4.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇺🇸 US-20 | Starlink", type: "vless", server: "starlink-us5.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇺🇸 US-21 | Starlink", type: "vless", server: "starlink-us6.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇺🇸 US-22 | Starlink", type: "vless", server: "starlink-us7.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇺🇸 US-23 | Starlink", type: "vless", server: "starlink-us8.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇦🇺 AU-1 | Starlink", type: "hysteria2", server: "starlink-au.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇦🇺 AU-2 | Starlink", type: "trojan", server: "starlink-au.mfa.cat", port: 44443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇳🇿 NZ-1 | Starlink", type: "hysteria2", server: "starlink-nz.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇳🇿 NZ-2 | Starlink", type: "trojan", server: "starlink-nz.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇧🇭 BH-1 | Starlink", type: "trojan", server: "z-sg1.mfa.cat", port: 10112, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇧🇭 BH-2 | Starlink", type: "trojan", server: "z-sg1.mfa.cat", port: 10112, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇦🇪 AE-1 | Starlink", type: "trojan", server: "z-sg1.mfa.cat", port: 10012, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇦🇪 AE-2 | Starlink", type: "trojan", server: "z-sg2.mfa.cat", port: 10012, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇦 SA-1 | Starlink", type: "trojan", server: "z-sg1.mfa.cat", port: 10212, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇦 SA-2 | Starlink", type: "trojan", server: "z-sg2.mfa.cat", port: 10212, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇩🇪 DE-1 | Starlink", type: "hysteria2", server: "starlink-de1.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true}
+- {name: "🇩🇪 DE-2 | Starlink", type: "hysteria2", server: "starlink-de2.mfa.cat", port: 443, password: "P1qJ_HL17tkk0-cTOiDAxZKy", sni: "www.cloudflare.com", skip-cert-verify: true}
+- {name: "🇩🇪 DE-3 | Starlink", type: "vless", server: "starlink-de1.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇩🇪 DE-4 | Starlink", type: "vless", server: "starlink-de2.mfa.cat", port: 443, uuid: "P1qJ_HL17tkk0-cTOiDAxZKy", network: "tcp", servername: "www.microsoft.com", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "UFe-Y_-8fEigWjaksGsQzU-B8o-QHWcyQG0Wnelc03A"}, udp: true}
+- {name: "🇩🇪 DE-5 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10124, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true}
+- {name: "🇩🇪 DE-6 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10125, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true}
+- {name: "🇦🇹 AT-1 | Starlink", type: "hysteria2", server: "152.53.47.16", port: 21520, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇦🇹 AT-2 | Starlink", type: "trojan", server: "152.53.47.16", port: 21520, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇭 CH-1 | Starlink", type: "hysteria2", server: "starlink-ch.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇭 CH-2 | Starlink", type: "trojan", server: "starlink-ch.mfa.cat", port: 22443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇫🇷 FR-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10123, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true}
+- {name: "🇫🇷 FR-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10123, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true}
+- {name: "🇬🇧 GB-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10015, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇬🇧 GB-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10015, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇮🇪 IE-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10031, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇮🇪 IE-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10031, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇮🇹 IT-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10117, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇮🇹 IT-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10117, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇪🇸 ES-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10033, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇪🇸 ES-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10033, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇵🇹 PT-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10119, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇵🇹 PT-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10119, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇳🇱 NL-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10116, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇳🇱 NL-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10116, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇩🇰 DK-1 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10135, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇩🇰 DK-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10135, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇪 SE-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10018, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇪 SE-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10018, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇳🇴 NO-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10112, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇳🇴 NO-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10112, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇫🇮 FI-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10120, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇫🇮 FI-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10120, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇮🇸 IS-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10113, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇮🇸 IS-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10113, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇿 CZ-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10108, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇿 CZ-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10108, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇸🇰 SK-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10127, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true}
+- {name: "🇸🇰 SK-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10127, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true}
+- {name: "🇵🇱 PL-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10034, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇵🇱 PL-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10034, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇺 HU-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10107, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇭🇺 HU-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10107, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇧🇬 BG-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10121, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇧🇬 BG-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10121, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇷🇴 RO-1 | Starlink", type: "hysteria2", server: "45.134.48.73", port: 21520, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇷🇴 RO-2 | Starlink", type: "trojan", server: "45.134.48.73", port: 21520, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇲🇩 MD-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10105, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇲🇩 MD-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10105, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇦 UA-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10306, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇺🇦 UA-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10306, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇷🇺 RU-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10110, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇷🇺 RU-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10110, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇱🇹 LT-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10111, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇱🇹 LT-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10111, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇮🇱 IL-1 | Starlink", type: "hysteria2", server: "starlink-il.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇮🇱 IL-2 | Starlink", type: "trojan", server: "starlink-il.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇮🇶 IQ-1 | Starlink", type: "hysteria2", server: "starlink-il.mfa.cat", port: 20000, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇮🇶 IQ-2 | Starlink", type: "trojan", server: "starlink-il.mfa.cat", port: 20000, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇹🇷 TR-1 | Starlink", type: "hysteria2", server: "146.103.24.144", port: 30000, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇹🇷 TR-2 | Starlink", type: "trojan", server: "146.103.24.144", port: 30000, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇰🇬 KG-1 | Starlink", type: "hysteria2", server: "188.240.213.45", port: 20075, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇰🇬 KG-2 | Starlink", type: "trojan", server: "188.240.213.45", port: 20071, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇰🇿 KZ-1 | Starlink", type: "hysteria2", server: "188.240.213.45", port: 20075, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇰🇿 KZ-2 | Starlink", type: "trojan", server: "188.240.213.45", port: 20071, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇲🇽 MX-1 | Starlink", type: "trojan", server: "starlink-mx.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇲🇽 MX-2 | Starlink", type: "trojan", server: "starlink-mx.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇦 CA-1 | Starlink", type: "hysteria2", server: "starlink-ca.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇦 CA-2 | Starlink", type: "trojan", server: "starlink-ca.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇵🇪 PE-1 | Starlink", type: "hysteria2", server: "161.132.51.133", port: 20045, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇵🇪 PE-2 | Starlink", type: "trojan", server: "161.132.51.133", port: 20042, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇧🇷 BR-1 | Starlink", type: "hysteria2", server: "starlink-br.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇧🇷 BR-2 | Starlink", type: "trojan", server: "starlink-br.mfa.cat", port: 22222, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇱 CL-1 | Starlink", type: "hysteria2", server: "starlink-ca.mfa.cat", port: 20000, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇨🇱 CL-2 | Starlink", type: "trojan", server: "starlink-ca.mfa.cat", port: 20000, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇦🇷 AR-1 | Starlink", type: "hysteria2", server: "starlink-br.mfa.cat", port: 30000, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇦🇷 AR-2 | Starlink", type: "trojan", server: "starlink-br.mfa.cat", port: 33333, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇪🇬 EG-1 | Starlink", type: "trojan", server: "z-eu1.mfa.cat", port: 10201, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇪🇬 EG-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10201, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇳🇬 NG-1 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10122, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇳🇬 NG-2 | Starlink", type: "trojan", server: "z-eu2.mfa.cat", port: 10122, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇿🇦 ZA-1 | Starlink", type: "hysteria2", server: "starlink-za.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇿🇦 ZA-2 | Starlink", type: "trojan", server: "starlink-za.mfa.cat", port: 443, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇦🇶 AQ-1 | Starlink", type: "trojan", server: "z-sg1.mfa.cat", port: 10109, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
+- {name: "🇦🇶 AQ-2 | Starlink", type: "trojan", server: "z-sg1.mfa.cat", port: 10109, password: "升级订阅解锁全部节点", sni: "www.cloudflare.com", skip-cert-verify: true, udp: true}
 proxy-groups:
   - name: 选择线路
     type: select
@@ -157,25 +321,189 @@ proxy-groups:
       - 🇺🇸 US-4 | Starlink
       - 🇺🇸 US-5 | Starlink
       - 🇺🇸 US-6 | Starlink
+      - 🇺🇸 US-7 | Starlink
+      - 🇸🇬 SG-1 | Starlink
+      - 🇸🇬 SG-2 | Starlink
+      - 🇸🇬 SG-3 | Starlink
+      - 🇸🇬 SG-4 | Starlink
+      - 🇸🇬 SG-5 | Starlink
+      - 🇸🇬 SG-6 | Starlink
+      - 🇸🇬 SG-7 | Starlink
+      - 🇸🇬 SG-8 | Starlink
+      - 🇸🇬 SG-9 | Starlink
+      - 🇸🇬 SG-10 | Starlink
+      - 🇸🇬 SG-11 | Starlink
+      - 🇸🇬 SG-12 | Starlink
       - 🇯🇵 JP-1 | Starlink
       - 🇯🇵 JP-2 | Starlink
-      - 🇧🇷 BR-1 | Starlink
-      - 🇧🇷 BR-2 | Starlink
-      - 🇺🇸 US-7 | Starlink
-      - 🇭🇰 HK-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇪🇸 ES-1 | Starlink
-      - 🇫🇷 FR-1 | Starlink
       - 🇯🇵 JP-3 | Starlink
       - 🇯🇵 JP-4 | Starlink
-      - 🇩🇪 DE-1 | Starlink
-      - 🇹🇼 TW-1 | Starlink
-      - 🇰🇷 KR-1 | Starlink
-      - 🇺🇸 US-8 | Starlink
-      - 🇺🇸 US-9 | Starlink
       - 🇯🇵 JP-5 | Starlink
       - 🇯🇵 JP-6 | Starlink
+      - 🇯🇵 JP-7 | Starlink
+      - 🇯🇵 JP-8 | Starlink
+      - 🇯🇵 JP-9 | Starlink
+      - 🇯🇵 JP-10 | Starlink
+      - 🇯🇵 JP-11 | Starlink
+      - 🇯🇵 JP-12 | Starlink
+      - 🇭🇰 HK-1 | Starlink
+      - 🇭🇰 HK-2 | Starlink
+      - 🇭🇰 HK-3 | Starlink
+      - 🇭🇰 HK-4 | Starlink
+      - 🇭🇰 HK-5 | Starlink
+      - 🇭🇰 HK-6 | Starlink
+      - 🇭🇰 HK-7 | Starlink
+      - 🇭🇰 HK-8 | Starlink
+      - 🇭🇰 HK-9 | Starlink
+      - 🇭🇰 HK-10 | Starlink
+      - 🇭🇰 HK-11 | Starlink
+      - 🇭🇰 HK-12 | Starlink
+      - 🇲🇴 MO-1 | Starlink
+      - 🇲🇴 MO-2 | Starlink
+      - 🇨🇳 CN-1 | Starlink
+      - 🇨🇳 CN-2 | Starlink
+      - 🇨🇳 CN-3 | Starlink
+      - 🇨🇳 CN-4 | Starlink
+      - 🇨🇳 CN-5 | Starlink
+      - 🇨🇳 CN-6 | Starlink
+      - 🇨🇳 CN-7 | Starlink
+      - 🇨🇳 CN-8 | Starlink
+      - 🇨🇳 CN-9 | Starlink
+      - 🇨🇳 CN-10 | Starlink
+      - 🇨🇳 CN-11 | Starlink
+      - 🇨🇳 CN-12 | Starlink
+      - 🇰🇷 KR-1 | Starlink
+      - 🇰🇷 KR-2 | Starlink
+      - 🇰🇷 KR-3 | Starlink
+      - 🇰🇷 KR-4 | Starlink
+      - 🇰🇭 KH-1 | Starlink
+      - 🇰🇭 KH-2 | Starlink
+      - 🇵🇭 PH-1 | Starlink
+      - 🇵🇭 PH-2 | Starlink
+      - 🇻🇳 VN-1 | Starlink
+      - 🇻🇳 VN-2 | Starlink
+      - 🇲🇾 MY-1 | Starlink
+      - 🇲🇾 MY-2 | Starlink
+      - 🇮🇩 ID-1 | Starlink
+      - 🇮🇩 ID-2 | Starlink
+      - 🇹🇭 TH-1 | Starlink
+      - 🇹🇭 TH-2 | Starlink
+      - 🇮🇳 IN-1 | Starlink
+      - 🇮🇳 IN-2 | Starlink
+      - 🇵🇰 PK-1 | Starlink
+      - 🇵🇰 PK-2 | Starlink
+      - 🇧🇩 BD-1 | Starlink
+      - 🇧🇩 BD-2 | Starlink
+      - 🇺🇸 US-8 | Starlink
+      - 🇺🇸 US-9 | Starlink
+      - 🇺🇸 US-10 | Starlink
+      - 🇺🇸 US-11 | Starlink
+      - 🇺🇸 US-12 | Starlink
+      - 🇺🇸 US-13 | Starlink
+      - 🇺🇸 US-14 | Starlink
+      - 🇺🇸 US-15 | Starlink
+      - 🇺🇸 US-16 | Starlink
+      - 🇺🇸 US-17 | Starlink
+      - 🇺🇸 US-18 | Starlink
+      - 🇺🇸 US-19 | Starlink
+      - 🇺🇸 US-20 | Starlink
+      - 🇺🇸 US-21 | Starlink
+      - 🇺🇸 US-22 | Starlink
+      - 🇺🇸 US-23 | Starlink
+      - 🇦🇺 AU-1 | Starlink
+      - 🇦🇺 AU-2 | Starlink
+      - 🇳🇿 NZ-1 | Starlink
+      - 🇳🇿 NZ-2 | Starlink
+      - 🇧🇭 BH-1 | Starlink
+      - 🇧🇭 BH-2 | Starlink
+      - 🇦🇪 AE-1 | Starlink
+      - 🇦🇪 AE-2 | Starlink
+      - 🇸🇦 SA-1 | Starlink
+      - 🇸🇦 SA-2 | Starlink
+      - 🇩🇪 DE-1 | Starlink
+      - 🇩🇪 DE-2 | Starlink
+      - 🇩🇪 DE-3 | Starlink
+      - 🇩🇪 DE-4 | Starlink
+      - 🇩🇪 DE-5 | Starlink
+      - 🇩🇪 DE-6 | Starlink
+      - 🇦🇹 AT-1 | Starlink
+      - 🇦🇹 AT-2 | Starlink
+      - 🇨🇭 CH-1 | Starlink
+      - 🇨🇭 CH-2 | Starlink
+      - 🇫🇷 FR-1 | Starlink
       - 🇫🇷 FR-2 | Starlink
+      - 🇬🇧 GB-1 | Starlink
+      - 🇬🇧 GB-2 | Starlink
+      - 🇮🇪 IE-1 | Starlink
+      - 🇮🇪 IE-2 | Starlink
+      - 🇮🇹 IT-1 | Starlink
+      - 🇮🇹 IT-2 | Starlink
+      - 🇪🇸 ES-1 | Starlink
+      - 🇪🇸 ES-2 | Starlink
+      - 🇵🇹 PT-1 | Starlink
+      - 🇵🇹 PT-2 | Starlink
+      - 🇳🇱 NL-1 | Starlink
+      - 🇳🇱 NL-2 | Starlink
+      - 🇩🇰 DK-1 | Starlink
+      - 🇩🇰 DK-2 | Starlink
+      - 🇸🇪 SE-1 | Starlink
+      - 🇸🇪 SE-2 | Starlink
+      - 🇳🇴 NO-1 | Starlink
+      - 🇳🇴 NO-2 | Starlink
+      - 🇫🇮 FI-1 | Starlink
+      - 🇫🇮 FI-2 | Starlink
+      - 🇮🇸 IS-1 | Starlink
+      - 🇮🇸 IS-2 | Starlink
+      - 🇨🇿 CZ-1 | Starlink
+      - 🇨🇿 CZ-2 | Starlink
+      - 🇸🇰 SK-1 | Starlink
+      - 🇸🇰 SK-2 | Starlink
+      - 🇵🇱 PL-1 | Starlink
+      - 🇵🇱 PL-2 | Starlink
+      - 🇭🇺 HU-1 | Starlink
+      - 🇭🇺 HU-2 | Starlink
+      - 🇧🇬 BG-1 | Starlink
+      - 🇧🇬 BG-2 | Starlink
+      - 🇷🇴 RO-1 | Starlink
+      - 🇷🇴 RO-2 | Starlink
+      - 🇲🇩 MD-1 | Starlink
+      - 🇲🇩 MD-2 | Starlink
+      - 🇺🇦 UA-1 | Starlink
+      - 🇺🇦 UA-2 | Starlink
+      - 🇷🇺 RU-1 | Starlink
+      - 🇷🇺 RU-2 | Starlink
+      - 🇱🇹 LT-1 | Starlink
+      - 🇱🇹 LT-2 | Starlink
+      - 🇮🇱 IL-1 | Starlink
+      - 🇮🇱 IL-2 | Starlink
+      - 🇮🇶 IQ-1 | Starlink
+      - 🇮🇶 IQ-2 | Starlink
+      - 🇹🇷 TR-1 | Starlink
+      - 🇹🇷 TR-2 | Starlink
+      - 🇰🇬 KG-1 | Starlink
+      - 🇰🇬 KG-2 | Starlink
+      - 🇰🇿 KZ-1 | Starlink
+      - 🇰🇿 KZ-2 | Starlink
+      - 🇲🇽 MX-1 | Starlink
+      - 🇲🇽 MX-2 | Starlink
+      - 🇨🇦 CA-1 | Starlink
+      - 🇨🇦 CA-2 | Starlink
+      - 🇵🇪 PE-1 | Starlink
+      - 🇵🇪 PE-2 | Starlink
+      - 🇧🇷 BR-1 | Starlink
+      - 🇧🇷 BR-2 | Starlink
+      - 🇨🇱 CL-1 | Starlink
+      - 🇨🇱 CL-2 | Starlink
+      - 🇦🇷 AR-1 | Starlink
+      - 🇦🇷 AR-2 | Starlink
+      - 🇪🇬 EG-1 | Starlink
+      - 🇪🇬 EG-2 | Starlink
+      - 🇳🇬 NG-1 | Starlink
+      - 🇳🇬 NG-2 | Starlink
+      - 🇿🇦 ZA-1 | Starlink
+      - 🇿🇦 ZA-2 | Starlink
+      - 🇦🇶 AQ-1 | Starlink
+      - 🇦🇶 AQ-2 | Starlink
   - name: 自动选择⚡️
     type: url-test
     proxies:
@@ -185,25 +513,189 @@ proxy-groups:
       - 🇺🇸 US-4 | Starlink
       - 🇺🇸 US-5 | Starlink
       - 🇺🇸 US-6 | Starlink
+      - 🇺🇸 US-7 | Starlink
+      - 🇸🇬 SG-1 | Starlink
+      - 🇸🇬 SG-2 | Starlink
+      - 🇸🇬 SG-3 | Starlink
+      - 🇸🇬 SG-4 | Starlink
+      - 🇸🇬 SG-5 | Starlink
+      - 🇸🇬 SG-6 | Starlink
+      - 🇸🇬 SG-7 | Starlink
+      - 🇸🇬 SG-8 | Starlink
+      - 🇸🇬 SG-9 | Starlink
+      - 🇸🇬 SG-10 | Starlink
+      - 🇸🇬 SG-11 | Starlink
+      - 🇸🇬 SG-12 | Starlink
       - 🇯🇵 JP-1 | Starlink
       - 🇯🇵 JP-2 | Starlink
-      - 🇧🇷 BR-1 | Starlink
-      - 🇧🇷 BR-2 | Starlink
-      - 🇺🇸 US-7 | Starlink
-      - 🇭🇰 HK-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇪🇸 ES-1 | Starlink
-      - 🇫🇷 FR-1 | Starlink
       - 🇯🇵 JP-3 | Starlink
       - 🇯🇵 JP-4 | Starlink
-      - 🇩🇪 DE-1 | Starlink
-      - 🇹🇼 TW-1 | Starlink
-      - 🇰🇷 KR-1 | Starlink
-      - 🇺🇸 US-8 | Starlink
-      - 🇺🇸 US-9 | Starlink
       - 🇯🇵 JP-5 | Starlink
       - 🇯🇵 JP-6 | Starlink
+      - 🇯🇵 JP-7 | Starlink
+      - 🇯🇵 JP-8 | Starlink
+      - 🇯🇵 JP-9 | Starlink
+      - 🇯🇵 JP-10 | Starlink
+      - 🇯🇵 JP-11 | Starlink
+      - 🇯🇵 JP-12 | Starlink
+      - 🇭🇰 HK-1 | Starlink
+      - 🇭🇰 HK-2 | Starlink
+      - 🇭🇰 HK-3 | Starlink
+      - 🇭🇰 HK-4 | Starlink
+      - 🇭🇰 HK-5 | Starlink
+      - 🇭🇰 HK-6 | Starlink
+      - 🇭🇰 HK-7 | Starlink
+      - 🇭🇰 HK-8 | Starlink
+      - 🇭🇰 HK-9 | Starlink
+      - 🇭🇰 HK-10 | Starlink
+      - 🇭🇰 HK-11 | Starlink
+      - 🇭🇰 HK-12 | Starlink
+      - 🇲🇴 MO-1 | Starlink
+      - 🇲🇴 MO-2 | Starlink
+      - 🇨🇳 CN-1 | Starlink
+      - 🇨🇳 CN-2 | Starlink
+      - 🇨🇳 CN-3 | Starlink
+      - 🇨🇳 CN-4 | Starlink
+      - 🇨🇳 CN-5 | Starlink
+      - 🇨🇳 CN-6 | Starlink
+      - 🇨🇳 CN-7 | Starlink
+      - 🇨🇳 CN-8 | Starlink
+      - 🇨🇳 CN-9 | Starlink
+      - 🇨🇳 CN-10 | Starlink
+      - 🇨🇳 CN-11 | Starlink
+      - 🇨🇳 CN-12 | Starlink
+      - 🇰🇷 KR-1 | Starlink
+      - 🇰🇷 KR-2 | Starlink
+      - 🇰🇷 KR-3 | Starlink
+      - 🇰🇷 KR-4 | Starlink
+      - 🇰🇭 KH-1 | Starlink
+      - 🇰🇭 KH-2 | Starlink
+      - 🇵🇭 PH-1 | Starlink
+      - 🇵🇭 PH-2 | Starlink
+      - 🇻🇳 VN-1 | Starlink
+      - 🇻🇳 VN-2 | Starlink
+      - 🇲🇾 MY-1 | Starlink
+      - 🇲🇾 MY-2 | Starlink
+      - 🇮🇩 ID-1 | Starlink
+      - 🇮🇩 ID-2 | Starlink
+      - 🇹🇭 TH-1 | Starlink
+      - 🇹🇭 TH-2 | Starlink
+      - 🇮🇳 IN-1 | Starlink
+      - 🇮🇳 IN-2 | Starlink
+      - 🇵🇰 PK-1 | Starlink
+      - 🇵🇰 PK-2 | Starlink
+      - 🇧🇩 BD-1 | Starlink
+      - 🇧🇩 BD-2 | Starlink
+      - 🇺🇸 US-8 | Starlink
+      - 🇺🇸 US-9 | Starlink
+      - 🇺🇸 US-10 | Starlink
+      - 🇺🇸 US-11 | Starlink
+      - 🇺🇸 US-12 | Starlink
+      - 🇺🇸 US-13 | Starlink
+      - 🇺🇸 US-14 | Starlink
+      - 🇺🇸 US-15 | Starlink
+      - 🇺🇸 US-16 | Starlink
+      - 🇺🇸 US-17 | Starlink
+      - 🇺🇸 US-18 | Starlink
+      - 🇺🇸 US-19 | Starlink
+      - 🇺🇸 US-20 | Starlink
+      - 🇺🇸 US-21 | Starlink
+      - 🇺🇸 US-22 | Starlink
+      - 🇺🇸 US-23 | Starlink
+      - 🇦🇺 AU-1 | Starlink
+      - 🇦🇺 AU-2 | Starlink
+      - 🇳🇿 NZ-1 | Starlink
+      - 🇳🇿 NZ-2 | Starlink
+      - 🇧🇭 BH-1 | Starlink
+      - 🇧🇭 BH-2 | Starlink
+      - 🇦🇪 AE-1 | Starlink
+      - 🇦🇪 AE-2 | Starlink
+      - 🇸🇦 SA-1 | Starlink
+      - 🇸🇦 SA-2 | Starlink
+      - 🇩🇪 DE-1 | Starlink
+      - 🇩🇪 DE-2 | Starlink
+      - 🇩🇪 DE-3 | Starlink
+      - 🇩🇪 DE-4 | Starlink
+      - 🇩🇪 DE-5 | Starlink
+      - 🇩🇪 DE-6 | Starlink
+      - 🇦🇹 AT-1 | Starlink
+      - 🇦🇹 AT-2 | Starlink
+      - 🇨🇭 CH-1 | Starlink
+      - 🇨🇭 CH-2 | Starlink
+      - 🇫🇷 FR-1 | Starlink
       - 🇫🇷 FR-2 | Starlink
+      - 🇬🇧 GB-1 | Starlink
+      - 🇬🇧 GB-2 | Starlink
+      - 🇮🇪 IE-1 | Starlink
+      - 🇮🇪 IE-2 | Starlink
+      - 🇮🇹 IT-1 | Starlink
+      - 🇮🇹 IT-2 | Starlink
+      - 🇪🇸 ES-1 | Starlink
+      - 🇪🇸 ES-2 | Starlink
+      - 🇵🇹 PT-1 | Starlink
+      - 🇵🇹 PT-2 | Starlink
+      - 🇳🇱 NL-1 | Starlink
+      - 🇳🇱 NL-2 | Starlink
+      - 🇩🇰 DK-1 | Starlink
+      - 🇩🇰 DK-2 | Starlink
+      - 🇸🇪 SE-1 | Starlink
+      - 🇸🇪 SE-2 | Starlink
+      - 🇳🇴 NO-1 | Starlink
+      - 🇳🇴 NO-2 | Starlink
+      - 🇫🇮 FI-1 | Starlink
+      - 🇫🇮 FI-2 | Starlink
+      - 🇮🇸 IS-1 | Starlink
+      - 🇮🇸 IS-2 | Starlink
+      - 🇨🇿 CZ-1 | Starlink
+      - 🇨🇿 CZ-2 | Starlink
+      - 🇸🇰 SK-1 | Starlink
+      - 🇸🇰 SK-2 | Starlink
+      - 🇵🇱 PL-1 | Starlink
+      - 🇵🇱 PL-2 | Starlink
+      - 🇭🇺 HU-1 | Starlink
+      - 🇭🇺 HU-2 | Starlink
+      - 🇧🇬 BG-1 | Starlink
+      - 🇧🇬 BG-2 | Starlink
+      - 🇷🇴 RO-1 | Starlink
+      - 🇷🇴 RO-2 | Starlink
+      - 🇲🇩 MD-1 | Starlink
+      - 🇲🇩 MD-2 | Starlink
+      - 🇺🇦 UA-1 | Starlink
+      - 🇺🇦 UA-2 | Starlink
+      - 🇷🇺 RU-1 | Starlink
+      - 🇷🇺 RU-2 | Starlink
+      - 🇱🇹 LT-1 | Starlink
+      - 🇱🇹 LT-2 | Starlink
+      - 🇮🇱 IL-1 | Starlink
+      - 🇮🇱 IL-2 | Starlink
+      - 🇮🇶 IQ-1 | Starlink
+      - 🇮🇶 IQ-2 | Starlink
+      - 🇹🇷 TR-1 | Starlink
+      - 🇹🇷 TR-2 | Starlink
+      - 🇰🇬 KG-1 | Starlink
+      - 🇰🇬 KG-2 | Starlink
+      - 🇰🇿 KZ-1 | Starlink
+      - 🇰🇿 KZ-2 | Starlink
+      - 🇲🇽 MX-1 | Starlink
+      - 🇲🇽 MX-2 | Starlink
+      - 🇨🇦 CA-1 | Starlink
+      - 🇨🇦 CA-2 | Starlink
+      - 🇵🇪 PE-1 | Starlink
+      - 🇵🇪 PE-2 | Starlink
+      - 🇧🇷 BR-1 | Starlink
+      - 🇧🇷 BR-2 | Starlink
+      - 🇨🇱 CL-1 | Starlink
+      - 🇨🇱 CL-2 | Starlink
+      - 🇦🇷 AR-1 | Starlink
+      - 🇦🇷 AR-2 | Starlink
+      - 🇪🇬 EG-1 | Starlink
+      - 🇪🇬 EG-2 | Starlink
+      - 🇳🇬 NG-1 | Starlink
+      - 🇳🇬 NG-2 | Starlink
+      - 🇿🇦 ZA-1 | Starlink
+      - 🇿🇦 ZA-2 | Starlink
+      - 🇦🇶 AQ-1 | Starlink
+      - 🇦🇶 AQ-2 | Starlink
     url: https://www.gstatic.com/generate_204
     interval: 300
 rules:

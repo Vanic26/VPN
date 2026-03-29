@@ -1011,12 +1011,11 @@ def load_proxies(url, retries=10):
                         node = parse_node_line(line, idx)
                         if node:
                             nodes.append(node)
-                            print(f"[parsed] 🔎 Base64 node: {idx} parsed", flush=True)
+                            # detect protocol
+                            protocol = line.split("://")[0].upper() if "://" in line else "NODE"
+                            print(f"[parse] 🔎 {protocol} node: {idx} parsed", flush=True)
                         else:
-                            print(f"[skip] ⛔ Invalid or unsupported line -> Check line {idx}", flush=True)
-                    except Exception:
-                        print(f"[warn] 😭 Error parsing line: {idx}", flush=True)
-
+                            print(f"[skip] ⛔ Invalid or unsupported line {idx}", flush=True)
             return nodes
 
         except Exception:

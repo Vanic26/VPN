@@ -1,4 +1,4 @@
-# Last update: 01.04.2026 03:28:02
+# Last update: 01.04.2026 03:52:42
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -121,269 +121,104 @@ dns:
       - +.googleapis.com
       - +.gvt1.com
 proxies:
-- {name: "🇭🇰 HK-1 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2095, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", network: "ws", ws-opts: {path: "/xxawedq", headers: {"Host": "huio1dhiuyqgk.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇭🇰 HK-2 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2095, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", network: "ws", ws-opts: {path: "/cxzdsa", headers: {"Host": "hdshau2kk.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇭🇰 HK-3 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2095, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", network: "ws", ws-opts: {path: "/xtqa", headers: {"Host": "hutxtz3k.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇯🇵 JP-1 | Starlink", type: "vless", server: "jp1.892622.xyz", port: 26703, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "safari", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "i3qsDfc_ep-_GGSb1S4BGO0qVLm3q0xzOrMz2r6mr0g", short-id: null}}
-- {name: "🇯🇵 JP-2 | Starlink", type: "vless", server: "jp2.892622.xyz", port: 26704, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "firefox", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "sHHoKne67Tb4jvOBnqkCS0iPJrokq5WB5cAtLfPj9zc", short-id: null}}
-- {name: "🇯🇵 JP-3 | Starlink", type: "vless", server: "jp3.892622.xyz", port: 26705, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "firefox", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "_F1mEMAPLxJDeV2NBvaWZPHtx9z1UnkHSJPmisN3AAA", short-id: null}}
-- {name: "🇯🇵 JP-4 | Starlink", type: "hysteria2", server: "jp4.892622.xyz", port: 26702, password: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", sni: "jp4.892622.xyz", skip-cert-verify: false, up: 200, down: 200}
-- {name: "🇯🇵 JP-5 | Starlink", type: "vless", server: "jp5.892622.xyz", port: 8080, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "ios", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "SzTvjBrZD4CQJ1EmuhcmhBz4nVasDI_9jAWLp551rzo", short-id: null}}
-- {name: "🇯🇵 JP-6 | Starlink", type: "vless", server: "jp6.892622.xyz", port: 26701, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "qq", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "yUlhkJ1iNg5EwKEhE_pDYhFTdwfO2Xcl5fQYn9pyADk", short-id: null}}
-- {name: "🇸🇬 SG-1 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2086, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", network: "ws", ws-opts: {path: "/cxzcsa", headers: {"Host": "szop1iyqg.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇸🇬 SG-2 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2086, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", network: "ws", ws-opts: {path: "/dsaewqz", headers: {"Host": "suihgyq2g.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇹🇼 TW-1 | Starlink", type: "vless", server: "tw1.892622.xyz", port: 14060, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "edge", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "OyMvsUjnAiH_uHZO5fX9MvvZVa8ZIuitnq6O0M8QrAA", short-id: null}}
-- {name: "🇺🇸 US-1 | Starlink", type: "hysteria2", server: "us1.892622.xyz", port: 26702, password: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", sni: "us1.892622.xyz", skip-cert-verify: false, up: 200, down: 200}
-- {name: "🇺🇸 US-2 | Starlink", type: "vless", server: "us2.892622.xyz", port: 8080, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "ios", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "U8qMhMopoDP9qhxcbKuObAGQrCAB_O0bEViDDx9M42E", short-id: null}}
-- {name: "🇺🇸 US-3 | Starlink", type: "vless", server: "us3.892622.xyz", port: 26701, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "qq", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "Qcx6QrYMozeBOrdzg8I-BfxXxgPP_CbPZgVCzK5vCH4", short-id: null}}
-- {name: "🇺🇸 US-4 | Starlink", type: "vless", server: "us4.892622.xyz", port: 26703, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "ios", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "8jIt-s6bCPR2A0yxDkorwKaM3f4DC6UugoFtAnsxazM", short-id: null}}
-- {name: "🇺🇸 US-5 | Starlink", type: "vless", server: "us5.892622.xyz", port: 26704, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "qq", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "X-7pmY-BGvWb7fr-ASkNAwse47_I-hDe2FWwb2ZxKhE", short-id: null}}
-- {name: "🇺🇸 US-6 | Starlink", type: "vless", server: "us6.892622.xyz", port: 26705, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", servername: "www.microsoft.com", skip-cert-verify: false, client-fingerprint: "edge", alterId: 0, cipher: "auto", udp: true, flow: "xtls-rprx-vision", tls: true, reality-opts: {public-key: "L1ZF4yLaG7x3Z3F2-VzfnKVBLW098b5dl8qMz7Kbm1k", short-id: null}}
-- {name: "🇩🇪 DE-1 | Starlink", type: "hysteria2", server: "de.892622.xyz", port: 8080, password: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", sni: "de.892622.xyz", skip-cert-verify: false, up: 300, down: 300}
-- {name: "🇷🇺 RU-1 | Starlink", type: "hysteria2", server: "elsxxx.892622.xyz", port: 8080, password: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", sni: "elsxxx.892622.xyz", skip-cert-verify: false, up: 300, down: 300}
-- {name: "🇳🇱 NL-1 | Starlink", type: "vless", server: "yitsa.5783678.xyz", port: 2086, uuid: "cf2a7194-ae38-48b0-9cfb-8594f34d02dd", network: "ws", ws-opts: {path: "/dsadsa", headers: {"Host": "njighiuq1l.892622.xyz"}}, alterId: 0, cipher: "auto", udp: true, flow: null, tls: false}
-- {name: "🇸🇬 SG-3 [ipv6] | Starlink", type: "vless", server: "2a0e:97c0:7d4:39e9:b9c1:4089:a425:d470", port: 10001, uuid: "9c79aceb-4649-44ea-9698-b5e9ecf6d6da", encryption: "none", security: "reality", sni: "www.icloud.com", fp: "chrome", reality-opts: {public-key: "7qP6YKWx5CJXia1qjQoIcD7FRjUBbioaioioI729D34", short-id: "2afe4310", server-name: "www.icloud.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "7qP6YKWx5CJXia1qjQoIcD7FRjUBbioaioioI729D34", sid: "2afe4310", headerType: "none"}
-- {name: "🇸🇬 SG-4 [ipv6] | Starlink", type: "vless", server: "2a0e:97c0:7d4:a398:e199:2e3c:4dc0:7abd", port: 10001, uuid: "9c79aceb-4649-44ea-9698-b5e9ecf6d6da", encryption: "none", security: "reality", sni: "www.icloud.com", fp: "chrome", reality-opts: {public-key: "7qP6YKWx5CJXia1qjQoIcD7FRjUBbioaioioI729D34", short-id: "2afe4310", server-name: "www.icloud.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "7qP6YKWx5CJXia1qjQoIcD7FRjUBbioaioioI729D34", sid: "2afe4310", headerType: "none"}
-- {name: "🇬🇧 GB-1 | Starlink", type: "vless", server: "uk-001.xiaoxiaobujidao.xyz", port: 443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", headerType: "none"}
-- {name: "🇬🇧 GB-2 | Starlink", type: "vless", server: "uk-001.xiaoxiaobujidao.xyz", port: 443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", headerType: "none"}
-- {name: "🇬🇧 GB-3 | Starlink", type: "vless", server: "uk-001.xiaoxiaobujidao.xyz", port: 443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "vMHW4_fx7bd_4bFZN9ecx58xSjv6SLg0wRYrdI62yUo", headerType: "none"}
-- {name: "🇬🇧 GB-4 | Starlink", type: "hysteria2", server: "uk-001.xiaoxiaobujidao.xyz", port: 19443, password: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", sni: "uk-001.xiaoxiaobujidao.xyz", skip-cert-verify: true, tls: {server_name: "uk-001.xiaoxiaobujidao.xyz", insecure: true, enabled: true}, insecure: "1"}
-- {name: "🇨🇦 CA-1 | Starlink", type: "vless", server: "ca-x-001.xiaoxiaobujidao.xyz", port: 443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "xhttp", security: "tls", sni: "ca-x-001.xiaoxiaobujidao.xyz", servername: "ca-x-001.xiaoxiaobujidao.xyz", skip-cert-verify: false, tls: true, headerType: "none"}
-- {name: "🇺🇸 US-7 | Starlink", type: "vless", server: "uk-x-001.xiaoxiaobujidao.xyz", port: 443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "xhttp", security: "tls", sni: "uk-x-001.xiaoxiaobujidao.xyz", servername: "uk-x-001.xiaoxiaobujidao.xyz", skip-cert-verify: false, tls: true, headerType: "none"}
-- {name: "🇯🇵 JP-7 | Starlink", type: "vless", server: "tk-X06.xiaoxiaobujidao.xyz", port: 18443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", headerType: "none"}
-- {name: "🇯🇵 JP-8 | Starlink", type: "vless", server: "tk-X07.xiaoxiaobujidao.xyz", port: 12443, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", headerType: "none"}
-- {name: "🇺🇸 US-8 | Starlink", type: "vless", server: "px-x01.xiaoxiaobujidao.xyz", port: 23456, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", headerType: "none"}
-- {name: "🇺🇸 US-9 | Starlink", type: "vless", server: "px-x02.xiaoxiaobujidao.xyz", port: 12345, uuid: "9b5b522d-e150-495d-9aa3-b4b74cd8981d", encryption: "none", network: "tcp", security: "reality", sni: "dash.cloudflare.com", fp: "firefox", reality-opts: {public-key: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", short-id: "", server-name: "dash.cloudflare.com"}, tls: true, flow: "xtls-rprx-vision", pbk: "_zJXh1QBg7D0lcPUFPrxPh7Zfqu1wK0sX8W0AQNIRg0", headerType: "none"}
-- {name: "🇺🇸 US-10 | Starlink", type: "vless", server: "c1.bujidao.org", port: 2083, uuid: "1ccc1dd8-d8ed-4b69-b0c2-27f6282f9755", encryption: "none", network: "ws", security: "tls", sni: "vl.bujidao.cc", servername: "vl.bujidao.cc", skip-cert-verify: false, path: "/?ed=2048", ws-opts: {path: "/?ed=2048"}, tls: true, headerType: "none"}
-- {name: "🇺🇸 US-11 | Starlink", type: "vless", server: "c2-4.bujidao.org", port: 2083, uuid: "1ccc1dd8-d8ed-4b69-b0c2-27f6282f9755", encryption: "none", network: "ws", security: "tls", sni: "test.bujidao.org", servername: "test.bujidao.org", skip-cert-verify: false, path: "/?ed=2048", ws-opts: {path: "/?ed=2048"}, tls: true, headerType: "none"}
-- {name: "🇺🇸 US-12 | Starlink", type: "vless", server: "c2-6.bujidao.org", port: 8443, uuid: "1ccc1dd8-d8ed-4b69-b0c2-27f6282f9755", encryption: "none", network: "ws", security: "tls", sni: "test.bujidao.org", servername: "test.bujidao.org", skip-cert-verify: false, path: "/?ed=2048", ws-opts: {path: "/?ed=2048"}, tls: true, headerType: "none"}
-- {name: "🇺🇸 US-13 | Starlink", type: "trojan", server: "saas.sin.fan", port: 443, password: "6202b230-417c-4d8e-b624-0f71afa9c75d", network: "ws", security: "tls", sni: "sni.111000.dynv6.net", servername: "sni.111000.dynv6.net", skip-cert-verify: false, fp: "chrome", path: "/?ed=2560&proxyip=ip.111000.de5.net:443", ws-opts: {path: "/?ed=2560&proxyip=ip.111000.de5.net:443", headers: {"Host": "sni.111000.dynv6.net"}}, alpn: ["http/1.1"], insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://doh.pub/dns-query", host: "sni.111000.dynv6.net"}
-- {name: "🇺🇸 US-14 | Starlink", type: "vless", server: "saas.sin.fan", port: 443, uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d", encryption: "none", network: "ws", security: "tls", sni: "sni.111000.dynv6.net", servername: "sni.111000.dynv6.net", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/?ed=2560&proxyip=ip.111000.de5.net:443", ws-opts: {path: "/?ed=2560&proxyip=ip.111000.de5.net:443", headers: {"Host": "sni.111000.dynv6.net"}}, tls: true, alpn: ["http/1.1"], insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://doh.pub/dns-query", host: "sni.111000.dynv6.net"}
-- {name: "🇺🇸 US-15 | Starlink", type: "vless", server: "freeyx.cloudflare88.eu.org", port: 443, uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d", encryption: "none", network: "ws", security: "tls", sni: "sni.111000.dynv6.net", servername: "sni.111000.dynv6.net", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/?ed=2560&proxyip=ip.111000.de5.net:443", ws-opts: {path: "/?ed=2560&proxyip=ip.111000.de5.net:443", headers: {"Host": "sni.111000.dynv6.net"}}, tls: true, alpn: ["http/1.1"], insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://doh.pub/dns-query", host: "sni.111000.dynv6.net"}
-- {name: "🇺🇸 US-16 | Starlink", type: "trojan", server: "freeyx.cloudflare88.eu.org", port: 443, password: "6202b230-417c-4d8e-b624-0f71afa9c75d", network: "ws", security: "tls", sni: "sni.111000.dynv6.net", servername: "sni.111000.dynv6.net", skip-cert-verify: false, fp: "chrome", path: "/?ed=2560&proxyip=ip.111000.de5.net:443", ws-opts: {path: "/?ed=2560&proxyip=ip.111000.de5.net:443", headers: {"Host": "sni.111000.dynv6.net"}}, alpn: ["http/1.1"], insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://doh.pub/dns-query", host: "sni.111000.dynv6.net"}
-- {name: "🇨🇳 CN-1 | Starlink", type: "trojan", server: "58.152.25.253", port: 443, password: "BxceQaOe", network: "tcp", security: "tls", skip-cert-verify: true, insecure: "1", allowInsecure: "1", headerType: "none"}
-- {name: "🇺🇸 US-17 | Starlink", type: "trojan", server: "bestcf.030101.xyz", port: 443, password: "6202b230-417c-4d8e-b624-0f71afa9c75d", network: "ws", security: "tls", sni: "sni.111000.dynv6.net", servername: "sni.111000.dynv6.net", skip-cert-verify: false, fp: "chrome", path: "/?ed=2560&proxyip=ip.111000.de5.net:443", ws-opts: {path: "/?ed=2560&proxyip=ip.111000.de5.net:443", headers: {"Host": "sni.111000.dynv6.net"}}, alpn: ["http/1.1"], insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://doh.pub/dns-query", host: "sni.111000.dynv6.net"}
-- {name: "🇺🇸 US-18 | Starlink", type: "trojan", server: "172.66.44.230", port: 8443, password: "8r<[9'l6hAO#8ZQi", network: "ws", security: "tls", sni: "Koma-YT.PAGeS.Dev", servername: "Koma-YT.PAGeS.Dev", skip-cert-verify: true, path: "/tro8sFW1S91B6sZrM1?ed=2560", ws-opts: {path: "/tro8sFW1S91B6sZrM1?ed=2560", headers: {"Host": "Koma-YT.PAGeS.Dev"}}, insecure: "1", allowInsecure: "1", host: "Koma-YT.PAGeS.Dev"}
-- {name: "🇺🇸 US-19 | Starlink", type: "vless", server: "bestcf.030101.xyz", port: 443, uuid: "6202b230-417c-4d8e-b624-0f71afa9c75d", encryption: "none", network: "ws", security: "tls", sni: "sni.111000.dynv6.net", servername: "sni.111000.dynv6.net", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/?ed=2560&proxyip=ip.111000.de5.net:443", ws-opts: {path: "/?ed=2560&proxyip=ip.111000.de5.net:443", headers: {"Host": "sni.111000.dynv6.net"}}, tls: true, alpn: ["http/1.1"], insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://doh.pub/dns-query", host: "sni.111000.dynv6.net"}
-- {name: "🇺🇸 US-20 | Starlink", type: "anytls", server: "45.221.98.14", port: 59901, password: "dongtaiwang.com", security: "tls", skip-cert-verify: true, tls: {insecure: true, enabled: true}, insecure: "1", allowInsecure: "1"}
-- {name: "🇦🇪 AE-1 | Starlink", type: "vmess", server: "188.208.110.158", port: 443, uuid: "4fc56c5c-1683-4854-859d-896b4e2fe868", network: "xhttp", sni: "8zuzrt7v.videocache.stream", servername: "8zuzrt7v.videocache.stream", fp: "random", path: "/intl/zh-hk/", alterId: 0, cipher: "auto", tls: true, v: "2", ps: "阿联酋-01_富查伊拉@pgkj0402", add: "188.208.110.158", id: "4fc56c5c-1683-4854-859d-896b4e2fe868", aid: "0", scy: "auto", net: "xhttp", insecure: "0"}
-- {name: "🇦🇪 AE-2 | Starlink", type: "vless", server: "188.208.110.158", port: 9443, uuid: "11102659-7c18-4e4c-97fb-079f049b9a15", encryption: "none", network: "xhttp", security: "reality", sni: "www.slack.com", fp: "random", path: "/intl/zh-hk/", reality-opts: {public-key: "ztih2Q36QmWZDMjzrVJZ3P8FAaTv5sIRfDwTx6n9eBo", short-id: "e57c872eadd6", server-name: "www.slack.com"}, tls: true, pbk: "ztih2Q36QmWZDMjzrVJZ3P8FAaTv5sIRfDwTx6n9eBo", sid: "e57c872eadd6", spx: "/intl/zh-hk/", mode: "auto"}
-- {name: "🇺🇸 US-21 | Starlink", type: "anytls", server: "45.221.98.14", port: 59901, password: "dongtaiwang.com", security: "tls", sni: "45.221.98.14", servername: "45.221.98.14", skip-cert-verify: true, tls: {server_name: "45.221.98.14", insecure: true, enabled: true}, insecure: "1", allowInsecure: "1"}
-- {name: "🇦🇪 AE-3 | Starlink", type: "vless", server: "188.208.110.158", port: 9443, uuid: "167002a5-8f5b-42a2-8d7d-ea51347b726f", encryption: "none", network: "xhttp", security: "reality", sni: "www.slack.com", fp: "random", path: "/intl/zh-hk/", reality-opts: {public-key: "ztih2Q36QmWZDMjzrVJZ3P8FAaTv5sIRfDwTx6n9eBo", short-id: "e57c872eadd6", server-name: "www.slack.com"}, tls: true, pbk: "ztih2Q36QmWZDMjzrVJZ3P8FAaTv5sIRfDwTx6n9eBo", sid: "e57c872eadd6", spx: "/intl/zh-hk/", mode: "auto"}
-- {name: "🇩🇪 DE-2 | Starlink", type: "trojan", server: "94.131.105.125", port: 4443, password: "strong-secret-pass-777", network: "tcp", security: "tls", skip-cert-verify: true, insecure: "1", allowInsecure: "1", headerType: "none"}
-- {name: "🇺🇸 US-22 | Starlink", type: "anytls", server: "45.221.98.14", port: 59901, password: "dongtaiwang.com", security: "tls", sni: "45.221.98.14", servername: "45.221.98.14", skip-cert-verify: true, fp: "chrome", client-fingerprint: "chrome", tls: {server_name: "45.221.98.14", insecure: true, enabled: true}, alpn: ["h2", "http/1.1"], insecure: "1", allowInsecure: "1"}
-- {name: "🇺🇸 US-23 | Starlink", type: "trojan", server: "94.131.105.125", port: 4443, password: "strong-secret-pass-777", network: "tcp", security: "tls", skip-cert-verify: true, insecure: "1", allowInsecure: "1", headerType: "none"}
-- {name: "🇹🇷 TR-1 | Starlink", type: "anytls", server: "45.221.98.14", port: 59901, password: "dongtaiwang.com", security: "tls", skip-cert-verify: true, tls: {insecure: true, enabled: true}, alpn: ["h2"], insecure: "1", allowInsecure: "1"}
-- {name: "🇳🇱 NL-2 | Starlink", type: "vless", server: "138.226.240.199", port: 4433, uuid: "00000000-0000-4000-8000-000000000000", encryption: "none", network: "ws", security: "tls", sni: "sub.mot.ip-ddns.com", servername: "sub.mot.ip-ddns.com", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/", ws-opts: {path: "/", headers: {"Host": "sub.mot.ip-ddns.com"}}, tls: true, insecure: "0", allowInsecure: "0", host: "sub.mot.ip-ddns.com"}
-- {name: "🇺🇸 US-24 | Starlink", type: "vless", server: "138.226.240.199", port: 4433, uuid: "00000000-0000-4000-8000-000000000000", encryption: "none", network: "ws", security: "tls", sni: "sub.mot.ip-ddns.com", servername: "sub.mot.ip-ddns.com", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/", ws-opts: {path: "/", headers: {"Host": "sub.mot.ip-ddns.com"}}, tls: true, insecure: "0", allowInsecure: "0", host: "sub.mot.ip-ddns.com"}
-- {name: "🇮🇹 IT-1 | Starlink", type: "vless", server: "222.167.202.52", port: 7443, uuid: "06ef598c-1555-4887-b3f9-08214a2f6792", encryption: "none", network: "ws", security: "tls", sni: "2026.hhhhh.eu.org", servername: "2026.hhhhh.eu.org", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/222.167.202.52:7443", ws-opts: {path: "/222.167.202.52:7443", headers: {"Host": "2026.hhhhh.eu.org"}}, tls: true, insecure: "0", allowInsecure: "0", host: "2026.hhhhh.eu.org"}
-- {name: "🇩🇪 DE-3 | Starlink", type: "vless", server: "185.94.29.156", port: 4001, uuid: "00000000-0000-4000-8000-000000000000", encryption: "none", network: "ws", security: "tls", sni: "sub.mot.ip-ddns.com", servername: "sub.mot.ip-ddns.com", skip-cert-verify: false, path: "/", ws-opts: {path: "/", headers: {"Host": "sub.mot.ip-ddns.com"}}, tls: true, insecure: "0", allowInsecure: "0", host: "sub.mot.ip-ddns.com"}
-- {name: "🇮🇱 IL-1 | Starlink", type: "vmess", server: "45.144.172.140", port: 443, uuid: "f6afbaff-5de3-483e-81aa-30255c65937e", network: "xhttp", sni: "u3wwrvm6.videocache.stream", servername: "u3wwrvm6.videocache.stream", fp: "random", path: "/intl/zh-hk/", alterId: 0, cipher: "auto", tls: true, v: "2", ps: "@pgkj0402", add: "45.144.172.140", id: "f6afbaff-5de3-483e-81aa-30255c65937e", aid: "0", scy: "auto", net: "xhttp", insecure: "0"}
-- {name: "🇺🇸 US-25 | Starlink", type: "vless", server: "222.167.202.50", port: 7443, uuid: "06ef598c-1555-4887-b3f9-08214a2f6792", encryption: "none", network: "ws", security: "tls", sni: "2026.hhhhh.eu.org", servername: "2026.hhhhh.eu.org", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/222.167.202.50:7443", ws-opts: {path: "/222.167.202.50:7443", headers: {"Host": "2026.hhhhh.eu.org"}}, tls: true, insecure: "0", allowInsecure: "0", host: "2026.hhhhh.eu.org"}
-- {name: "🇺🇸 US-26 | Starlink", type: "vless", server: "222.167.202.15", port: 7443, uuid: "06ef598c-1555-4887-b3f9-08214a2f6792", encryption: "none", network: "ws", security: "tls", sni: "2026.hhhhh.eu.org", servername: "2026.hhhhh.eu.org", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/222.167.202.15:7443", ws-opts: {path: "/222.167.202.15:7443", headers: {"Host": "2026.hhhhh.eu.org"}}, tls: true, insecure: "0", allowInsecure: "0", host: "2026.hhhhh.eu.org"}
-- {name: "🇺🇸 US-27 | Starlink", type: "vless", server: "222.167.202.2", port: 7443, uuid: "06ef598c-1555-4887-b3f9-08214a2f6792", encryption: "none", network: "ws", security: "tls", sni: "2026.hhhhh.eu.org", servername: "2026.hhhhh.eu.org", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/222.167.202.2:7443", ws-opts: {path: "/222.167.202.2:7443", headers: {"Host": "2026.hhhhh.eu.org"}}, tls: true, insecure: "0", allowInsecure: "0", host: "2026.hhhhh.eu.org"}
-- {name: "🇳🇱 NL-3 | Starlink", type: "tuic", server: "ip1.758733.xyz", port: 10088, uuid: "9bbd1f42-7ae7-4239-bd10-a68de95e3295:dongtaiwang.com", password: "", sni: "apple.com", servername: "apple.com", skip-cert-verify: true, tls: {server_name: "apple.com", insecure: true, enabled: true}, alpn: ["h3"], congestion-controller: "bbr", insecure: "1", allowInsecure: "1", congestion_control: "bbr"}
-- {name: "🇺🇸 US-28 | Starlink", type: "vless", server: "222.167.202.22", port: 7443, uuid: "06ef598c-1555-4887-b3f9-08214a2f6792", encryption: "none", network: "ws", security: "tls", sni: "2026.hhhhh.eu.org", servername: "2026.hhhhh.eu.org", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/222.167.202.22:7443", ws-opts: {path: "/222.167.202.22:7443", headers: {"Host": "2026.hhhhh.eu.org"}}, tls: true, insecure: "0", allowInsecure: "0", host: "2026.hhhhh.eu.org"}
-- {name: "🇺🇸 US-29 | Starlink", type: "vless", server: "222.167.202.16", port: 7443, uuid: "06ef598c-1555-4887-b3f9-08214a2f6792", encryption: "none", network: "ws", security: "tls", sni: "2026.hhhhh.eu.org", servername: "2026.hhhhh.eu.org", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/222.167.202.16:7443", ws-opts: {path: "/222.167.202.16:7443", headers: {"Host": "2026.hhhhh.eu.org"}}, tls: true, insecure: "0", allowInsecure: "0", host: "2026.hhhhh.eu.org"}
-- {name: "🇨🇳 CN-2 | Starlink", type: "vless", server: "222.167.202.70", port: 7443, uuid: "06ef598c-1555-4887-b3f9-08214a2f6792", encryption: "none", network: "ws", security: "tls", sni: "2026.hhhhh.eu.org", servername: "2026.hhhhh.eu.org", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/222.167.202.70:7443", ws-opts: {path: "/222.167.202.70:7443", headers: {"Host": "2026.hhhhh.eu.org"}}, tls: true, insecure: "0", allowInsecure: "0", host: "2026.hhhhh.eu.org"}
-- {name: "🇺🇸 US-30 | Starlink", type: "vless", server: "222.167.202.47", port: 7443, uuid: "06ef598c-1555-4887-b3f9-08214a2f6792", encryption: "none", network: "ws", security: "tls", sni: "2026.hhhhh.eu.org", servername: "2026.hhhhh.eu.org", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/222.167.202.47:7443", ws-opts: {path: "/222.167.202.47:7443", headers: {"Host": "2026.hhhhh.eu.org"}}, tls: true, insecure: "0", allowInsecure: "0", host: "2026.hhhhh.eu.org"}
-- {name: "🇮🇱 IL-2 | Starlink", type: "vless", server: "45.144.172.140", port: 9443, uuid: "3178e1d1-3887-418f-93c7-f12d46f8e3bb", encryption: "none", network: "xhttp", security: "reality", sni: "www.slack.com", fp: "random", path: "/intl/zh-hk/", reality-opts: {public-key: "yJIv1uwTBMNF7fcUysZQXP2Q1hKPLLGAIhOF9jaSoxI", short-id: "e1bb633aecd5", server-name: "www.slack.com"}, tls: true, pbk: "yJIv1uwTBMNF7fcUysZQXP2Q1hKPLLGAIhOF9jaSoxI", sid: "e1bb633aecd5", spx: "/intl/zh-hk/", mode: "auto"}
-- {name: "🇺🇸 US-31 | Starlink", type: "vless", server: "222.167.202.33", port: 7443, uuid: "06ef598c-1555-4887-b3f9-08214a2f6792", encryption: "none", network: "ws", security: "tls", sni: "2026.hhhhh.eu.org", servername: "2026.hhhhh.eu.org", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/222.167.202.33:7443", ws-opts: {path: "/222.167.202.33:7443", headers: {"Host": "2026.hhhhh.eu.org"}}, tls: true, insecure: "0", allowInsecure: "0", host: "2026.hhhhh.eu.org"}
-- {name: "🇮🇹 IT-2 | Starlink", type: "vless", server: "222.167.202.32", port: 7443, uuid: "06ef598c-1555-4887-b3f9-08214a2f6792", encryption: "none", network: "ws", security: "tls", sni: "2026.hhhhh.eu.org", servername: "2026.hhhhh.eu.org", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/222.167.202.32:7443", ws-opts: {path: "/222.167.202.32:7443", headers: {"Host": "2026.hhhhh.eu.org"}}, tls: true, insecure: "0", allowInsecure: "0", host: "2026.hhhhh.eu.org"}
-- {name: "🇺🇸 US-32 | Starlink", type: "vless", server: "45.145.42.170", port: 8005, uuid: "00000000-0000-4000-8000-000000000000", encryption: "none", network: "ws", security: "tls", sni: "sub.mot.ip-ddns.com", servername: "sub.mot.ip-ddns.com", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/", ws-opts: {path: "/", headers: {"Host": "sub.mot.ip-ddns.com"}}, tls: true, insecure: "0", allowInsecure: "0", host: "sub.mot.ip-ddns.com"}
-- {name: "🇮🇱 IL-3 | Starlink", type: "vless", server: "45.144.172.140", port: 9443, uuid: "121f8413-c1aa-4d1d-8e46-678b1891e408", encryption: "none", network: "xhttp", security: "reality", sni: "www.slack.com", fp: "random", path: "/intl/zh-hk/", reality-opts: {public-key: "yJIv1uwTBMNF7fcUysZQXP2Q1hKPLLGAIhOF9jaSoxI", short-id: "e1bb633aecd5", server-name: "www.slack.com"}, tls: true, pbk: "yJIv1uwTBMNF7fcUysZQXP2Q1hKPLLGAIhOF9jaSoxI", sid: "e1bb633aecd5", spx: "/intl/zh-hk/", mode: "auto"}
-- {name: "🇫🇮 FI-1 | Starlink", type: "vless", server: "xhtpipw.gfdv54cvghhgfhgj-njhgj64.info", port: 443, uuid: "221ab711-b458-4044-b9d9-d2f027e5a4e8", encryption: "none", network: "xhttp", security: "tls", sni: "Tp099XvO3n.NeWnEwCoMpAnYdOm1.InFo", servername: "Tp099XvO3n.NeWnEwCoMpAnYdOm1.InFo", skip-cert-verify: false, path: "/", tls: true, insecure: "0", allowInsecure: "0", host: "Tp099XvO3n.NeWnEwCoMpAnYdOm1.InFo", mode: "stream-one"}
-- {name: "🇮🇱 IL-4 | Starlink", type: "vmess", server: "45.144.172.140", port: 443, uuid: "c2efad23-d7a8-4d41-bbdd-2612ef0f473f", network: "xhttp", sni: "13lrsldv.videocache.stream", servername: "13lrsldv.videocache.stream", fp: "random", path: "/intl/zh-hk/", alterId: 0, cipher: "auto", tls: true, v: "2", ps: "以色列-01_特拉维夫@pgkj0402", add: "45.144.172.140", id: "c2efad23-d7a8-4d41-bbdd-2612ef0f473f", aid: "0", scy: "auto", net: "xhttp", insecure: "0"}
-- {name: "🇮🇹 IT-3 | Starlink", type: "vless", server: "185.198.235.159", port: 9443, uuid: "a2214d32-8f25-4871-808d-c29de2a24b2f", encryption: "none", network: "xhttp", security: "reality", sni: "www.slack.com", fp: "random", path: "/intl/zh-hk/", reality-opts: {public-key: "vbV539lKF29Dd3gAdzcRohXIxR6wxBJv4o3Y3cuYkCQ", short-id: "396f2ec8", server-name: "www.slack.com"}, tls: true, pbk: "vbV539lKF29Dd3gAdzcRohXIxR6wxBJv4o3Y3cuYkCQ", sid: "396f2ec8", spx: "/intl/zh-hk/", mode: "auto"}
-- {name: "🇸🇬 SG-5 | Starlink", type: "vmess", server: "v12.hdacd.com", port: 30812, uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484", network: "tcp", alterId: 0, cipher: "auto", tls: false, v: "2", ps: "新加坡@pgkj0402", add: "v12.hdacd.com", id: "cbb3f877-d1fb-344c-87a9-d153bffd5484", aid: "0", scy: "auto", net: "tcp", insecure: "0"}
-- {name: "🇮🇹 IT-4 | Starlink", type: "vmess", server: "185.198.235.159", port: 443, uuid: "c4379918-a047-41f0-b371-81dfd0c70ead", network: "xhttp", sni: "jyhjbj7d.videocache.stream", servername: "jyhjbj7d.videocache.stream", fp: "random", path: "/intl/zh-hk/", alterId: 0, cipher: "auto", tls: true, v: "2", ps: "意大利-01_帕勒莫@pgkj0402", add: "185.198.235.159", id: "c4379918-a047-41f0-b371-81dfd0c70ead", aid: "0", scy: "auto", net: "xhttp", insecure: "0"}
-- {name: "🇳🇱 NL-4 | Starlink", type: "vless", server: "195.181.173.199", port: 8443, uuid: "394f6981-a782-4779-9a85-e6cf22935d93", encryption: "none", network: "tcp", security: "tls", sni: "ams1.fromblancwithlove.com", servername: "ams1.fromblancwithlove.com", skip-cert-verify: false, tls: true, insecure: "0", allowInsecure: "0", headerType: "none"}
-- {name: "🇮🇹 IT-5 | Starlink", type: "vless", server: "185.198.235.159", port: 9443, uuid: "e98329d0-00c8-40ca-824a-1a6722b86066", encryption: "none", network: "xhttp", security: "reality", sni: "www.slack.com", fp: "random", path: "/intl/zh-hk/", reality-opts: {public-key: "vbV539lKF29Dd3gAdzcRohXIxR6wxBJv4o3Y3cuYkCQ", short-id: "396f2ec8", server-name: "www.slack.com"}, tls: true, pbk: "vbV539lKF29Dd3gAdzcRohXIxR6wxBJv4o3Y3cuYkCQ", sid: "396f2ec8", spx: "/intl/zh-hk/", mode: "auto"}
-- {name: "🇮🇹 IT-6 | Starlink", type: "vmess", server: "185.198.235.159", port: 443, uuid: "274b1fb3-aa10-4d4e-9149-f88dae55c9a6", network: "xhttp", sni: "qane1v22.videocache.stream", servername: "qane1v22.videocache.stream", fp: "random", path: "/intl/zh-hk/", alterId: 0, cipher: "auto", tls: true, v: "2", ps: "@pgkj0402", add: "185.198.235.159", id: "274b1fb3-aa10-4d4e-9149-f88dae55c9a6", aid: "0", scy: "auto", net: "xhttp", insecure: "0"}
-- {name: "🇺🇸 US-33 | Starlink", type: "vless", server: "192.200.160.20", port: 443, uuid: "92b82d0f-d2f8-4f6f-b177-08f681a337e6", encryption: "none", network: "ws", security: "tls", sni: "639073677243791121.camry-perma.info", servername: "639073677243791121.camry-perma.info", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", path: "/njvqoews", ws-opts: {path: "/njvqoews", headers: {"Host": "639073677243791121.camry-perma.info"}}, tls: true, insecure: "0", allowInsecure: "0", host: "639073677243791121.camry-perma.info"}
-- {name: "🇺🇸 US-34 | Starlink", type: "anytls", server: "45.221.98.14", port: 59901, password: "dongtaiwang.com", security: "tls", sni: "45.221.98.14", servername: "45.221.98.14", skip-cert-verify: true, fp: "chrome", client-fingerprint: "chrome", tls: {server_name: "45.221.98.14", insecure: true, enabled: true}, alpn: ["h2"], insecure: "1", allowInsecure: "1"}
-- {name: "🇺🇸 US-35 | Starlink", type: "anytls", server: "45.221.98.14", port: 59901, password: "dongtaiwang.com", security: "tls", sni: "45.221.98.14", servername: "45.221.98.14", skip-cert-verify: true, tls: {server_name: "45.221.98.14", insecure: true, enabled: true}, alpn: ["h2"], insecure: "1", allowInsecure: "1"}
-- {name: "🇮🇷 IR-1 | Starlink", type: "vmess", server: "v12.hdacd.com", port: 30812, uuid: "cbb3f877-d1fb-344c-87a9-d153bffd5484", network: "tcp", path: "/", alterId: 0, cipher: "auto", tls: false, v: "2", ps: "🇮🇷 伊朗 | IR-001 @pgkj0402", add: "v12.hdacd.com", id: "cbb3f877-d1fb-344c-87a9-d153bffd5484", aid: "0", scy: "auto", net: "tcp", host: "v12.hdacd.com", insecure: "0"}
-- {name: "🇩🇪 DE-4 | Starlink", type: "vless", server: "185.94.29.156", port: 4001, uuid: "00000000-0000-4000-8000-000000000000", encryption: "none", network: "ws", security: "tls", sni: "sub.mot.ip-ddns.com", servername: "sub.mot.ip-ddns.com", skip-cert-verify: false, path: "/", ws-opts: {path: "/", headers: {"Host": "sub.mot.ip-ddns.com"}}, tls: true, insecure: "0", allowInsecure: "0", host: "sub.mot.ip-ddns.com"}
-- {name: "🇭🇰 HK-4 | Starlink", type: "trojan", server: "58.152.25.253", port: 443, password: "BxceQaOe", network: "tcp", security: "tls", sni: "t.me/ripaojiedian", servername: "t.me/ripaojiedian", skip-cert-verify: true, insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇺🇸 US-1 | Starlink", type: "vless", server: "cf.danfeng.eu.org", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-2 | Starlink", type: "vless", server: "cf1.danfeng.eu.org", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇸🇬 SG-1 | Starlink", type: "vless", server: "cf2.danfeng.eu.org", port: 8443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-3 | Starlink", type: "vless", server: "cf3.danfeng.eu.org", port: 8443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-4 | Starlink", type: "vless", server: "cf4.danfeng.eu.org", port: 2053, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-5 | Starlink", type: "vless", server: "cf5.danfeng.eu.org", port: 2053, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-6 | Starlink", type: "vless", server: "cf6.danfeng.eu.org", port: 2087, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-7 | Starlink", type: "vless", server: "cf7.danfeng.eu.org", port: 2087, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-8 | Starlink", type: "vless", server: "cf8.danfeng.eu.org", port: 2096, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-9 | Starlink", type: "vless", server: "cf9.danfeng.eu.org", port: 2096, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇯🇵 JP-1 | Starlink", type: "vless", server: "154.31.113.190", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇯🇵 JP-2 | Starlink", type: "vless", server: "38.47.124.159", port: 8443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇰🇷 KR-1 | Starlink", type: "vless", server: "221.163.35.103", port: 10000, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇸🇬 SG-2 | Starlink", type: "vless", server: "128.199.160.193", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇸🇬 SG-3 | Starlink", type: "vless", server: "43.156.159.240", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-10 | Starlink", type: "vless", server: "151.243.93.159", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-11 | Starlink", type: "vless", server: "64.44.157.80", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇩🇪 DE-1 | Starlink", type: "vless", server: "94.16.113.166", port: 8444, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇩🇪 DE-2 | Starlink", type: "vless", server: "169.150.210.140", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇩🇪 DE-3 | Starlink", type: "vless", server: "164.90.216.191", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇩🇪 DE-4 | Starlink", type: "vless", server: "164.92.179.8", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇹🇬 TG-1 | Starlink", type: "vless", server: "66.92.20.139", port: 28802, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇬🇧 GB-1 | Starlink", type: "vless", server: "188.166.150.159", port: 2096, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇳🇱 NL-1 | Starlink", type: "vless", server: "152.42.130.189", port: 2087, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇳🇱 NL-2 | Starlink", type: "vless", server: "146.185.174.59", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇳🇱 NL-3 | Starlink", type: "vless", server: "159.65.201.224", port: 2083, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇳🇱 NL-4 | Starlink", type: "vless", server: "188.166.125.107", port: 2083, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇳🇱 NL-5 | Starlink", type: "vless", server: "194.87.134.130", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇳🇱 NL-6 | Starlink", type: "vless", server: "134.209.202.86", port: 2096, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇸🇪 SE-1 | Starlink", type: "vless", server: "217.145.79.218", port: 2053, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
 proxy-groups:
   - name: 选择线路
     type: select
     proxies:
       - 自动选择⚡️
-      - 🇭🇰 HK-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇭🇰 HK-3 | Starlink
-      - 🇯🇵 JP-1 | Starlink
-      - 🇯🇵 JP-2 | Starlink
-      - 🇯🇵 JP-3 | Starlink
-      - 🇯🇵 JP-4 | Starlink
-      - 🇯🇵 JP-5 | Starlink
-      - 🇯🇵 JP-6 | Starlink
-      - 🇸🇬 SG-1 | Starlink
-      - 🇸🇬 SG-2 | Starlink
-      - 🇹🇼 TW-1 | Starlink
       - 🇺🇸 US-1 | Starlink
       - 🇺🇸 US-2 | Starlink
+      - 🇸🇬 SG-1 | Starlink
       - 🇺🇸 US-3 | Starlink
       - 🇺🇸 US-4 | Starlink
       - 🇺🇸 US-5 | Starlink
       - 🇺🇸 US-6 | Starlink
-      - 🇩🇪 DE-1 | Starlink
-      - 🇷🇺 RU-1 | Starlink
-      - 🇳🇱 NL-1 | Starlink
-      - 🇸🇬 SG-3 [ipv6] | Starlink
-      - 🇸🇬 SG-4 [ipv6] | Starlink
-      - 🇬🇧 GB-1 | Starlink
-      - 🇬🇧 GB-2 | Starlink
-      - 🇬🇧 GB-3 | Starlink
-      - 🇬🇧 GB-4 | Starlink
-      - 🇨🇦 CA-1 | Starlink
       - 🇺🇸 US-7 | Starlink
-      - 🇯🇵 JP-7 | Starlink
-      - 🇯🇵 JP-8 | Starlink
       - 🇺🇸 US-8 | Starlink
       - 🇺🇸 US-9 | Starlink
+      - 🇯🇵 JP-1 | Starlink
+      - 🇯🇵 JP-2 | Starlink
+      - 🇰🇷 KR-1 | Starlink
+      - 🇸🇬 SG-2 | Starlink
+      - 🇸🇬 SG-3 | Starlink
       - 🇺🇸 US-10 | Starlink
       - 🇺🇸 US-11 | Starlink
-      - 🇺🇸 US-12 | Starlink
-      - 🇺🇸 US-13 | Starlink
-      - 🇺🇸 US-14 | Starlink
-      - 🇺🇸 US-15 | Starlink
-      - 🇺🇸 US-16 | Starlink
-      - 🇨🇳 CN-1 | Starlink
-      - 🇺🇸 US-17 | Starlink
-      - 🇺🇸 US-18 | Starlink
-      - 🇺🇸 US-19 | Starlink
-      - 🇺🇸 US-20 | Starlink
-      - 🇦🇪 AE-1 | Starlink
-      - 🇦🇪 AE-2 | Starlink
-      - 🇺🇸 US-21 | Starlink
-      - 🇦🇪 AE-3 | Starlink
+      - 🇩🇪 DE-1 | Starlink
       - 🇩🇪 DE-2 | Starlink
-      - 🇺🇸 US-22 | Starlink
-      - 🇺🇸 US-23 | Starlink
-      - 🇹🇷 TR-1 | Starlink
-      - 🇳🇱 NL-2 | Starlink
-      - 🇺🇸 US-24 | Starlink
-      - 🇮🇹 IT-1 | Starlink
       - 🇩🇪 DE-3 | Starlink
-      - 🇮🇱 IL-1 | Starlink
-      - 🇺🇸 US-25 | Starlink
-      - 🇺🇸 US-26 | Starlink
-      - 🇺🇸 US-27 | Starlink
-      - 🇳🇱 NL-3 | Starlink
-      - 🇺🇸 US-28 | Starlink
-      - 🇺🇸 US-29 | Starlink
-      - 🇨🇳 CN-2 | Starlink
-      - 🇺🇸 US-30 | Starlink
-      - 🇮🇱 IL-2 | Starlink
-      - 🇺🇸 US-31 | Starlink
-      - 🇮🇹 IT-2 | Starlink
-      - 🇺🇸 US-32 | Starlink
-      - 🇮🇱 IL-3 | Starlink
-      - 🇫🇮 FI-1 | Starlink
-      - 🇮🇱 IL-4 | Starlink
-      - 🇮🇹 IT-3 | Starlink
-      - 🇸🇬 SG-5 | Starlink
-      - 🇮🇹 IT-4 | Starlink
-      - 🇳🇱 NL-4 | Starlink
-      - 🇮🇹 IT-5 | Starlink
-      - 🇮🇹 IT-6 | Starlink
-      - 🇺🇸 US-33 | Starlink
-      - 🇺🇸 US-34 | Starlink
-      - 🇺🇸 US-35 | Starlink
-      - 🇮🇷 IR-1 | Starlink
       - 🇩🇪 DE-4 | Starlink
-      - 🇭🇰 HK-4 | Starlink
+      - 🇹🇬 TG-1 | Starlink
+      - 🇬🇧 GB-1 | Starlink
+      - 🇳🇱 NL-1 | Starlink
+      - 🇳🇱 NL-2 | Starlink
+      - 🇳🇱 NL-3 | Starlink
+      - 🇳🇱 NL-4 | Starlink
+      - 🇳🇱 NL-5 | Starlink
+      - 🇳🇱 NL-6 | Starlink
+      - 🇸🇪 SE-1 | Starlink
   - name: 自动选择⚡️
     type: url-test
     proxies:
-      - 🇭🇰 HK-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇭🇰 HK-3 | Starlink
-      - 🇯🇵 JP-1 | Starlink
-      - 🇯🇵 JP-2 | Starlink
-      - 🇯🇵 JP-3 | Starlink
-      - 🇯🇵 JP-4 | Starlink
-      - 🇯🇵 JP-5 | Starlink
-      - 🇯🇵 JP-6 | Starlink
-      - 🇸🇬 SG-1 | Starlink
-      - 🇸🇬 SG-2 | Starlink
-      - 🇹🇼 TW-1 | Starlink
       - 🇺🇸 US-1 | Starlink
       - 🇺🇸 US-2 | Starlink
+      - 🇸🇬 SG-1 | Starlink
       - 🇺🇸 US-3 | Starlink
       - 🇺🇸 US-4 | Starlink
       - 🇺🇸 US-5 | Starlink
       - 🇺🇸 US-6 | Starlink
-      - 🇩🇪 DE-1 | Starlink
-      - 🇷🇺 RU-1 | Starlink
-      - 🇳🇱 NL-1 | Starlink
-      - 🇸🇬 SG-3 [ipv6] | Starlink
-      - 🇸🇬 SG-4 [ipv6] | Starlink
-      - 🇬🇧 GB-1 | Starlink
-      - 🇬🇧 GB-2 | Starlink
-      - 🇬🇧 GB-3 | Starlink
-      - 🇬🇧 GB-4 | Starlink
-      - 🇨🇦 CA-1 | Starlink
       - 🇺🇸 US-7 | Starlink
-      - 🇯🇵 JP-7 | Starlink
-      - 🇯🇵 JP-8 | Starlink
       - 🇺🇸 US-8 | Starlink
       - 🇺🇸 US-9 | Starlink
+      - 🇯🇵 JP-1 | Starlink
+      - 🇯🇵 JP-2 | Starlink
+      - 🇰🇷 KR-1 | Starlink
+      - 🇸🇬 SG-2 | Starlink
+      - 🇸🇬 SG-3 | Starlink
       - 🇺🇸 US-10 | Starlink
       - 🇺🇸 US-11 | Starlink
-      - 🇺🇸 US-12 | Starlink
-      - 🇺🇸 US-13 | Starlink
-      - 🇺🇸 US-14 | Starlink
-      - 🇺🇸 US-15 | Starlink
-      - 🇺🇸 US-16 | Starlink
-      - 🇨🇳 CN-1 | Starlink
-      - 🇺🇸 US-17 | Starlink
-      - 🇺🇸 US-18 | Starlink
-      - 🇺🇸 US-19 | Starlink
-      - 🇺🇸 US-20 | Starlink
-      - 🇦🇪 AE-1 | Starlink
-      - 🇦🇪 AE-2 | Starlink
-      - 🇺🇸 US-21 | Starlink
-      - 🇦🇪 AE-3 | Starlink
+      - 🇩🇪 DE-1 | Starlink
       - 🇩🇪 DE-2 | Starlink
-      - 🇺🇸 US-22 | Starlink
-      - 🇺🇸 US-23 | Starlink
-      - 🇹🇷 TR-1 | Starlink
-      - 🇳🇱 NL-2 | Starlink
-      - 🇺🇸 US-24 | Starlink
-      - 🇮🇹 IT-1 | Starlink
       - 🇩🇪 DE-3 | Starlink
-      - 🇮🇱 IL-1 | Starlink
-      - 🇺🇸 US-25 | Starlink
-      - 🇺🇸 US-26 | Starlink
-      - 🇺🇸 US-27 | Starlink
-      - 🇳🇱 NL-3 | Starlink
-      - 🇺🇸 US-28 | Starlink
-      - 🇺🇸 US-29 | Starlink
-      - 🇨🇳 CN-2 | Starlink
-      - 🇺🇸 US-30 | Starlink
-      - 🇮🇱 IL-2 | Starlink
-      - 🇺🇸 US-31 | Starlink
-      - 🇮🇹 IT-2 | Starlink
-      - 🇺🇸 US-32 | Starlink
-      - 🇮🇱 IL-3 | Starlink
-      - 🇫🇮 FI-1 | Starlink
-      - 🇮🇱 IL-4 | Starlink
-      - 🇮🇹 IT-3 | Starlink
-      - 🇸🇬 SG-5 | Starlink
-      - 🇮🇹 IT-4 | Starlink
-      - 🇳🇱 NL-4 | Starlink
-      - 🇮🇹 IT-5 | Starlink
-      - 🇮🇹 IT-6 | Starlink
-      - 🇺🇸 US-33 | Starlink
-      - 🇺🇸 US-34 | Starlink
-      - 🇺🇸 US-35 | Starlink
-      - 🇮🇷 IR-1 | Starlink
       - 🇩🇪 DE-4 | Starlink
-      - 🇭🇰 HK-4 | Starlink
+      - 🇹🇬 TG-1 | Starlink
+      - 🇬🇧 GB-1 | Starlink
+      - 🇳🇱 NL-1 | Starlink
+      - 🇳🇱 NL-2 | Starlink
+      - 🇳🇱 NL-3 | Starlink
+      - 🇳🇱 NL-4 | Starlink
+      - 🇳🇱 NL-5 | Starlink
+      - 🇳🇱 NL-6 | Starlink
+      - 🇸🇪 SE-1 | Starlink
     url: https://www.gstatic.com/generate_204
     interval: 300
 rules:

@@ -61,7 +61,7 @@ jobs:
           echo "${{ secrets.SOURCES_STARLINK }}" > SOURCES_STARLINK
           
       - name: Start fetching, decoding and rename processes
-        run: python src/Sub3.py
+        run: python src/Starlink.py
         env:
           CN_TO_CC: ${{ secrets.CN_TO_CC }}
           LATENCY_FILTER: ${{ inputs.use_latency_filter || 'false' }}

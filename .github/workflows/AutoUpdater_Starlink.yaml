@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '0 */4 * * *' # every 4 hours
 
-  # Manual trigger with inputs  
+  # Manual trigger with inputs
   workflow_dispatch:
     inputs:
       use_latency_filter:
@@ -26,20 +26,20 @@ on:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  # forces Node.js 24 for JS actions
-
+          
 jobs:
   update:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write  # needed for commit & push
-      actions: write   # needed for deleting artifacts
+      contents: write   # needed for commit & push
+      actions: write    # needed for deleting artifacts
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Setup Python
+      - name: Prepart to start
         uses: actions/setup-python@v4
         with:
           python-version: "3.x"
@@ -49,19 +49,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests pyyaml babel pycountry
 
-      - name: Fail if SOURCES_STARLINK is missing
+      - name: Checking source from secret
         run: |
           if [ -z "${{ secrets.SOURCES_STARLINK }}" ]; then
-            echo "❌ ERROR: SOURCES_STARLINK secret is not set in repository secrets."
+            echo "❌ ERROR: Source is not set in repository secrets."
             exit 1
           fi
 
-      - name: Restore SOURCES_STARLINK from secret
+      - name: Load source from secret
         run: |
           echo "${{ secrets.SOURCES_STARLINK }}" > SOURCES_STARLINK
           
-      - name: Run Python script
-        run: python src/Starlink.py
+      - name: Start fetching, decoding and rename processes
+        run: python src/Sub3.py
         env:
           CN_TO_CC: ${{ secrets.CN_TO_CC }}
           LATENCY_FILTER: ${{ inputs.use_latency_filter || 'false' }}
@@ -69,38 +69,43 @@ jobs:
           DUPLICATE_FILTER: ${{ inputs.use_duplicate_filter || 'false' }}
           USE_ONLY_GEOIP: ${{ inputs.use_only_geoip || 'false' }}
 
-      - name: Generate GMT+6:30 timestamp
+      - name: Generate local timestamp
         id: timestamp
         run: |
           # Get UTC time in seconds since epoch
           utc_seconds=$(date -u +%s)
-          # Get UTC time in seconds since epoch
+          # Add 6 hours 30 minutes = 23400 seconds
           local_seconds=$((utc_seconds + 6*3600 + 30*60))
           # Format as DD.MM.YYYY HH:MM:SS GMT+6:30
           TIMESTAMP=$(date -u -d "@$local_seconds" +"%d.%m.%Y %H:%M:%S")
           echo "TIMESTAMP=$TIMESTAMP" >> $GITHUB_ENV
 
-      - name: Commit and Push Starlink
+      - name: Commit and Push subscription
         shell: bash
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      
           git add Starlink
+      
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
             MAX_RETRIES=5
             COUNT=0
             SUCCESS=0
+      
             while [ $COUNT -lt $MAX_RETRIES ]; do
               echo "Attempt $(($COUNT + 1)) to commit & push..."
               git commit -m "🎉Starlink Auto update successful🎉 - $TIMESTAMP" && \
               git push --force-with-lease origin main && \
               SUCCESS=1 && break
+      
               COUNT=$(($COUNT + 1))
               echo "Push failed, retrying in 5 seconds..."
               sleep 5
             done
+      
             if [ $SUCCESS -eq 1 ]; then
               echo "Push successful!"
             else
@@ -109,17 +114,17 @@ jobs:
             fi
           fi
 
-      - name: Copy Starlink with .yaml extension
+      - name: Set subscription extension
         run: cp Starlink Starlink.yaml
 
-      - name: Upload Starlink artifact
+      - name: Upload subscription artifact for backup
         id: upload_artifact
         uses: actions/upload-artifact@v4
         with:
           name: Starlink
           path: Starlink.yaml
           retention-days: 30
-
+      
       - name: Cleanup old artifacts (keep latest 60)
         if: success() && steps.upload_artifact.outcome == 'success'
         uses: actions/github-script@v8

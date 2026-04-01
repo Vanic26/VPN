@@ -2,6 +2,8 @@ import os
 import sys
 import time
 import yaml
+import subprocess
+import tempfile
 import requests
 import socket
 import threading
@@ -180,6 +182,139 @@ def geo_ip(host_or_ip):
                 geoip_cache[ip] = ("unknown", "UN")
 
         return "unknown", "UN"
+
+# ---------------- Run Mihomo ----------------
+def run_mihomo(nodes):
+    """
+    Run mihomo locally to detect exit country for each server.
+    nodes: list of node dicts with 'server' and 'port'.
+    Updates each node with 'exit_ip' and 'exit_country' if detected.
+    """
+    # Create temporary Clash config for Mihomo
+    temp_config_file = tempfile.NamedTemporaryFile(delete=False, suffix=".yaml")
+    config = {
+        "mixed-port": 7890,
+        "mode": "global",
+        "external-controller": "127.0.0.1:9090",
+        "proxies": []
+    }
+
+    for n in nodes:
+        config["proxies"].append({
+            "name": n.get("name", "TempNode"),
+            "type": n.get("type", "vmess"),
+            "server": n.get("server"),
+            "port": n.get("port"),
+            "uuid": n.get("uuid", ""),
+            "password": n.get("password", "")
+        })
+
+    with open(temp_config_file.name, "w", encoding="utf-8") as f:
+        yaml.dump(config, f, allow_unicode=True)
+
+    # Run mihomo
+    mihomo_bin = "./mihomo"  # Path to mihomo binary
+    try:
+        proc = subprocess.run([mihomo_bin, "-f", temp_config_file.name],
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.PIPE,
+                              timeout=30)
+        if proc.returncode != 0:
+            print(f"[warn] ❌ Mihomo failed: {proc.stderr.decode()}")
+            return nodes
+
+        # ---------------- Parse Mihomo Output ----------------
+        # Assume Mihomo outputs JSON like:
+        # [{"name":"Node1","exit_ip":"1.2.3.4","exit_country":"CN"}, ...]
+        output_file = "mihomo_output.json"
+        try:
+            with open(output_file, "r", encoding="utf-8") as f:
+                results = json.load(f)
+                for node in nodes:
+                    # Match by node name
+                    for r in results:
+                        if r.get("name") == node.get("name"):
+                            node["exit_ip"] = r.get("exit_ip", "")
+                            node["exit_country"] = r.get("exit_country", "")
+                            break
+            print("[mihomo] ✅ Mihomo output parsed successfully")
+        except FileNotFoundError:
+            print("[warn] ⚠️ Mihomo output file not found, skipping exit_ip updates")
+
+    except Exception as e:
+        print(f"[warn] ❌ Mihomo execution error: {e}")
+
+    return nodes
+
+nodes_with_exit = run_mihomo(renamed_nodes)
+
+for n in nodes_with_exit:
+    print(f"{n['name']} -> exit_ip: {n.get('exit_ip','N/A')}, exit_country: {n.get('exit_country','N/A')}")
+
+# ---------------- Group nodes by MiHoYo server ----------------
+def group_by_mihoyo_server(nodes):
+    """
+    Group nodes based on their MiHoYo server (China, Global, etc.)
+    nodes: list of node dicts with 'exit_country'
+    Returns a dict: {server_region: [node1, node2, ...]}
+    """
+    server_groups = {}
+    for n in nodes:
+        region = n.get('exit_country', 'Unknown')
+        if region not in server_groups:
+            server_groups[region] = []
+        server_groups[region].append(n)
+    return server_groups
+
+# ---------------- Generate Clash YAML for MiHoYo server groups ----------------
+def generate_clash_groups(server_groups, clash_yaml_path="clash_mihoyo.yaml"):
+    import yaml
+
+    clash_config = {
+        "proxies": [],
+        "proxy-groups": []
+    }
+
+    # Add nodes to proxies list
+    for group_nodes in server_groups.values():
+        for n in group_nodes:
+            proxy_entry = {
+                "name": n['name'],
+                "type": n.get("type", "vmess"),
+                "server": n['server'],
+                "port": n['port'],
+                "uuid": n.get("uuid", ""),
+                "password": n.get("password", "")
+            }
+            clash_config["proxies"].append(proxy_entry)
+
+    # Add groups
+    for region, group_nodes in server_groups.items():
+        group_entry = {
+            "name": f"MiHoYo-{region}",
+            "type": "select",
+            "proxies": [n['name'] for n in group_nodes]
+        }
+        clash_config["proxy-groups"].append(group_entry)
+
+    # Save to file
+    with open(clash_yaml_path, "w", encoding="utf-8") as f:
+        yaml.dump(clash_config, f, allow_unicode=True)
+
+    print(f"[clash] ✅ Clash YAML generated: {clash_yaml_path}")
+
+# ---------------- Main Workflow ----------------
+nodes_with_exit = run_mihomo(renamed_nodes)
+
+for n in nodes_with_exit:
+    print(f"{n['name']} -> exit_ip: {n.get('exit_ip','N/A')}, exit_country: {n.get('exit_country','N/A')}")
+
+server_groups = group_by_mihoyo_server(nodes_with_exit)
+
+for region, group_nodes in server_groups.items():
+    print(f"Region: {region} -> Nodes: {[n['name'] for n in group_nodes]}")
+
+generate_clash_groups(server_groups, clash_yaml_path="clash_mihoyo.yaml")
     
 def country_to_flag(cc):
     """Convert ISO 3166 two-letter code to emoji flag"""

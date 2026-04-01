@@ -4,6 +4,7 @@ import time
 import yaml
 import requests
 import socket
+import threading
 import concurrent.futures
 import traceback
 from collections import defaultdict, OrderedDict
@@ -39,7 +40,11 @@ session = requests.Session()
 session.headers.update({"User-Agent": "Subscription-Updater/1.0"})
 
 # ---------------- Helper ----------------
+geoip_lock = threading.Lock()
+counter_lock = threading.Lock()
+
 geoip_cache = {}
+country_counter = defaultdict(int)
 
 def resolve_ip(host):
     try:
@@ -113,56 +118,67 @@ def deduplicate_nodes(nodes):
     return unique_nodes, removed
 
 def geo_ip(host_or_ip):
+    ip = None
+
     try:
         if not host_or_ip:
             return None, None
 
-        # check if already cached (by host_or_ip)
-        if host_or_ip in geoip_cache:
-            return geoip_cache[host_or_ip]
+        # check cache by hostname
+        with geoip_lock:
+            if host_or_ip in geoip_cache:
+                return geoip_cache[host_or_ip]
 
         import ipaddress
         try:
             ipaddress.ip_address(host_or_ip)
             ip = host_or_ip
-        except ValueError:
-            # domain → resolve IP
+        except:
             ip = resolve_ip(host_or_ip)
 
         if not ip:
-            geoip_cache[host_or_ip] = ("unknown", "UN")
+            with geoip_lock:
+                geoip_cache[host_or_ip] = ("unknown", "UN")
             return "unknown", "UN"
 
-        # check if IP result is cached
-        if ip in geoip_cache:
-            geoip_cache[host_or_ip] = geoip_cache[ip]
-            return geoip_cache[ip]
+        # check cache by IP
+        with geoip_lock:
+            if ip in geoip_cache:
+                geoip_cache[host_or_ip] = geoip_cache[ip]
+                return geoip_cache[ip]
 
         r = session.get(f"https://ipinfo.io/{ip}/json", timeout=5)
+
         if r.status_code != 200:
-            geoip_cache[host_or_ip] = ("unknown", "UN")
-            geoip_cache[ip] = ("unknown", "UN")
+            with geoip_lock:
+                geoip_cache[host_or_ip] = ("unknown", "UN")
+                geoip_cache[ip] = ("unknown", "UN")
             return "unknown", "UN"
 
         data = r.json()
         country = data.get("country", "")
+
         if not country:
-            geoip_cache[host_or_ip] = ("unknown", "UN")
-            geoip_cache[ip] = ("unknown", "UN")
+            with geoip_lock:
+                geoip_cache[host_or_ip] = ("unknown", "UN")
+                geoip_cache[ip] = ("unknown", "UN")
             return "unknown", "UN"
 
-        cc_lower, cc_upper = country.lower(), country.upper()
+        cc_lower = country.lower()
+        cc_upper = country.upper()
 
-        # cache both host and IP
-        geoip_cache[host_or_ip] = (cc_lower, cc_upper)
-        geoip_cache[ip] = (cc_lower, cc_upper)
+        with geoip_lock:
+            geoip_cache[host_or_ip] = (cc_lower, cc_upper)
+            geoip_cache[ip] = (cc_lower, cc_upper)
 
         return cc_lower, cc_upper
 
     except Exception:
-        geoip_cache[host_or_ip] = ("unknown", "UN")
-        if 'ip' in locals() and ip:
-            geoip_cache[ip] = ("unknown", "UN")
+        with geoip_lock:
+            geoip_cache[host_or_ip] = ("unknown", "UN")
+            if ip:
+                geoip_cache[ip] = ("unknown", "UN")
+
         return "unknown", "UN"
     
 def country_to_flag(cc):
@@ -944,10 +960,11 @@ def rename_node(p, country_counter, CN_TO_CC):
             geoip_primary_fail += 1
 
         # ----------Final naming----------
-        country_counter[cc] += 1
-        index = country_counter[cc]
-        p["name"] = build_name(flag, cc, index, ipv6_tag)
-        return p
+        with counter_lock:
+            country_counter[cc] += 1
+            index = country_counter[cc]
+            p["name"] = build_name(flag, cc, index, ipv6_tag)
+            return p
 
     # ----------If GEOIP-ONLY Mode Is Not Set----------
     else:
@@ -997,10 +1014,11 @@ def rename_node(p, country_counter, CN_TO_CC):
             return None    # ❌ truly unnameable → skip
 
         # ----------Final naming----------
-        country_counter[cc] += 1
-        index = country_counter[cc]
-        p["name"] = build_name(flag, cc, index, ipv6_tag)
-        return p
+        with counter_lock:
+            country_counter[cc] += 1
+            index = country_counter[cc]
+            p["name"] = build_name(flag, cc, index, ipv6_tag)
+            return p
 
 # ---------------- Load proxies ----------------
 def load_proxies(url, retries=5):
@@ -1131,7 +1149,6 @@ def main():
         # ---------------- Latency filter ----------------
         if USE_LATENCY:
             print(f"[latency] 🚫 Filtering nodes > {LATENCY_THRESHOLD} ms")
-            country_counter = defaultdict(int)
             filtered_nodes = []
             with concurrent.futures.ThreadPoolExecutor(max_workers=50) as ex:
                 futures = [ex.submit(tcp_latency_ms, n.get("server"), n.get("port")) for n in all_nodes]
@@ -1145,7 +1162,6 @@ def main():
             print(f"[latency]  🖨️ Total [{len(filtered_nodes)}] nodes remain after latency filtering")
         else:
             filtered_nodes = all_nodes
-            country_counter = defaultdict(int)
             print(f"[latency] 🚀 Latency filtering disabled, ({len(filtered_nodes)}) nodes remain")
 
         # ---------------- Duplicate filter ----------------

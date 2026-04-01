@@ -39,7 +39,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Prepart to start
+      - name: Prepare to start
         uses: actions/setup-python@v4
         with:
           python-version: "3.x"
@@ -66,7 +66,7 @@ jobs:
           CN_TO_CC: ${{ secrets.CN_TO_CC }}
           LATENCY_FILTER: ${{ inputs.use_latency_filter || 'false' }}
           LATENCY_THRESHOLD: ${{ inputs.latency_threshold || '100' }}
-          DUPLICATE_FILTER: ${{ inputs.use_duplicate_filter || 'false' }}
+          DUPLICATE_FILTER: ${{ inputs.use_duplicate_filter || 'true' }}
           USE_ONLY_GEOIP: ${{ inputs.use_only_geoip || 'false' }}
 
       - name: Generate local timestamp

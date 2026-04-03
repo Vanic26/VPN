@@ -385,20 +385,6 @@ def has_ipv6(host, port, timeout=2.0):
 
     return reachable
 
-# Apply IPv6 detection to all nodes
-for region, group_nodes in server_groups.items():
-    for node in group_nodes:
-        server = node.get('server')
-        port = node.get('port')
-        if has_ipv6(server, port):
-            # Append IPv6 tag to name if not already present
-            if "[ipv6]" not in node['name']:
-                node['name'] += " [ipv6]"
-
-# Print nodes after IPv6 detection
-for region, group_nodes in server_groups.items():
-    print(f"Region: {region} -> Nodes: {[n['name'] for n in group_nodes]}")
-
 def country_to_flag(cc):
     """Convert ISO 3166 two-letter code to emoji flag"""
     if not cc or len(cc) != 2:

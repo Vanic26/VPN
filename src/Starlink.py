@@ -184,191 +184,6 @@ def geo_ip(host_or_ip):
 
         return "unknown", "UN"
 
-def detect_real_ip(nodes):
-    """
-    Detect the real public IP for each node using an HTTP request.
-    Adds 'real_ip' and 'real_country' fields to each node.
-    """
-    for n in nodes:
-        server = n.get("server")
-        port = n.get("port")
-        if not server or not port:
-            n["real_ip"] = "N/A"
-            n["real_country"] = "UN"
-            continue
-
-        try:
-            # Example using a simple HTTP request via requests
-            proxies = None
-            if n.get("type", "") in ["http", "https", "socks5", "vmess"]:
-                proxies = {
-                    "http": f"socks5://{server}:{port}",
-                    "https": f"socks5://{server}:{port}"
-                }
-
-            r = session.get("https://ipinfo.io/json", proxies=proxies, timeout=5)
-            if r.status_code == 200:
-                data = r.json()
-                n["real_ip"] = data.get("ip", "N/A")
-                n["real_country"] = data.get("country", "UN")
-            else:
-                n["real_ip"] = "N/A"
-                n["real_country"] = "UN"
-
-        except Exception:
-            n["real_ip"] = "N/A"
-            n["real_country"] = "UN"
-
-    return nodes
-
-def filter_nodes_by_country(nodes, allowed_countries):
-    """
-    Keep only nodes whose 'real_country' or 'exit_country' is in allowed_countries.
-    """
-    filtered = []
-    for n in nodes:
-        country = n.get("real_country") or n.get("exit_country") or "UN"
-        if country.upper() in [c.upper() for c in allowed_countries]:
-            filtered.append(n)
-    return filtered
-
-# ---------------- Run Mihomo ----------------
-def run_mihomo(nodes):
-    """
-    Run Mihomo locally to detect exit country for each server.
-    Updates each node with 'exit_ip' and 'exit_country' if detected.
-    Cleans up temporary files after execution.
-    """
-    print("[mihomo] 🔹 Starting Mihomo run...")
-    # Create temporary config file for Mihomo
-    temp_config_file = tempfile.NamedTemporaryFile(delete=False, suffix=".yaml")
-    config = {
-        "mixed-port": 7890,
-        "mode": "global",
-        "external-controller": "127.0.0.1:9090",
-        "proxies": []
-    }
-
-    for n in nodes:
-        config["proxies"].append({
-            "name": n.get("name", "TempNode"),
-            "type": n.get("type", "vmess"),
-            "server": n.get("server"),
-            "port": n.get("port"),
-            "uuid": n.get("uuid", ""),
-            "password": n.get("password", "")
-        })
-
-    print(f"[mihomo] 🔹 Writing temporary config to {temp_config_file.name} ...")
-    try:
-        # Write temporary config
-        with open(temp_config_file.name, "w", encoding="utf-8") as f:
-            yaml.dump(config, f, allow_unicode=True)
-        print(f"[mihomo] ✅ Config file written successfully.")
-
-        # Run Mihomo
-        mihomo_bin = "./mihomo"
-        print(f"[mihomo] 🔹 Executing Mihomo binary: {mihomo_bin}")
-        proc = subprocess.run([mihomo_bin, "-f", temp_config_file.name],
-                              stdout=subprocess.PIPE,
-                              stderr=subprocess.PIPE,
-                              timeout=30)
-        print(f"[mihomo] 🔹 Mihomo return code: {proc.returncode}")
-        if proc.stdout:
-            print(f"[mihomo] 🔹 STDOUT:\n{proc.stdout.decode()}")
-        if proc.stderr:
-            print(f"[mihomo] 🔹 STDERR:\n{proc.stderr.decode()}")
-        if proc.returncode != 0:
-            print(f"[warn] ❌ Mihomo failed: {proc.stderr.decode()}")
-            return nodes
-
-        # ---------------- Parse Mihomo Output ----------------
-        # Assume Mihomo outputs JSON like:
-        # [{"name":"Node1","exit_ip":"1.2.3.4","exit_country":"CN"}, ...]
-        output_file = "mihomo_output.json"
-        print(f"[mihomo] 🔹 Parsing Mihomo output from {output_file} ...")
-        try:
-            with open(output_file, "r", encoding="utf-8") as f:
-                results = json.load(f)
-                print(f"[mihomo] 🔹 Parsed {len(results)} entries from Mihomo output.")
-                for node in nodes:
-                    # Match node by name
-                    matched = False
-                    for r in results:
-                        if r.get("name") == node.get("name"):
-                            node["exit_ip"] = r.get("exit_ip", "")
-                            node["exit_country"] = r.get("exit_country", "")
-                            matched = True
-                            break
-                    if not matched:
-                        print(f"[warn] ⚠️ No Mihomo output for node: {node.get('name')}")
-            print("[mihomo] ✅ Mihomo output parsed successfully")
-        except FileNotFoundError:
-            print("[warn] ⚠️ Mihomo output file not found, skipping exit_ip updates")
-        except json.JSONDecodeError as e:
-            print(f"[warn] ❌ Failed to parse Mihomo JSON output: {e}")
-            
-    except subprocess.TimeoutExpired:
-        print("[warn] ❌ Mihomo execution timed out")
-    except Exception as e:
-        print(f"[warn] ❌ Mihomo execution error: {e}")
-    finally:
-        # Clean up temporary config file
-        try:
-            if os.path.exists(temp_config_file.name):
-                os.remove(temp_config_file.name)
-                print(f"[mihomo] 🔹 Temporary config file removed.")
-        except Exception as e:
-            print(f"[warn] ⚠️ Failed to delete temp config file: {e}")
-
-    return nodes
-
-# ---------------- Group nodes by MiHoYo server ----------------
-def group_by_mihoyo_server(nodes):
-    """
-    Group nodes based on their MiHoYo server (China, Global, etc.)
-    nodes: list of node dicts with 'exit_country'
-    Returns a dict: {server_region: [node1, node2, ...]}
-    """
-    server_groups = {}
-    for n in nodes:
-        region = n.get('exit_country', 'Unknown')
-        if region not in server_groups:
-            server_groups[region] = []
-        server_groups[region].append(n)
-    return server_groups
-
-# ---------------- Generate Clash YAML for MiHoYo server groups ----------------
-def generate_clash_groups(server_groups, clash_yaml_path="clash_mihoyo.yaml"):
-        clash_config = {"proxies": [], "proxy-groups": []}
-        # Add nodes to proxies list
-        for group_nodes in server_groups.values():
-            for n in group_nodes:
-                proxy_entry = {
-                    "name": n['name'],
-                    "type": n.get("type", "vmess"),
-                    "server": n['server'],
-                    "port": n['port'],
-                    "uuid": n.get("uuid", ""),
-                    "password": n.get("password", "")
-                }
-                clash_config["proxies"].append(proxy_entry)
-
-        # Add groups
-        for region, group_nodes in server_groups.items():
-            group_entry = {
-                "name": f"MiHoYo-{region}",
-                "type": "select",
-                "proxies": [n['name'] for n in group_nodes]
-            }
-            clash_config["proxy-groups"].append(group_entry)
-    
-        # Save to file
-        with open(clash_yaml_path, "w", encoding="utf-8") as f:
-            yaml.dump(clash_config, f, allow_unicode=True)
-    
-        print(f"[clash] ✅ Clash YAML generated: {clash_yaml_path}")
-
 # ---------------- IPv6 Detection with Cache ----------------
 ipv6_cache = {}
 ipv6_cache_lock = threading.Lock()
@@ -428,10 +243,9 @@ def build_name(flag, cc, index, ipv6_tag=False):
     suffix = " [ipv6]" if ipv6_tag else ""
     return f"{flag} {cc}-{index}{suffix} | Starlink"
 
-# ---------------- Load and preprocess nodes ----------------
+# ---------------- Parse Node Links ----------------
 def parse_node_link(link: str):
-    """Parse a raw vmess/vless/ss/trojan link into dict"""
-    node = {"raw": link, "name": "Unknown"}
+    node = {"raw": link, "name": "Unknown", "type": "unknown"}
     try:
         if link.startswith("vmess://"):
             decoded = base64.urlsafe_b64decode(link[8:] + "===")
@@ -458,53 +272,53 @@ def parse_node_link(link: str):
             })
             node["name"] = parsed.fragment or f"VL-{parsed.hostname}"
         elif link.startswith("ss://"):
-            # Simplified parsing for Shadowsocks
+            parsed = urlparse(link)
             node.update({
                 "type": "ss",
-                "server": urlparse(link).hostname,
-                "port": urlparse(link).port,
-                "remark": urlparse(link).fragment
+                "server": parsed.hostname,
+                "port": parsed.port,
+                "remark": parsed.fragment
             })
-            node["name"] = urlparse(link).fragment or f"SS-{urlparse(link).hostname}"
-        else:
-            node["type"] = "unknown"
-            node["name"] = "Unknown"
+            node["name"] = parsed.fragment or f"SS-{parsed.hostname}"
+        elif link.startswith("trojan://"):
+            parsed = urlparse(link)
+            node.update({
+                "type": "trojan",
+                "server": parsed.hostname,
+                "port": parsed.port,
+                "password": parsed.username,
+                "remark": parsed.fragment
+            })
+            node["name"] = parsed.fragment or f"TR-{parsed.hostname}"
     except Exception as e:
         print(f"[warn] Failed to parse node: {link} -> {e}")
     return node
 
-# ---------------- Load subscription source ----------------
-with open("SOURCES_STARLINK", "r", encoding="utf-8") as f:
+# ---------------- Load Subscription ----------------
+with open(SOURCES_FILE, "r", encoding="utf-8") as f:
     source_data = f.read().strip()
 
 renamed_nodes = []
-
-# Detect if base64 subscription
 try:
     decoded_bytes = base64.urlsafe_b64decode(source_data + "===")
     decoded_str = decoded_bytes.decode("utf-8")
-    # Try YAML parse
     try:
         yaml_data = yaml.safe_load(decoded_str)
         if isinstance(yaml_data, dict) and "proxies" in yaml_data:
-            # Clash YAML format
             for p in yaml_data["proxies"]:
                 p["name"] = p.get("name") or f"Node-{len(renamed_nodes)+1}"
                 renamed_nodes.append(p)
         else:
-            # Might be a list of vmess links
             for line in decoded_str.splitlines():
                 line = line.strip()
                 if line:
                     renamed_nodes.append(parse_node_link(line))
     except yaml.YAMLError:
-        # fallback: assume list of individual links
         for line in decoded_str.splitlines():
             line = line.strip()
             if line:
                 renamed_nodes.append(parse_node_link(line))
 except Exception:
-    # fallback: treat each line as raw node
     for idx, line in enumerate(source_data.splitlines(), start=1):
         line = line.strip()
         if line:
@@ -513,6 +327,253 @@ except Exception:
             renamed_nodes.append(node)
 
 print(f"[info] Loaded {len(renamed_nodes)} nodes from subscription.")
+
+# ---------------- Filter unsupported nodes ----------------
+valid_nodes = []
+for n in renamed_nodes:
+    if n.get("type") in ["vmess", "vless", "ss", "trojan"]:
+        valid_nodes.append(n)
+    else:
+        print(f"[warn] ⚠️ Skipping unsupported node type: {n.get('type')} ({n.get('name')})")
+print(f"[info] {len(valid_nodes)} valid nodes will be sent to Mihomo.")
+
+# ---------------- Run Mihomo ----------------
+def run_mihomo(nodes):
+    if not nodes:
+        print("[mihomo] ⚠️ No nodes to run Mihomo on, skipping.")
+        return nodes
+
+    print("[mihomo] 🔹 Starting Mihomo run...")
+    temp_config_file = tempfile.NamedTemporaryFile(delete=False, suffix=".yaml")
+    config = {"mixed-port": 7890, "mode": "global", "external-controller": "127.0.0.1:9090", "proxies": []}
+
+    for n in nodes:
+        config["proxies"].append({
+            "name": n.get("name", "TempNode"),
+            "type": n.get("type"),
+            "server": n.get("server"),
+            "port": n.get("port"),
+            "uuid": n.get("uuid", ""),
+            "password": n.get("password", "")
+        })
+
+    try:
+        with open(temp_config_file.name, "w", encoding="utf-8") as f:
+            yaml.dump(config, f, allow_unicode=True)
+        print(f"[mihomo] 🔹 Writing temporary config to {temp_config_file.name} ... ✅ Done")
+
+        mihomo_bin = "./mihomo"
+        print(f"[mihomo] 🔹 Executing Mihomo binary: {mihomo_bin}")
+        proc = subprocess.run([mihomo_bin, "-f", temp_config_file.name],
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.PIPE,
+                              timeout=30)
+
+        print(f"[mihomo] 🔹 Mihomo return code: {proc.returncode}")
+        print(f"[mihomo] 🔹 STDOUT:\n{proc.stdout.decode()}")
+        print(f"[mihomo] 🔹 STDERR:\n{proc.stderr.decode()}")
+
+        if proc.returncode != 0:
+            print("[warn] ❌ Mihomo failed.")
+            return nodes
+
+        output_file = "mihomo_output.json"
+        try:
+            with open(output_file, "r", encoding="utf-8") as f:
+                results = json.load(f)
+                for node in nodes:
+                    matched = False
+                    for r in results:
+                        if r.get("name") == node.get("name"):
+                            node["exit_ip"] = r.get("exit_ip", "")
+                            node["exit_country"] = r.get("exit_country", "")
+                            matched = True
+                            break
+                    if not matched:
+                        print(f"[warn] ⚠️ No Mihomo output for node: {node.get('name')}")
+            print("[mihomo] ✅ Mihomo output parsed successfully")
+        except FileNotFoundError:
+            print("[warn] ⚠️ Mihomo output file not found, skipping exit_ip updates")
+
+    except subprocess.TimeoutExpired:
+        print("[warn] ❌ Mihomo execution timed out")
+    except Exception as e:
+        print(f"[warn] ❌ Mihomo execution error: {e}")
+    finally:
+        try:
+            if os.path.exists(temp_config_file.name):
+                os.remove(temp_config_file.name)
+                print("[mihomo] 🔹 Temporary config file removed.")
+        except Exception as e:
+            print(f"[warn] ⚠️ Failed to delete temp config file: {e}")
+
+    return nodes
+    
+def detect_real_ip(nodes):
+    """
+    Detect the real public IP for each node using an HTTP request.
+    Adds 'real_ip' and 'real_country' fields to each node.
+    """
+    for n in nodes:
+        server = n.get("server")
+        port = n.get("port")
+        if not server or not port:
+            n["real_ip"] = "N/A"
+            n["real_country"] = "UN"
+            continue
+
+        try:
+            # Example using a simple HTTP request via requests
+            proxies = None
+            if n.get("type", "") in ["http", "https", "socks5", "vmess"]:
+                proxies = {"http": f"socks5://{server}:{port}", "https": f"socks5://{server}:{port}"}
+            r = session.get("https://ipinfo.io/json", proxies=proxies, timeout=5)
+            if r.status_code == 200:
+                data = r.json()
+                n["real_ip"] = data.get("ip", "N/A")
+                n["real_country"] = data.get("country", "UN")
+            else:
+                n["real_ip"] = "N/A"
+                n["real_country"] = "UN"
+
+        except Exception:
+            n["real_ip"] = "N/A"
+            n["real_country"] = "UN"
+
+    return nodes
+
+def filter_nodes_by_country(nodes, allowed_countries):
+    """
+    Keep only nodes whose 'real_country' or 'exit_country' is in allowed_countries.
+    """
+    filtered = []
+    for n in nodes:
+        country = n.get("real_country") or n.get("exit_country") or "UN"
+        if country.upper() in [c.upper() for c in allowed_countries]:
+            filtered.append(n)
+    return filtered
+
+def run_mihomo(nodes):
+    """
+    Run Mihomo locally to detect exit country for each server.
+    Updates each node with 'exit_ip' and 'exit_country' if detected.
+    """
+    if not nodes:
+        print("[mihomo] ⚠️ No nodes to run Mihomo on, skipping.")
+        return nodes
+
+    print("[mihomo] 🔹 Starting Mihomo run...")
+    temp_config_file = tempfile.NamedTemporaryFile(delete=False, suffix=".yaml")
+    config = {"mixed-port": 7890, "mode": "global", "external-controller": "127.0.0.1:9090", "proxies": []}
+
+    for n in nodes:
+        config["proxies"].append({
+            "name": n.get("name", "TempNode"),
+            "type": n.get("type", "vmess"),
+            "server": n.get("server"),
+            "port": n.get("port"),
+            "uuid": n.get("uuid", ""),
+            "password": n.get("password", "")
+        })
+
+    try:
+        with open(temp_config_file.name, "w", encoding="utf-8") as f:
+            yaml.dump(config, f, allow_unicode=True)
+        print(f"[mihomo] 🔹 Writing temporary config to {temp_config_file.name} ... ✅ Done")
+
+        mihomo_bin = "./mihomo"
+        print(f"[mihomo] 🔹 Executing Mihomo binary: {mihomo_bin}")
+        proc = subprocess.run([mihomo_bin, "-f", temp_config_file.name],
+                              stdout=subprocess.PIPE,
+                              stderr=subprocess.PIPE,
+                              timeout=30)
+
+        print(f"[mihomo] 🔹 Mihomo return code: {proc.returncode}")
+        print(f"[mihomo] 🔹 STDOUT:\n{proc.stdout.decode()}")
+        print(f"[mihomo] 🔹 STDERR:\n{proc.stderr.decode()}")
+
+        if proc.returncode != 0:
+            print("[warn] ❌ Mihomo failed.")
+            return nodes
+
+        # Parse Mihomo JSON output
+        output_file = "mihomo_output.json"
+        try:
+            with open(output_file, "r", encoding="utf-8") as f:
+                results = json.load(f)
+                for node in nodes:
+                    matched = False
+                    for r in results:
+                        if r.get("name") == node.get("name"):
+                            node["exit_ip"] = r.get("exit_ip", "")
+                            node["exit_country"] = r.get("exit_country", "")
+                            matched = True
+                            break
+                    if not matched:
+                        print(f"[warn] ⚠️ No Mihomo output for node: {node.get('name')}")
+            print("[mihomo] ✅ Mihomo output parsed successfully")
+        except FileNotFoundError:
+            print("[warn] ⚠️ Mihomo output file not found, skipping exit_ip updates")
+
+    except subprocess.TimeoutExpired:
+        print("[warn] ❌ Mihomo execution timed out")
+    except Exception as e:
+        print(f"[warn] ❌ Mihomo execution error: {e}")
+    finally:
+        try:
+            if os.path.exists(temp_config_file.name):
+                os.remove(temp_config_file.name)
+                print("[mihomo] 🔹 Temporary config file removed.")
+        except Exception as e:
+            print(f"[warn] ⚠️ Failed to delete temp config file: {e}")
+
+    return nodes
+
+# ---------------- Group nodes by MiHoYo server ----------------
+def group_by_mihoyo_server(nodes):
+    """
+    Group nodes based on their MiHoYo server (China, Global, etc.)
+    nodes: list of node dicts with 'exit_country'
+    Returns a dict: {server_region: [node1, node2, ...]}
+    """
+    server_groups = {}
+    for n in nodes:
+        region = n.get('exit_country', 'Unknown')
+        if region not in server_groups:
+            server_groups[region] = []
+        server_groups[region].append(n)
+    return server_groups
+
+# ---------------- Generate Clash YAML for MiHoYo server groups ----------------
+def generate_clash_groups(server_groups, clash_yaml_path="clash_mihoyo.yaml"):
+        clash_config = {"proxies": [], "proxy-groups": []}
+        # Add nodes to proxies list
+        for group_nodes in server_groups.values():
+            for n in group_nodes:
+                proxy_entry = {
+                    "name": n['name'],
+                    "type": n.get("type", "vmess"),
+                    "server": n['server'],
+                    "port": n['port'],
+                    "uuid": n.get("uuid", ""),
+                    "password": n.get("password", "")
+                }
+                clash_config["proxies"].append(proxy_entry)
+
+        # Add groups
+        for region, group_nodes in server_groups.items():
+            group_entry = {
+                "name": f"MiHoYo-{region}",
+                "type": "select",
+                "proxies": [n['name'] for n in group_nodes]
+            }
+            clash_config["proxy-groups"].append(group_entry)
+    
+        # Save to file
+        with open(clash_yaml_path, "w", encoding="utf-8") as f:
+            yaml.dump(clash_config, f, allow_unicode=True)
+    
+        print(f"[clash] ✅ Clash YAML generated: {clash_yaml_path}")
 
 # ---------------- Main Workflow ----------------
 # Step 1: Run Mihomo
@@ -527,16 +588,14 @@ filtered_nodes = filter_nodes_by_country(nodes_with_real_ip, allowed_countries)
 
 # Step 4: Print filtered nodes
 for n in filtered_nodes:
-    print(f"{n['name']} -> exit_ip: {n.get('exit_ip','N/A')}, "
-          f"exit_country: {n.get('exit_country','N/A')}, "
-          f"real_ip: {n.get('real_ip','N/A')}, "
-          f"real_country: {n.get('real_country','N/A')}")
+    print(f"{n['name']} -> exit_ip: {n.get('exit_ip','N/A')}, exit_country: {n.get('exit_country','N/A')}, "
+          f"real_ip: {n.get('real_ip','N/A')}, real_country: {n.get('real_country','N/A')}")
 
 # Step 5: Group nodes
 server_groups = group_by_mihoyo_server(filtered_nodes)
+cn_to_cc = load_cn_to_cc()
 
 # Step 6: Rename nodes for Clash
-cn_to_cc = load_cn_to_cc()
 for region, group_nodes in server_groups.items():
     for idx, node in enumerate(group_nodes, start=1):
         exit_cc = node.get('exit_country', 'UN')
@@ -544,22 +603,11 @@ for region, group_nodes in server_groups.items():
         mapped_cc = cn_to_cc.get(exit_cc, exit_cc)
         node['name'] = build_name(flag, mapped_cc, idx, ipv6_tag=False)
 
-# Step 7: Detect IPv6 and append tag
-for region, group_nodes in server_groups.items():
-    for node in group_nodes:
-        server = node.get('server')
-        port = node.get('port')
-        if has_ipv6(server, port):
-            node['name'] = build_name(country_to_flag(node.get('exit_country','UN')),
-                                      node.get('exit_country','UN'),
-                                      group_nodes.index(node)+1,
-                                      ipv6_tag=True)
-
-# Step 8: Print grouped nodes
+# Step 7: Print grouped nodes
 for region, group_nodes in server_groups.items():
     print(f"Region: {region} -> Nodes: {[n['name'] for n in group_nodes]}")
 
-# Step 9: Generate Clash YAML
+# Step 8: Generate Clash YAML
 generate_clash_groups(server_groups, clash_yaml_path="clash_mihoyo.yaml")
 
 # ---------------- Load sources ----------------

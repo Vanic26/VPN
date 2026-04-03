@@ -1,4 +1,4 @@
-# Last update: 01.04.2026 10:57:49
+# Last update: 03.04.2026 19:50:09
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -131,26 +131,46 @@ proxies:
 - {name: "🇺🇸 US-7 | Starlink", type: "vless", server: "cf7.danfeng.eu.org", port: 2087, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
 - {name: "🇺🇸 US-8 | Starlink", type: "vless", server: "cf8.danfeng.eu.org", port: 2096, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
 - {name: "🇺🇸 US-9 | Starlink", type: "vless", server: "cf9.danfeng.eu.org", port: 2096, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇭🇰 HK-1 | Starlink", type: "vless", server: "159.138.135.253", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇯🇵 JP-1 | Starlink", type: "vless", server: "212.135.212.99", port: 8443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇰🇷 KR-1 | Starlink", type: "vless", server: "121.182.148.222", port: 18791, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇰🇷 KR-2 | Starlink", type: "vless", server: "121.180.225.222", port: 19530, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇬 SG-2 | Starlink", type: "vless", server: "129.150.63.187", port: 8443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇬 SG-3 | Starlink", type: "vless", server: "165.245.144.113", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇬 SG-4 | Starlink", type: "vless", server: "166.88.57.244", port: 39738, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-10 | Starlink", type: "vless", server: "64.186.244.54", port: 2222, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-11 | Starlink", type: "vless", server: "149.28.89.45", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇩🇪 DE-1 | Starlink", type: "vless", server: "165.22.91.25", port: 8088, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇩🇪 DE-2 | Starlink", type: "vless", server: "95.85.232.166", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇩🇪 DE-3 | Starlink", type: "vless", server: "209.38.199.164", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇩🇪 DE-4 | Starlink", type: "vless", server: "143.20.41.56", port: 461, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇬🇧 GB-1 | Starlink", type: "vless", server: "188.166.169.50", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇬🇧 GB-2 | Starlink", type: "vless", server: "157.245.46.237", port: 2083, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇬🇧 GB-3 | Starlink", type: "vless", server: "146.70.30.56", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇬🇧 GB-4 | Starlink", type: "vless", server: "57.128.183.133", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇳🇱 NL-1 | Starlink", type: "vless", server: "134.209.85.210", port: 2087, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇪 SE-1 | Starlink", type: "vless", server: "31.56.196.56", port: 8443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇪 SE-2 | Starlink", type: "vless", server: "72.56.115.26", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇭🇰 HK-1 | Starlink", type: "vless", server: "47.242.215.209", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇭🇰 HK-2 | Starlink", type: "vless", server: "91.229.133.211", port: 13076, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇭🇰 HK-3 | Starlink", type: "vless", server: "103.118.42.122", port: 21959, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇯🇵 JP-1 | Starlink", type: "vless", server: "161.33.16.188", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇯🇵 JP-2 | Starlink", type: "vless", server: "45.192.248.34", port: 24044, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇯🇵 JP-3 | Starlink", type: "vless", server: "110.54.62.19", port: 10443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇯🇵 JP-4 | Starlink", type: "vless", server: "172.104.101.51", port: 20205, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇰🇷 KR-1 | Starlink", type: "vless", server: "106.246.54.30", port: 10339, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇰🇷 KR-2 | Starlink", type: "vless", server: "219.255.114.230", port: 18889, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇰🇷 KR-3 | Starlink", type: "vless", server: "222.109.40.96", port: 32773, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇰🇷 KR-4 | Starlink", type: "vless", server: "220.86.228.109", port: 32603, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇰🇷 KR-5 | Starlink", type: "vless", server: "115.143.216.64", port: 18245, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇸🇬 SG-2 | Starlink", type: "vless", server: "147.139.189.225", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇸🇬 SG-3 | Starlink", type: "vless", server: "174.138.24.153", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇸🇬 SG-4 | Starlink", type: "vless", server: "20.6.12.145", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇸🇬 SG-5 | Starlink", type: "vless", server: "178.128.86.3", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇸🇬 SG-6 | Starlink", type: "vless", server: "209.97.170.115", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇸🇬 SG-7 | Starlink", type: "vless", server: "188.239.9.91", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇨🇳 CN-1 | Starlink", type: "vless", server: "82.152.90.67", port: 17009, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇨🇳 CN-2 | Starlink", type: "vless", server: "203.69.248.40", port: 14147, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-10 | Starlink", type: "vless", server: "216.144.226.202", port: 60030, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-11 | Starlink", type: "vless", server: "52.43.37.114", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-12 | Starlink", type: "vless", server: "134.195.211.13", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-13 | Starlink", type: "vless", server: "38.244.5.108", port: 39738, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-14 | Starlink", type: "vless", server: "35.208.146.222", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-15 | Starlink", type: "vless", server: "45.202.113.251", port: 2083, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-16 | Starlink", type: "vless", server: "98.96.231.177", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-17 | Starlink", type: "vless", server: "129.146.183.59", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-18 | Starlink", type: "vless", server: "45.202.113.233", port: 2053, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-19 | Starlink", type: "vless", server: "38.75.220.93", port: 39738, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇩🇪 DE-1 | Starlink", type: "vless", server: "46.101.240.105", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇩🇪 DE-2 | Starlink", type: "vless", server: "209.38.231.103", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇩🇪 DE-3 | Starlink", type: "vless", server: "142.93.111.174", port: 2083, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇬🇧 GB-1 | Starlink", type: "vless", server: "144.21.48.237", port: 30443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇮🇹 IT-1 | Starlink", type: "vless", server: "185.244.40.219", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇳🇱 NL-1 | Starlink", type: "vless", server: "134.209.194.199", port: 2053, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇳🇱 NL-2 | Starlink", type: "vless", server: "146.185.154.80", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇳🇱 NL-3 | Starlink", type: "vless", server: "142.93.225.99", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇷🇺 RU-1 | Starlink", type: "vless", server: "212.34.150.204", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇹🇬 TG-1 | Starlink", type: "vless", server: "140.238.208.12", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
 proxy-groups:
   - name: 选择线路
     type: select
@@ -167,25 +187,45 @@ proxy-groups:
       - 🇺🇸 US-8 | Starlink
       - 🇺🇸 US-9 | Starlink
       - 🇭🇰 HK-1 | Starlink
+      - 🇭🇰 HK-2 | Starlink
+      - 🇭🇰 HK-3 | Starlink
       - 🇯🇵 JP-1 | Starlink
+      - 🇯🇵 JP-2 | Starlink
+      - 🇯🇵 JP-3 | Starlink
+      - 🇯🇵 JP-4 | Starlink
       - 🇰🇷 KR-1 | Starlink
       - 🇰🇷 KR-2 | Starlink
+      - 🇰🇷 KR-3 | Starlink
+      - 🇰🇷 KR-4 | Starlink
+      - 🇰🇷 KR-5 | Starlink
       - 🇸🇬 SG-2 | Starlink
       - 🇸🇬 SG-3 | Starlink
       - 🇸🇬 SG-4 | Starlink
+      - 🇸🇬 SG-5 | Starlink
+      - 🇸🇬 SG-6 | Starlink
+      - 🇸🇬 SG-7 | Starlink
+      - 🇨🇳 CN-1 | Starlink
+      - 🇨🇳 CN-2 | Starlink
       - 🇺🇸 US-10 | Starlink
       - 🇺🇸 US-11 | Starlink
+      - 🇺🇸 US-12 | Starlink
+      - 🇺🇸 US-13 | Starlink
+      - 🇺🇸 US-14 | Starlink
+      - 🇺🇸 US-15 | Starlink
+      - 🇺🇸 US-16 | Starlink
+      - 🇺🇸 US-17 | Starlink
+      - 🇺🇸 US-18 | Starlink
+      - 🇺🇸 US-19 | Starlink
       - 🇩🇪 DE-1 | Starlink
       - 🇩🇪 DE-2 | Starlink
       - 🇩🇪 DE-3 | Starlink
-      - 🇩🇪 DE-4 | Starlink
       - 🇬🇧 GB-1 | Starlink
-      - 🇬🇧 GB-2 | Starlink
-      - 🇬🇧 GB-3 | Starlink
-      - 🇬🇧 GB-4 | Starlink
+      - 🇮🇹 IT-1 | Starlink
       - 🇳🇱 NL-1 | Starlink
-      - 🇸🇪 SE-1 | Starlink
-      - 🇸🇪 SE-2 | Starlink
+      - 🇳🇱 NL-2 | Starlink
+      - 🇳🇱 NL-3 | Starlink
+      - 🇷🇺 RU-1 | Starlink
+      - 🇹🇬 TG-1 | Starlink
   - name: 自动选择⚡️
     type: url-test
     proxies:
@@ -200,25 +240,45 @@ proxy-groups:
       - 🇺🇸 US-8 | Starlink
       - 🇺🇸 US-9 | Starlink
       - 🇭🇰 HK-1 | Starlink
+      - 🇭🇰 HK-2 | Starlink
+      - 🇭🇰 HK-3 | Starlink
       - 🇯🇵 JP-1 | Starlink
+      - 🇯🇵 JP-2 | Starlink
+      - 🇯🇵 JP-3 | Starlink
+      - 🇯🇵 JP-4 | Starlink
       - 🇰🇷 KR-1 | Starlink
       - 🇰🇷 KR-2 | Starlink
+      - 🇰🇷 KR-3 | Starlink
+      - 🇰🇷 KR-4 | Starlink
+      - 🇰🇷 KR-5 | Starlink
       - 🇸🇬 SG-2 | Starlink
       - 🇸🇬 SG-3 | Starlink
       - 🇸🇬 SG-4 | Starlink
+      - 🇸🇬 SG-5 | Starlink
+      - 🇸🇬 SG-6 | Starlink
+      - 🇸🇬 SG-7 | Starlink
+      - 🇨🇳 CN-1 | Starlink
+      - 🇨🇳 CN-2 | Starlink
       - 🇺🇸 US-10 | Starlink
       - 🇺🇸 US-11 | Starlink
+      - 🇺🇸 US-12 | Starlink
+      - 🇺🇸 US-13 | Starlink
+      - 🇺🇸 US-14 | Starlink
+      - 🇺🇸 US-15 | Starlink
+      - 🇺🇸 US-16 | Starlink
+      - 🇺🇸 US-17 | Starlink
+      - 🇺🇸 US-18 | Starlink
+      - 🇺🇸 US-19 | Starlink
       - 🇩🇪 DE-1 | Starlink
       - 🇩🇪 DE-2 | Starlink
       - 🇩🇪 DE-3 | Starlink
-      - 🇩🇪 DE-4 | Starlink
       - 🇬🇧 GB-1 | Starlink
-      - 🇬🇧 GB-2 | Starlink
-      - 🇬🇧 GB-3 | Starlink
-      - 🇬🇧 GB-4 | Starlink
+      - 🇮🇹 IT-1 | Starlink
       - 🇳🇱 NL-1 | Starlink
-      - 🇸🇪 SE-1 | Starlink
-      - 🇸🇪 SE-2 | Starlink
+      - 🇳🇱 NL-2 | Starlink
+      - 🇳🇱 NL-3 | Starlink
+      - 🇷🇺 RU-1 | Starlink
+      - 🇹🇬 TG-1 | Starlink
     url: https://www.gstatic.com/generate_204
     interval: 300
 rules:

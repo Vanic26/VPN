@@ -41,13 +41,14 @@ USE_DUPLICATE_FILTER = use_dup_env == "true"
 session = requests.Session()
 session.headers.update({"User-Agent": "Subscription-Updater/1.0"})
 
-# ---------------- Helper ----------------
+# ---------------- Helper Locks & Caches ----------------
 geoip_lock = threading.Lock()
 counter_lock = threading.Lock()
 
 geoip_cache = {}
 country_counter = defaultdict(int)
 
+# ---------------- Helper Functions ----------------
 def resolve_ip(host):
     try:
         infos = socket.getaddrinfo(host, None)
@@ -183,6 +184,54 @@ def geo_ip(host_or_ip):
 
         return "unknown", "UN"
 
+def detect_real_ip(nodes):
+    """
+    Detect the real public IP for each node using an HTTP request.
+    Adds 'real_ip' and 'real_country' fields to each node.
+    """
+    for n in nodes:
+        server = n.get("server")
+        port = n.get("port")
+        if not server or not port:
+            n["real_ip"] = "N/A"
+            n["real_country"] = "UN"
+            continue
+
+        try:
+            # Example using a simple HTTP request via requests
+            proxies = None
+            if n.get("type", "") in ["http", "https", "socks5", "vmess"]:
+                proxies = {
+                    "http": f"socks5://{server}:{port}",
+                    "https": f"socks5://{server}:{port}"
+                }
+
+            r = session.get("https://ipinfo.io/json", proxies=proxies, timeout=5)
+            if r.status_code == 200:
+                data = r.json()
+                n["real_ip"] = data.get("ip", "N/A")
+                n["real_country"] = data.get("country", "UN")
+            else:
+                n["real_ip"] = "N/A"
+                n["real_country"] = "UN"
+
+        except Exception:
+            n["real_ip"] = "N/A"
+            n["real_country"] = "UN"
+
+    return nodes
+
+def filter_nodes_by_country(nodes, allowed_countries):
+    """
+    Keep only nodes whose 'real_country' or 'exit_country' is in allowed_countries.
+    """
+    filtered = []
+    for n in nodes:
+        country = n.get("real_country") or n.get("exit_country") or "UN"
+        if country.upper() in [c.upper() for c in allowed_countries]:
+            filtered.append(n)
+    return filtered
+
 # ---------------- Run Mihomo ----------------
 def run_mihomo(nodes):
     """
@@ -237,19 +286,24 @@ def run_mihomo(nodes):
                             node["exit_ip"] = r.get("exit_ip", "")
                             node["exit_country"] = r.get("exit_country", "")
                             break
-            print("[mihomo] ✅ Mihomo output parsed successfully")
-        except FileNotFoundError:
-            print("[warn] ⚠️ Mihomo output file not found, skipping exit_ip updates")
-
-    except Exception as e:
-        print(f"[warn] ❌ Mihomo execution error: {e}")
-
-    return nodes
-
-nodes_with_exit = run_mihomo(renamed_nodes)
-
-for n in nodes_with_exit:
-    print(f"{n['name']} -> exit_ip: {n.get('exit_ip','N/A')}, exit_country: {n.get('exit_country','N/A')}")
+                   if not matched:
+                                print(f"[warn] ⚠️ No Mihomo output for node: {node.get('name')}")
+                    print("[mihomo] ✅ Mihomo output parsed successfully")
+                except FileNotFoundError:
+                    print("[warn] ⚠️ Mihomo output file not found, skipping exit_ip updates")
+            except subprocess.TimeoutExpired:
+                print("[warn] ❌ Mihomo execution timed out")
+            except Exception as e:
+                print(f"[warn] ❌ Mihomo execution error: {e}")
+            finally:
+                # Clean up temporary config file
+                try:
+                    if os.path.exists(temp_config_file.name):
+                        os.remove(temp_config_file.name)
+                except Exception as e:
+                    print(f"[warn] ⚠️ Failed to delete temp config file: {e}")
+        
+            return nodes
 
 # ---------------- Group nodes by MiHoYo server ----------------
 def group_by_mihoyo_server(nodes):
@@ -268,13 +322,7 @@ def group_by_mihoyo_server(nodes):
 
 # ---------------- Generate Clash YAML for MiHoYo server groups ----------------
 def generate_clash_groups(server_groups, clash_yaml_path="clash_mihoyo.yaml"):
-    import yaml
-
-    clash_config = {
-        "proxies": [],
-        "proxy-groups": []
-    }
-
+        clash_config = {"proxies": [], "proxy-groups": []}
     # Add nodes to proxies list
     for group_nodes in server_groups.values():
         for n in group_nodes:
@@ -303,19 +351,51 @@ def generate_clash_groups(server_groups, clash_yaml_path="clash_mihoyo.yaml"):
 
     print(f"[clash] ✅ Clash YAML generated: {clash_yaml_path}")
 
-# ---------------- Main Workflow ----------------
-nodes_with_exit = run_mihomo(renamed_nodes)
+# ---------------- IPv6 Detection with Cache ----------------
+ipv6_cache = {}
+ipv6_cache_lock = threading.Lock()
 
-for n in nodes_with_exit:
-    print(f"{n['name']} -> exit_ip: {n.get('exit_ip','N/A')}, exit_country: {n.get('exit_country','N/A')}")
+def has_ipv6(host, port, timeout=2.0):
+    """
+    Check if a host:port is reachable via IPv6.
+    Uses caching to avoid repeated lookups for the same host:port.
+    """
+    cache_key = f"{host}:{port}"
+    with ipv6_cache_lock:
+        if cache_key in ipv6_cache:
+            return ipv6_cache[cache_key]
 
-server_groups = group_by_mihoyo_server(nodes_with_exit)
+    reachable = False
+    try:
+        infos = socket.getaddrinfo(host, port, socket.AF_INET6, socket.SOCK_STREAM)
+        for info in infos:
+            ip = info[4][0]
+            sock = socket.create_connection((ip, port), timeout=timeout)
+            sock.close()
+            reachable = True
+            break
+    except Exception:
+        reachable = False
 
+    with ipv6_cache_lock:
+        ipv6_cache[cache_key] = reachable
+
+    return reachable
+
+# Apply IPv6 detection to all nodes
+for region, group_nodes in server_groups.items():
+    for node in group_nodes:
+        server = node.get('server')
+        port = node.get('port')
+        if has_ipv6(server, port):
+            # Append IPv6 tag to name if not already present
+            if "[ipv6]" not in node['name']:
+                node['name'] += " [ipv6]"
+
+# Print nodes after IPv6 detection
 for region, group_nodes in server_groups.items():
     print(f"Region: {region} -> Nodes: {[n['name'] for n in group_nodes]}")
 
-generate_clash_groups(server_groups, clash_yaml_path="clash_mihoyo.yaml")
-    
 def country_to_flag(cc):
     """Convert ISO 3166 two-letter code to emoji flag"""
     if not cc or len(cc) != 2:
@@ -343,6 +423,54 @@ def load_cn_to_cc():
 def build_name(flag, cc, index, ipv6_tag=False):
     suffix = " [ipv6]" if ipv6_tag else ""
     return f"{flag} {cc}-{index}{suffix} | Starlink"
+
+# ---------------- Main Workflow ----------------
+# Step 1: Run Mihomo
+nodes_with_exit = run_mihomo(renamed_nodes)
+
+# Step 2: Detect real IP
+nodes_with_real_ip = detect_real_ip(nodes_with_exit)
+
+# Step 3: Filter by allowed countries
+allowed_countries = ["CN", "JP", "US"]
+filtered_nodes = filter_nodes_by_country(nodes_with_real_ip, allowed_countries)
+
+# Step 4: Print filtered nodes
+for n in filtered_nodes:
+    print(f"{n['name']} -> exit_ip: {n.get('exit_ip','N/A')}, "
+          f"exit_country: {n.get('exit_country','N/A')}, "
+          f"real_ip: {n.get('real_ip','N/A')}, "
+          f"real_country: {n.get('real_country','N/A')}")
+
+# Step 5: Group nodes
+server_groups = group_by_mihoyo_server(filtered_nodes)
+
+# Step 6: Rename nodes for Clash
+cn_to_cc = load_cn_to_cc()
+for region, group_nodes in server_groups.items():
+    for idx, node in enumerate(group_nodes, start=1):
+        exit_cc = node.get('exit_country', 'UN')
+        flag = country_to_flag(exit_cc)
+        mapped_cc = cn_to_cc.get(exit_cc, exit_cc)
+        node['name'] = build_name(flag, mapped_cc, idx, ipv6_tag=False)
+
+# Step 7: Detect IPv6 and append tag
+for region, group_nodes in server_groups.items():
+    for node in group_nodes:
+        server = node.get('server')
+        port = node.get('port')
+        if has_ipv6(server, port):
+            node['name'] = build_name(country_to_flag(node.get('exit_country','UN')),
+                                      node.get('exit_country','UN'),
+                                      group_nodes.index(node)+1,
+                                      ipv6_tag=True)
+
+# Step 8: Print grouped nodes
+for region, group_nodes in server_groups.items():
+    print(f"Region: {region} -> Nodes: {[n['name'] for n in group_nodes]}")
+
+# Step 9: Generate Clash YAML
+generate_clash_groups(server_groups, clash_yaml_path="clash_mihoyo.yaml")
 
 # ---------------- Load sources ----------------
 def load_sources():

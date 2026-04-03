@@ -339,20 +339,20 @@ def generate_clash_groups(server_groups, clash_yaml_path="clash_mihoyo.yaml"):
                 }
                 clash_config["proxies"].append(proxy_entry)
 
-    # Add groups
-    for region, group_nodes in server_groups.items():
-        group_entry = {
-            "name": f"MiHoYo-{region}",
-            "type": "select",
-            "proxies": [n['name'] for n in group_nodes]
-        }
-        clash_config["proxy-groups"].append(group_entry)
-
-    # Save to file
-    with open(clash_yaml_path, "w", encoding="utf-8") as f:
-        yaml.dump(clash_config, f, allow_unicode=True)
-
-    print(f"[clash] ✅ Clash YAML generated: {clash_yaml_path}")
+        # Add groups
+        for region, group_nodes in server_groups.items():
+            group_entry = {
+                "name": f"MiHoYo-{region}",
+                "type": "select",
+                "proxies": [n['name'] for n in group_nodes]
+            }
+            clash_config["proxy-groups"].append(group_entry)
+    
+        # Save to file
+        with open(clash_yaml_path, "w", encoding="utf-8") as f:
+            yaml.dump(clash_config, f, allow_unicode=True)
+    
+        print(f"[clash] ✅ Clash YAML generated: {clash_yaml_path}")
 
 # ---------------- IPv6 Detection with Cache ----------------
 ipv6_cache = {}

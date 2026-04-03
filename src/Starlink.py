@@ -413,6 +413,28 @@ def build_name(flag, cc, index, ipv6_tag=False):
     suffix = " [ipv6]" if ipv6_tag else ""
     return f"{flag} {cc}-{index}{suffix} | Starlink"
 
+# ---------------- Load and preprocess nodes ----------------
+if not os.path.exists("SOURCES_STARLINK"):
+    raise FileNotFoundError("SOURCES_STARLINK file is missing.")
+
+with open("SOURCES_STARLINK", "r", encoding="utf-8") as f:
+    source_data = f.read()
+
+# Decode or parse nodes (you need to implement this)
+# For demonstration, assume YAML/JSON list:
+try:
+    decoded_nodes = yaml.safe_load(source_data)
+except Exception as e:
+    print(f"[error] Failed to parse SOURCES_STARLINK: {e}")
+    decoded_nodes = []
+
+# Apply initial renaming or indexing
+renamed_nodes = []
+for idx, node in enumerate(decoded_nodes, start=1):
+    node_name = node.get("name", f"Node-{idx}")
+    node["name"] = node_name
+    renamed_nodes.append(node)
+
 # ---------------- Main Workflow ----------------
 # Step 1: Run Mihomo
 nodes_with_exit = run_mihomo(renamed_nodes)

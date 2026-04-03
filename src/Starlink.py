@@ -1440,7 +1440,7 @@ def load_proxies(url, retries=5):
                         print(f"[parse] 🔎 YAML to {protocol} node: {idx} parsed", flush=True)
                 else:
                     print("[warn] 😭 YAML structure invalid or empty", flush=True)
-
+            
             except Exception:
                  print("[warn] 😭 YAML parsing failed", flush=True)
 

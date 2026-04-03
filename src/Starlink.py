@@ -1429,25 +1429,17 @@ def load_proxies(url, retries=5):
 
             # ---------- Parse YAML ----------
             if sub_type == "YAML":
-                try:
-                    data = yaml.safe_load(text)
-
-                    if data and "proxies" in data:
-                        for idx, p in enumerate(data["proxies"], start=1):
-                            original_name = str(p.get("name", "") or "").strip()
-
-                            if not original_name:
-                                p["name"] = f"Node-{idx}"
-                            nodes.append(p)
-                            protocol = str(p.get("type", "NODE")).upper()
-
-                            print(
-                                f"[parse] 🔎 YAML to {protocol} node: {idx} parsed",
-                                flush=True
-                            )
-
-                    else:
-                        print("[warn] 😭 YAML structure invalid or empty", flush=True)
+                proxies = data.get("proxies", [])
+                if proxies:
+                    for idx, p in enumerate(proxies, start=1):
+                        name = str(p.get("name", "") or "").strip()
+                        if not name:
+                            p["name"] = f"Node-{idx}"
+                        nodes.append(p)
+                        protocol = str(p.get("type", "NODE")).upper()
+                        print(f"[parse] 🔎 YAML to {protocol} node: {idx} parsed", flush=True)
+                else:
+                    print("[warn] 😭 YAML structure invalid or empty", flush=True)
 
                 except Exception:
                     print("[warn] 😭 YAML parsing failed", flush=True)

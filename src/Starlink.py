@@ -1441,8 +1441,8 @@ def load_proxies(url, retries=5):
                 else:
                     print("[warn] 😭 YAML structure invalid or empty", flush=True)
 
-                except Exception:
-                    print("[warn] 😭 YAML parsing failed", flush=True)
+            except Exception:
+                 print("[warn] 😭 YAML parsing failed", flush=True)
 
             # ---------- Parse Base64 or V2Ray ----------
             else:

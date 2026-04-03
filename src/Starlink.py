@@ -414,26 +414,90 @@ def build_name(flag, cc, index, ipv6_tag=False):
     return f"{flag} {cc}-{index}{suffix} | Starlink"
 
 # ---------------- Load and preprocess nodes ----------------
-if not os.path.exists("SOURCES_STARLINK"):
-    raise FileNotFoundError("SOURCES_STARLINK file is missing.")
+def parse_node_link(link: str):
+    """Parse a raw vmess/vless/ss/trojan link into dict"""
+    node = {"raw": link, "name": "Unknown"}
+    try:
+        if link.startswith("vmess://"):
+            decoded = base64.urlsafe_b64decode(link[8:] + "===")
+            data = json.loads(decoded)
+            node.update({
+                "type": "vmess",
+                "server": data.get("add"),
+                "port": int(data.get("port", 0)),
+                "uuid": data.get("id"),
+                "alterId": data.get("aid"),
+                "security": data.get("scy"),
+                "network": data.get("net"),
+                "remark": data.get("ps")
+            })
+            node["name"] = data.get("ps") or f"VM-{data.get('add')}"
+        elif link.startswith("vless://"):
+            parsed = urlparse(link)
+            node.update({
+                "type": "vless",
+                "server": parsed.hostname,
+                "port": parsed.port,
+                "uuid": parsed.username,
+                "remark": parsed.fragment
+            })
+            node["name"] = parsed.fragment or f"VL-{parsed.hostname}"
+        elif link.startswith("ss://"):
+            # Simplified parsing for Shadowsocks
+            node.update({
+                "type": "ss",
+                "server": urlparse(link).hostname,
+                "port": urlparse(link).port,
+                "remark": urlparse(link).fragment
+            })
+            node["name"] = urlparse(link).fragment or f"SS-{urlparse(link).hostname}"
+        else:
+            node["type"] = "unknown"
+            node["name"] = "Unknown"
+    except Exception as e:
+        print(f"[warn] Failed to parse node: {link} -> {e}")
+    return node
 
+# ---------------- Load subscription source ----------------
 with open("SOURCES_STARLINK", "r", encoding="utf-8") as f:
-    source_data = f.read()
+    source_data = f.read().strip()
 
-# Decode or parse nodes (you need to implement this)
-# For demonstration, assume YAML/JSON list:
-try:
-    decoded_nodes = yaml.safe_load(source_data)
-except Exception as e:
-    print(f"[error] Failed to parse SOURCES_STARLINK: {e}")
-    decoded_nodes = []
-
-# Apply initial renaming or indexing
 renamed_nodes = []
-for idx, node in enumerate(decoded_nodes, start=1):
-    node_name = node.get("name", f"Node-{idx}")
-    node["name"] = node_name
-    renamed_nodes.append(node)
+
+# Detect if base64 subscription
+try:
+    decoded_bytes = base64.urlsafe_b64decode(source_data + "===")
+    decoded_str = decoded_bytes.decode("utf-8")
+    # Try YAML parse
+    try:
+        yaml_data = yaml.safe_load(decoded_str)
+        if isinstance(yaml_data, dict) and "proxies" in yaml_data:
+            # Clash YAML format
+            for p in yaml_data["proxies"]:
+                p["name"] = p.get("name") or f"Node-{len(renamed_nodes)+1}"
+                renamed_nodes.append(p)
+        else:
+            # Might be a list of vmess links
+            for line in decoded_str.splitlines():
+                line = line.strip()
+                if line:
+                    renamed_nodes.append(parse_node_link(line))
+    except yaml.YAMLError:
+        # fallback: assume list of individual links
+        for line in decoded_str.splitlines():
+            line = line.strip()
+            if line:
+                renamed_nodes.append(parse_node_link(line))
+except Exception:
+    # fallback: treat each line as raw node
+    for idx, line in enumerate(source_data.splitlines(), start=1):
+        line = line.strip()
+        if line:
+            node = parse_node_link(line)
+            node["name"] = node.get("name") or f"Node-{idx}"
+            renamed_nodes.append(node)
+
+print(f"[info] Loaded {len(renamed_nodes)} nodes from subscription.")
 
 # ---------------- Main Workflow ----------------
 # Step 1: Run Mihomo

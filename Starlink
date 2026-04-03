@@ -1,4 +1,4 @@
-# Last update: 03.04.2026 20:13:06
+# Last update: 03.04.2026 21:03:34
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -121,164 +121,242 @@ dns:
       - +.googleapis.com
       - +.gvt1.com
 proxies:
-- {name: "🇺🇸 US-1 | Starlink", type: "vless", server: "cf.danfeng.eu.org", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-2 | Starlink", type: "vless", server: "cf1.danfeng.eu.org", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇬 SG-1 | Starlink", type: "vless", server: "cf2.danfeng.eu.org", port: 8443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-3 | Starlink", type: "vless", server: "cf3.danfeng.eu.org", port: 8443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-4 | Starlink", type: "vless", server: "cf4.danfeng.eu.org", port: 2053, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-5 | Starlink", type: "vless", server: "cf5.danfeng.eu.org", port: 2053, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-6 | Starlink", type: "vless", server: "cf6.danfeng.eu.org", port: 2087, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-7 | Starlink", type: "vless", server: "cf7.danfeng.eu.org", port: 2087, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-8 | Starlink", type: "vless", server: "cf8.danfeng.eu.org", port: 2096, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-9 | Starlink", type: "vless", server: "cf9.danfeng.eu.org", port: 2096, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇭🇰 HK-1 | Starlink", type: "vless", server: "193.134.210.105", port: 23152, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇭🇰 HK-2 | Starlink", type: "vless", server: "38.76.194.44", port: 18888, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇭🇰 HK-3 | Starlink", type: "vless", server: "68.64.178.42", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇭🇰 HK-4 | Starlink", type: "vless", server: "223.16.138.113", port: 10428, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇯🇵 JP-1 | Starlink", type: "vless", server: "207.65.189.9", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇯🇵 JP-2 | Starlink", type: "vless", server: "217.142.224.210", port: 7443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇯🇵 JP-3 | Starlink", type: "vless", server: "64.110.105.93", port: 2087, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇰🇷 KR-1 | Starlink", type: "vless", server: "218.158.164.133", port: 12345, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇰🇷 KR-2 | Starlink", type: "vless", server: "106.254.62.105", port: 30021, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇰🇷 KR-3 | Starlink", type: "vless", server: "193.123.233.175", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇬 SG-2 | Starlink", type: "vless", server: "8.219.65.35", port: 39738, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇬 SG-3 | Starlink", type: "vless", server: "96.126.190.243", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇬 SG-4 | Starlink", type: "vless", server: "125.227.233.197", port: 2053, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇬 SG-5 | Starlink", type: "vless", server: "129.150.35.29", port: 587, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇬 SG-6 | Starlink", type: "vless", server: "157.230.255.59", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇬 SG-7 | Starlink", type: "vless", server: "103.241.62.245", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇬 SG-8 | Starlink", type: "vless", server: "47.236.129.25", port: 39738, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇬 SG-9 | Starlink", type: "vless", server: "206.189.89.230", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇸🇬 SG-10 | Starlink", type: "vless", server: "166.88.35.150", port: 16839, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇨🇳 CN-1 | Starlink", type: "vless", server: "85.237.207.19", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-10 | Starlink", type: "vless", server: "38.95.78.229", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-11 | Starlink", type: "vless", server: "104.223.50.78", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-12 | Starlink", type: "vless", server: "64.186.240.71", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-13 | Starlink", type: "vless", server: "205.196.81.230", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-14 | Starlink", type: "vless", server: "64.186.242.91", port: 8443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-15 | Starlink", type: "vless", server: "45.207.201.48", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-16 | Starlink", type: "vless", server: "38.244.5.237", port: 39738, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-17 | Starlink", type: "vless", server: "141.11.95.189", port: 444, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-18 | Starlink", type: "vless", server: "161.35.228.153", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇺🇸 US-19 | Starlink", type: "vless", server: "154.9.243.90", port: 25816, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇩🇪 DE-1 | Starlink", type: "vless", server: "195.54.170.66", port: 8443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇩🇪 DE-2 | Starlink", type: "vless", server: "165.245.214.97", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇩🇪 DE-3 | Starlink", type: "vless", server: "156.226.174.20", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇩🇪 DE-4 | Starlink", type: "vless", server: "64.226.125.55", port: 2083, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇩🇪 DE-5 | Starlink", type: "vless", server: "169.40.154.20", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇩🇪 DE-6 | Starlink", type: "vless", server: "167.172.184.165", port: 2096, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇹🇬 TG-1 | Starlink", type: "vless", server: "166.1.60.67", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇹🇬 TG-2 | Starlink", type: "vless", server: "166.1.62.152", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇳🇱 NL-1 | Starlink", type: "vless", server: "91.149.240.235", port: 443, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
-- {name: "🇳🇱 NL-2 | Starlink", type: "vless", server: "188.226.163.48", port: 20202, uuid: "26524cce-d514-4014-a426-365fb266a14d", network: "ws", servername: "be3noxe89ev.sh21.eu.org", skip-cert-verify: true, client-fingerprint: "chrome", ws-opts: {path: "/danfeng?ed=2560", headers: {"Host": "be3noxe89ev.sh21.eu.org"}}, tls: true, tfo: false, ech-opts: {enable: true, query-server-name: "crypto.cloudflare.com"}}
+- {name: "🇺🇸 US-1 | Starlink", type: "ss", server: "9.9.9.9", port: 54321, password: "febf501b-e19d-4451-8071-aa6144bb8825", cipher: "aes-256-cfb"}
+- {name: "🇯🇵 JP-1 | Starlink", type: "http", server: "223f32ac-tcxds0-teivih-1rz31.jp.oshuawei.com", port: 443, password: "7699767c-44ae-11ef-80c7-f23c91cfbbc9", username: "7699767c-44ae-11ef-80c7-f23c91cfbbc9", tls: true}
+- {name: "🇭🇰 HK-1 | Starlink", type: "ss", server: "202.84.53.85", port: 30816, password: "14b02e2a-8930-4afb-8412-ea4a4954ca5b", cipher: "none", plugin: "v2ray-plugin", plugin-opts: {mode: "websocket", host: "ylnhh.us.ci", path: "14b02e2a-8930-4afb-8412-ea4a4954ca5b/?ed=2560", tls: true, mux: false}, udp: true}
+- {name: "🇹🇭 TH-1 | Starlink", type: "http", server: "6962167f-tcz8g0-tnnrly-g43g.id.oshuawei.com", port: 32232, password: "6ddb6a68-d5f5-ca30-3943-cf0c9876d50c", username: "6ddb6a68-d5f5-ca30-3943-cf0c9876d50c", tls: true}
+- {name: "🇸🇬 SG-1 | Starlink", type: "http", server: "5142d786-tcxds0-tfjz9x-1t5n1.cm4.oshuawei.com", port: 17235, password: "ea800f9e-ca6c-11ef-8e74-f23c913c8d2b", username: "ea800f9e-ca6c-11ef-8e74-f23c913c8d2b", tls: true}
+- {name: "🇬🇧 GB-1 | Starlink", type: "http", server: "2693af1a-tcxds0-tm53cm-1ol97.uk.oshuawei.com", port: 443, password: "93fb69fc-77cf-11ee-85ee-f23c91369f2d", username: "93fb69fc-77cf-11ee-85ee-f23c91369f2d", tls: true}
+- {name: "🇺🇸 US-2 | Starlink", type: "http", server: "767d1d3f-td1340-ttyjoe-ieln.jp4.oshuawei.com", port: 443, password: "f5c0eda2-4b97-11ed-bd7c-f23c913c8d2b", username: "f5c0eda2-4b97-11ed-bd7c-f23c913c8d2b", tls: true}
+- {name: "🇰🇷 KR-1 | Starlink", type: "http", server: "e2a57077-tcz8g0-tw9un7-1k27l.kr.oshuawei.com", port: 31433, password: "ba4b1f2e-c985-11ed-9c0c-f23c913c8d2b", username: "ba4b1f2e-c985-11ed-9c0c-f23c913c8d2b", tls: true}
+- {name: "🇺🇸 US-3 | Starlink", type: "http", server: "b3bdcd03-td1340-tjsm26-6gn6.sjc.oshuawei.com", port: 443, password: "c12f73f6-e8c7-11ed-9246-f23c9164ca5d", username: "c12f73f6-e8c7-11ed-9246-f23c9164ca5d", tls: true}
+- {name: "🇭🇰 HK-2 | Starlink", type: "http", server: "fd369c17-td1340-tqx9ef-1k0yf.hkt.cdnhuawei.com", port: 8443, password: "<password>", username: "9cc3c03e-21fd-11ee-a642-f23c91369f2d", tls: true}
+- {name: "🇭🇰 HK-3 | Starlink", type: "anytls", server: "377c8f92-tcxds0-tysu9z-1nq4g.hkt2.cdnhuawei.com", port: 8443, password: "80aa5178-f936-11ed-8ce6-f23c91369f2d", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-4 | Starlink", type: "ss", server: "167.235.224.25", port: 443, password: "14b02e2a-8930-4afb-8412-ea4a4954ca5b", cipher: "none", plugin: "v2ray-plugin", plugin-opts: {mode: "websocket", host: "ylnhh.us.ci", path: "/14b02e2a-8930-4afb-8412-ea4a4954ca5b/?ed=2560", tls: true, mux: false}, udp: true}
+- {name: "🇺🇸 US-4 | Starlink", type: "http", server: "89ffd235-tcz8g0-tnnrly-g43g.cu.oshuawei.com", port: 15229, password: "6ddb6a68-d5f5-ca30-3943-cf0c9876d50c", username: "6ddb6a68-d5f5-ca30-3943-cf0c9876d50c", tls: true}
+- {name: "🇭🇰 HK-5 | Starlink", type: "http", server: "ede5acbc-td1340-tdadcv-1hd7v.hkt.cdnhuawei.com", port: 8443, password: "<password>", username: "f73c64bc-9e8c-11ec-bd7c-f23c913c8d2b", tls: true}
+- {name: "🇰🇷 KR-2 | Starlink", type: "http", server: "52aeccab-tcxds0-tpn98f-1rcxl.kr.oshuawei.com", port: 31433, password: "9141f048-0b70-11ef-9eb1-f23c91cfbbc9", username: "9141f048-0b70-11ef-9eb1-f23c91cfbbc9", tls: true}
+- {name: "🇸🇬 SG-2 | Starlink", type: "http", server: "5edba076-tcz8g0-tujecz-1qkeg.cm4.oshuawei.com", port: 17235, password: "a305ac08-d136-11ee-b6db-f23c91cfbbc9", username: "a305ac08-d136-11ee-b6db-f23c91cfbbc9", tls: true}
+- {name: "🇲🇾 MY-1 | Starlink", type: "http", server: "21b4cd65-tcxds0-tujecz-1qkeg.my.oshuawei.com", port: 31233, password: "a305ac08-d136-11ee-b6db-f23c91cfbbc9", username: "a305ac08-d136-11ee-b6db-f23c91cfbbc9", tls: true}
+- {name: "🇫🇷 FR-1 | Starlink", type: "http", server: "5e8fb85b-tcz8g0-tei4of-1qxa1.fr.oshuawei.com", port: 443, password: "f609abb4-ed17-11ee-9fa2-f23c9164ca5d", username: "f609abb4-ed17-11ee-9fa2-f23c9164ca5d", tls: true}
+- {name: "🇭🇰 HK-6 | Starlink", type: "http", server: "a39bb845-tcz8g0-tlvq5w-1jcwu.hkt.cdnhuawei.com", port: 8443, password: "<password>", username: "f93486ce-cc84-11ed-9e98-f23c913c8d2b", tls: true}
+- {name: "🇭🇰 HK-7 | Starlink", type: "http", server: "78473ff0-tcz8g0-tm53cm-1ol97.cm4.oshuawei.com", port: 5228, password: "93fb69fc-77cf-11ee-85ee-f23c91369f2d", username: "93fb69fc-77cf-11ee-85ee-f23c91369f2d", tls: true}
+- {name: "🇩🇪 DE-1 | Starlink", type: "http", server: "40d28f40-tcxds0-tdktcz-ezjz.de.oshuawei.com", port: 443, password: "591ac730-bd6f-11ed-a8bf-f23c91cfbbc9", username: "591ac730-bd6f-11ed-a8bf-f23c91cfbbc9", tls: true}
+- {name: "🇬🇧 GB-2 | Starlink", type: "http", server: "a0e3f6ed-tcz8g0-tfi5fd-1imi4.uk.oshuawei.com", port: 443, password: "40fb1315-191a-11ed-b0ca-f23c91cfbbc9", username: "40fb1315-191a-11ed-b0ca-f23c91cfbbc9", tls: true}
+- {name: "🇲🇾 MY-2 | Starlink", type: "http", server: "8fe8dcb7-td1340-tiuylw-46gc.my.oshuawei.com", port: 31233, password: "225d1cca-d744-11ef-b790-f23c91cfbbc9", username: "225d1cca-d744-11ef-b790-f23c91cfbbc9", tls: true}
+- {name: "🇭🇰 HK-8 | Starlink", type: "anytls", server: "329454c9-td1340-teivih-1rz31.hk2.hyhuawei.com", port: 443, password: "7699767c-44ae-11ef-80c7-f23c91cfbbc9", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-9 | Starlink", type: "http", server: "c786c1f0-tcxds0-tlvq5w-1jcwu.cm4.oshuawei.com", port: 5228, password: "f93486ce-cc84-11ed-9e98-f23c913c8d2b", username: "f93486ce-cc84-11ed-9e98-f23c913c8d2b", tls: true}
+- {name: "🇭🇰 HK-10 | Starlink", type: "anytls", server: "041b11f8-tcz8g0-tlvq5w-1jcwu.hk2.hyhuawei.com", port: 443, password: "f93486ce-cc84-11ed-9e98-f23c913c8d2b", skip-cert-verify: true, udp: true}
+- {name: "🇯🇵 JP-2 | Starlink", type: "http", server: "c183a2ab-tcz8g0-tv7zgh-1ijh5.cm4.oshuawei.com", port: 27233, password: "f7d95364-607b-11ee-93af-f23c91369f2d", username: "f7d95364-607b-11ee-93af-f23c91369f2d", tls: true}
+- {name: "🇯🇵 JP-3 | Starlink", type: "http", server: "cc217c62-td1340-toa9ad-4w8.jp.oshuawei.com", port: 443, password: "ba7a37e3-033a-e1ab-06f6-9027aa4630f5", username: "ba7a37e3-033a-e1ab-06f6-9027aa4630f5", tls: true}
+- {name: "🇺🇸 US-5 | Starlink", type: "http", server: "c59e2906-td1340-tw9un7-1k27l.sjc.oshuawei.com", port: 443, password: "ba4b1f2e-c985-11ed-9c0c-f23c913c8d2b", username: "ba4b1f2e-c985-11ed-9c0c-f23c913c8d2b", tls: true}
+- {name: "🇺🇸 US-6 | Starlink", type: "http", server: "b63a23a0-tcxds0-tiaexf-ufc0.sj.oshuawei.com", port: 443, password: "22308988-8548-11ea-a22e-f23c91cfbbc9", username: "22308988-8548-11ea-a22e-f23c91cfbbc9", tls: true}
+- {name: "🇺🇸 US-7 | Starlink", type: "anytls", server: "8506abd6-td1340-tfjz9x-1t5n1.se.hyhuawei.com", port: 443, password: "ea800f9e-ca6c-11ef-8e74-f23c913c8d2b", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-8 | Starlink", type: "anytls", server: "a5450ceb-td1340-tdm5u7-1pr35.se.hyhuawei.com", port: 443, password: "6b7c1278-ff9d-11ee-84ca-f23c913c8d2b", skip-cert-verify: true, udp: true}
+- {name: "🇺🇸 US-9 | Starlink", type: "vless", server: "usrna.osaip.net", port: 15055, uuid: "2afc07b8-1afc-41c0-b529-cf88751e3140", network: "grpc", client-fingerprint: "chrome", grpc-opts: {grpc-mode: "gun", grpc-service-name: "violet"}, tls: true, udp: true}
+- {name: "🇺🇸 US-10 | Starlink", type: "http", server: "f5c8a4ff-tcz8g0-tg010c-1r7od.cu.oshuawei.com", port: 15229, password: "6d56436c-150d-11f0-b0c8-f23c913c8d2b", username: "6d56436c-150d-11f0-b0c8-f23c913c8d2b", tls: true}
+- {name: "🇰🇷 KR-3 | Starlink", type: "http", server: "7b258c50-td1340-tefu35-4lg6.kr.oshuawei.com", port: 31433, password: "a4c9b7cc-a816-11ed-9f65-f23c9164ca5d", username: "a4c9b7cc-a816-11ed-9f65-f23c9164ca5d", tls: true}
+- {name: "🇬🇧 GB-3 | Starlink", type: "http", server: "69eaef5c-tcxds0-teivih-1rz31.uk.oshuawei.com", port: 443, password: "7699767c-44ae-11ef-80c7-f23c91cfbbc9", username: "7699767c-44ae-11ef-80c7-f23c91cfbbc9", tls: true}
+- {name: "🇺🇸 US-11 | Starlink", type: "http", server: "25970927-tcxds0-td23wa-1j6h0.cu.oshuawei.com", port: 15229, password: "dcccacba-fa44-11ef-8400-f23c9164ca5d", username: "dcccacba-fa44-11ef-8400-f23c9164ca5d", tls: true}
+- {name: "🇺🇸 US-12 | Starlink", type: "http", server: "97398728-td1340-tef7kb-luwe.cu.oshuawei.com", port: 15229, password: "a2b0fd2b-716f-0df8-d4e2-03a1c00e5f1a", username: "a2b0fd2b-716f-0df8-d4e2-03a1c00e5f1a", tls: true}
+- {name: "🇸🇬 SG-3 | Starlink", type: "http", server: "f8906920-tcz8g0-teivih-1rz31.cm4.oshuawei.com", port: 17235, password: "7699767c-44ae-11ef-80c7-f23c91cfbbc9", username: "7699767c-44ae-11ef-80c7-f23c91cfbbc9", tls: true}
+- {name: "🇩🇪 DE-2 | Starlink", type: "http", server: "eff3506d-tcxds0-tqx9ef-1k0yf.de.oshuawei.com", port: 443, password: "9cc3c03e-21fd-11ee-a642-f23c91369f2d", username: "9cc3c03e-21fd-11ee-a642-f23c91369f2d", tls: true}
+- {name: "🇩🇪 DE-3 | Starlink", type: "http", server: "657afe29-tcz8g0-td1l1t-1s824.de.oshuawei.com", port: 443, password: "6d4abac0-86e6-11ef-83cc-f23c913c8d2b", username: "6d4abac0-86e6-11ef-83cc-f23c913c8d2b", tls: true}
+- {name: "🇯🇵 JP-4 | Starlink", type: "http", server: "276abd42-tcxds0-td1l1t-1s824.jp.oshuawei.com", port: 443, password: "6d4abac0-86e6-11ef-83cc-f23c913c8d2b", username: "6d4abac0-86e6-11ef-83cc-f23c913c8d2b", tls: true}
+- {name: "🇺🇸 US-13 | Starlink", type: "anytls", server: "7e782b07-tcz8g0-tm53cm-1ol97.los.hyhuawei.com", port: 443, password: "93fb69fc-77cf-11ee-85ee-f23c91369f2d", skip-cert-verify: true, udp: true}
+- {name: "🇬🇧 GB-4 | Starlink", type: "http", server: "7124ee30-tcz8g0-ts40sw-14g76.uk.oshuawei.com", port: 443, password: "4729b4c8-1790-11eb-8684-f23c913c8d2b", username: "4729b4c8-1790-11eb-8684-f23c913c8d2b", tls: true}
+- {name: "🇺🇸 US-14 | Starlink", type: "http", server: "3b6744de-tcz8g0-tgl02u-1jr1u.cu.oshuawei.com", port: 15229, password: "2c01eae6-0b6a-11ee-a058-f23c91369f2d", username: "2c01eae6-0b6a-11ee-a058-f23c91369f2d", tls: true}
+- {name: "🇯🇵 JP-5 | Starlink", type: "http", server: "082a8a5a-td1340-tv7zgh-1ijh5.cm4.oshuawei.com", port: 27233, password: "f7d95364-607b-11ee-93af-f23c91369f2d", username: "f7d95364-607b-11ee-93af-f23c91369f2d", tls: true}
+- {name: "🇹🇭 TH-2 | Starlink", type: "http", server: "ba490de3-tcz8g0-tvh2gy-1qzi1.id.oshuawei.com", port: 32232, password: "8f99107c-f091-11ee-9935-f23c9164ca5d", username: "8f99107c-f091-11ee-9935-f23c9164ca5d", tls: true}
+- {name: "🇺🇸 US-15 | Starlink", type: "anytls", server: "b65d3524-td1340-tm53cm-1ol97.se.hyhuawei.com", port: 443, password: "93fb69fc-77cf-11ee-85ee-f23c91369f2d", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-11 | Starlink", type: "anytls", server: "hkt-ddns.baipiao0721-dns78655.eu", port: 18443, password: "9d696742-4e6d-4dd5-975d-c6c52ea54edc", skip-cert-verify: true, udp: true}
+- {name: "🇭🇰 HK-12 | Starlink", type: "http", server: "b54c4b28-tcz8g0-tiuylw-46gc.cm4.oshuawei.com", port: 5228, password: "225d1cca-d744-11ef-b790-f23c91cfbbc9", username: "225d1cca-d744-11ef-b790-f23c91cfbbc9", tls: true}
+- {name: "🇺🇸 US-16 | Starlink", type: "http", server: "32c9aedf-td1340-tjsm26-6gn6.se.oshuawei.com", port: 443, password: "c12f73f6-e8c7-11ed-9246-f23c9164ca5d", username: "c12f73f6-e8c7-11ed-9246-f23c9164ca5d", tls: true}
+- {name: "🇰🇷 KR-4 | Starlink", type: "http", server: "01efea03-td1340-tegbrw-1ta58.kr.oshuawei.com", port: 31433, password: "e2d8b574-e089-11ef-9cc7-f23c9164ca5d", username: "e2d8b574-e089-11ef-9cc7-f23c9164ca5d", tls: true}
+- {name: "🇺🇸 US-17 | Starlink", type: "http", server: "c6f1bb93-tcz8g0-tdadcv-1hd7v.cu.oshuawei.com", port: 15229, password: "f73c64bc-9e8c-11ec-bd7c-f23c913c8d2b", username: "f73c64bc-9e8c-11ec-bd7c-f23c913c8d2b", tls: true}
+- {name: "🇭🇰 HK-13 | Starlink", type: "http", server: "b55cf920-tcxds0-tqx9ef-1k0yf.cm4.oshuawei.com", port: 5228, password: "9cc3c03e-21fd-11ee-a642-f23c91369f2d", username: "9cc3c03e-21fd-11ee-a642-f23c91369f2d", tls: true}
+- {name: "🇺🇸 US-18 | Starlink", type: "http", server: "15fc8c96-tcz8g0-ttk5iz-i8ie.cu.oshuawei.com", port: 15229, password: "990e8f34-bd4f-11ef-bdb9-f23c91cfbbc9", username: "990e8f34-bd4f-11ef-bdb9-f23c91cfbbc9", tls: true}
+- {name: "🇭🇰 HK-14 | Starlink", type: "anytls", server: "885879c5-td1340-tg010c-1r7od.hkt2.cdnhuawei.com", port: 8443, password: "6d56436c-150d-11f0-b0c8-f23c913c8d2b", skip-cert-verify: true, udp: true}
+- {name: "🇸🇬 SG-4 | Starlink", type: "http", server: "ee053908-td1340-td6rm6-1o8ak.cm4.oshuawei.com", port: 17235, password: "8bb68d04-6973-11ee-b518-f23c9164ca5d", username: "8bb68d04-6973-11ee-b518-f23c9164ca5d", tls: true}
+- {name: "🇮🇩 ID-1 | Starlink", type: "http", server: "b9f25427-td1340-tds6bp-1hzyr.id.oshuawei.com", port: 32233, password: "3be8cba8-b721-11ec-8b04-f23c91cfbbc9", username: "3be8cba8-b721-11ec-8b04-f23c91cfbbc9", tls: true}
+- {name: "🇹🇭 TH-3 | Starlink", type: "http", server: "da24c187-tcz8g0-tdktcz-ezjz.id.oshuawei.com", port: 32232, password: "591ac730-bd6f-11ed-a8bf-f23c91cfbbc9", username: "591ac730-bd6f-11ed-a8bf-f23c91cfbbc9", tls: true}
+- {name: "🇬🇧 GB-5 | Starlink", type: "http", server: "0dec86e5-td1340-tm53cm-1ol97.uk.oshuawei.com", port: 443, password: "93fb69fc-77cf-11ee-85ee-f23c91369f2d", username: "93fb69fc-77cf-11ee-85ee-f23c91369f2d", tls: true}
+- {name: "🇯🇵 JP-6 | Starlink", type: "http", server: "a031379c-tcxds0-td6rm6-1o8ak.cm4.oshuawei.com", port: 27233, password: "8bb68d04-6973-11ee-b518-f23c9164ca5d", username: "8bb68d04-6973-11ee-b518-f23c9164ca5d", tls: true}
+- {name: "🇲🇾 MY-3 | Starlink", type: "http", server: "f35536ca-tcz8g0-tqruo0-1pqhp.my.oshuawei.com", port: 31233, password: "b02327ac-a49a-11ef-a673-f23c913c8d2b", username: "b02327ac-a49a-11ef-a673-f23c913c8d2b", tls: true}
+- {name: "🇺🇸 US-19 | Starlink", type: "http", server: "e18493d3-td1340-ts40sw-14g76.cu.oshuawei.com", port: 15229, password: "4729b4c8-1790-11eb-8684-f23c913c8d2b", username: "4729b4c8-1790-11eb-8684-f23c913c8d2b", tls: true}
+- {name: "🇩🇪 DE-4 | Starlink", type: "http", server: "7411abe1-tcxds0-ts40sw-14g76.de.oshuawei.com", port: 443, password: "4729b4c8-1790-11eb-8684-f23c913c8d2b", username: "4729b4c8-1790-11eb-8684-f23c913c8d2b", tls: true}
+- {name: "🇩🇪 DE-5 | Starlink", type: "http", server: "f40f96b0-tcz8g0-tlm64c-xm0q.de.oshuawei.com", port: 443, password: "3437f34e-1b77-11eb-8684-f23c913c8d2b", username: "3437f34e-1b77-11eb-8684-f23c913c8d2b", tls: true}
+- {name: "🇲🇾 MY-4 | Starlink", type: "http", server: "10e2109a-td1340-tysu9z-1nq4g.my.oshuawei.com", port: 31233, password: "80aa5178-f936-11ed-8ce6-f23c91369f2d", username: "80aa5178-f936-11ed-8ce6-f23c91369f2d", tls: true}
+- {name: "🇹🇭 TH-4 | Starlink", type: "http", server: "4fd5abd3-td1340-tgl02u-1jr1u.id.oshuawei.com", port: 32232, password: "2c01eae6-0b6a-11ee-a058-f23c91369f2d", username: "2c01eae6-0b6a-11ee-a058-f23c91369f2d", tls: true}
+- {name: "🇺🇸 US-20 | Starlink", type: "http", server: "9b774cf6-td1340-tiuylw-46gc.sjc.oshuawei.com", port: 443, password: "225d1cca-d744-11ef-b790-f23c91cfbbc9", username: "225d1cca-d744-11ef-b790-f23c91cfbbc9", tls: true}
+- {name: "🇹🇭 TH-5 | Starlink", type: "http", server: "547dacf4-tcxds0-tm53cm-1ol97.id.oshuawei.com", port: 32232, password: "93fb69fc-77cf-11ee-85ee-f23c91369f2d", username: "93fb69fc-77cf-11ee-85ee-f23c91369f2d", tls: true}
+- {name: "🇭🇰 HK-15 | Starlink", type: "anytls", server: "ff1b1911-td1340-toa9ad-4w8.hkt2.cdnhuawei.com", port: 8443, password: "ba7a37e3-033a-e1ab-06f6-9027aa4630f5", skip-cert-verify: true, udp: true}
+- {name: "🇻🇳 VN-1 | Starlink", type: "ss", server: "103.186.154.230", port: 38388, password: "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV", cipher: "aes-256-cfb", udp: true}
+- {name: "🇯🇵 JP-7 | Starlink", type: "http", server: "1c904f4b-tcxds0-tgl02u-1jr1u.cm4.oshuawei.com", port: 27233, password: "2c01eae6-0b6a-11ee-a058-f23c91369f2d", username: "2c01eae6-0b6a-11ee-a058-f23c91369f2d", tls: true}
+- {name: "🇩🇪 DE-6 | Starlink", type: "http", server: "81996015-tcz8g0-tpn98f-1rcxl.de.oshuawei.com", port: 443, password: "9141f048-0b70-11ef-9eb1-f23c91cfbbc9", username: "9141f048-0b70-11ef-9eb1-f23c91cfbbc9", tls: true}
+- {name: "🇫🇷 FR-2 | Starlink", type: "http", server: "e91c31cb-td1340-te4dj8-1m0fq.fr.oshuawei.com", port: 443, password: "a698c4a6-c3c9-11ee-9693-f23c91cfbbc9", username: "a698c4a6-c3c9-11ee-9693-f23c91cfbbc9", tls: true}
+- {name: "🇰🇷 KR-5 | Starlink", type: "http", server: "3151def4-tcxds0-tighxj-12hj8.kr.oshuawei.com", port: 31433, password: "5acc7a7c-d7ea-11eb-8673-f23c9164ca5d", username: "5acc7a7c-d7ea-11eb-8673-f23c9164ca5d", tls: true}
+- {name: "🇹🇭 TH-6 | Starlink", type: "http", server: "732d55d6-tcz8g0-tdt3k0-jx5r.id.oshuawei.com", port: 32232, password: "73bfcc1c-5814-5f2a-b43a-3ef6af011db8", username: "73bfcc1c-5814-5f2a-b43a-3ef6af011db8", tls: true}
 proxy-groups:
   - name: 选择线路
     type: select
     proxies:
       - 自动选择⚡️
       - 🇺🇸 US-1 | Starlink
-      - 🇺🇸 US-2 | Starlink
+      - 🇯🇵 JP-1 | Starlink
+      - 🇭🇰 HK-1 | Starlink
+      - 🇹🇭 TH-1 | Starlink
       - 🇸🇬 SG-1 | Starlink
+      - 🇬🇧 GB-1 | Starlink
+      - 🇺🇸 US-2 | Starlink
+      - 🇰🇷 KR-1 | Starlink
       - 🇺🇸 US-3 | Starlink
+      - 🇭🇰 HK-2 | Starlink
+      - 🇭🇰 HK-3 | Starlink
+      - 🇭🇰 HK-4 | Starlink
       - 🇺🇸 US-4 | Starlink
+      - 🇭🇰 HK-5 | Starlink
+      - 🇰🇷 KR-2 | Starlink
+      - 🇸🇬 SG-2 | Starlink
+      - 🇲🇾 MY-1 | Starlink
+      - 🇫🇷 FR-1 | Starlink
+      - 🇭🇰 HK-6 | Starlink
+      - 🇭🇰 HK-7 | Starlink
+      - 🇩🇪 DE-1 | Starlink
+      - 🇬🇧 GB-2 | Starlink
+      - 🇲🇾 MY-2 | Starlink
+      - 🇭🇰 HK-8 | Starlink
+      - 🇭🇰 HK-9 | Starlink
+      - 🇭🇰 HK-10 | Starlink
+      - 🇯🇵 JP-2 | Starlink
+      - 🇯🇵 JP-3 | Starlink
       - 🇺🇸 US-5 | Starlink
       - 🇺🇸 US-6 | Starlink
       - 🇺🇸 US-7 | Starlink
       - 🇺🇸 US-8 | Starlink
       - 🇺🇸 US-9 | Starlink
-      - 🇭🇰 HK-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇭🇰 HK-3 | Starlink
-      - 🇭🇰 HK-4 | Starlink
-      - 🇯🇵 JP-1 | Starlink
-      - 🇯🇵 JP-2 | Starlink
-      - 🇯🇵 JP-3 | Starlink
-      - 🇰🇷 KR-1 | Starlink
-      - 🇰🇷 KR-2 | Starlink
-      - 🇰🇷 KR-3 | Starlink
-      - 🇸🇬 SG-2 | Starlink
-      - 🇸🇬 SG-3 | Starlink
-      - 🇸🇬 SG-4 | Starlink
-      - 🇸🇬 SG-5 | Starlink
-      - 🇸🇬 SG-6 | Starlink
-      - 🇸🇬 SG-7 | Starlink
-      - 🇸🇬 SG-8 | Starlink
-      - 🇸🇬 SG-9 | Starlink
-      - 🇸🇬 SG-10 | Starlink
-      - 🇨🇳 CN-1 | Starlink
       - 🇺🇸 US-10 | Starlink
+      - 🇰🇷 KR-3 | Starlink
+      - 🇬🇧 GB-3 | Starlink
       - 🇺🇸 US-11 | Starlink
       - 🇺🇸 US-12 | Starlink
-      - 🇺🇸 US-13 | Starlink
-      - 🇺🇸 US-14 | Starlink
-      - 🇺🇸 US-15 | Starlink
-      - 🇺🇸 US-16 | Starlink
-      - 🇺🇸 US-17 | Starlink
-      - 🇺🇸 US-18 | Starlink
-      - 🇺🇸 US-19 | Starlink
-      - 🇩🇪 DE-1 | Starlink
+      - 🇸🇬 SG-3 | Starlink
       - 🇩🇪 DE-2 | Starlink
       - 🇩🇪 DE-3 | Starlink
+      - 🇯🇵 JP-4 | Starlink
+      - 🇺🇸 US-13 | Starlink
+      - 🇬🇧 GB-4 | Starlink
+      - 🇺🇸 US-14 | Starlink
+      - 🇯🇵 JP-5 | Starlink
+      - 🇹🇭 TH-2 | Starlink
+      - 🇺🇸 US-15 | Starlink
+      - 🇭🇰 HK-11 | Starlink
+      - 🇭🇰 HK-12 | Starlink
+      - 🇺🇸 US-16 | Starlink
+      - 🇰🇷 KR-4 | Starlink
+      - 🇺🇸 US-17 | Starlink
+      - 🇭🇰 HK-13 | Starlink
+      - 🇺🇸 US-18 | Starlink
+      - 🇭🇰 HK-14 | Starlink
+      - 🇸🇬 SG-4 | Starlink
+      - 🇮🇩 ID-1 | Starlink
+      - 🇹🇭 TH-3 | Starlink
+      - 🇬🇧 GB-5 | Starlink
+      - 🇯🇵 JP-6 | Starlink
+      - 🇲🇾 MY-3 | Starlink
+      - 🇺🇸 US-19 | Starlink
       - 🇩🇪 DE-4 | Starlink
       - 🇩🇪 DE-5 | Starlink
+      - 🇲🇾 MY-4 | Starlink
+      - 🇹🇭 TH-4 | Starlink
+      - 🇺🇸 US-20 | Starlink
+      - 🇹🇭 TH-5 | Starlink
+      - 🇭🇰 HK-15 | Starlink
+      - 🇻🇳 VN-1 | Starlink
+      - 🇯🇵 JP-7 | Starlink
       - 🇩🇪 DE-6 | Starlink
-      - 🇹🇬 TG-1 | Starlink
-      - 🇹🇬 TG-2 | Starlink
-      - 🇳🇱 NL-1 | Starlink
-      - 🇳🇱 NL-2 | Starlink
+      - 🇫🇷 FR-2 | Starlink
+      - 🇰🇷 KR-5 | Starlink
+      - 🇹🇭 TH-6 | Starlink
   - name: 自动选择⚡️
     type: url-test
     proxies:
       - 🇺🇸 US-1 | Starlink
-      - 🇺🇸 US-2 | Starlink
+      - 🇯🇵 JP-1 | Starlink
+      - 🇭🇰 HK-1 | Starlink
+      - 🇹🇭 TH-1 | Starlink
       - 🇸🇬 SG-1 | Starlink
+      - 🇬🇧 GB-1 | Starlink
+      - 🇺🇸 US-2 | Starlink
+      - 🇰🇷 KR-1 | Starlink
       - 🇺🇸 US-3 | Starlink
+      - 🇭🇰 HK-2 | Starlink
+      - 🇭🇰 HK-3 | Starlink
+      - 🇭🇰 HK-4 | Starlink
       - 🇺🇸 US-4 | Starlink
+      - 🇭🇰 HK-5 | Starlink
+      - 🇰🇷 KR-2 | Starlink
+      - 🇸🇬 SG-2 | Starlink
+      - 🇲🇾 MY-1 | Starlink
+      - 🇫🇷 FR-1 | Starlink
+      - 🇭🇰 HK-6 | Starlink
+      - 🇭🇰 HK-7 | Starlink
+      - 🇩🇪 DE-1 | Starlink
+      - 🇬🇧 GB-2 | Starlink
+      - 🇲🇾 MY-2 | Starlink
+      - 🇭🇰 HK-8 | Starlink
+      - 🇭🇰 HK-9 | Starlink
+      - 🇭🇰 HK-10 | Starlink
+      - 🇯🇵 JP-2 | Starlink
+      - 🇯🇵 JP-3 | Starlink
       - 🇺🇸 US-5 | Starlink
       - 🇺🇸 US-6 | Starlink
       - 🇺🇸 US-7 | Starlink
       - 🇺🇸 US-8 | Starlink
       - 🇺🇸 US-9 | Starlink
-      - 🇭🇰 HK-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇭🇰 HK-3 | Starlink
-      - 🇭🇰 HK-4 | Starlink
-      - 🇯🇵 JP-1 | Starlink
-      - 🇯🇵 JP-2 | Starlink
-      - 🇯🇵 JP-3 | Starlink
-      - 🇰🇷 KR-1 | Starlink
-      - 🇰🇷 KR-2 | Starlink
-      - 🇰🇷 KR-3 | Starlink
-      - 🇸🇬 SG-2 | Starlink
-      - 🇸🇬 SG-3 | Starlink
-      - 🇸🇬 SG-4 | Starlink
-      - 🇸🇬 SG-5 | Starlink
-      - 🇸🇬 SG-6 | Starlink
-      - 🇸🇬 SG-7 | Starlink
-      - 🇸🇬 SG-8 | Starlink
-      - 🇸🇬 SG-9 | Starlink
-      - 🇸🇬 SG-10 | Starlink
-      - 🇨🇳 CN-1 | Starlink
       - 🇺🇸 US-10 | Starlink
+      - 🇰🇷 KR-3 | Starlink
+      - 🇬🇧 GB-3 | Starlink
       - 🇺🇸 US-11 | Starlink
       - 🇺🇸 US-12 | Starlink
-      - 🇺🇸 US-13 | Starlink
-      - 🇺🇸 US-14 | Starlink
-      - 🇺🇸 US-15 | Starlink
-      - 🇺🇸 US-16 | Starlink
-      - 🇺🇸 US-17 | Starlink
-      - 🇺🇸 US-18 | Starlink
-      - 🇺🇸 US-19 | Starlink
-      - 🇩🇪 DE-1 | Starlink
+      - 🇸🇬 SG-3 | Starlink
       - 🇩🇪 DE-2 | Starlink
       - 🇩🇪 DE-3 | Starlink
+      - 🇯🇵 JP-4 | Starlink
+      - 🇺🇸 US-13 | Starlink
+      - 🇬🇧 GB-4 | Starlink
+      - 🇺🇸 US-14 | Starlink
+      - 🇯🇵 JP-5 | Starlink
+      - 🇹🇭 TH-2 | Starlink
+      - 🇺🇸 US-15 | Starlink
+      - 🇭🇰 HK-11 | Starlink
+      - 🇭🇰 HK-12 | Starlink
+      - 🇺🇸 US-16 | Starlink
+      - 🇰🇷 KR-4 | Starlink
+      - 🇺🇸 US-17 | Starlink
+      - 🇭🇰 HK-13 | Starlink
+      - 🇺🇸 US-18 | Starlink
+      - 🇭🇰 HK-14 | Starlink
+      - 🇸🇬 SG-4 | Starlink
+      - 🇮🇩 ID-1 | Starlink
+      - 🇹🇭 TH-3 | Starlink
+      - 🇬🇧 GB-5 | Starlink
+      - 🇯🇵 JP-6 | Starlink
+      - 🇲🇾 MY-3 | Starlink
+      - 🇺🇸 US-19 | Starlink
       - 🇩🇪 DE-4 | Starlink
       - 🇩🇪 DE-5 | Starlink
+      - 🇲🇾 MY-4 | Starlink
+      - 🇹🇭 TH-4 | Starlink
+      - 🇺🇸 US-20 | Starlink
+      - 🇹🇭 TH-5 | Starlink
+      - 🇭🇰 HK-15 | Starlink
+      - 🇻🇳 VN-1 | Starlink
+      - 🇯🇵 JP-7 | Starlink
       - 🇩🇪 DE-6 | Starlink
-      - 🇹🇬 TG-1 | Starlink
-      - 🇹🇬 TG-2 | Starlink
-      - 🇳🇱 NL-1 | Starlink
-      - 🇳🇱 NL-2 | Starlink
+      - 🇫🇷 FR-2 | Starlink
+      - 🇰🇷 KR-5 | Starlink
+      - 🇹🇭 TH-6 | Starlink
     url: https://www.gstatic.com/generate_204
     interval: 300
 rules:

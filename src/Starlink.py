@@ -235,11 +235,11 @@ def filter_nodes_by_country(nodes, allowed_countries):
 # ---------------- Run Mihomo ----------------
 def run_mihomo(nodes):
     """
-    Run mihomo locally to detect exit country for each server.
-    nodes: list of node dicts with 'server' and 'port'.
+    Run Mihomo locally to detect exit country for each server.
     Updates each node with 'exit_ip' and 'exit_country' if detected.
+    Cleans up temporary files after execution.
     """
-    # Create temporary Clash config for Mihomo
+    # Create temporary config file for Mihomo
     temp_config_file = tempfile.NamedTemporaryFile(delete=False, suffix=".yaml")
     config = {
         "mixed-port": 7890,
@@ -258,12 +258,13 @@ def run_mihomo(nodes):
             "password": n.get("password", "")
         })
 
-    with open(temp_config_file.name, "w", encoding="utf-8") as f:
-        yaml.dump(config, f, allow_unicode=True)
-
-    # Run mihomo
-    mihomo_bin = "./mihomo"  # Path to mihomo binary
     try:
+        # Write temporary config
+        with open(temp_config_file.name, "w", encoding="utf-8") as f:
+            yaml.dump(config, f, allow_unicode=True)
+
+        # Run Mihomo
+        mihomo_bin = "./mihomo"
         proc = subprocess.run([mihomo_bin, "-f", temp_config_file.name],
                               stdout=subprocess.PIPE,
                               stderr=subprocess.PIPE,
@@ -280,30 +281,32 @@ def run_mihomo(nodes):
             with open(output_file, "r", encoding="utf-8") as f:
                 results = json.load(f)
                 for node in nodes:
-                    # Match by node name
+                    # Match node by name
+                    matched = False
                     for r in results:
                         if r.get("name") == node.get("name"):
                             node["exit_ip"] = r.get("exit_ip", "")
                             node["exit_country"] = r.get("exit_country", "")
+                            matched = True
                             break
-                   if not matched:
-                                print(f"[warn] ⚠️ No Mihomo output for node: {node.get('name')}")
-                    print("[mihomo] ✅ Mihomo output parsed successfully")
-                except FileNotFoundError:
-                    print("[warn] ⚠️ Mihomo output file not found, skipping exit_ip updates")
-            except subprocess.TimeoutExpired:
-                print("[warn] ❌ Mihomo execution timed out")
-            except Exception as e:
-                print(f"[warn] ❌ Mihomo execution error: {e}")
-            finally:
-                # Clean up temporary config file
-                try:
-                    if os.path.exists(temp_config_file.name):
-                        os.remove(temp_config_file.name)
-                except Exception as e:
-                    print(f"[warn] ⚠️ Failed to delete temp config file: {e}")
-        
-            return nodes
+                    if not matched:
+                        print(f"[warn] ⚠️ No Mihomo output for node: {node.get('name')}")
+            print("[mihomo] ✅ Mihomo output parsed successfully")
+        except FileNotFoundError:
+            print("[warn] ⚠️ Mihomo output file not found, skipping exit_ip updates")
+    except subprocess.TimeoutExpired:
+        print("[warn] ❌ Mihomo execution timed out")
+    except Exception as e:
+        print(f"[warn] ❌ Mihomo execution error: {e}")
+    finally:
+        # Clean up temporary config file
+        try:
+            if os.path.exists(temp_config_file.name):
+                os.remove(temp_config_file.name)
+        except Exception as e:
+            print(f"[warn] ⚠️ Failed to delete temp config file: {e}")
+
+    return nodes
 
 # ---------------- Group nodes by MiHoYo server ----------------
 def group_by_mihoyo_server(nodes):

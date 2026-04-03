@@ -1380,8 +1380,7 @@ def load_proxies(url, retries=5):
         try:
             r = session.get(url, timeout=10)
             r.raise_for_status()
-            text = r.content.decode("utf-8-sig").strip()
-            text = quote_nonascii_strings(text)
+            text = r.text.strip()
             nodes = []
             sub_type = None
 
@@ -1409,18 +1408,9 @@ def load_proxies(url, retries=5):
                     print("[warn] 😭 Base64 decode failed", flush=True)
 
             # ---------- For YAML decode ----------
-            try:
-                data = yaml.safe_load(text)
-                if isinstance(data, dict) and "proxies" in data:
-                    sub_type = "YAML"
-                    print("[fetch] 📥 YAML subscription detected", flush=True)
-                # Handle top-level list with proxies directly
-                elif isinstance(data, list) and all(isinstance(i, dict) for i in data):
-                    data = {"proxies": data}
-                    sub_type = "YAML"
-                    print("[fetch] 📥 YAML subscription detected (list)", flush=True)
-            except Exception as e:
-                print(f"[warn] 😭 YAML parsing error: {e}", flush=True)
+            if not sub_type and ("proxies:" in text or text.startswith("proxies:")):
+                sub_type = "YAML"
+                print("[fetch] 📥 YAML subscription detected", flush=True)
 
             # ---------- For V2Ray decode ----------
             if not sub_type:
@@ -1429,17 +1419,28 @@ def load_proxies(url, retries=5):
 
             # ---------- Parse YAML ----------
             if sub_type == "YAML":
-                proxies = data.get("proxies", [])
-                if proxies:
-                    for idx, p in enumerate(proxies, start=1):
-                        name = str(p.get("name", "") or "").strip()
-                        if not name:
-                            p["name"] = f"Node-{idx}"
-                        nodes.append(p)
-                        protocol = str(p.get("type", "NODE")).upper()
-                        print(f"[parse] 🔎 YAML to {protocol} node: {idx} parsed", flush=True)
-                else:
-                    print("[warn] 😭 YAML structure invalid or empty", flush=True)
+                try:
+                    data = yaml.safe_load(text)
+
+                    if data and "proxies" in data:
+                        for idx, p in enumerate(data["proxies"], start=1):
+                            original_name = str(p.get("name", "") or "").strip()
+
+                            if not original_name:
+                                p["name"] = f"Node-{idx}"
+                            nodes.append(p)
+                            protocol = str(p.get("type", "NODE")).upper()
+
+                            print(
+                                f"[parse] 🔎 YAML to {protocol} node: {idx} parsed",
+                                flush=True
+                            )
+
+                    else:
+                        print("[warn] 😭 YAML structure invalid or empty", flush=True)
+
+                except Exception:
+                    print("[warn] 😭 YAML parsing failed", flush=True)
 
             # ---------- Parse Base64 or V2Ray ----------
             else:

@@ -239,6 +239,7 @@ def run_mihomo(nodes):
     Updates each node with 'exit_ip' and 'exit_country' if detected.
     Cleans up temporary files after execution.
     """
+    print("[mihomo] 🔹 Starting Mihomo run...")
     # Create temporary config file for Mihomo
     temp_config_file = tempfile.NamedTemporaryFile(delete=False, suffix=".yaml")
     config = {
@@ -258,17 +259,25 @@ def run_mihomo(nodes):
             "password": n.get("password", "")
         })
 
+    print(f"[mihomo] 🔹 Writing temporary config to {temp_config_file.name} ...")
     try:
         # Write temporary config
         with open(temp_config_file.name, "w", encoding="utf-8") as f:
             yaml.dump(config, f, allow_unicode=True)
+        print(f"[mihomo] ✅ Config file written successfully.")
 
         # Run Mihomo
         mihomo_bin = "./mihomo"
+        print(f"[mihomo] 🔹 Executing Mihomo binary: {mihomo_bin}")
         proc = subprocess.run([mihomo_bin, "-f", temp_config_file.name],
                               stdout=subprocess.PIPE,
                               stderr=subprocess.PIPE,
                               timeout=30)
+        print(f"[mihomo] 🔹 Mihomo return code: {proc.returncode}")
+        if proc.stdout:
+            print(f"[mihomo] 🔹 STDOUT:\n{proc.stdout.decode()}")
+        if proc.stderr:
+            print(f"[mihomo] 🔹 STDERR:\n{proc.stderr.decode()}")
         if proc.returncode != 0:
             print(f"[warn] ❌ Mihomo failed: {proc.stderr.decode()}")
             return nodes
@@ -277,9 +286,11 @@ def run_mihomo(nodes):
         # Assume Mihomo outputs JSON like:
         # [{"name":"Node1","exit_ip":"1.2.3.4","exit_country":"CN"}, ...]
         output_file = "mihomo_output.json"
+        print(f"[mihomo] 🔹 Parsing Mihomo output from {output_file} ...")
         try:
             with open(output_file, "r", encoding="utf-8") as f:
                 results = json.load(f)
+                print(f"[mihomo] 🔹 Parsed {len(results)} entries from Mihomo output.")
                 for node in nodes:
                     # Match node by name
                     matched = False
@@ -294,6 +305,9 @@ def run_mihomo(nodes):
             print("[mihomo] ✅ Mihomo output parsed successfully")
         except FileNotFoundError:
             print("[warn] ⚠️ Mihomo output file not found, skipping exit_ip updates")
+        except json.JSONDecodeError as e:
+            print(f"[warn] ❌ Failed to parse Mihomo JSON output: {e}")
+            
     except subprocess.TimeoutExpired:
         print("[warn] ❌ Mihomo execution timed out")
     except Exception as e:
@@ -303,6 +317,7 @@ def run_mihomo(nodes):
         try:
             if os.path.exists(temp_config_file.name):
                 os.remove(temp_config_file.name)
+                print(f"[mihomo] 🔹 Temporary config file removed.")
         except Exception as e:
             print(f"[warn] ⚠️ Failed to delete temp config file: {e}")
 

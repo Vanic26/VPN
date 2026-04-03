@@ -326,18 +326,18 @@ def group_by_mihoyo_server(nodes):
 # ---------------- Generate Clash YAML for MiHoYo server groups ----------------
 def generate_clash_groups(server_groups, clash_yaml_path="clash_mihoyo.yaml"):
         clash_config = {"proxies": [], "proxy-groups": []}
-    # Add nodes to proxies list
-    for group_nodes in server_groups.values():
-        for n in group_nodes:
-            proxy_entry = {
-                "name": n['name'],
-                "type": n.get("type", "vmess"),
-                "server": n['server'],
-                "port": n['port'],
-                "uuid": n.get("uuid", ""),
-                "password": n.get("password", "")
-            }
-            clash_config["proxies"].append(proxy_entry)
+        # Add nodes to proxies list
+        for group_nodes in server_groups.values():
+            for n in group_nodes:
+                proxy_entry = {
+                    "name": n['name'],
+                    "type": n.get("type", "vmess"),
+                    "server": n['server'],
+                    "port": n['port'],
+                    "uuid": n.get("uuid", ""),
+                    "password": n.get("password", "")
+                }
+                clash_config["proxies"].append(proxy_entry)
 
     # Add groups
     for region, group_nodes in server_groups.items():

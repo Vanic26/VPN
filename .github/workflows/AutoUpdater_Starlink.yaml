@@ -64,6 +64,7 @@ jobs:
         run: |
           LATEST_URL=$(curl -s https://api.github.com/repos/MetaCubeX/mihomo/releases/latest \
             | grep "browser_download_url.*linux-amd64-v2.*gz" \
+            | head -n 1 \
             | cut -d '"' -f 4)
           echo "Downloading: $LATEST_URL"
           curl -L -o mihomo.gz "$LATEST_URL"

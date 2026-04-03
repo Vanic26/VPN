@@ -59,6 +59,11 @@ jobs:
       - name: Load source from secret
         run: |
           echo "${{ secrets.SOURCES_STARLINK }}" > SOURCES_STARLINK
+
+      - name: Download Mihomo
+        run: |
+          curl -L -o mihomo https://github.com/your-org/mihomo/releases/latest/download/mihomo_linux_amd64
+          chmod +x mihomo
           
       - name: Start fetching, decoding and rename processes
         run: python src/Starlink.py

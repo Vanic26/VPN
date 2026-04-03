@@ -1393,9 +1393,14 @@ def load_proxies(url, retries=5):
                     print("[warn] 😭 Base64 decode failed", flush=True)
 
             # ---------- For YAML decode ----------
-            if not sub_type and ("proxies:" in text or text.startswith("proxies:")):
-                sub_type = "YAML"
-                print("[fetch] 📥 YAML subscription detected", flush=True)
+            if not sub_type:
+                try:
+                    data = yaml.safe_load(text)
+                    if isinstance(data, dict) and "proxies" in data:
+                        sub_type = "YAML"
+                        print("[fetch] 📥 YAML subscription detected", flush=True)
+                except Exception:
+                    pass
 
             # ---------- For V2Ray decode ----------
             if not sub_type:

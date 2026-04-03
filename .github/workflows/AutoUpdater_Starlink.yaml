@@ -72,7 +72,7 @@ jobs:
           curl -L -o mihomo.gz "$LATEST_URL"
           gunzip -f mihomo.gz
           chmod +x mihomo
-          ./mihomo -version
+          ./mihomo -v   # check binary works
           
       - name: Start fetching, decoding and rename processes
         run: python src/Starlink.py

@@ -1358,6 +1358,20 @@ def rename_node(p, country_counter, CN_TO_CC):
             p["name"] = build_name(flag, cc, index, ipv6_tag)
             return p
 
+# ---------------- Check Sub: type ----------------
+def quote_nonascii_strings(yaml_text):
+    """
+    Wrap values containing non-ASCII characters in quotes to ensure YAML parses correctly.
+    """
+    def replacer(match):
+        key, value = match.groups()
+        # If value contains non-ASCII or spaces, wrap in quotes
+        if any(ord(c) > 127 for c in value) or " " in value:
+            value = f'"{value}"'
+        return f"{key}: {value}"
+    
+    # Match key: value pairs inside inline { ... } mappings
+    return re.sub(r"(\b[\w\-]+):\s*([^,}\n]+)", replacer, yaml_text)
 # ---------------- Load proxies ----------------
 def load_proxies(url, retries=5):
     attempt = 0
@@ -1366,6 +1380,7 @@ def load_proxies(url, retries=5):
             r = session.get(url, timeout=10)
             r.raise_for_status()
             text = r.content.decode("utf-8-sig").strip()
+            text = quote_nonascii_strings(text)
             nodes = []
             sub_type = None
 
@@ -1398,6 +1413,12 @@ def load_proxies(url, retries=5):
                 if isinstance(data, dict) and "proxies" in data:
                     sub_type = "YAML"
                     print("[fetch] 📥 YAML subscription detected", flush=True)
+                # Handle top-level list with proxies directly
+                elif isinstance(data, list) and all(isinstance(i, dict) for i in data):
+                    # Wrap list inside dict
+                    data = {"proxies": data}
+                    sub_type = "YAML"
+                    print("[fetch] 📥 YAML subscription detected (list)", flush=True)
             except Exception as e:
                 print(f"[warn] 😭 YAML parsing error: {e}", flush=True)
 

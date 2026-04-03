@@ -1372,6 +1372,7 @@ def quote_nonascii_strings(yaml_text):
     
     # Match key: value pairs inside inline { ... } mappings
     return re.sub(r"(\b[\w\-]+):\s*([^,}\n]+)", replacer, yaml_text)
+    
 # ---------------- Load proxies ----------------
 def load_proxies(url, retries=5):
     attempt = 0
@@ -1415,7 +1416,6 @@ def load_proxies(url, retries=5):
                     print("[fetch] 📥 YAML subscription detected", flush=True)
                 # Handle top-level list with proxies directly
                 elif isinstance(data, list) and all(isinstance(i, dict) for i in data):
-                    # Wrap list inside dict
                     data = {"proxies": data}
                     sub_type = "YAML"
                     print("[fetch] 📥 YAML subscription detected (list)", flush=True)
@@ -1440,9 +1440,6 @@ def load_proxies(url, retries=5):
                         print(f"[parse] 🔎 YAML to {protocol} node: {idx} parsed", flush=True)
                 else:
                     print("[warn] 😭 YAML structure invalid or empty", flush=True)
-            
-            except Exception:
-                 print("[warn] 😭 YAML parsing failed", flush=True)
 
             # ---------- Parse Base64 or V2Ray ----------
             else:

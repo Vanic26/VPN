@@ -1365,7 +1365,7 @@ def load_proxies(url, retries=5):
         try:
             r = session.get(url, timeout=10)
             r.raise_for_status()
-            text = r.text.strip()
+            text = r.content.decode("utf-8-sig").strip()
             nodes = []
             sub_type = None
 

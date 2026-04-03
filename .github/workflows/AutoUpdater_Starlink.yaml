@@ -60,9 +60,14 @@ jobs:
         run: |
           echo "${{ secrets.SOURCES_STARLINK }}" > SOURCES_STARLINK
 
-      - name: Download Mihomo
+      - name: Download latest Mihomo Linux AMD64 binary
         run: |
-          curl -L -o mihomo https://github.com/your-org/mihomo/releases/latest/download/mihomo_linux_amd64
+          LATEST_URL=$(curl -s https://api.github.com/repos/MetaCubeX/mihomo/releases/latest \
+            | grep "browser_download_url.*linux-amd64-v2.*gz" \
+            | cut -d '"' -f 4)
+          echo "Downloading: $LATEST_URL"
+          curl -L -o mihomo.gz "$LATEST_URL"
+          gunzip -f mihomo.gz
           chmod +x mihomo
           
       - name: Start fetching, decoding and rename processes

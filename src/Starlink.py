@@ -1094,9 +1094,9 @@ def decode_b64(data: str) -> str:
 def smart_cast(value: str):
     v = value.strip().lower()
 
-    if v in ["1", "true"]:
+    if v in ["true"]:
         return True
-    if v in ["0", "false"]:
+    if v in ["false"]:
         return False
 
     if v.isdigit():
@@ -1128,7 +1128,7 @@ def parse_plugin(plugin_str: str):
             val = v.strip()
 
             # ✅ type safety for critical fields
-            if key in ["tls", "mux"]:
+            if key == "tls":
                 opts[key] = val.lower() in ["1", "true"]
             else:
                 opts[key] = smart_cast(val)

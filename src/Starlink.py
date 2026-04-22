@@ -1767,9 +1767,6 @@ def main():
         # Apply to all renamed nodes
         info_ordered = [reorder_info(n) for n in renamed_nodes]
         info_ordered_dicts = [dict(n) for n in info_ordered]
-        
-        clash_info_ordered = [reorder_info(n) for n in clash_nodes]
-        clash_info_dicts = [dict(n) for n in clash_info_ordered]
 
          # Line by line YAML proxies output format
         def make_single_line_yaml(proxies):
@@ -1794,6 +1791,10 @@ def main():
 
         # ---------------- Clash-compatible nodes ----------------
         clash_nodes = convert_mux_for_clash(renamed_nodes)
+        
+        clash_info_ordered = [reorder_info(n) for n in clash_nodes]
+        clash_info_dicts = [dict(n) for n in clash_info_ordered]
+        
         lash_proxies_yaml = make_single_line_yaml(clash_info_dicts)
         clash_proxy_names = "\n".join([f"      - {unquote(p['name'])}" for p in clash_info_dicts])
         

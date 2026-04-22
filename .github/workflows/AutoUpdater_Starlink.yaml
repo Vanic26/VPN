@@ -131,7 +131,6 @@ jobs:
             echo "Push failed after $MAX_RETRIES attempts."
             exit 1
           fi
-          fi
 
       - name: Set subscription extension
         run: |

@@ -1309,7 +1309,30 @@ def parse_ssr(line, line_number=None):
 
     except Exception as e:
         print(f"[warn] ❗SSR parse error -> Line {line_number}")
-        return None 
+        return None
+
+# -----------------------------------------------------------
+# Mux for clash
+# -----------------------------------------------------------
+def convert_mux_for_clash(nodes):
+    converted = []
+
+    for n in nodes:
+        node = dict(n)
+
+        if "mux" in node:
+            val = node["mux"]
+
+            if str(val).lower() in ["0", "false"]:
+                node["mux"] = False
+            elif str(val).lower() in ["1", "true"]:
+                node["mux"] = True
+            else:
+                node["mux"] = bool(val)
+
+        converted.append(node)
+
+    return converted
     
 # -----------------------------------------------------------
 # Dispatcher
@@ -1518,29 +1541,6 @@ def quote_nonascii_strings(yaml_text):
     
     # Match key: value pairs inside inline { ... } mappings
     return re.sub(r"(\b[\w\-]+):\s*([^,}\n]+)", replacer, yaml_text)
-
-# -----------------------------------------------------------
-# Mux for clash
-# -----------------------------------------------------------
-def convert_mux_for_clash(nodes):
-    converted = []
-
-    for n in nodes:
-        node = dict(n)
-
-        if "mux" in node:
-            val = node["mux"]
-
-            if str(val).lower() in ["0", "false"]:
-                node["mux"] = False
-            elif str(val).lower() in ["1", "true"]:
-                node["mux"] = True
-            else:
-                node["mux"] = bool(val)
-
-        converted.append(node)
-
-    return converted
     
 # ---------------- Load proxies ----------------
 def load_proxies(url, retries=5):

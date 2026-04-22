@@ -1795,7 +1795,7 @@ def main():
         clash_info_ordered = [reorder_info(n) for n in clash_nodes]
         clash_info_dicts = [dict(n) for n in clash_info_ordered]
         
-        lash_proxies_yaml = make_single_line_yaml(clash_info_dicts)
+        clash_proxies_yaml = make_single_line_yaml(clash_info_dicts)
         clash_proxy_names = "\n".join([f"      - {unquote(p['name'])}" for p in clash_info_dicts])
         
         clash_output_text = template_text.replace("{{PROXIES}}", clash_proxies_yaml)

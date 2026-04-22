@@ -1309,33 +1309,8 @@ def parse_ssr(line, line_number=None):
 
     except Exception as e:
         print(f"[warn] ❗SSR parse error -> Line {line_number}")
-        return None
-        
-# -----------------------------------------------------------
-# Mux for clash
-# -----------------------------------------------------------
-def convert_mux_for_clash(nodes):
-    converted = []
-
-    for n in nodes:
-        node = dict(n)  # copy
-
-        if "mux" in node:
-            val = node["mux"]
-
-            # normalize to boolean false for Clash
-            if val in [0, "0", False]:
-                node["mux"] = False
-            elif val in [1, "1", True]:
-                node["mux"] = True
-            else:
-                # fallback: force bool
-                node["mux"] = bool(val)
-
-        converted.append(node)
-
-    return converted
-
+        return None 
+    
 # -----------------------------------------------------------
 # Dispatcher
 # -----------------------------------------------------------
@@ -1543,6 +1518,29 @@ def quote_nonascii_strings(yaml_text):
     
     # Match key: value pairs inside inline { ... } mappings
     return re.sub(r"(\b[\w\-]+):\s*([^,}\n]+)", replacer, yaml_text)
+
+# -----------------------------------------------------------
+# Mux for clash
+# -----------------------------------------------------------
+def convert_mux_for_clash(nodes):
+    converted = []
+
+    for n in nodes:
+        node = dict(n)
+
+        if "mux" in node:
+            val = node["mux"]
+
+            if str(val).lower() in ["0", "false"]:
+                node["mux"] = False
+            elif str(val).lower() in ["1", "true"]:
+                node["mux"] = True
+            else:
+                node["mux"] = bool(val)
+
+        converted.append(node)
+
+    return converted
     
 # ---------------- Load proxies ----------------
 def load_proxies(url, retries=5):
@@ -1790,14 +1788,13 @@ def main():
             return "\n".join(lines)
 
         # ---------------- Clash-compatible nodes ----------------
-        clash_nodes = convert_mux_for_clash(renamed_nodes)
-        
-        clash_info_ordered = [reorder_info(n) for n in clash_nodes]
+        clash_info_ordered = [reorder_info(n) for n in renamed_nodes]
+        clash_info_ordered = convert_mux_for_clash(clash_info_ordered)
         clash_info_dicts = [dict(n) for n in clash_info_ordered]
-        
+
         clash_proxies_yaml = make_single_line_yaml(clash_info_dicts)
         clash_proxy_names = "\n".join([f"      - {unquote(p['name'])}" for p in clash_info_dicts])
-        
+
         clash_output_text = template_text.replace("{{PROXIES}}", clash_proxies_yaml)
         clash_output_text = clash_output_text.replace("{{PROXY_NAMES}}", clash_proxy_names)
 

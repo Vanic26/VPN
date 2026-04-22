@@ -114,7 +114,7 @@ jobs:
    
             git add Starlink_Clash
             if ! git diff --cached --quiet; then
-              git commit -m "🎉Starlinke_Clash Auto update successful🎉 - $TIMESTAMP"
+              git commit -m "🎉Starlink_Clash Auto update successful🎉 - $TIMESTAMP"
             fi
           
             # --- Push once ---

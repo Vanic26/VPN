@@ -1323,12 +1323,13 @@ def convert_mux_for_clash(nodes):
         if "mux" in node:
             val = node["mux"]
 
+            # FORCE boolean strictly
             if str(val).lower() in ["0", "false"]:
                 node["mux"] = False
             elif str(val).lower() in ["1", "true"]:
                 node["mux"] = True
             else:
-                node["mux"] = bool(val)
+                node["mux"] = False  # safer fallback for Clash
 
         converted.append(node)
 
@@ -1788,8 +1789,8 @@ def main():
             return "\n".join(lines)
 
         # ---------------- Clash-compatible nodes ----------------
-        clash_info_ordered = [reorder_info(n) for n in renamed_nodes]
-        clash_info_ordered = convert_mux_for_clash(clash_info_ordered)
+        clash_nodes = convert_mux_for_clash(renamed_nodes)
+        clash_info_ordered = [reorder_info(n) for n in clash_nodes]
         clash_info_dicts = [dict(n) for n in clash_info_ordered]
 
         clash_proxies_yaml = make_single_line_yaml(clash_info_dicts)

@@ -1768,19 +1768,7 @@ def main():
         info_ordered = [reorder_info(n) for n in renamed_nodes]
         info_ordered_dicts = [dict(n) for n in info_ordered]
 
-        # ---------------- Clash-compatible nodes ----------------
-        clash_nodes = convert_mux_for_clash(renamed_nodes)
-        
-        clash_info_ordered = [reorder_info(n) for n in clash_nodes]
-        clash_info_dicts = [dict(n) for n in clash_info_ordered]
-        
-        clash_proxies_yaml = make_single_line_yaml(clash_info_dicts)
-        clash_proxy_names = "\n".join([f"      - {unquote(p['name'])}" for p in clash_info_dicts])
-        
-        clash_output_text = template_text.replace("{{PROXIES}}", clash_proxies_yaml)
-        clash_output_text = clash_output_text.replace("{{PROXY_NAMES}}", clash_proxy_names)
-
-        # Line by line YAML proxies output format
+         # Line by line YAML proxies output format
         def make_single_line_yaml(proxies):
             lines = []
             for p in proxies:
@@ -1800,6 +1788,18 @@ def main():
                 lines.append(line)
         
             return "\n".join(lines)
+
+        # ---------------- Clash-compatible nodes ----------------
+        clash_nodes = convert_mux_for_clash(renamed_nodes)
+        
+        clash_info_ordered = [reorder_info(n) for n in clash_nodes]
+        clash_info_dicts = [dict(n) for n in clash_info_ordered]
+        
+        clash_proxies_yaml = make_single_line_yaml(clash_info_dicts)
+        clash_proxy_names = "\n".join([f"      - {unquote(p['name'])}" for p in clash_info_dicts])
+        
+        clash_output_text = template_text.replace("{{PROXIES}}", clash_proxies_yaml)
+        clash_output_text = clash_output_text.replace("{{PROXY_NAMES}}", clash_proxy_names)
 
         # ---------------- Convert to YAML ----------------
         proxies_yaml_block = make_single_line_yaml(info_ordered_dicts)    #If multiple lines format is needed, Delete Line by line YAML proxies output format code block, proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
@@ -1859,7 +1859,7 @@ def upload_to_textdb():
             print(f"[warn] ❗Response: {upload_resp.text}")
 
         # Step 1: Read freshly generated subscription file (local, not GitHub raw)
-        with open(OUTPUT_FILE_Clash, "r", encoding="utf-8") as f:
+        with open(OUTPUT_FILE_CLASH, "r", encoding="utf-8") as f:
             output_text = f.read()
 
         # Step 2: Delete old data

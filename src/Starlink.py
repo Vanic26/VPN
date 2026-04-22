@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import yaml
+import copy
 import subprocess
 import tempfile
 import requests
@@ -1310,33 +1311,6 @@ def parse_ssr(line, line_number=None):
     except Exception as e:
         print(f"[warn] ❗SSR parse error -> Line {line_number}")
         return None
-
-# -----------------------------------------------------------
-# Mux for clash
-# -----------------------------------------------------------
-def fix_mux(obj):
-    if isinstance(obj, dict):
-        for k, v in obj.items():
-            if k == "mux":
-                if str(v).lower() in ["0", "false"]:
-                    obj[k] = False
-                elif str(v).lower() in ["1", "true"]:
-                    obj[k] = True
-                else:
-                    obj[k] = False
-            else:
-                fix_mux(v)
-    elif isinstance(obj, list):
-        for item in obj:
-            fix_mux(item)
-
-def convert_mux_for_clash(nodes):
-    converted = []
-    for n in nodes:
-        node = dict(n)
-        fix_mux(node)
-        converted.append(node)
-    return converted
     
 # -----------------------------------------------------------
 # Dispatcher
@@ -1545,6 +1519,38 @@ def quote_nonascii_strings(yaml_text):
     
     # Match key: value pairs inside inline { ... } mappings
     return re.sub(r"(\b[\w\-]+):\s*([^,}\n]+)", replacer, yaml_text)
+
+# -----------------------------------------------------------
+# Mux for clash
+# -----------------------------------------------------------
+def convert_mux_for_clash(nodes):
+    converted = []
+
+    for n in nodes:
+        node = copy.deepcopy(n)
+
+        if "mux" in node:
+            val = node["mux"]
+            if str(val).lower() in ["0", "false"]:
+                node["mux"] = False
+            elif str(val).lower() in ["1", "true"]:
+                node["mux"] = True
+            else:
+                node["mux"] = False
+
+        if "plugin-opts" in node and isinstance(node["plugin-opts"], dict):
+            if "mux" in node["plugin-opts"]:
+                val = node["plugin-opts"]["mux"]
+                if str(val).lower() in ["0", "false"]:
+                    node["plugin-opts"]["mux"] = False
+                elif str(val).lower() in ["1", "true"]:
+                    node["plugin-opts"]["mux"] = True
+                else:
+                    node["plugin-opts"]["mux"] = False
+
+        converted.append(node)
+
+    return converted
     
 # ---------------- Load proxies ----------------
 def load_proxies(url, retries=5):

@@ -1310,6 +1310,33 @@ def parse_ssr(line, line_number=None):
     except Exception as e:
         print(f"[warn] ❗SSR parse error -> Line {line_number}")
         return None
+
+# -----------------------------------------------------------
+# Mux for clash
+# -----------------------------------------------------------
+def fix_mux(obj):
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            if k == "mux":
+                if str(v).lower() in ["0", "false"]:
+                    obj[k] = False
+                elif str(v).lower() in ["1", "true"]:
+                    obj[k] = True
+                else:
+                    obj[k] = False
+            else:
+                fix_mux(v)
+    elif isinstance(obj, list):
+        for item in obj:
+            fix_mux(item)
+
+def convert_mux_for_clash(nodes):
+    converted = []
+    for n in nodes:
+        node = dict(n)
+        fix_mux(node)
+        converted.append(node)
+    return converted
     
 # -----------------------------------------------------------
 # Dispatcher
@@ -1518,33 +1545,6 @@ def quote_nonascii_strings(yaml_text):
     
     # Match key: value pairs inside inline { ... } mappings
     return re.sub(r"(\b[\w\-]+):\s*([^,}\n]+)", replacer, yaml_text)
-
-# -----------------------------------------------------------
-# Mux for clash
-# -----------------------------------------------------------
-def fix_mux(obj):
-    if isinstance(obj, dict):
-        for k, v in obj.items():
-            if k == "mux":
-                if str(v).lower() in ["0", "false"]:
-                    obj[k] = False
-                elif str(v).lower() in ["1", "true"]:
-                    obj[k] = True
-                else:
-                    obj[k] = False
-            else:
-                fix_mux(v)
-    elif isinstance(obj, list):
-        for item in obj:
-            fix_mux(item)
-
-def convert_mux_for_clash(nodes):
-    converted = []
-    for n in nodes:
-        node = dict(n)
-        fix_mux(node)
-        converted.append(node)
-    return converted
     
 # ---------------- Load proxies ----------------
 def load_proxies(url, retries=5):

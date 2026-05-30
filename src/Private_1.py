@@ -1620,7 +1620,7 @@ def main():
         print(f"[done] 💾 Generated subscription -> {TEMP_FILE}")
 
         # Upload to textdb only after all upper processes successful processing
-        upload_to_textdb()
+        upload_to_textdb(final_output)
 
     except Exception as e:
         print("[⚠️FATAL ERROR in main]", str(e))

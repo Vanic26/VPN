@@ -55,6 +55,17 @@ jobs:
             echo "❌ ERROR: Secret source is not present."
             exit 1
           fi
+
+      - name: Debug secret exists
+        run: |
+          if [ -z "$SECRET_SOURCE_1" ]; then
+            echo "❌ SECRET_SOURCE_1 missing"
+            exit 1
+          else
+            echo "✅ SECRET_SOURCE_1 loaded"
+          fi
+        env:
+          SECRET_SOURCE_1: ${{ secrets.SECRET_SOURCE_1 }}
           
       - name: Start fetching, decoding and rename processes
         run: python src/Private_1.py

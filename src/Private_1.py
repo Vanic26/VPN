@@ -322,7 +322,7 @@ def load_sources():
 
     sources = [
         line.strip()
-        for line in SOURCES_SECRET.splitlines()
+        for line in SECRET_SOURCE.splitlines()
         if line.strip() and not line.strip().startswith("#")
     ]
 

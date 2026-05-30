@@ -54,13 +54,6 @@ jobs:
           if [ -z "${{ secrets.SECRET_SOURCE_1 }}" ]; then
             echo "❌ ERROR: Secret source is not present in action secrets."
             exit 1
-          fi
-
-      - name: Debug secret exists
-        run: |
-          if [ -z "$SECRET_SOURCE_1" ]; then
-            echo "❌ SECRET_SOURCE is missing"
-            exit 1
           else
             echo "✅ SECRET_SOURCE loaded"
           fi

@@ -2,7 +2,7 @@ name: Update VPN Subscription (Private_Sub)
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # every 6 hours
+    - cron: '0 */2 * * *'
     
   # Manual trigger with inputs
   workflow_dispatch:
@@ -68,19 +68,19 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install requests pyyaml babel pycountry
-
-            - name: Check schedule interval
-              shell: bash
-              run: |
-                CURRENT_HOUR=$(date -u +%H)
-                CURRENT_HOUR=$((10#$CURRENT_HOUR))
       
-                if (( CURRENT_HOUR % ${{ matrix.sub.interval }} != 0 )); then
-                  echo "⏭️ Skipping ${{ matrix.sub.name }} (interval mismatch)"
-                  exit 0
-                fi
+      - name: Check schedule interval
+        shell: bash
+        run: |
+          CURRENT_HOUR=$(date -u +%H)
+          CURRENT_HOUR=$((10#$CURRENT_HOUR))
       
-                echo "✅ Running ${{ matrix.sub.name }}"
+          if (( CURRENT_HOUR % ${{ matrix.sub.interval }} != 0 )); then
+            echo "⏭️ Skipping ${{ matrix.sub.name }} (interval mismatch)"
+            exit 0
+          fi
+      
+          echo "✅ Running ${{ matrix.sub.name }}"
 
       - name: Checking source from secret
         run: |

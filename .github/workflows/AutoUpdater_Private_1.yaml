@@ -49,6 +49,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests pyyaml babel pycountry
 
+      - name: Checking source from secret
+        run: |
+          if [ -z "${{ secrets.SECRET_SOURCE_1 }}" ]; then
+            echo "❌ ERROR: Secret source is not present in action secrets."
+            exit 1
+          fi
+
       - name: Debug secret exists
         run: |
           if [ -z "$SECRET_SOURCE_1" ]; then

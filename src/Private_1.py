@@ -1628,7 +1628,7 @@ def main():
         sys.exit(1)
 
 # ---------------- Upload to TextDB ----------------
-def upload_to_textdb(output_text):
+def upload_to_textdb(final_output):
     try:
         if not TEXTDB_API:
             print("[FATAL] ⚠️ TEXTDB_API secret is missing or empty")
@@ -1646,7 +1646,7 @@ def upload_to_textdb(output_text):
         time.sleep(3)
 
         # Step 2: Upload new data
-        upload_resp = session.post(TEXTDB_API, data={"value": output_text})
+        upload_resp = session.post(TEXTDB_API, data={"value": final_output})
         if upload_resp.status_code == 200:
             print("[info] 📤 Successfully uploaded new data on textdb")
         else:

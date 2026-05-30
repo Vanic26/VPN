@@ -311,7 +311,7 @@ def load_cn_to_cc():
 
 def build_name(flag, cc, index, ipv6_tag=False):
     suffix = " [ipv6]" if ipv6_tag else ""
-    return f"{flag} {cc}-{index}{suffix} | 8EB"
+    return f"{flag} {cc}-{index}{suffix} | PrivateSub_1"
 
 # ---------------- Load sources ----------------
 def load_sources():

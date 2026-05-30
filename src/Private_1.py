@@ -1634,9 +1634,10 @@ def upload_to_textdb(final_output):
             print("[FATAL] ⚠️ TEXTDB_API secret is missing or empty")
             sys.exit(1)
 
+        base_url = TEXTDB_API.split("&value=")[0]
+
         # Step 1: Delete old data
-        delete_url = TEXTDB_API.format("")
-        delete_resp = session.get(delete_url)
+        delete_resp = session.post(base_url, data={"value": ""})
 
         if delete_resp.status_code == 200:
             print("[info] 🗑️ Successfully deleted old data on textdb")
@@ -1648,8 +1649,7 @@ def upload_to_textdb(final_output):
         time.sleep(3)
 
         # Step 2: Upload new data
-        upload_url = TEXTDB_API.format(requests.utils.quote(final_output))
-        upload_resp = session.get(upload_url)
+        upload_resp = session.post(base_url, data={"value": final_output})
 
         if upload_resp.status_code == 200:
             print("[info] 📤 Successfully uploaded new data on textdb")

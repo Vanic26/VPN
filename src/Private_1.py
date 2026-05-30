@@ -1635,7 +1635,9 @@ def upload_to_textdb(final_output):
             sys.exit(1)
 
         # Step 1: Delete old data
-        delete_resp = session.post(TEXTDB_API, data={"value": ""})
+        delete_url = TEXTDB_API.format("")
+        delete_resp = session.get(delete_url)
+
         if delete_resp.status_code == 200:
             print("[info] 🗑️ Successfully deleted old data on textdb")
         else:
@@ -1646,11 +1648,13 @@ def upload_to_textdb(final_output):
         time.sleep(3)
 
         # Step 2: Upload new data
-        upload_resp = session.post(TEXTDB_API, data={"value": final_output})
+        upload_url = TEXTDB_API.format(requests.utils.quote(final_output))
+        upload_resp = session.get(upload_url)
+
         if upload_resp.status_code == 200:
             print("[info] 📤 Successfully uploaded new data on textdb")
         else:
-            print(f"[warn] ❌Failed to upload new data on textdb: {upload_resp.status_code}")
+            print(f"[warn] ❌ Failed to upload new data on textdb: {upload_resp.status_code}")
             print(f"[warn] ❗Response: {upload_resp.text}")
 
     except Exception as e:

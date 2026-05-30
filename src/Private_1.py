@@ -1617,7 +1617,7 @@ def main():
         # ---------------- Final output ----------------
         final_output = f"# Last update: {timestamp}\n" + output_text
         with open(TEMP_FILE, "w", encoding="utf-8") as f: f.write(final_output)
-        print(f"[done] 🧠 Generated subscription -> {TEMP_FILE}")
+        print(f"[done] 💾 Generated subscription -> {TEMP_FILE}")
 
         # Upload to textdb only after all upper processes successful processing
         upload_to_textdb()

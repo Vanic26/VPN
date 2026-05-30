@@ -5,6 +5,7 @@ from collections import defaultdict, OrderedDict; from datetime import datetime,
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 SECRET_SOURCE = os.environ.get("SECRET_SOURCE_1", "").strip()
 CLASH_TEMPLATE = os.path.join(REPO_ROOT, "ClashTemplate.ini")
+TEMP_FILE = "/tmp/temp.yaml"
 TEXTDB_API = os.environ.get("TEXTDB_API_1", "").strip()
 USE_ONLY_GEOIP = os.getenv("USE_ONLY_GEOIP", "false").lower() == "true"
 
@@ -1615,8 +1616,8 @@ def main():
 
         # ---------------- Final output ----------------
         final_output = f"# Last update: {timestamp}\n" + output_text
-        
-        print("💾 Generated subscription in memory")
+        with open(TEMP_FILE, "w", encoding="utf-8") as f: f.write(final_output)
+        print(f"[done] 🧠 Generated subscription -> {TEMP_FILE}")
 
         # Upload to textdb only after all upper processes successful processing
         upload_to_textdb()

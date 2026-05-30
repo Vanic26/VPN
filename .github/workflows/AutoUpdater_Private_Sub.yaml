@@ -7,6 +7,10 @@ on:
   # Manual trigger with inputs
   workflow_dispatch:
     inputs:
+      target_sub:
+        description: "Run which subscription? (type all or 1-4)"
+        required: false
+        default: "all"
       use_latency_filter:
         description: "Enable latency filter? (true/false)"
         required: true
@@ -26,6 +30,7 @@ on:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  # forces Node.js 24 for JS actions
+  TARGET_SUB: ${{ inputs.target_sub || 'all' }}
           
 jobs:
   update:
@@ -72,11 +77,15 @@ jobs:
       - name: Check schedule interval
         shell: bash
         run: |
+          set -e
+      
           CURRENT_HOUR=$(date -u +%H)
           CURRENT_HOUR=$((10#$CURRENT_HOUR))
       
-          if (( CURRENT_HOUR % ${{ matrix.sub.interval }} != 0 )); then
-            echo "⏭️ Skipping ${{ matrix.sub.name }} (interval mismatch)"
+          INTERVAL=${{ matrix.sub.interval }}
+      
+          if [ $((CURRENT_HOUR % INTERVAL)) -ne 0 ]; then
+            echo "⏭️ Skipping ${{ matrix.sub.name }} (hour=$CURRENT_HOUR, interval=$INTERVAL)"
             exit 0
           fi
       
@@ -84,7 +93,7 @@ jobs:
 
       - name: Checking source from secret
         run: |
-          if [ -z "${{ secrets.SECRET_SOURCE_1 }}" ]; then
+          if [ -z "${{ secrets[format('SECRET_SOURCE_{0}', matrix.sub.id)] }}" ]; then
             echo "❌ ERROR: Secret source is not present in action secrets."
             exit 1
           else
@@ -118,27 +127,40 @@ jobs:
       - name: Backup subscription to private gist
         shell: bash
         env:
-          GIST_ID: ${{ secrets.PRIVATE_SUB1 }}
+          SUB_ID: ${{ matrix.sub.id }}
+          SUB_NAME: ${{ matrix.sub.name }}
           GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+          GIST_ID: ${{ secrets[format('PRIVATE_SUB_{0}', matrix.sub.id)] }}
         run: |
-          if [ ! -f /tmp/temp.yaml ]; then
-            echo "❌ Backup file not found: /tmp/temp.yaml"
+          FILE="/tmp/temp${SUB_ID}.yaml"
+      
+          if [ ! -f "$FILE" ]; then
+            echo "❌ Backup file not found: $FILE"
             exit 1
           fi
       
-          CONTENT=$(jq -Rs . < /tmp/temp.yaml)
+          CONTENT=$(jq -Rs . < "$FILE")
       
-          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
             -X PATCH \
             -H "Authorization: token $GIST_TOKEN" \
             -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/gists/$GIST_ID" \
-            -d "{\"files\":{\"Private_1\":{\"content\":$CONTENT}}}")
+            https://api.github.com/gists/$GIST_ID \
+            PAYLOAD=$(jq -n --arg content "$CONTENT" \
+              --arg filename "${SUB_NAME}.yaml" \
+              '{files: {($filename): {content: $content}}}')
+            
+            curl -s -o /dev/null -w "%{http_code}" \
+              -X PATCH \
+              -H "Authorization: token $GIST_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              https://api.github.com/gists/$GIST_ID \
+              -d "$PAYLOAD"
       
-          if [ "$HTTP_CODE" = "200" ]; then
-            echo "✅ Private gist backup updated"
+          if [ "$RESPONSE" = "200" ]; then
+            echo "✅ Private gist backup updated for $SUB_NAME"
           else
-            echo "❌ Gist backup failed (HTTP $HTTP_CODE)"
+            echo "❌ Failed to update gist for $SUB_NAME (HTTP $RESPONSE)"
             exit 1
           fi
 

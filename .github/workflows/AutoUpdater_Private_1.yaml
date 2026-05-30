@@ -78,7 +78,28 @@ jobs:
           TIMESTAMP=$(date -u -d "@$local_seconds" +"%d.%m.%Y %H:%M:%S")
           echo "TIMESTAMP=$TIMESTAMP" >> $GITHUB_ENV
 
-      - name: Commit and Push subscription
+      - name: Backup subscription to private gist
+        shell: bash
+        env:
+          GIST_ID: ${{ secrets.PRIVATE_SUB1 }}
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+        run: |
+          if [ ! -f /tmp/8EB.yaml ]; then
+            echo "❌ Backup file not found: /tmp/temp.yaml"
+            exit 1
+          fi
+      
+          CONTENT=$(jq -Rs . < /tmp/temp.yaml)
+      
+          curl -s -X PATCH \
+            -H "Authorization: token $GIST_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/gists/$GIST_ID \
+            -d "{\"files\":{\"8EB.yaml\":{\"content\":$CONTENT}}}"
+      
+          echo "✅ Private gist backup updated"
+
+      - name: Commit and Push notification
         shell: bash
         run: |
           git config --global user.name "github-actions[bot]"

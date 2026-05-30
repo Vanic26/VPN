@@ -59,7 +59,7 @@ jobs:
       - name: Start fetching, decoding and rename processes
         run: python src/Private_1.py
         env:
-          SECRET_SOURCE: ${{ secrets.SECRET_SOURCE_1 }}
+          SECRET_SOURCE_1: ${{ secrets.SECRET_SOURCE_1 }}
           TEXTDB_API_1: ${{ secrets.TEXTDB_API_1 }}
           CN_TO_CC: ${{ secrets.CN_TO_CC }}
           LATENCY_FILTER: ${{ inputs.use_latency_filter || 'false' }}
@@ -84,7 +84,7 @@ jobs:
           GIST_ID: ${{ secrets.PRIVATE_SUB1 }}
           GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
         run: |
-          if [ ! -f /tmp/8EB.yaml ]; then
+          if [ ! -f /tmp/temp.yaml ]; then
             echo "❌ Backup file not found: /tmp/temp.yaml"
             exit 1
           fi
@@ -95,7 +95,7 @@ jobs:
             -H "Authorization: token $GIST_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/gists/$GIST_ID \
-            -d "{\"files\":{\"8EB.yaml\":{\"content\":$CONTENT}}}"
+            -d "{\"files\":{\"temp.yaml\":{\"content\":$CONTENT}}}"
       
           echo "✅ Private gist backup updated"
 

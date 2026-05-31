@@ -1388,7 +1388,10 @@ def main():
             sys.exit(1)
 
         # ---------------- Keep original node structure ----------------
-        info_ordered_dicts = info_ordered
+        info_ordered_dicts = []
+        for node in renamed_nodes:
+            node = normalize_mux(node)
+            info_ordered_dicts.append(node)
 
         # Line by line YAML proxies output format
         def make_inline_yaml(proxies):

@@ -132,7 +132,9 @@ jobs:
           GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
           GIST_ID: ${{ secrets[format('PRIVATE_SUB_{0}', matrix.sub.id)] }}
         run: |
-          FILE="/tmp/temp${SUB_ID}.yaml"
+          set -e
+      
+          FILE="/tmp/${SUB_ID}.yaml"
       
           if [ ! -f "$FILE" ]; then
             echo "❌ Backup file not found: $FILE"
@@ -141,26 +143,22 @@ jobs:
       
           CONTENT=$(jq -Rs . < "$FILE")
       
-          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+          PAYLOAD=$(jq -n \
+            --arg filename "${SUB_NAME}.yaml" \
+            --arg content "$CONTENT" \
+            '{files: {($filename): {content: $content}}}')
+      
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
             -X PATCH \
             -H "Authorization: token $GIST_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/gists/$GIST_ID \
-            PAYLOAD=$(jq -n --arg content "$CONTENT" \
-              --arg filename "${SUB_NAME}.yaml" \
-              '{files: {($filename): {content: $content}}}')
-            
-            curl -s -o /dev/null -w "%{http_code}" \
-              -X PATCH \
-              -H "Authorization: token $GIST_TOKEN" \
-              -H "Accept: application/vnd.github+json" \
-              https://api.github.com/gists/$GIST_ID \
-              -d "$PAYLOAD"
+            -d "$PAYLOAD")
       
-          if [ "$RESPONSE" = "200" ]; then
-            echo "✅ Private gist backup updated for $SUB_NAME"
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "✅ Gist backup updated ($SUB_NAME)"
           else
-            echo "❌ Failed to update gist for $SUB_NAME (HTTP $RESPONSE)"
+            echo "❌ Gist update failed ($SUB_NAME) HTTP $HTTP_CODE"
             exit 1
           fi
 

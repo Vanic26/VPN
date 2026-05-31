@@ -66,6 +66,19 @@ def tcp_latency_ms(host, port, timeout=2.0):
     except Exception:
         return 9999
 
+def wrap_node(original_node):
+    """
+    Keep original node untouched.
+    Add temporary metadata for filtering only.
+    """
+    if not isinstance(original_node, dict):
+        return None
+
+    return {
+        "_original": copy.deepcopy(original_node),
+        "_meta": normalize_node(original_node)
+    }
+
 def normalize_node(n):
     if not isinstance(n, dict):
         return None
@@ -176,30 +189,26 @@ def normalize_node(n):
     return n
 
 def deduplicate_nodes(nodes):
-    seen = set()
-    unique_nodes = []
-    removed = 0
+    seen, unique_nodes, removed = set(), [], 0
 
-    for raw_node in nodes:
+    for node in nodes:
+        meta = node.get("_meta", {})
+        if not meta: continue
 
-        n = normalize_node(raw_node)
-
-        if not n:
-            continue
-
-        if not n["_auth"]:
-            unique_nodes.append(n)
+        auth = meta.get("_auth", "")
+        if not auth:
+            unique_nodes.append(node)
             continue
 
         key = (
-            n["type"],
-            n["server"],
-            n["port"],
-            n["_auth"],
-            n["_security"],
-            n["_sni"],
-            n["_network"],
-            n["_path"],
+            meta.get("type", ""),
+            meta.get("server", ""),
+            meta.get("port", 0),
+            auth,
+            meta.get("_security", ""),
+            meta.get("_sni", ""),
+            meta.get("_network", ""),
+            meta.get("_path", "")
         )
 
         if key in seen:
@@ -207,18 +216,7 @@ def deduplicate_nodes(nodes):
             continue
 
         seen.add(key)
-
-        # cleanup temp fields
-        for k in [
-            "_auth",
-            "_security",
-            "_sni",
-            "_network",
-            "_path",
-        ]:
-            n.pop(k, None)
-
-        unique_nodes.append(n)
+        unique_nodes.append(node)
 
     return unique_nodes, removed
 
@@ -1253,7 +1251,7 @@ geoip_primary_fail = 0   # counts nodes where GeoIP mode failed but fallback suc
 name_primary_fail = 0    # counts nodes where name-based mode failed but fallback succeeded
 
 # ---------------- Rename node ----------------
-def rename_node(p, country_counter, CN_TO_CC):
+def rename_node(node, country_counter, CN_TO_CC):
     global geoip_primary_fail, name_primary_fail
     """
     Assign a standardized name to the node without changing any other fields.
@@ -1261,15 +1259,18 @@ def rename_node(p, country_counter, CN_TO_CC):
     If USE_ONLY_GEOIP is True, assign name by GeoIP only.
     Preserves all original fields to maintain connectivity.
     """
+    original = node.get("_original", {})
+    meta = node.get("_meta", {})
 
+    if not original or not meta:
+        return None
+    
     # Original name
-    original_name = str(p.get("name", "") or "").strip()
-    host = p.get("server") or p.get("add") or ""
+    original_name = str(original.get("name", "") or "").strip()
+    host = meta.get("server", "")
 
     # Detect ipv6 tag
-    ipv6_tag = False
-    if re.search(r'[\(\[\{]?\s*ipv6\s*[\)\]\}]?', original_name, flags=re.IGNORECASE):
-        ipv6_tag = True
+    ipv6_tag = bool(re.search(r'[\(\[\{]?\s*ipv6\s*[\)\]\}]?', original_name, flags=re.IGNORECASE))
 
     # Define forbidden emojis (any emoji you want to filter out)
     FORBIDDEN_EMOJIS = {"🔒", "❌", "⚠️", "🚀", "🎁"}
@@ -1280,19 +1281,18 @@ def rename_node(p, country_counter, CN_TO_CC):
 
     # ---------- Prepare ----------
     name_for_match = unquote(original_name)
-    cc = None
-    flag = None
+    cc, flag = None, None
 
     # Initialize fallback flags for counters
     geoip_failed = False
-    name_failed = False
 
-    # ----------If GEOIP-ONLY Mode Is Set----------
+    # ---------------- GEOIP ONLY MODE ----------------
     if USE_ONLY_GEOIP:
 
         # 1️⃣ GeoIP first
         ip = resolve_ip(host) or host
         cc_lower, cc_upper = geo_ip(ip)
+
         if cc_upper and cc_upper != "UN":
             cc = cc_upper
             flag = country_to_flag(cc)
@@ -1305,81 +1305,62 @@ def rename_node(p, country_counter, CN_TO_CC):
             if flag_match:
                 flag = flag_match.group(0)
                 cc = flag_to_country_code(flag)
-                if cc:
-                    cc = cc.upper()
+                if cc: cc = cc.upper()
 
         # 3️⃣ Chinese name mapping
         if not cc:
             for cn_name, code in CN_TO_CC.items():
-                if not cn_name:
-                    continue
-                if cn_name in name_for_match:
+                if cn_name and cn_name in name_for_match:
                     cc = code.upper()
                     flag = country_to_flag(cc)
                     break
 
         # 4️⃣ Two-letter ISO code (context-aware, unit-safe)
         if not cc:
-            iso_iter = re.finditer(r'\b([A-Z]{2})\b', original_name)
-            for iso_match in iso_iter:
+            for iso_match in re.finditer(r'\b([A-Z]{2})\b', original_name):
                 iso = iso_match.group(1)
                 before = original_name[:iso_match.start()]
-                # Avoid some two letters which are identical to two-letters ISO code
-                if re.search(r'\d\s*$', before):
-                    continue
+                if re.search(r'\d\s*$', before): continue
                 cc = iso
                 flag = country_to_flag(cc)
                 break
-
+                
         # Final validation
         if not cc or not flag:
-            return None    # ❌ truly unnameable → skip
+            return None
 
-        # 📊 GeoIP fallback success count
+        # GeoIP fallback success count
         if geoip_failed:
             geoip_primary_fail += 1
 
-        # ----------Final naming----------
-        with counter_lock:
-            country_counter[cc] += 1
-            index = country_counter[cc]
-            p["name"] = build_name(flag, cc, index, ipv6_tag)
-            return p
-
-    # ----------If GEOIP-ONLY Mode Is Not Set----------
+    # ---------------- NAME BASE MODE ----------------
     else:
         # 1️⃣ Emoji flag mapping
         flag_match = re.search(r'[\U0001F1E6-\U0001F1FF]{2}', name_for_match)
         if flag_match:
             flag = flag_match.group(0)
             cc = flag_to_country_code(flag)
-            if cc:
-                cc = cc.upper()
+            if cc: cc = cc.upper()
 
         # 2️⃣ Chinese name mapping
         if not cc:
             for cn_name, code in CN_TO_CC.items():
-                if not cn_name:
-                    continue
-                if cn_name in name_for_match:
+                if cn_name and cn_name in name_for_match:
                     cc = code.upper()
                     flag = country_to_flag(cc)
                     break
 
-        # 3️⃣ Two-letter ISO code (unit-safe)
+        # ISO code
         if not cc:
-            iso_iter = re.finditer(r'\b([A-Z]{2})\b', original_name)
-            for iso_match in iso_iter:
+            for iso_match in re.finditer(r'\b([A-Z]{2})\b', original_name):
                 iso = iso_match.group(1)
                 before = original_name[:iso_match.start()]
-                # Avoid some two letters which are identical to two-letters ISO code
-                if re.search(r'\d\s*$', before):
-                    continue
+                if re.search(r'\d\s*$', before): continue
                 cc = iso
                 flag = country_to_flag(cc)
                 break
 
-        # ---------- GeoIP fallback ----------
+        # 3️⃣ Two-letter ISO code (unit-safe)
         if not cc:
             ip = resolve_ip(host) or host
             if ip:
@@ -1388,17 +1369,19 @@ def rename_node(p, country_counter, CN_TO_CC):
                     cc = cc_upper
                     flag = country_to_flag(cc)
                     name_primary_fail += 1
-        
-        # ---------- Final validation ----------
-        if not cc or not flag:
-            return None    # ❌ truly unnameable → skip
 
-        # ----------Final naming----------
-        with counter_lock:
-            country_counter[cc] += 1
-            index = country_counter[cc]
-            p["name"] = build_name(flag, cc, index, ipv6_tag)
-            return p
+        # Final validation
+        if not cc or not flag:
+            return None
+
+    # ---------------- Naming Only ----------------
+    with counter_lock:
+        country_counter[cc] += 1
+        index = country_counter[cc]
+
+        original["name"] = build_name(flag, cc, index, ipv6_tag)
+
+    return node
 
 # ---------------- Load proxies ----------------
 def load_proxies(url, retries=5):
@@ -1451,17 +1434,25 @@ def load_proxies(url, retries=5):
 
                     if data and "proxies" in data:
                         for idx, p in enumerate(data["proxies"], start=1):
-                            original_name = str(p.get("name", "") or "").strip()
+                    
+                            original_name = str(
+                                p.get("name", "") or ""
+                            ).strip()
                     
                             if not original_name:
                                 p["name"] = f"Node-{idx}"
                     
-                            # remove metadata
+                            # remove metadata only
                             p.pop("metadata", None)
                     
-                            nodes.append(p)
+                            wrapped = wrap_node(p)
                     
-                            protocol = str(p.get("type", "NODE")).upper()
+                            if wrapped:
+                                nodes.append(wrapped)
+                    
+                            protocol = str(
+                                p.get("type", "NODE")
+                            ).upper()
                     
                             print(
                                 f"[parse] 🔎 YAML to {protocol} node: {idx} parsed",
@@ -1486,18 +1477,16 @@ def load_proxies(url, retries=5):
                         node = parse_node_line(line, idx)
 
                         if node:
-                            nodes.append(node)
-                            protocol = (
-                                line.split("://")[0].upper()
-                                if "://" in line
-                                else "NODE"
-                            )
+                            wrapped = wrap_node(node)
+                            if wrapped:
+                                nodes.append(wrapped)
+                                
+                            protocol = (line.split("://")[0].upper() if "://" in line else "NODE")
 
                             if sub_type == "BASE64":
-                                print(
-                                    f"[parse] 🔎 Base64 to {protocol} node: {idx} parsed", flush=True )
+                                print(f"[parse] 🔎 Base64 to {protocol} node: {idx} parsed", flush=True)
                             else:
-                                print(f"[parse] 🔎 {protocol} node: {idx} parsed", flush=True )
+                                print(f"[parse] 🔎 {protocol} node: {idx} parsed", flush=True)
 
                         else:
                             print(f"[skip] ⛔ Invalid or unsupported line ({idx})", flush=True)
@@ -1540,11 +1529,11 @@ def main():
             print(f"[latency] 🚫 Filtering nodes > {LATENCY_THRESHOLD} ms")
             filtered_nodes = []
             with concurrent.futures.ThreadPoolExecutor(max_workers=50) as ex:
-                futures = [ex.submit(tcp_latency_ms, n.get("server"), n.get("port")) for n in all_nodes]
+                futures = [ex.submit(tcp_latency_ms, n["_meta"].get("server"), n["_meta"].get("port")) for n in all_nodes]
+            
                 for n, f in zip(all_nodes, futures):
                     latency = f.result()
-                    if latency <= LATENCY_THRESHOLD:
-                        filtered_nodes.append(n)
+                    if latency <= LATENCY_THRESHOLD: filtered_nodes.append(n)
 
             num_filtered = len(all_nodes) - len(filtered_nodes)
             print(f"[latency] ❗Filtered {num_filtered} nodes due to latency")
@@ -1602,62 +1591,14 @@ def main():
             print(f"[FATAL] ⚠️ Failed to load ClashTemplate -> {e_local}")
             sys.exit(1)
 
-        # ---------------- Preferred key order ----------------
-        INFO_ORDER = [
-            "name", "type", "server", "port", "uuid", "password",
-            "encryption", "network", "security", "sni", "servername",
-            "skip-cert-verify", "fp", "client-fingerprint",
-            "path", "ws-opts", "grpc-opts", "h2-opts"
-        ]
-        
-        # ---------------- Function to reorder keys ----------------
-        def reorder_info(node):
-            ordered = OrderedDict()
-            # Add preferred keys only if they exist in the node
-            for key in INFO_ORDER:
-                if key in node:
-                    val = node[key]
-                    # Convert string to list only if original value is a list or comma string
-                    if key in ("alpn") and isinstance(val, str):
-                        # Only split if val is not empty
-                        val_list = [x.strip() for x in val.split(",") if x.strip()]
-                        ordered[key] = val_list if val_list else val
-                    else:
-                        ordered[key] = val
-            # Append extra keys not in preferred order
-            for key in node:
-                if key not in ordered:
-                    ordered[key] = node[key]
-            return ordered
-        
-        # Apply to all renamed nodes
-        normalized_nodes = [normalize_vless_for_clash(n) if n.get("type") == "vless" else normalize_mux(n) for n in renamed_nodes]
-        info_ordered = [reorder_info(n) for n in normalized_nodes]
-        info_ordered_dicts = [dict(n) for n in info_ordered]
-
-        # Line by line YAML proxies output format
-        def make_single_line_yaml(proxies):
-            lines = []
-            for p in proxies:
-                # Convert nested dicts safely
-                def to_yaml_value(v):
-                    if isinstance(v, dict):
-                        inner = ", ".join(f"{k}: {json.dumps(vv, ensure_ascii=False)}" for k, vv in v.items())
-                        return "{" + inner + "}"
-                    else:
-                        return json.dumps(v, ensure_ascii=False)
-        
-                parts = []
-                for k, v in p.items():
-                    parts.append(f"{k}: {to_yaml_value(v)}")
-        
-                line = "- {" + ", ".join(parts) + "}"
-                lines.append(line)
-        
-            return "\n".join(lines)
+        # ---------------- Keep original node structure ----------------
+        info_ordered_dicts = []
+        for node in renamed_nodes:
+            node["_original"] = normalize_mux(node["_original"])
+            info_ordered_dicts.append(node["_original"])
 
         # ---------------- Convert to YAML ----------------
-        proxies_yaml_block = make_single_line_yaml(info_ordered_dicts)    #If multiple lines format is needed, Delete Line by line YAML proxies output format code block, proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
+        proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)    #If multiple lines format is needed, Delete Line by line YAML proxies output format code block, proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
         proxy_names_block = "\n".join([f"      - {unquote(p['name'])}" for p in info_ordered_dicts])
 
         # ---------------- Replace placeholders ----------------

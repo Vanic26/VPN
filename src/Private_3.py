@@ -564,16 +564,12 @@ def parse_vless(line, line_number=None):
             "server": host,
             "port": int(port),
             "uuid": uuid,
-            "encryption": query.get("encryption", "none"),
         }
         
-        # preserve important raw fields
-        for key in ["security", "flow", "sni", "fp"]:
-            if key in query and query[key] != "":
-                node[key] = query[key]
-
+        # preserve raw query only
         for k, v in query.items():
-            if v not in ("", None): node[k] = urllib.parse.unquote(v)
+            if v not in ("", None):
+                node[k] = urllib.parse.unquote(v)
 
         return node
 
@@ -637,7 +633,15 @@ def parse_trojan(line, line_number=None):
         }
 
         for k, v in query.items():
-            if v not in ("", None): node[k] = urllib.parse.unquote(v)
+            if v in ("", None):
+                continue
+        
+            # never overwrite protocol type
+            if k == "type":
+                node["network"] = urllib.parse.unquote(v)
+                continue
+        
+            node[k] = urllib.parse.unquote(v)
 
         return node
 
@@ -1390,8 +1394,9 @@ def main():
         # ---------------- Keep original node structure ----------------
         info_ordered_dicts = []
         for node in renamed_nodes:
-            node = normalize_mux(node)
-            info_ordered_dicts.append(node)
+            original = copy.deepcopy(node["_original"])
+            original = normalize_mux(original)
+            info_ordered_dicts.append(original)
 
         # Line by line YAML proxies output format
         def make_inline_yaml(proxies):

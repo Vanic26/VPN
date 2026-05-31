@@ -73,30 +73,60 @@ def normalize_node(n):
     n = copy.deepcopy(n)
 
     # ---------------- safe nested objects ----------------
-    tls_obj = n.get("tls") if isinstance(n.get("tls"), dict) else {}
-    transport_obj = n.get("transport") if isinstance(n.get("transport"), dict) else {}
-    ws_opts = n.get("ws-opts") if isinstance(n.get("ws-opts"), dict) else {}
-    grpc_opts = n.get("grpc-opts") if isinstance(n.get("grpc-opts"), dict) else {}
-    reality_opts = n.get("reality-opts") if isinstance(n.get("reality-opts"), dict) else {}
+    tls_obj = n.get("tls")
+    if not isinstance(tls_obj, dict):
+        tls_obj = {}
+
+    transport_obj = n.get("transport")
+    if not isinstance(transport_obj, dict):
+        transport_obj = {}
+
+    ws_opts = n.get("ws-opts")
+    if not isinstance(ws_opts, dict):
+        ws_opts = {}
+
+    grpc_opts = n.get("grpc-opts")
+    if not isinstance(grpc_opts, dict):
+        grpc_opts = {}
+
+    reality_opts = n.get("reality-opts")
+    if not isinstance(reality_opts, dict):
+        reality_opts = {}
 
     # ---------------- canonical fields ----------------
-    n["server"] = str(n.get("server") or "").strip().lower().rstrip(".")
+    n["server"] = str(
+        n.get("server") or ""
+    ).strip().lower().rstrip(".")
 
     try:
-        n["port"] = int(n.get("port") or n.get("server_port") or 0)
+        n["port"] = int(
+            n.get("port")
+            or n.get("server_port")
+            or 0
+        )
     except:
         n["port"] = 0
 
-    n["type"] = str(n.get("type") or "").strip().lower()
+    n["type"] = str(
+        n.get("type") or ""
+    ).strip().lower()
 
-    auth = n.get("uuid") or n.get("password") or ""
+    # ---------------- auth ----------------
+    auth = (
+        n.get("uuid")
+        or n.get("password")
+        or ""
+    )
+
     n["_auth"] = str(auth).strip()
 
     # ---------------- security ----------------
     if reality_opts:
         n["_security"] = "reality"
+
     elif tls_obj or n.get("tls") is True:
         n["_security"] = "tls"
+
     else:
         n["_security"] = ""
 
@@ -108,29 +138,43 @@ def normalize_node(n):
         or tls_obj.get("server_name")
         or ""
     )
+
     n["_sni"] = str(sni).strip().lower()
 
     # ---------------- network ----------------
-    network = n.get("network") or transport_obj.get("type") or "tcp"
+    network = (
+        n.get("network")
+        or transport_obj.get("type")
+        or "tcp"
+    )
+
     n["_network"] = str(network).strip().lower()
 
     # ---------------- path ----------------
     path = ""
+
     if n["_network"] == "ws":
-        path = ws_opts.get("path") or transport_obj.get("path") or n.get("path") or ""
+
+        path = (
+            ws_opts.get("path")
+            or transport_obj.get("path")
+            or n.get("path")
+            or ""
+        )
+
     elif n["_network"] == "grpc":
-        path = grpc_opts.get("serviceName") or grpc_opts.get("grpc-service-name") or ""
+
+        path = (
+            grpc_opts.get("serviceName")
+            or grpc_opts.get("grpc-service-name")
+            or transport_obj.get("service_name")
+            or ""
+        )
 
     n["_path"] = str(path).strip().lower()
 
-    # ✅ IMPORTANT: guarantees dedup safety
-    n["_sni"] = n.get("_sni", "")
-    n["_security"] = n.get("_security", "")
-    n["_network"] = n.get("_network", "")
-    n["_path"] = n.get("_path", "")
-
     return n
-    
+
 def deduplicate_nodes(nodes):
     seen = set()
     unique_nodes = []
@@ -143,15 +187,19 @@ def deduplicate_nodes(nodes):
         if not n:
             continue
 
+        if not n["_auth"]:
+            unique_nodes.append(n)
+            continue
+
         key = (
-            n.get("type", ""),
-            n.get("server", ""),
-            n.get("port", 0),
-            n.get("_auth", ""),
-            n.get("_security", ""),
-            n.get("_sni", ""),
-            n.get("_network", ""),
-            n.get("_path", ""),
+            n["type"],
+            n["server"],
+            n["port"],
+            n["_auth"],
+            n["_security"],
+            n["_sni"],
+            n["_network"],
+            n["_path"],
         )
 
         if key in seen:
@@ -160,7 +208,14 @@ def deduplicate_nodes(nodes):
 
         seen.add(key)
 
-        for k in ["_auth", "_security", "_sni", "_network", "_path"]:
+        # cleanup temp fields
+        for k in [
+            "_auth",
+            "_security",
+            "_sni",
+            "_network",
+            "_path",
+        ]:
             n.pop(k, None)
 
         unique_nodes.append(n)
@@ -450,8 +505,8 @@ def parse_vmess(line, line_number=None):
             }
 
         # ---------------- Dynamic Fields (Safe) ----------------
-        node = merge_dynamic_fields(node, query)
-        node = normalize_node(node)
+        node = merge_dynamic_fields(node, data)
+
         return node
 
     except Exception as e:
@@ -515,8 +570,8 @@ def normalize_vless_for_clash(node):
     clean["skip-cert-verify"] = node.get("skip-cert-verify", False)
 
     return clean
-    
-# ---------------- Main VLESS parser ----------------    
+
+# ---------------- Main VMESS parser ----------------
 def parse_vless(line, line_number=None):
     try:
         if not line.startswith("vless://"):
@@ -578,7 +633,7 @@ def parse_vless(line, line_number=None):
         for key in ["security", "flow", "sni", "fp"]:
             if key in query and query[key] != "":
                 node[key] = query[key]
-        
+
         # Security (TLS / Reality)
         if query.get("security") == "tls":
             node["tls"] = True
@@ -586,15 +641,9 @@ def parse_vless(line, line_number=None):
             node["skip-cert-verify"] = query.get("allowInsecure", "0") in ("1", "true", "yes")
             if "fp" in query:
                 node["client-fingerprint"] = query["fp"]
-        
         elif query.get("security") == "reality":
-            node["reality-opts"] = {
-                "public-key": query.get("pbk", ""),
-                "short-id": query.get("sid", ""),
-                "server-name": query.get("sni", "")
-            }
+            node["reality-opts"] = {"public-key": query.get("pbk", ""), "short-id": query.get("sid", ""), "server-name": query.get("sni", "")}
             node["tls"] = True
-            node["security"] = "reality"
 
         # Network
         if "type" in query:
@@ -610,7 +659,6 @@ def parse_vless(line, line_number=None):
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
 
         node = merge_dynamic_fields(node, query)
-        node = normalize_node(node)
         return node
 
     except Exception as e:
@@ -701,7 +749,6 @@ def parse_trojan(line, line_number=None):
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
 
         node = merge_dynamic_fields(node, query)
-        node = normalize_node(node)
         return node
 
     except Exception as e:
@@ -772,7 +819,7 @@ def parse_hysteria2(line, line_number=None):
             node["down"] = query["down"]
 
         node = merge_dynamic_fields(node, query)
-        node = normalize_node(node)
+
         return node
 
     except Exception:
@@ -833,7 +880,7 @@ def parse_anytls(line, line_number=None):
 
         # dynamic fields
         node = merge_dynamic_fields(node, query)
-        node = normalize_node(node)
+
         return node
 
     except Exception as e:
@@ -908,7 +955,7 @@ def parse_tuic(line, line_number=None):
             node["disable-sni"] = query["disable_sni"].lower() in ("1", "true", "yes")
 
         node = merge_dynamic_fields(node, query)
-        node = normalize_node(node)
+
         return node
 
     except Exception as e:
@@ -1072,8 +1119,6 @@ def parse_ss(line, line_number=None):
         if plugin_opts:
             node["plugin-opts"] = plugin_opts
 
-        node = merge_dynamic_fields(node, query)
-        node = normalize_node(node)
         return node
 
     except Exception as e:
@@ -1131,8 +1176,8 @@ def parse_ssr(line, line_number=None):
         if "protoparam" in qs:
             node["protocol-param"] = decode_base64(qs["protoparam"])
 
-        node = merge_dynamic_fields(node, query)
-        node = normalize_node(node)
+        node = merge_dynamic_fields(node, qs)
+
         return node
 
     except Exception as e:
@@ -1586,7 +1631,7 @@ def main():
             return ordered
         
         # Apply to all renamed nodes
-        normalized_nodes = [normalize_vless_for_clash(n) if n.get("type") == "vless" else normalize_mux(n) for n in renamed_nodes]
+        normalize_vless_for_clash(n) if n.get("type") == "vless" else normalize_mux(n) for n in renamed_nodes]
         info_ordered = [reorder_info(n) for n in normalized_nodes]
         info_ordered_dicts = [dict(n) for n in info_ordered]
 

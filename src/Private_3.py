@@ -1631,7 +1631,7 @@ def main():
             return ordered
         
         # Apply to all renamed nodes
-        normalize_vless_for_clash(n) if n.get("type") == "vless" else normalize_mux(n) for n in renamed_nodes]
+        normalized_nodes = [normalize_vless_for_clash(n) if n.get("type") == "vless" else normalize_mux(n) for n in renamed_nodes]
         info_ordered = [reorder_info(n) for n in normalized_nodes]
         info_ordered_dicts = [dict(n) for n in info_ordered]
 

@@ -66,19 +66,6 @@ def tcp_latency_ms(host, port, timeout=2.0):
     except Exception:
         return 9999
 
-def wrap_node(original_node):
-    """
-    Keep original node untouched.
-    Add temporary metadata for filtering only.
-    """
-    if not isinstance(original_node, dict):
-        return None
-
-    return {
-        "_original": copy.deepcopy(original_node),
-        "_meta": normalize_node(original_node)
-    }
-
 def normalize_node(n):
     if not isinstance(n, dict):
         return None
@@ -189,26 +176,30 @@ def normalize_node(n):
     return n
 
 def deduplicate_nodes(nodes):
-    seen, unique_nodes, removed = set(), [], 0
+    seen = set()
+    unique_nodes = []
+    removed = 0
 
-    for node in nodes:
-        meta = node.get("_meta", {})
-        if not meta: continue
+    for raw_node in nodes:
 
-        auth = meta.get("_auth", "")
-        if not auth:
-            unique_nodes.append(node)
+        n = normalize_node(raw_node)
+
+        if not n:
+            continue
+
+        if not n["_auth"]:
+            unique_nodes.append(n)
             continue
 
         key = (
-            meta.get("type", ""),
-            meta.get("server", ""),
-            meta.get("port", 0),
-            auth,
-            meta.get("_security", ""),
-            meta.get("_sni", ""),
-            meta.get("_network", ""),
-            meta.get("_path", "")
+            n["type"],
+            n["server"],
+            n["port"],
+            n["_auth"],
+            n["_security"],
+            n["_sni"],
+            n["_network"],
+            n["_path"],
         )
 
         if key in seen:
@@ -216,7 +207,18 @@ def deduplicate_nodes(nodes):
             continue
 
         seen.add(key)
-        unique_nodes.append(node)
+
+        # cleanup temp fields
+        for k in [
+            "_auth",
+            "_security",
+            "_sni",
+            "_network",
+            "_path",
+        ]:
+            n.pop(k, None)
+
+        unique_nodes.append(n)
 
     return unique_nodes, removed
 
@@ -354,40 +356,62 @@ def safe_int(value, default=0):
 # -----------------------------------------------------------
 def merge_dynamic_fields(node, data):
     """
-    Preserve-only merge:
-    - NEVER create new semantic aliases
-    - ONLY keep fields if they already exist in node OR are explicitly raw-safe
+    Universal dynamic field merger:
+    - Works for BOTH JSON (vmess) and URL query (vless/trojan/ss/etc.)
+    - Safe against None, int, bool
+    - Supports ALPN parsing
+    - Supports URL decoding
     """
 
+    # ---------------- remove metadata universally ---------------- 
     node.pop("metadata", None)
 
-    # Only allow truly raw passthrough keys (no aliasing)
-    ALLOWED_RAW_KEYS = {
-        "alpn", "host", "path", "sni", "flow", "fp",
-        "uuid", "password", "cipher", "network"
+    # Reserved / normalized keys
+    reserved = {
+        # common normalized fields
+        "name", "server", "port", "uuid", "password",
+        "cipher", "network", "tls", "alterId",
+        "servername", "type", "encryption",
+
+        # raw fields (already normalized)
+        "v", "ps", "add", "id", "aid", "net",
+        "scy", "host", "path", "tls", "sni",
+
+        # protocol transport fields
+        "security", "type", "flow",
+
+        # ignore metadata
+        "metadata"
     }
+
+    known = set(node.keys()) | reserved
 
     for k, v in data.items():
 
+        # Ignore metadata completely
         if k.lower() == "metadata":
             continue
 
-        # Skip empty values
+        if k in known:
+            continue
+
+        # Skip empty / None
         if v is None or v == "":
             continue
 
-        # Normalize string only
+        # Convert to string safely
         if not isinstance(v, str):
             v = str(v)
 
+        # URL decode
         v = urllib.parse.unquote(v)
 
-        # 🚫 BLOCK alias injection keys completely
-        if k.lower() in {"pbk", "sid", "publickey", "shortid"}:
-            continue
-
-        # Only allow safe raw passthrough
-        if k in ALLOWED_RAW_KEYS:
+        # Special handling
+        if k.lower() == "alpn":
+            v_list = [x.strip() for x in v.split(",") if x.strip()]
+            if v_list:
+                node[k] = v_list
+        else:
             node[k] = v
 
     return node
@@ -439,12 +463,11 @@ def parse_vmess(line, line_number=None):
             "name": data.get("ps") or "VMESS Node",
             "server": data.get("add") or "",
             "port": safe_int(data.get("port")),
-            "uuid": data.get("id") or ""
+            "uuid": data.get("id") or "",
+            "alterId": safe_int(data.get("aid")),
+            "cipher": data.get("scy") or "auto",
+            "network": data.get("net") or "tcp",
         }
-        
-        if data.get("aid") not in (None, ""): node["alterId"] = safe_int(data.get("aid"))
-        if data.get("scy"): node["cipher"] = data["scy"]
-        if data.get("net"): node["network"] = data["net"]
 
         # ---------------- TLS Handling ----------------
         tls_val = data.get("tls")
@@ -463,19 +486,26 @@ def parse_vmess(line, line_number=None):
         net = node["network"]
 
         if net == "ws":
-            ws_opts = {}
-            if data.get("path"): ws_opts["path"] = data["path"]
-            if data.get("host"): ws_opts["headers"] = {"Host": data["host"]}
-            if ws_opts: node["ws-opts"] = ws_opts
+            node["ws-opts"] = {
+                "path": data.get("path") or "/",
+                "headers": {
+                    "Host": data.get("host") or ""
+                }
+            }
 
         elif net == "grpc":
-            if data.get("path"): node["grpc-opts"] = {"grpc-service-name": data["path"]}
+            node["grpc-opts"] = {
+                "grpc-service-name": data.get("path") or ""
+            }
 
         elif net == "h2":
-            h2_opts = {}
-            if data.get("path"): h2_opts["path"] = data["path"]
-            if data.get("host"): h2_opts["host"] = [data["host"]]
-            if h2_opts: node["h2-opts"] = h2_opts
+            node["h2-opts"] = {
+                "path": data.get("path") or "/",
+                "host": [data.get("host") or ""]
+            }
+
+        # ---------------- Dynamic Fields (Safe) ----------------
+        node = merge_dynamic_fields(node, data)
 
         return node
 
@@ -489,27 +519,59 @@ def parse_vmess(line, line_number=None):
 def normalize_vless_for_clash(node):
     clean = {}
 
-    # required core fields only if exist
-    for k in ["name", "type", "server", "port", "uuid"]:
-        if k in node:
-            clean[k] = node[k]
+    # core required fields
+    clean["name"] = node.get("name", "")
+    clean["type"] = "vless"
+    clean["server"] = node.get("server", "")
+    clean["port"] = node.get("port", 0)
+    clean["uuid"] = node.get("uuid", "")
 
-    # OPTIONAL pass-through (NO modification)
-    passthrough_keys = [
-        "alterId", "cipher", "udp", "network",
-        "flow", "security", "sni", "servername",
-        "skip-cert-verify", "fp", "client-fingerprint",
-        "path", "ws-opts", "grpc-opts", "h2-opts",
-        "reality-opts", "tls"
-    ]
+    # clash standard fields
+    clean["alterId"] = 0
+    clean["cipher"] = "auto"
+    clean["udp"] = True
 
-    for k in passthrough_keys:
-        if k in node:
-            clean[k] = node[k]
+    # transport
+    clean["network"] = node.get("network", "tcp")
+
+    # security mapping
+    if node.get("security") == "reality":
+        clean["tls"] = True
+    elif node.get("tls"):
+        clean["tls"] = True
+    else:
+        clean["tls"] = False
+
+    # sni
+    clean["servername"] = node.get("sni") or node.get("servername", "")
+
+    # reality ONLY inside object
+    if node.get("reality-opts"):
+        clean["reality-opts"] = node["reality-opts"]
+
+    # websocket / grpc
+    if "ws-opts" in node:
+        clean["ws-opts"] = node["ws-opts"]
+
+    if "grpc-opts" in node:
+        clean["grpc-opts"] = node["grpc-opts"]
+
+    # fingerprint (ONLY one field)
+    if node.get("fp"):
+        clean["client-fingerprint"] = node["fp"]
+    elif node.get("client-fingerprint"):
+        clean["client-fingerprint"] = node["client-fingerprint"]
+
+    # flow (important for vision)
+    if node.get("flow"):
+        clean["flow"] = node["flow"]
+
+    # skip-cert-verify mapping
+    clean["skip-cert-verify"] = node.get("skip-cert-verify", False)
 
     return clean
 
-# ---------------- Main VLESS parser ----------------
+# ---------------- Main VMESS parser ----------------
 def parse_vless(line, line_number=None):
     try:
         if not line.startswith("vless://"):
@@ -564,13 +626,39 @@ def parse_vless(line, line_number=None):
             "server": host,
             "port": int(port),
             "uuid": uuid,
+            "encryption": query.get("encryption", "none"),
         }
         
-        # preserve raw query only
-        for k, v in query.items():
-            if v not in ("", None):
-                node[k] = urllib.parse.unquote(v)
+        # preserve important raw fields
+        for key in ["security", "flow", "sni", "fp"]:
+            if key in query and query[key] != "":
+                node[key] = query[key]
 
+        # Security (TLS / Reality)
+        if query.get("security") == "tls":
+            node["tls"] = True
+            node["servername"] = query.get("sni", "")
+            node["skip-cert-verify"] = query.get("allowInsecure", "0") in ("1", "true", "yes")
+            if "fp" in query:
+                node["client-fingerprint"] = query["fp"]
+        elif query.get("security") == "reality":
+            node["reality-opts"] = {"public-key": query.get("pbk", ""), "short-id": query.get("sid", ""), "server-name": query.get("sni", "")}
+            node["tls"] = True
+
+        # Network
+        if "type" in query:
+            node["network"] = query["type"]
+
+        if node.get("network") == "ws":
+            ws_opts = {"path": urllib.parse.unquote(query.get("path", "/"))}
+            if "host" in query:
+                ws_opts["headers"] = {"Host": query["host"]}
+            node["ws-opts"] = ws_opts
+
+        if node.get("network") == "grpc":
+            node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
+
+        node = merge_dynamic_fields(node, query)
         return node
 
     except Exception as e:
@@ -632,17 +720,35 @@ def parse_trojan(line, line_number=None):
             "password": urllib.parse.unquote(password.strip()),
         }
 
-        for k, v in query.items():
-            if v in ("", None):
-                continue
-        
-            # never overwrite protocol type
-            if k == "type":
-                node["network"] = urllib.parse.unquote(v)
-                continue
-        
-            node[k] = urllib.parse.unquote(v)
+        # TLS / Security
+        node["skip-cert-verify"] = query.get("allowInsecure", "0").lower() in ("1", "true", "yes")
+        node["security"] = query.get("security", "tls")
 
+        sni = query.get("sni") or query.get("peer")
+        if sni:
+            node["sni"] = sni
+            node["servername"] = sni
+
+        # Fingerprint
+        if "fp" in query:
+            node["client-fingerprint"] = query["fp"]
+
+        # Network
+        if "type" in query:
+            node["network"] = query["type"]
+
+        # WebSocket
+        if node.get("network") == "ws":
+            ws_opts = {"path": urllib.parse.unquote(query.get("path", "/"))}
+            if "host" in query:
+                ws_opts["headers"] = {"Host": query["host"]}
+            node["ws-opts"] = ws_opts
+
+        # gRPC
+        elif node.get("network") == "grpc":
+            node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
+
+        node = merge_dynamic_fields(node, query)
         return node
 
     except Exception as e:
@@ -680,8 +786,39 @@ def parse_hysteria2(line, line_number=None):
             "password": password,
         }
 
-        for k, v in query.items():
-            if v not in ("", None): node[k] = urllib.parse.unquote(v)
+        # ---------------- TLS ----------------
+        tls = {}
+
+        if "sni" in query:
+            tls["server_name"] = query["sni"]
+
+        if "insecure" in query:
+            tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
+
+        if tls:
+            tls["enabled"] = True
+            node["tls"] = tls
+            node["skip-cert-verify"] = tls.get("insecure", False)
+
+        # ---------------- OBFS ----------------
+        if "obfs" in query:
+            node["obfs"] = query["obfs"]
+
+        if "obfs-password" in query:
+            node["obfs-password"] = query["obfs-password"]
+
+        # ---------------- ALPN ----------------
+        if "alpn" in query:
+            node["alpn"] = query["alpn"].split(",")
+
+        # ---------------- Speed ----------------
+        if "up" in query:
+            node["up"] = query["up"]
+
+        if "down" in query:
+            node["down"] = query["down"]
+
+        node = merge_dynamic_fields(node, query)
 
         return node
 
@@ -715,8 +852,34 @@ def parse_anytls(line, line_number=None):
             "password": password,
         }
 
-        for k, v in query.items():
-            if v not in ("", None): node[k] = urllib.parse.unquote(v)
+        # ---------------- TLS ----------------
+        tls = {}
+
+        if "sni" in query:
+            tls["server_name"] = query["sni"]
+            node["servername"] = query["sni"]
+
+        if "insecure" in query:
+            tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
+
+        if "allowInsecure" in query:
+            tls["insecure"] = query["allowInsecure"].lower() in ("1", "true", "yes")
+
+        if tls:
+            tls["enabled"] = True
+            node["tls"] = tls
+            node["skip-cert-verify"] = tls.get("insecure", False)
+
+        # ---------------- ALPN ----------------
+        if "alpn" in query:
+            node["alpn"] = query["alpn"].split(",")
+
+        # ---------------- Fingerprint ----------------
+        if "fp" in query:
+            node["client-fingerprint"] = query["fp"]
+
+        # dynamic fields
+        node = merge_dynamic_fields(node, query)
 
         return node
 
@@ -753,8 +916,45 @@ def parse_tuic(line, line_number=None):
             "password": password,
         }
 
-        for k, v in query.items():
-            if v not in ("", None): node[k] = urllib.parse.unquote(v)
+        # ---------------- TLS ----------------
+        tls = {}
+
+        if "sni" in query:
+            tls["server_name"] = query["sni"]
+            node["servername"] = query["sni"]
+
+        if "insecure" in query:
+            tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
+
+        if "allowInsecure" in query:
+            tls["insecure"] = query["allowInsecure"].lower() in ("1", "true", "yes")
+
+        if tls:
+            tls["enabled"] = True
+            node["tls"] = tls
+            node["skip-cert-verify"] = tls.get("insecure", False)
+
+        # ---------------- ALPN ----------------
+        if "alpn" in query:
+            node["alpn"] = query["alpn"].split(",")
+
+        # ---------------- congestion ----------------
+        if "congestion_control" in query:
+            node["congestion-controller"] = query["congestion_control"]
+
+        # ---------------- udp relay ----------------
+        if "udp_relay_mode" in query:
+            node["udp-relay-mode"] = query["udp_relay_mode"]
+
+        # ---------------- reduce rtt ----------------
+        if "reduce_rtt" in query:
+            node["reduce-rtt"] = query["reduce_rtt"].lower() in ("1", "true", "yes")
+
+        # ---------------- disable sni ----------------
+        if "disable_sni" in query:
+            node["disable-sni"] = query["disable_sni"].lower() in ("1", "true", "yes")
+
+        node = merge_dynamic_fields(node, query)
 
         return node
 
@@ -976,6 +1176,8 @@ def parse_ssr(line, line_number=None):
         if "protoparam" in qs:
             node["protocol-param"] = decode_base64(qs["protoparam"])
 
+        node = merge_dynamic_fields(node, qs)
+
         return node
 
     except Exception as e:
@@ -1051,7 +1253,7 @@ geoip_primary_fail = 0   # counts nodes where GeoIP mode failed but fallback suc
 name_primary_fail = 0    # counts nodes where name-based mode failed but fallback succeeded
 
 # ---------------- Rename node ----------------
-def rename_node(node, country_counter, CN_TO_CC):
+def rename_node(p, country_counter, CN_TO_CC):
     global geoip_primary_fail, name_primary_fail
     """
     Assign a standardized name to the node without changing any other fields.
@@ -1059,18 +1261,15 @@ def rename_node(node, country_counter, CN_TO_CC):
     If USE_ONLY_GEOIP is True, assign name by GeoIP only.
     Preserves all original fields to maintain connectivity.
     """
-    original = node.get("_original", {})
-    meta = node.get("_meta", {})
 
-    if not original or not meta:
-        return None
-    
     # Original name
-    original_name = str(original.get("name", "") or "").strip()
-    host = meta.get("server", "")
+    original_name = str(p.get("name", "") or "").strip()
+    host = p.get("server") or p.get("add") or ""
 
     # Detect ipv6 tag
-    ipv6_tag = bool(re.search(r'[\(\[\{]?\s*ipv6\s*[\)\]\}]?', original_name, flags=re.IGNORECASE))
+    ipv6_tag = False
+    if re.search(r'[\(\[\{]?\s*ipv6\s*[\)\]\}]?', original_name, flags=re.IGNORECASE):
+        ipv6_tag = True
 
     # Define forbidden emojis (any emoji you want to filter out)
     FORBIDDEN_EMOJIS = {"🔒", "❌", "⚠️", "🚀", "🎁"}
@@ -1081,18 +1280,19 @@ def rename_node(node, country_counter, CN_TO_CC):
 
     # ---------- Prepare ----------
     name_for_match = unquote(original_name)
-    cc, flag = None, None
+    cc = None
+    flag = None
 
     # Initialize fallback flags for counters
     geoip_failed = False
+    name_failed = False
 
-    # ---------------- GEOIP ONLY MODE ----------------
+    # ----------If GEOIP-ONLY Mode Is Set----------
     if USE_ONLY_GEOIP:
 
         # 1️⃣ GeoIP first
         ip = resolve_ip(host) or host
         cc_lower, cc_upper = geo_ip(ip)
-
         if cc_upper and cc_upper != "UN":
             cc = cc_upper
             flag = country_to_flag(cc)
@@ -1105,62 +1305,81 @@ def rename_node(node, country_counter, CN_TO_CC):
             if flag_match:
                 flag = flag_match.group(0)
                 cc = flag_to_country_code(flag)
-                if cc: cc = cc.upper()
+                if cc:
+                    cc = cc.upper()
 
         # 3️⃣ Chinese name mapping
         if not cc:
             for cn_name, code in CN_TO_CC.items():
-                if cn_name and cn_name in name_for_match:
+                if not cn_name:
+                    continue
+                if cn_name in name_for_match:
                     cc = code.upper()
                     flag = country_to_flag(cc)
                     break
 
         # 4️⃣ Two-letter ISO code (context-aware, unit-safe)
         if not cc:
-            for iso_match in re.finditer(r'\b([A-Z]{2})\b', original_name):
+            iso_iter = re.finditer(r'\b([A-Z]{2})\b', original_name)
+            for iso_match in iso_iter:
                 iso = iso_match.group(1)
                 before = original_name[:iso_match.start()]
-                if re.search(r'\d\s*$', before): continue
+                # Avoid some two letters which are identical to two-letters ISO code
+                if re.search(r'\d\s*$', before):
+                    continue
                 cc = iso
                 flag = country_to_flag(cc)
                 break
-                
+
         # Final validation
         if not cc or not flag:
-            return None
+            return None    # ❌ truly unnameable → skip
 
-        # GeoIP fallback success count
+        # 📊 GeoIP fallback success count
         if geoip_failed:
             geoip_primary_fail += 1
 
-    # ---------------- NAME BASE MODE ----------------
+        # ----------Final naming----------
+        with counter_lock:
+            country_counter[cc] += 1
+            index = country_counter[cc]
+            p["name"] = build_name(flag, cc, index, ipv6_tag)
+            return p
+
+    # ----------If GEOIP-ONLY Mode Is Not Set----------
     else:
         # 1️⃣ Emoji flag mapping
         flag_match = re.search(r'[\U0001F1E6-\U0001F1FF]{2}', name_for_match)
         if flag_match:
             flag = flag_match.group(0)
             cc = flag_to_country_code(flag)
-            if cc: cc = cc.upper()
+            if cc:
+                cc = cc.upper()
 
         # 2️⃣ Chinese name mapping
         if not cc:
             for cn_name, code in CN_TO_CC.items():
-                if cn_name and cn_name in name_for_match:
+                if not cn_name:
+                    continue
+                if cn_name in name_for_match:
                     cc = code.upper()
                     flag = country_to_flag(cc)
                     break
 
-        # ISO code
+        # 3️⃣ Two-letter ISO code (unit-safe)
         if not cc:
-            for iso_match in re.finditer(r'\b([A-Z]{2})\b', original_name):
+            iso_iter = re.finditer(r'\b([A-Z]{2})\b', original_name)
+            for iso_match in iso_iter:
                 iso = iso_match.group(1)
                 before = original_name[:iso_match.start()]
-                if re.search(r'\d\s*$', before): continue
+                # Avoid some two letters which are identical to two-letters ISO code
+                if re.search(r'\d\s*$', before):
+                    continue
                 cc = iso
                 flag = country_to_flag(cc)
                 break
 
-        # 3️⃣ Two-letter ISO code (unit-safe)
+        # ---------- GeoIP fallback ----------
         if not cc:
             ip = resolve_ip(host) or host
             if ip:
@@ -1169,19 +1388,17 @@ def rename_node(node, country_counter, CN_TO_CC):
                     cc = cc_upper
                     flag = country_to_flag(cc)
                     name_primary_fail += 1
-
-        # Final validation
+        
+        # ---------- Final validation ----------
         if not cc or not flag:
-            return None
+            return None    # ❌ truly unnameable → skip
 
-    # ---------------- Naming Only ----------------
-    with counter_lock:
-        country_counter[cc] += 1
-        index = country_counter[cc]
-
-        original["name"] = build_name(flag, cc, index, ipv6_tag)
-
-    return node
+        # ----------Final naming----------
+        with counter_lock:
+            country_counter[cc] += 1
+            index = country_counter[cc]
+            p["name"] = build_name(flag, cc, index, ipv6_tag)
+            return p
 
 # ---------------- Load proxies ----------------
 def load_proxies(url, retries=5):
@@ -1234,25 +1451,17 @@ def load_proxies(url, retries=5):
 
                     if data and "proxies" in data:
                         for idx, p in enumerate(data["proxies"], start=1):
-                    
-                            original_name = str(
-                                p.get("name", "") or ""
-                            ).strip()
+                            original_name = str(p.get("name", "") or "").strip()
                     
                             if not original_name:
                                 p["name"] = f"Node-{idx}"
                     
-                            # remove metadata only
+                            # remove metadata
                             p.pop("metadata", None)
                     
-                            wrapped = wrap_node(p)
+                            nodes.append(p)
                     
-                            if wrapped:
-                                nodes.append(wrapped)
-                    
-                            protocol = str(
-                                p.get("type", "NODE")
-                            ).upper()
+                            protocol = str(p.get("type", "NODE")).upper()
                     
                             print(
                                 f"[parse] 🔎 YAML to {protocol} node: {idx} parsed",
@@ -1277,16 +1486,18 @@ def load_proxies(url, retries=5):
                         node = parse_node_line(line, idx)
 
                         if node:
-                            wrapped = wrap_node(node)
-                            if wrapped:
-                                nodes.append(wrapped)
-                                
-                            protocol = (line.split("://")[0].upper() if "://" in line else "NODE")
+                            nodes.append(node)
+                            protocol = (
+                                line.split("://")[0].upper()
+                                if "://" in line
+                                else "NODE"
+                            )
 
                             if sub_type == "BASE64":
-                                print(f"[parse] 🔎 Base64 to {protocol} node: {idx} parsed", flush=True)
+                                print(
+                                    f"[parse] 🔎 Base64 to {protocol} node: {idx} parsed", flush=True )
                             else:
-                                print(f"[parse] 🔎 {protocol} node: {idx} parsed", flush=True)
+                                print(f"[parse] 🔎 {protocol} node: {idx} parsed", flush=True )
 
                         else:
                             print(f"[skip] ⛔ Invalid or unsupported line ({idx})", flush=True)
@@ -1329,11 +1540,11 @@ def main():
             print(f"[latency] 🚫 Filtering nodes > {LATENCY_THRESHOLD} ms")
             filtered_nodes = []
             with concurrent.futures.ThreadPoolExecutor(max_workers=50) as ex:
-                futures = [ex.submit(tcp_latency_ms, n["_meta"].get("server"), n["_meta"].get("port")) for n in all_nodes]
-            
+                futures = [ex.submit(tcp_latency_ms, n.get("server"), n.get("port")) for n in all_nodes]
                 for n, f in zip(all_nodes, futures):
                     latency = f.result()
-                    if latency <= LATENCY_THRESHOLD: filtered_nodes.append(n)
+                    if latency <= LATENCY_THRESHOLD:
+                        filtered_nodes.append(n)
 
             num_filtered = len(all_nodes) - len(filtered_nodes)
             print(f"[latency] ❗Filtered {num_filtered} nodes due to latency")
@@ -1391,38 +1602,63 @@ def main():
             print(f"[FATAL] ⚠️ Failed to load ClashTemplate -> {e_local}")
             sys.exit(1)
 
-        # ---------------- Keep original node structure ----------------
-        info_ordered_dicts = []
-        for node in renamed_nodes:
-            original = copy.deepcopy(node["_original"])
-            original = normalize_mux(original)
-            info_ordered_dicts.append(original)
+        # ---------------- Preferred key order ----------------
+        INFO_ORDER = [
+            "name", "type", "server", "port", "uuid", "password",
+            "encryption", "network", "security", "sni", "servername",
+            "skip-cert-verify", "fp", "client-fingerprint",
+            "path", "ws-opts", "grpc-opts", "h2-opts"
+        ]
+        
+        # ---------------- Function to reorder keys ----------------
+        def reorder_info(node):
+            ordered = OrderedDict()
+            # Add preferred keys only if they exist in the node
+            for key in INFO_ORDER:
+                if key in node:
+                    val = node[key]
+                    # Convert string to list only if original value is a list or comma string
+                    if key in ("alpn") and isinstance(val, str):
+                        # Only split if val is not empty
+                        val_list = [x.strip() for x in val.split(",") if x.strip()]
+                        ordered[key] = val_list if val_list else val
+                    else:
+                        ordered[key] = val
+            # Append extra keys not in preferred order
+            for key in node:
+                if key not in ordered:
+                    ordered[key] = node[key]
+            return ordered
+        
+        # Apply to all renamed nodes
+        normalized_nodes = [normalize_vless_for_clash(n) if n.get("type") == "vless" else normalize_mux(n) for n in renamed_nodes]
+        info_ordered = [reorder_info(n) for n in normalized_nodes]
+        info_ordered_dicts = [dict(n) for n in info_ordered]
 
         # Line by line YAML proxies output format
-        def make_inline_yaml(proxies):
+        def make_single_line_yaml(proxies):
             lines = []
-        
-            def to_value(v):
-                if isinstance(v, dict):
-                    inner = ", ".join(f"{k}: {json.dumps(vv, ensure_ascii=False)}" for k, vv in v.items())
-                    return "{" + inner + "}"
-                elif isinstance(v, list):
-                    return "[" + ", ".join(json.dumps(i, ensure_ascii=False) for i in v) + "]"
-                else:
-                    return json.dumps(v, ensure_ascii=False)
-        
             for p in proxies:
+                # Convert nested dicts safely
+                def to_yaml_value(v):
+                    if isinstance(v, dict):
+                        inner = ", ".join(f"{k}: {json.dumps(vv, ensure_ascii=False)}" for k, vv in v.items())
+                        return "{" + inner + "}"
+                    else:
+                        return json.dumps(v, ensure_ascii=False)
+        
                 parts = []
                 for k, v in p.items():
-                    parts.append(f"{k}: {to_value(v)}")
+                    parts.append(f"{k}: {to_yaml_value(v)}")
         
-                lines.append("- {" + ", ".join(parts) + "}")
+                line = "- {" + ", ".join(parts) + "}"
+                lines.append(line)
         
             return "\n".join(lines)
 
         # ---------------- Convert to YAML ----------------
-        proxies_yaml_block = make_inline_yaml(info_ordered_dicts)    #If multiple lines format is needed, Delete Line by line YAML proxies output format code block, proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
-        proxy_names_block = "\n".join(f"      - {json.dumps(unquote(p.get('name', '')) , ensure_ascii=False)}"  for p in info_ordered_dicts )
+        proxies_yaml_block = make_single_line_yaml(info_ordered_dicts)    #If multiple lines format is needed, Delete Line by line YAML proxies output format code block, proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
+        proxy_names_block = "\n".join([f"      - {unquote(p['name'])}" for p in info_ordered_dicts])
 
         # ---------------- Replace placeholders ----------------
         output_text = template_text.replace("{{PROXIES}}", proxies_yaml_block)

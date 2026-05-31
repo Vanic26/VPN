@@ -354,62 +354,40 @@ def safe_int(value, default=0):
 # -----------------------------------------------------------
 def merge_dynamic_fields(node, data):
     """
-    Universal dynamic field merger:
-    - Works for BOTH JSON (vmess) and URL query (vless/trojan/ss/etc.)
-    - Safe against None, int, bool
-    - Supports ALPN parsing
-    - Supports URL decoding
+    Preserve-only merge:
+    - NEVER create new semantic aliases
+    - ONLY keep fields if they already exist in node OR are explicitly raw-safe
     """
 
-    # ---------------- remove metadata universally ---------------- 
     node.pop("metadata", None)
 
-    # Reserved / normalized keys
-    reserved = {
-        # common normalized fields
-        "name", "server", "port", "uuid", "password",
-        "cipher", "network", "tls", "alterId",
-        "servername", "type", "encryption",
-
-        # raw fields (already normalized)
-        "v", "ps", "add", "id", "aid", "net",
-        "scy", "host", "path", "tls", "sni",
-
-        # protocol transport fields
-        "security", "type", "flow",
-
-        # ignore metadata
-        "metadata"
+    # Only allow truly raw passthrough keys (no aliasing)
+    ALLOWED_RAW_KEYS = {
+        "alpn", "host", "path", "sni", "flow", "fp",
+        "uuid", "password", "cipher", "network"
     }
-
-    known = set(node.keys()) | reserved
 
     for k, v in data.items():
 
-        # Ignore metadata completely
         if k.lower() == "metadata":
             continue
 
-        if k in known:
-            continue
-
-        # Skip empty / None
+        # Skip empty values
         if v is None or v == "":
             continue
 
-        # Convert to string safely
+        # Normalize string only
         if not isinstance(v, str):
             v = str(v)
 
-        # URL decode
         v = urllib.parse.unquote(v)
 
-        # Special handling
-        if k.lower() == "alpn":
-            v_list = [x.strip() for x in v.split(",") if x.strip()]
-            if v_list:
-                node[k] = v_list
-        else:
+        # 🚫 BLOCK alias injection keys completely
+        if k.lower() in {"pbk", "sid", "publickey", "shortid"}:
+            continue
+
+        # Only allow safe raw passthrough
+        if k in ALLOWED_RAW_KEYS:
             node[k] = v
 
     return node
@@ -461,11 +439,12 @@ def parse_vmess(line, line_number=None):
             "name": data.get("ps") or "VMESS Node",
             "server": data.get("add") or "",
             "port": safe_int(data.get("port")),
-            "uuid": data.get("id") or "",
-            "alterId": safe_int(data.get("aid")),
-            "cipher": data.get("scy") or "auto",
-            "network": data.get("net") or "tcp",
+            "uuid": data.get("id") or ""
         }
+        
+        if data.get("aid") not in (None, ""): node["alterId"] = safe_int(data.get("aid"))
+        if data.get("scy"): node["cipher"] = data["scy"]
+        if data.get("net"): node["network"] = data["net"]
 
         # ---------------- TLS Handling ----------------
         tls_val = data.get("tls")
@@ -484,26 +463,19 @@ def parse_vmess(line, line_number=None):
         net = node["network"]
 
         if net == "ws":
-            node["ws-opts"] = {
-                "path": data.get("path") or "/",
-                "headers": {
-                    "Host": data.get("host") or ""
-                }
-            }
+            ws_opts = {}
+            if data.get("path"): ws_opts["path"] = data["path"]
+            if data.get("host"): ws_opts["headers"] = {"Host": data["host"]}
+            if ws_opts: node["ws-opts"] = ws_opts
 
         elif net == "grpc":
-            node["grpc-opts"] = {
-                "grpc-service-name": data.get("path") or ""
-            }
+            if data.get("path"): node["grpc-opts"] = {"grpc-service-name": data["path"]}
 
         elif net == "h2":
-            node["h2-opts"] = {
-                "path": data.get("path") or "/",
-                "host": [data.get("host") or ""]
-            }
-
-        # ---------------- Dynamic Fields (Safe) ----------------
-        node = merge_dynamic_fields(node, data)
+            h2_opts = {}
+            if data.get("path"): h2_opts["path"] = data["path"]
+            if data.get("host"): h2_opts["host"] = [data["host"]]
+            if h2_opts: node["h2-opts"] = h2_opts
 
         return node
 
@@ -517,59 +489,27 @@ def parse_vmess(line, line_number=None):
 def normalize_vless_for_clash(node):
     clean = {}
 
-    # core required fields
-    clean["name"] = node.get("name", "")
-    clean["type"] = "vless"
-    clean["server"] = node.get("server", "")
-    clean["port"] = node.get("port", 0)
-    clean["uuid"] = node.get("uuid", "")
+    # required core fields only if exist
+    for k in ["name", "type", "server", "port", "uuid"]:
+        if k in node:
+            clean[k] = node[k]
 
-    # clash standard fields
-    clean["alterId"] = 0
-    clean["cipher"] = "auto"
-    clean["udp"] = True
+    # OPTIONAL pass-through (NO modification)
+    passthrough_keys = [
+        "alterId", "cipher", "udp", "network",
+        "flow", "security", "sni", "servername",
+        "skip-cert-verify", "fp", "client-fingerprint",
+        "path", "ws-opts", "grpc-opts", "h2-opts",
+        "reality-opts", "tls"
+    ]
 
-    # transport
-    clean["network"] = node.get("network", "tcp")
-
-    # security mapping
-    if node.get("security") == "reality":
-        clean["tls"] = True
-    elif node.get("tls"):
-        clean["tls"] = True
-    else:
-        clean["tls"] = False
-
-    # sni
-    clean["servername"] = node.get("sni") or node.get("servername", "")
-
-    # reality ONLY inside object
-    if node.get("reality-opts"):
-        clean["reality-opts"] = node["reality-opts"]
-
-    # websocket / grpc
-    if "ws-opts" in node:
-        clean["ws-opts"] = node["ws-opts"]
-
-    if "grpc-opts" in node:
-        clean["grpc-opts"] = node["grpc-opts"]
-
-    # fingerprint (ONLY one field)
-    if node.get("fp"):
-        clean["client-fingerprint"] = node["fp"]
-    elif node.get("client-fingerprint"):
-        clean["client-fingerprint"] = node["client-fingerprint"]
-
-    # flow (important for vision)
-    if node.get("flow"):
-        clean["flow"] = node["flow"]
-
-    # skip-cert-verify mapping
-    clean["skip-cert-verify"] = node.get("skip-cert-verify", False)
+    for k in passthrough_keys:
+        if k in node:
+            clean[k] = node[k]
 
     return clean
 
-# ---------------- Main VMESS parser ----------------
+# ---------------- Main VLESS parser ----------------
 def parse_vless(line, line_number=None):
     try:
         if not line.startswith("vless://"):
@@ -632,31 +572,9 @@ def parse_vless(line, line_number=None):
             if key in query and query[key] != "":
                 node[key] = query[key]
 
-        # Security (TLS / Reality)
-        if query.get("security") == "tls":
-            node["tls"] = True
-            node["servername"] = query.get("sni", "")
-            node["skip-cert-verify"] = query.get("allowInsecure", "0") in ("1", "true", "yes")
-            if "fp" in query:
-                node["client-fingerprint"] = query["fp"]
-        elif query.get("security") == "reality":
-            node["reality-opts"] = {"public-key": query.get("pbk", ""), "short-id": query.get("sid", ""), "server-name": query.get("sni", "")}
-            node["tls"] = True
+        for k, v in query.items():
+            if v not in ("", None): node[k] = urllib.parse.unquote(v)
 
-        # Network
-        if "type" in query:
-            node["network"] = query["type"]
-
-        if node.get("network") == "ws":
-            ws_opts = {"path": urllib.parse.unquote(query.get("path", "/"))}
-            if "host" in query:
-                ws_opts["headers"] = {"Host": query["host"]}
-            node["ws-opts"] = ws_opts
-
-        if node.get("network") == "grpc":
-            node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
-
-        node = merge_dynamic_fields(node, query)
         return node
 
     except Exception as e:
@@ -718,35 +636,9 @@ def parse_trojan(line, line_number=None):
             "password": urllib.parse.unquote(password.strip()),
         }
 
-        # TLS / Security
-        node["skip-cert-verify"] = query.get("allowInsecure", "0").lower() in ("1", "true", "yes")
-        node["security"] = query.get("security", "tls")
+        for k, v in query.items():
+            if v not in ("", None): node[k] = urllib.parse.unquote(v)
 
-        sni = query.get("sni") or query.get("peer")
-        if sni:
-            node["sni"] = sni
-            node["servername"] = sni
-
-        # Fingerprint
-        if "fp" in query:
-            node["client-fingerprint"] = query["fp"]
-
-        # Network
-        if "type" in query:
-            node["network"] = query["type"]
-
-        # WebSocket
-        if node.get("network") == "ws":
-            ws_opts = {"path": urllib.parse.unquote(query.get("path", "/"))}
-            if "host" in query:
-                ws_opts["headers"] = {"Host": query["host"]}
-            node["ws-opts"] = ws_opts
-
-        # gRPC
-        elif node.get("network") == "grpc":
-            node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
-
-        node = merge_dynamic_fields(node, query)
         return node
 
     except Exception as e:
@@ -784,39 +676,8 @@ def parse_hysteria2(line, line_number=None):
             "password": password,
         }
 
-        # ---------------- TLS ----------------
-        tls = {}
-
-        if "sni" in query:
-            tls["server_name"] = query["sni"]
-
-        if "insecure" in query:
-            tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
-
-        if tls:
-            tls["enabled"] = True
-            node["tls"] = tls
-            node["skip-cert-verify"] = tls.get("insecure", False)
-
-        # ---------------- OBFS ----------------
-        if "obfs" in query:
-            node["obfs"] = query["obfs"]
-
-        if "obfs-password" in query:
-            node["obfs-password"] = query["obfs-password"]
-
-        # ---------------- ALPN ----------------
-        if "alpn" in query:
-            node["alpn"] = query["alpn"].split(",")
-
-        # ---------------- Speed ----------------
-        if "up" in query:
-            node["up"] = query["up"]
-
-        if "down" in query:
-            node["down"] = query["down"]
-
-        node = merge_dynamic_fields(node, query)
+        for k, v in query.items():
+            if v not in ("", None): node[k] = urllib.parse.unquote(v)
 
         return node
 
@@ -850,34 +711,8 @@ def parse_anytls(line, line_number=None):
             "password": password,
         }
 
-        # ---------------- TLS ----------------
-        tls = {}
-
-        if "sni" in query:
-            tls["server_name"] = query["sni"]
-            node["servername"] = query["sni"]
-
-        if "insecure" in query:
-            tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
-
-        if "allowInsecure" in query:
-            tls["insecure"] = query["allowInsecure"].lower() in ("1", "true", "yes")
-
-        if tls:
-            tls["enabled"] = True
-            node["tls"] = tls
-            node["skip-cert-verify"] = tls.get("insecure", False)
-
-        # ---------------- ALPN ----------------
-        if "alpn" in query:
-            node["alpn"] = query["alpn"].split(",")
-
-        # ---------------- Fingerprint ----------------
-        if "fp" in query:
-            node["client-fingerprint"] = query["fp"]
-
-        # dynamic fields
-        node = merge_dynamic_fields(node, query)
+        for k, v in query.items():
+            if v not in ("", None): node[k] = urllib.parse.unquote(v)
 
         return node
 
@@ -914,45 +749,8 @@ def parse_tuic(line, line_number=None):
             "password": password,
         }
 
-        # ---------------- TLS ----------------
-        tls = {}
-
-        if "sni" in query:
-            tls["server_name"] = query["sni"]
-            node["servername"] = query["sni"]
-
-        if "insecure" in query:
-            tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
-
-        if "allowInsecure" in query:
-            tls["insecure"] = query["allowInsecure"].lower() in ("1", "true", "yes")
-
-        if tls:
-            tls["enabled"] = True
-            node["tls"] = tls
-            node["skip-cert-verify"] = tls.get("insecure", False)
-
-        # ---------------- ALPN ----------------
-        if "alpn" in query:
-            node["alpn"] = query["alpn"].split(",")
-
-        # ---------------- congestion ----------------
-        if "congestion_control" in query:
-            node["congestion-controller"] = query["congestion_control"]
-
-        # ---------------- udp relay ----------------
-        if "udp_relay_mode" in query:
-            node["udp-relay-mode"] = query["udp_relay_mode"]
-
-        # ---------------- reduce rtt ----------------
-        if "reduce_rtt" in query:
-            node["reduce-rtt"] = query["reduce_rtt"].lower() in ("1", "true", "yes")
-
-        # ---------------- disable sni ----------------
-        if "disable_sni" in query:
-            node["disable-sni"] = query["disable_sni"].lower() in ("1", "true", "yes")
-
-        node = merge_dynamic_fields(node, query)
+        for k, v in query.items():
+            if v not in ("", None): node[k] = urllib.parse.unquote(v)
 
         return node
 
@@ -1173,8 +971,6 @@ def parse_ssr(line, line_number=None):
 
         if "protoparam" in qs:
             node["protocol-param"] = decode_base64(qs["protoparam"])
-
-        node = merge_dynamic_fields(node, qs)
 
         return node
 
@@ -1592,14 +1388,33 @@ def main():
             sys.exit(1)
 
         # ---------------- Keep original node structure ----------------
-        info_ordered_dicts = []
-        for node in renamed_nodes:
-            node["_original"] = normalize_mux(node["_original"])
-            info_ordered_dicts.append(node["_original"])
+        info_ordered_dicts = info_ordered
+
+        # Line by line YAML proxies output format
+        def make_inline_yaml(proxies):
+            lines = []
+        
+            def to_value(v):
+                if isinstance(v, dict):
+                    inner = ", ".join(f"{k}: {json.dumps(vv, ensure_ascii=False)}" for k, vv in v.items())
+                    return "{" + inner + "}"
+                elif isinstance(v, list):
+                    return "[" + ", ".join(json.dumps(i, ensure_ascii=False) for i in v) + "]"
+                else:
+                    return json.dumps(v, ensure_ascii=False)
+        
+            for p in proxies:
+                parts = []
+                for k, v in p.items():
+                    parts.append(f"{k}: {to_value(v)}")
+        
+                lines.append("- {" + ", ".join(parts) + "}")
+        
+            return "\n".join(lines)
 
         # ---------------- Convert to YAML ----------------
-        proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)    #If multiple lines format is needed, Delete Line by line YAML proxies output format code block, proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
-        proxy_names_block = "\n".join([f"      - {unquote(p['name'])}" for p in info_ordered_dicts])
+        proxies_yaml_block = make_inline_yaml(info_ordered_dicts)    #If multiple lines format is needed, Delete Line by line YAML proxies output format code block, proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
+        proxy_names_block = "\n".join(f"      - {json.dumps(unquote(p.get('name', '')) , ensure_ascii=False)}"  for p in info_ordered_dicts )
 
         # ---------------- Replace placeholders ----------------
         output_text = template_text.replace("{{PROXIES}}", proxies_yaml_block)

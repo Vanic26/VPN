@@ -1,0 +1,136 @@
+name: Update VPN Subscription (Private_3)
+
+on:
+  schedule:
+    - cron: '0 */8 * * *' # every 8 hours
+    
+  # Manual trigger with inputs
+  workflow_dispatch:
+    inputs:
+      use_latency_filter:
+        description: "Enable latency filter? (true/false)"
+        required: true
+        default: "false"
+      latency_threshold:
+        description: "Latency threshold in ms (only used if filter is true)"
+        required: true
+        default: "100"
+      use_duplicate_filter:
+        description: "Enable duplicate node filter? (true/false)"
+        required: true
+        default: "true"
+      use_only_geoip:
+        description: "Use only GeoIP for naming? (true/false)"
+        required: false
+        default: "false"
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  # forces Node.js 24 for JS actions
+          
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write   # needed for commit & push
+      actions: write    # needed for deleting artifacts
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Prepart to start
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pyyaml babel pycountry
+
+      - name: Checking source from secret
+        run: |
+          if [ -z "${{ secrets.SECRET_SOURCE_3 }}" ]; then
+            echo "❌ ERROR: Secret source is not present in action secrets."
+            exit 1
+          else
+            echo "✅ SECRET_SOURCE loaded"
+          fi
+          
+      - name: Start fetching, decoding and rename processes
+        run: python src/Private_3.py
+        env:
+          SECRET_SOURCE_3: ${{ secrets.SECRET_SOURCE_3 }}
+          TEXTDB_API_3: ${{ secrets.TEXTDB_API_3 }}
+          CN_TO_CC: ${{ secrets.CN_TO_CC }}
+          LATENCY_FILTER: ${{ inputs.use_latency_filter || 'false' }}
+          LATENCY_THRESHOLD: ${{ inputs.latency_threshold || '100' }}
+          DUPLICATE_FILTER: ${{ inputs.use_duplicate_filter || 'true' }}
+          USE_ONLY_GEOIP: ${{ inputs.use_only_geoip || 'false' }}
+
+      - name: Generate local timestamp
+        id: timestamp
+        run: |
+          # Get UTC time in seconds since epoch
+          utc_seconds=$(date -u +%s)
+          # Add 6 hours 30 minutes = 23400 seconds
+          local_seconds=$((utc_seconds + 6*3600 + 30*60))
+          # Format as DD.MM.YYYY HH:MM:SS GMT+6:30
+          TIMESTAMP=$(date -u -d "@$local_seconds" +"%d.%m.%Y %H:%M:%S")
+          echo "TIMESTAMP=$TIMESTAMP" >> $GITHUB_ENV
+
+      - name: Backup subscription to private gist
+        shell: bash
+        env:
+          GIST_ID: ${{ secrets.PRIVATE_GIST_3 }}
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+        run: |
+          if [ ! -f /tmp/temp3.yaml ]; then
+            echo "❌ Backup file not found: /tmp/temp3.yaml"
+            exit 1
+          fi
+      
+          CONTENT=$(jq -Rs . < /tmp/temp3.yaml)
+      
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X PATCH \
+            -H "Authorization: token $GIST_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/gists/$GIST_ID" \
+            -d "{\"files\":{\"Private_3\":{\"content\":$CONTENT}}}")
+      
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "✅ Private gist backup updated"
+          else
+            echo "❌ Gist backup failed (HTTP $HTTP_CODE)"
+            exit 1
+          fi
+
+      - name: Commit and Push notification
+        shell: bash
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      
+          MAX_RETRIES=3
+          COUNT=0
+          SUCCESS=0
+      
+          while [ $COUNT -lt $MAX_RETRIES ]; do
+            echo "Attempt $(($COUNT + 1)) to commit & push..."
+            git commit --allow-empty -m "🎉Private_3 Auto update successful🎉 - $TIMESTAMP" && \
+            git push --force-with-lease origin main && \
+            SUCCESS=1 && break
+      
+            COUNT=$(($COUNT + 1))
+            echo "Push failed, retrying in 5 seconds..."
+            sleep 5
+          done
+      
+          if [ $SUCCESS -eq 1 ]; then
+            echo "Push successful!"
+          else
+            echo "Push failed after $MAX_RETRIES attempts."
+            exit 1
+          fi

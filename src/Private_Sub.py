@@ -1,14 +1,15 @@
-import os, sys, time, yaml, requests, socket, threading, concurrent.futures, traceback, base64, re, copy, json, urllib.parse
+import os, sys, time, yaml, requests, math, socket, threading, concurrent.futures, traceback, base64, re, copy, json, urllib.parse
 from collections import defaultdict, OrderedDict; from datetime import datetime, timedelta, timezone; from urllib.parse import unquote, urlparse, parse_qs
 
 # ---------------- Config ----------------
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 SECRET_SOURCE = os.getenv("SECRET_SOURCE", "").strip()
 TEXTDB_API = os.getenv("TEXTDB_API", "").strip()
-SUB_NAME = os.getenv("SUB_NAME", "PrivateSub").strip()
-SUB_ID = os.getenv("SUB_ID", "1").strip()
+SUB_NAME = os.getenv("SUB_NAME", "").strip()
+SUB_ID = os.getenv("SUB_ID", "").strip()
 CLASH_TEMPLATE = os.path.join(REPO_ROOT, "ClashTemplate.ini")
 TEMP_FILE = f"/tmp/temp{SUB_ID}.yaml"
+CN_TO_CC = os.getenv("CN_TO_CC", "").strip()
 USE_ONLY_GEOIP = os.getenv("USE_ONLY_GEOIP", "false").lower() == "true"
 
 # ---------------- Inputs ----------------
@@ -1618,8 +1619,9 @@ def main():
 
         # ---------------- Final output ----------------
         final_output = f"# Last update: {timestamp}\n" + output_text
-        with open(TEMP_FILE, "w", encoding="utf-8") as f: f.write(final_output)
-        print(f"[done] 💾 Generated subscription -> {TEMP_FILE}")
+        with open(TEMP_FILE, "w", encoding="utf-8") as f:
+            f.write(final_output)
+        print(f"[done] 💾 Generated subscription ({SUB_NAME}) -> {TEMP_FILE}")
 
         # Upload to textdb only after all upper processes successful processing
         upload_to_textdb(final_output)
@@ -1630,38 +1632,41 @@ def main():
         sys.exit(1)
 
 # ---------------- Upload to TextDB ----------------
+def chunk_text(text, size=8000):
+    return [text[i:i+size] for i in range(0, len(text), size)]
+
+
 def upload_to_textdb(final_output):
     try:
         if not TEXTDB_API:
             print("[FATAL] ⚠️ TEXTDB_API secret is missing or empty")
-            sys.exit(1)
+            return
 
-        base_url = TEXTDB_API.split("&value=")[0]
+        chunks = chunk_text(final_output, 8000)
+        total = len(chunks)
 
-        # Step 1: Delete old data
-        delete_resp = session.post(base_url, data={"value": ""})
+        print(f"[info] 📦 Uploading to TextDB in {total} chunks")
 
-        if delete_resp.status_code == 200:
-            print("[info] 🗑️ Successfully deleted old data on textdb")
-        else:
-            print(f"[warn] ❌ Failed to delete old data on textdb: {delete_resp.status_code}")
-            print(f"[warn] ❗Response: {delete_resp.text}")
+        for i, chunk in enumerate(chunks, start=1):
 
-        # Wait 3 seconds
-        time.sleep(3)
+            payload = {"value": chunk}
 
-        # Step 2: Upload new data
-        upload_resp = session.post(base_url, data={"value": final_output})
+            resp = session.post(TEXTDB_API, data=payload)
 
-        if upload_resp.status_code == 200:
-            print("[info] 📤 Successfully uploaded new data on textdb")
-        else:
-            print(f"[warn] ❌ Failed to upload new data on textdb: {upload_resp.status_code}")
-            print(f"[warn] ❗Response: {upload_resp.text}")
+            if resp.status_code != 200:
+                print(f"[warn] ❌ Chunk {i}/{total} failed: {resp.status_code}")
+                print(f"[warn] Response: {resp.text[:200]}")
+                return
+
+            print(f"[info] ✅ Uploaded chunk {i}/{total}")
 
     except Exception as e:
-        print(f"[error] ⛔ Unexpected error: {e}")
+        print(f"[error] ⛔ TextDB upload failed: {e}")
 
 # ---------------- Entry ----------------
+def main():
+    sources = load_sources()
+    process_subscription(SUB_ID, SUB_NAME, sources)
+
 if __name__ == "__main__":
     main()

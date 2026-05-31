@@ -94,39 +94,31 @@ def normalize_node(n):
         reality_opts = {}
 
     # ---------------- canonical fields ----------------
-    n["server"] = str(
-        n.get("server") or ""
-    ).strip().lower().rstrip(".")
+    n["server"] = str(n.get("server") or "").strip().lower().rstrip(".")
 
     try:
-        n["port"] = int(
-            n.get("port")
-            or n.get("server_port")
-            or 0
-        )
+        n["port"] = int(n.get("port") or n.get("server_port") or 0)
     except:
         n["port"] = 0
 
-    n["type"] = str(
-        n.get("type") or ""
-    ).strip().lower()
+    n["type"] = str(n.get("type") or "").strip().lower()
+
+    # ---------------- REQUIRED Clash defaults ----------------
+    n["alterId"] = 0
+    n["cipher"] = n.get("cipher") or "auto"
+    n["udp"] = True
 
     # ---------------- auth ----------------
-    auth = (
-        n.get("uuid")
-        or n.get("password")
-        or ""
-    )
-
+    auth = n.get("uuid") or n.get("password") or ""
     n["_auth"] = str(auth).strip()
 
     # ---------------- security ----------------
-    if reality_opts:
+    if reality_opts or n.get("security") == "reality":
+        n["security"] = "reality"
         n["_security"] = "reality"
-
     elif tls_obj or n.get("tls") is True:
+        n["security"] = "tls"
         n["_security"] = "tls"
-
     else:
         n["_security"] = ""
 
@@ -138,8 +130,7 @@ def normalize_node(n):
         or tls_obj.get("server_name")
         or ""
     )
-
-    n["_sni"] = str(sni).strip().lower()
+    n["servername"] = str(sni).strip()
 
     # ---------------- network ----------------
     network = (
@@ -147,23 +138,18 @@ def normalize_node(n):
         or transport_obj.get("type")
         or "tcp"
     )
-
-    n["_network"] = str(network).strip().lower()
+    n["network"] = str(network).strip().lower()
 
     # ---------------- path ----------------
     path = ""
-
-    if n["_network"] == "ws":
-
+    if n["network"] == "ws":
         path = (
             ws_opts.get("path")
             or transport_obj.get("path")
             or n.get("path")
             or ""
         )
-
-    elif n["_network"] == "grpc":
-
+    elif n["network"] == "grpc":
         path = (
             grpc_opts.get("serviceName")
             or grpc_opts.get("grpc-service-name")
@@ -171,10 +157,14 @@ def normalize_node(n):
             or ""
         )
 
-    n["_path"] = str(path).strip().lower()
+    n["path"] = str(path).strip()
+
+    # ---------------- REMOVE V2RAY-ONLY FLAT FIELDS ----------------
+    for k in ["pbk", "sid", "fp", "flow"]:
+        n.pop(k, None)
 
     return n
-
+    
 def deduplicate_nodes(nodes):
     seen = set()
     unique_nodes = []
@@ -577,7 +567,7 @@ def parse_vless(line, line_number=None):
         for key in ["security", "flow", "sni", "fp"]:
             if key in query and query[key] != "":
                 node[key] = query[key]
-
+        
         # Security (TLS / Reality)
         if query.get("security") == "tls":
             node["tls"] = True
@@ -585,9 +575,15 @@ def parse_vless(line, line_number=None):
             node["skip-cert-verify"] = query.get("allowInsecure", "0") in ("1", "true", "yes")
             if "fp" in query:
                 node["client-fingerprint"] = query["fp"]
+        
         elif query.get("security") == "reality":
-            node["reality-opts"] = {"public-key": query.get("pbk", ""), "short-id": query.get("sid", ""), "server-name": query.get("sni", "")}
+            node["reality-opts"] = {
+                "public-key": query.get("pbk", ""),
+                "short-id": query.get("sid", ""),
+                "server-name": query.get("sni", "")
+            }
             node["tls"] = True
+            node["security"] = "reality"
 
         # Network
         if "type" in query:
@@ -603,6 +599,7 @@ def parse_vless(line, line_number=None):
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
 
         node = merge_dynamic_fields(node, query)
+        node = normalize_node(node)
         return node
 
     except Exception as e:

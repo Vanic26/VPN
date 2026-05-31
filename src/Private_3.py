@@ -73,25 +73,11 @@ def normalize_node(n):
     n = copy.deepcopy(n)
 
     # ---------------- safe nested objects ----------------
-    tls_obj = n.get("tls")
-    if not isinstance(tls_obj, dict):
-        tls_obj = {}
-
-    transport_obj = n.get("transport")
-    if not isinstance(transport_obj, dict):
-        transport_obj = {}
-
-    ws_opts = n.get("ws-opts")
-    if not isinstance(ws_opts, dict):
-        ws_opts = {}
-
-    grpc_opts = n.get("grpc-opts")
-    if not isinstance(grpc_opts, dict):
-        grpc_opts = {}
-
-    reality_opts = n.get("reality-opts")
-    if not isinstance(reality_opts, dict):
-        reality_opts = {}
+    tls_obj = n.get("tls") if isinstance(n.get("tls"), dict) else {}
+    transport_obj = n.get("transport") if isinstance(n.get("transport"), dict) else {}
+    ws_opts = n.get("ws-opts") if isinstance(n.get("ws-opts"), dict) else {}
+    grpc_opts = n.get("grpc-opts") if isinstance(n.get("grpc-opts"), dict) else {}
+    reality_opts = n.get("reality-opts") if isinstance(n.get("reality-opts"), dict) else {}
 
     # ---------------- canonical fields ----------------
     n["server"] = str(n.get("server") or "").strip().lower().rstrip(".")
@@ -103,21 +89,13 @@ def normalize_node(n):
 
     n["type"] = str(n.get("type") or "").strip().lower()
 
-    # ---------------- REQUIRED Clash defaults ----------------
-    n["alterId"] = 0
-    n["cipher"] = n.get("cipher") or "auto"
-    n["udp"] = True
-
-    # ---------------- auth ----------------
     auth = n.get("uuid") or n.get("password") or ""
     n["_auth"] = str(auth).strip()
 
     # ---------------- security ----------------
-    if reality_opts or n.get("security") == "reality":
-        n["security"] = "reality"
+    if reality_opts:
         n["_security"] = "reality"
     elif tls_obj or n.get("tls") is True:
-        n["security"] = "tls"
         n["_security"] = "tls"
     else:
         n["_security"] = ""
@@ -130,38 +108,26 @@ def normalize_node(n):
         or tls_obj.get("server_name")
         or ""
     )
-    n["servername"] = str(sni).strip()
+    n["_sni"] = str(sni).strip().lower()
 
     # ---------------- network ----------------
-    network = (
-        n.get("network")
-        or transport_obj.get("type")
-        or "tcp"
-    )
-    n["network"] = str(network).strip().lower()
+    network = n.get("network") or transport_obj.get("type") or "tcp"
+    n["_network"] = str(network).strip().lower()
 
     # ---------------- path ----------------
     path = ""
-    if n["network"] == "ws":
-        path = (
-            ws_opts.get("path")
-            or transport_obj.get("path")
-            or n.get("path")
-            or ""
-        )
-    elif n["network"] == "grpc":
-        path = (
-            grpc_opts.get("serviceName")
-            or grpc_opts.get("grpc-service-name")
-            or transport_obj.get("service_name")
-            or ""
-        )
+    if n["_network"] == "ws":
+        path = ws_opts.get("path") or transport_obj.get("path") or n.get("path") or ""
+    elif n["_network"] == "grpc":
+        path = grpc_opts.get("serviceName") or grpc_opts.get("grpc-service-name") or ""
 
-    n["path"] = str(path).strip()
+    n["_path"] = str(path).strip().lower()
 
-    # ---------------- REMOVE V2RAY-ONLY FLAT FIELDS ----------------
-    for k in ["pbk", "sid", "fp", "flow"]:
-        n.pop(k, None)
+    # ✅ IMPORTANT: guarantees dedup safety
+    n["_sni"] = n.get("_sni", "")
+    n["_security"] = n.get("_security", "")
+    n["_network"] = n.get("_network", "")
+    n["_path"] = n.get("_path", "")
 
     return n
     
@@ -177,19 +143,15 @@ def deduplicate_nodes(nodes):
         if not n:
             continue
 
-        if not n["_auth"]:
-            unique_nodes.append(n)
-            continue
-
         key = (
-            n["type"],
-            n["server"],
-            n["port"],
-            n["_auth"],
-            n["_security"],
-            n["_sni"],
-            n["_network"],
-            n["_path"],
+            n.get("type", ""),
+            n.get("server", ""),
+            n.get("port", 0),
+            n.get("_auth", ""),
+            n.get("_security", ""),
+            n.get("_sni", ""),
+            n.get("_network", ""),
+            n.get("_path", ""),
         )
 
         if key in seen:
@@ -198,14 +160,7 @@ def deduplicate_nodes(nodes):
 
         seen.add(key)
 
-        # cleanup temp fields
-        for k in [
-            "_auth",
-            "_security",
-            "_sni",
-            "_network",
-            "_path",
-        ]:
+        for k in ["_auth", "_security", "_sni", "_network", "_path"]:
             n.pop(k, None)
 
         unique_nodes.append(n)

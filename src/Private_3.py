@@ -495,8 +495,8 @@ def parse_vmess(line, line_number=None):
             }
 
         # ---------------- Dynamic Fields (Safe) ----------------
-        node = merge_dynamic_fields(node, data)
-
+        node = merge_dynamic_fields(node, query)
+        node = normalize_node(node)
         return node
 
     except Exception as e:
@@ -690,6 +690,7 @@ def parse_trojan(line, line_number=None):
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
 
         node = merge_dynamic_fields(node, query)
+        node = normalize_node(node)
         return node
 
     except Exception as e:
@@ -760,7 +761,7 @@ def parse_hysteria2(line, line_number=None):
             node["down"] = query["down"]
 
         node = merge_dynamic_fields(node, query)
-
+        node = normalize_node(node)
         return node
 
     except Exception:
@@ -821,7 +822,7 @@ def parse_anytls(line, line_number=None):
 
         # dynamic fields
         node = merge_dynamic_fields(node, query)
-
+        node = normalize_node(node)
         return node
 
     except Exception as e:
@@ -896,7 +897,7 @@ def parse_tuic(line, line_number=None):
             node["disable-sni"] = query["disable_sni"].lower() in ("1", "true", "yes")
 
         node = merge_dynamic_fields(node, query)
-
+        node = normalize_node(node)
         return node
 
     except Exception as e:
@@ -1060,6 +1061,8 @@ def parse_ss(line, line_number=None):
         if plugin_opts:
             node["plugin-opts"] = plugin_opts
 
+        node = merge_dynamic_fields(node, query)
+        node = normalize_node(node)
         return node
 
     except Exception as e:
@@ -1117,8 +1120,8 @@ def parse_ssr(line, line_number=None):
         if "protoparam" in qs:
             node["protocol-param"] = decode_base64(qs["protoparam"])
 
-        node = merge_dynamic_fields(node, qs)
-
+        node = merge_dynamic_fields(node, query)
+        node = normalize_node(node)
         return node
 
     except Exception as e:

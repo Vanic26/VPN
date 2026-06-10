@@ -1,4 +1,4 @@
-# Last update: 10.06.2026 13:32:01
+# Last update: 10.06.2026 18:02:23
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -167,45 +167,45 @@ proxies:
 - {name: "🇺🇸 US-3 | Starlink", type: "vless", server: "199.19.110.128", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/qa/zh-tw/dh?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇳🇱 NL-3 | Starlink", type: "vless", server: "194.71.227.213", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/forums/ep/torrent?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇹🇭 TH-4 | Starlink", type: "vless", server: "45.154.24.89", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/photo?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-4 | Starlink", type: "trojan", server: "90081bb25c.node.tro.cac.cab", port: 46424, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "de.01.naiun.bilibili.com", servername: "de.01.naiun.bilibili.com", skip-cert-verify: true, insecure: "1", allowInsecure: "1", headerType: "none"}
-- {name: "🇸🇬 SG-5 | Starlink", type: "trojan", server: "90081bb25c.node.tro.cac.cab", port: 45553, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "ch.01.naiun.bilibili.com", servername: "ch.01.naiun.bilibili.com", skip-cert-verify: true, insecure: "1", allowInsecure: "1", headerType: "none"}
-- {name: "🇺🇸 US-4 | Starlink", type: "vless", server: "98.158.29.213", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/thread/ep?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-4 | Starlink", type: "trojan", server: "90081bb25c.node.tro.cac.cab", port: 46424, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "de.01.naiun.bilibili.com", servername: "de.01.naiun.bilibili.com", skip-cert-verify: true, insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇺🇸 US-5 | Starlink", type: "trojan", server: "90081bb25c.node.tro.cac.cab", port: 45553, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "ch.01.naiun.bilibili.com", servername: "ch.01.naiun.bilibili.com", skip-cert-verify: true, insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇺🇸 US-6 | Starlink", type: "vless", server: "98.158.29.213", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/thread/ep?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇦🇺 AU-4 | Starlink", type: "vless", server: "193.177.221.29", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/series?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇦🇺 AU-5 | Starlink", type: "vless", server: "170.64.163.39", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/clip/jump.php/favs?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇭🇰 HK-4 | Starlink", type: "vless", server: "163.61.74.121", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/shop/app?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇦🇺 AU-6 | Starlink", type: "vless", server: "170.64.232.210", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/tech/service/teacher?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇭🇰 HK-5 | Starlink", type: "vless", server: "161.248.31.35", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/doc?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇳🇱 NL-4 | Starlink", type: "vless", server: "152.53.200.139", port: 8443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/discount/about/play?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-5 | Starlink", type: "vless", server: "80.66.196.231", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/content/channel?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-7 | Starlink", type: "vless", server: "80.66.196.231", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/content/channel?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇨🇿 CZ-1 | Starlink", type: "vless", server: "185.253.46.5", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/help?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇦🇺 AU-7 | Starlink", type: "vless", server: "170.64.237.192", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/thread/wiki/games?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇦🇺 AU-8 | Starlink", type: "vless", server: "103.136.146.98", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/archive/blog?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇦🇺 AU-9 | Starlink", type: "vless", server: "170.64.245.159", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/dload?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇨🇭 CH-1 | Starlink", type: "vless", server: "83.228.193.188", port: 8443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/avatar/setting?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-6 | Starlink", type: "vmess", server: "82.198.246.250", port: 180, uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552", network: "tcp", alterId: 0, cipher: "auto", tls: false, insecure: "0"}
+- {name: "🇺🇸 US-8 | Starlink", type: "vmess", server: "82.198.246.250", port: 180, uuid: "d13fc2f5-3e05-4795-81eb-44143a09e552", network: "tcp", alterId: 0, cipher: "auto", tls: false, insecure: "0"}
 - {name: "🇧🇬 BG-4 | Starlink", type: "vless", server: "91.148.141.118", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/document/magnet/zip?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-7 | Starlink", type: "vless", server: "103.152.113.60", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/go?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-8 | Starlink", type: "vless", server: "103.152.113.60", port: 8443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/event/chat?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-9 | Starlink", type: "vless", server: "103.152.113.60", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/go?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-10 | Starlink", type: "vless", server: "103.152.113.60", port: 8443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/event/chat?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇮🇹 IT-1 | Starlink", type: "vless", server: "172.238.238.203", port: 2053, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/ad/page?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇫🇷 FR-1 | Starlink", type: "vless", server: "217.60.63.44", port: 8443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/home?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇩🇪 DE-3 | Starlink", type: "vless", server: "138.124.54.152", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/seller/dl/page?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇨🇿 CZ-2 | Starlink", type: "vless", server: "185.253.46.31", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/team/act/buy?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇵🇱 PL-2 | Starlink", type: "vless", server: "212.60.4.134", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/www/read?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-6 | Starlink", type: "vless", server: "140.245.59.102", port: 8443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/resource?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇸🇬 SG-4 | Starlink", type: "vless", server: "140.245.59.102", port: 8443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/resource?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇳🇱 NL-5 | Starlink", type: "vless", server: "188.190.26.243", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/cart?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇩🇪 DE-4 | Starlink", type: "vless", server: "91.199.160.8", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/pdf/downloads?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇧🇬 BG-5 | Starlink", type: "vless", server: "195.123.225.224", port: 8443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/tag/edu/member?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇹🇭 TH-5 | Starlink", type: "vless", server: "45.150.128.159", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/drama/episodes/event?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇵🇱 PL-3 | Starlink", type: "vless", server: "95.156.204.82", port: 8443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/channels/study/go.php?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇮🇱 IL-1 | Starlink", type: "vless", server: "64.176.167.56", port: 8443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/travel/contact?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-9 | Starlink", type: "vless", server: "r1.mizulina.top", port: 22231, uuid: "afcac633-0e1a-46c3-bef2-cc01cc0097c8", encryption: "none", network: "tcp", security: "tls", sni: "r1.mizulina.top", servername: "r1.mizulina.top", skip-cert-verify: false, fp: "edge", client-fingerprint: "edge", flow: "xtls-rprx-vision", tls: true, insecure: "0", allowInsecure: "0", headerType: "none"}
+- {name: "🇺🇸 US-11 | Starlink", type: "vless", server: "r1.mizulina.top", port: 22231, uuid: "afcac633-0e1a-46c3-bef2-cc01cc0097c8", encryption: "none", network: "tcp", security: "tls", sni: "r1.mizulina.top", servername: "r1.mizulina.top", skip-cert-verify: false, fp: "edge", client-fingerprint: "edge", flow: "xtls-rprx-vision", tls: true, insecure: "0", allowInsecure: "0", headerType: "none"}
 - {name: "🇩🇰 DK-1 | Starlink", type: "vless", server: "45.148.31.73", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/doc/services?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-10 | Starlink", type: "vless", server: "85.234.114.53", port: 22231, uuid: "afcac633-0e1a-46c3-bef2-cc01cc0097c8", encryption: "none", network: "tcp", security: "tls", sni: "r1.mizulina.top", servername: "r1.mizulina.top", skip-cert-verify: false, fp: "edge", client-fingerprint: "edge", flow: "xtls-rprx-vision", tls: true, insecure: "0", allowInsecure: "0", headerType: "none"}
+- {name: "🇺🇸 US-12 | Starlink", type: "vless", server: "85.234.114.53", port: 22231, uuid: "afcac633-0e1a-46c3-bef2-cc01cc0097c8", encryption: "none", network: "tcp", security: "tls", sni: "r1.mizulina.top", servername: "r1.mizulina.top", skip-cert-verify: false, fp: "edge", client-fingerprint: "edge", flow: "xtls-rprx-vision", tls: true, insecure: "0", allowInsecure: "0", headerType: "none"}
 - {name: "🇵🇱 PL-4 | Starlink", type: "vless", server: "185.179.82.201", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/groups?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇦🇹 AT-3 | Starlink", type: "vless", server: "91.184.250.182", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/qa/ep?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇫🇮 FI-1 | Starlink", type: "vless", server: "194.164.245.177", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/store/picture?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇩🇪 DE-5 | Starlink", type: "vless", server: "178.17.48.240", port: 8443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/online?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-11 | Starlink", type: "vless", server: "85.234.114.53", port: 443, uuid: "afcac633-0e1a-46c3-bef2-cc01cc0097c8", encryption: "none", network: "tcp", security: "tls", sni: "r1.mizulina.top", servername: "r1.mizulina.top", skip-cert-verify: false, fp: "edge", client-fingerprint: "edge", flow: "xtls-rprx-vision-udp443", tls: true, insecure: "0", allowInsecure: "0", headerType: "none"}
+- {name: "🇺🇸 US-13 | Starlink", type: "vless", server: "85.234.114.53", port: 443, uuid: "afcac633-0e1a-46c3-bef2-cc01cc0097c8", encryption: "none", network: "tcp", security: "tls", sni: "r1.mizulina.top", servername: "r1.mizulina.top", skip-cert-verify: false, fp: "edge", client-fingerprint: "edge", flow: "xtls-rprx-vision-udp443", tls: true, insecure: "0", allowInsecure: "0", headerType: "none"}
 - {name: "🇵🇱 PL-5 | Starlink", type: "vless", server: "95.156.204.82", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/course?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇩🇪 DE-6 | Starlink", type: "vless", server: "45.136.71.201", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/source/cn?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇩🇪 DE-7 | Starlink", type: "vless", server: "147.45.43.88", port: 443, uuid: "36af4874-d6a3-4f7c-82a7-1cb724961b52", encryption: "none", network: "ws", security: "tls", sni: "linek.perry.us.kg", servername: "linek.perry.us.kg", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/channel/work?ed=2560", headers: {"Host": "linek.perry.us.kg"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
@@ -268,45 +268,45 @@ proxy-groups:
       - 🇺🇸 US-3 | Starlink
       - 🇳🇱 NL-3 | Starlink
       - 🇹🇭 TH-4 | Starlink
-      - 🇸🇬 SG-4 | Starlink
-      - 🇸🇬 SG-5 | Starlink
       - 🇺🇸 US-4 | Starlink
+      - 🇺🇸 US-5 | Starlink
+      - 🇺🇸 US-6 | Starlink
       - 🇦🇺 AU-4 | Starlink
       - 🇦🇺 AU-5 | Starlink
       - 🇭🇰 HK-4 | Starlink
       - 🇦🇺 AU-6 | Starlink
       - 🇭🇰 HK-5 | Starlink
       - 🇳🇱 NL-4 | Starlink
-      - 🇺🇸 US-5 | Starlink
+      - 🇺🇸 US-7 | Starlink
       - 🇨🇿 CZ-1 | Starlink
       - 🇦🇺 AU-7 | Starlink
       - 🇦🇺 AU-8 | Starlink
       - 🇦🇺 AU-9 | Starlink
       - 🇨🇭 CH-1 | Starlink
-      - 🇺🇸 US-6 | Starlink
-      - 🇧🇬 BG-4 | Starlink
-      - 🇺🇸 US-7 | Starlink
       - 🇺🇸 US-8 | Starlink
+      - 🇧🇬 BG-4 | Starlink
+      - 🇺🇸 US-9 | Starlink
+      - 🇺🇸 US-10 | Starlink
       - 🇮🇹 IT-1 | Starlink
       - 🇫🇷 FR-1 | Starlink
       - 🇩🇪 DE-3 | Starlink
       - 🇨🇿 CZ-2 | Starlink
       - 🇵🇱 PL-2 | Starlink
-      - 🇸🇬 SG-6 | Starlink
+      - 🇸🇬 SG-4 | Starlink
       - 🇳🇱 NL-5 | Starlink
       - 🇩🇪 DE-4 | Starlink
       - 🇧🇬 BG-5 | Starlink
       - 🇹🇭 TH-5 | Starlink
       - 🇵🇱 PL-3 | Starlink
       - 🇮🇱 IL-1 | Starlink
-      - 🇺🇸 US-9 | Starlink
+      - 🇺🇸 US-11 | Starlink
       - 🇩🇰 DK-1 | Starlink
-      - 🇺🇸 US-10 | Starlink
+      - 🇺🇸 US-12 | Starlink
       - 🇵🇱 PL-4 | Starlink
       - 🇦🇹 AT-3 | Starlink
       - 🇫🇮 FI-1 | Starlink
       - 🇩🇪 DE-5 | Starlink
-      - 🇺🇸 US-11 | Starlink
+      - 🇺🇸 US-13 | Starlink
       - 🇵🇱 PL-5 | Starlink
       - 🇩🇪 DE-6 | Starlink
       - 🇩🇪 DE-7 | Starlink
@@ -367,45 +367,45 @@ proxy-groups:
       - 🇺🇸 US-3 | Starlink
       - 🇳🇱 NL-3 | Starlink
       - 🇹🇭 TH-4 | Starlink
-      - 🇸🇬 SG-4 | Starlink
-      - 🇸🇬 SG-5 | Starlink
       - 🇺🇸 US-4 | Starlink
+      - 🇺🇸 US-5 | Starlink
+      - 🇺🇸 US-6 | Starlink
       - 🇦🇺 AU-4 | Starlink
       - 🇦🇺 AU-5 | Starlink
       - 🇭🇰 HK-4 | Starlink
       - 🇦🇺 AU-6 | Starlink
       - 🇭🇰 HK-5 | Starlink
       - 🇳🇱 NL-4 | Starlink
-      - 🇺🇸 US-5 | Starlink
+      - 🇺🇸 US-7 | Starlink
       - 🇨🇿 CZ-1 | Starlink
       - 🇦🇺 AU-7 | Starlink
       - 🇦🇺 AU-8 | Starlink
       - 🇦🇺 AU-9 | Starlink
       - 🇨🇭 CH-1 | Starlink
-      - 🇺🇸 US-6 | Starlink
-      - 🇧🇬 BG-4 | Starlink
-      - 🇺🇸 US-7 | Starlink
       - 🇺🇸 US-8 | Starlink
+      - 🇧🇬 BG-4 | Starlink
+      - 🇺🇸 US-9 | Starlink
+      - 🇺🇸 US-10 | Starlink
       - 🇮🇹 IT-1 | Starlink
       - 🇫🇷 FR-1 | Starlink
       - 🇩🇪 DE-3 | Starlink
       - 🇨🇿 CZ-2 | Starlink
       - 🇵🇱 PL-2 | Starlink
-      - 🇸🇬 SG-6 | Starlink
+      - 🇸🇬 SG-4 | Starlink
       - 🇳🇱 NL-5 | Starlink
       - 🇩🇪 DE-4 | Starlink
       - 🇧🇬 BG-5 | Starlink
       - 🇹🇭 TH-5 | Starlink
       - 🇵🇱 PL-3 | Starlink
       - 🇮🇱 IL-1 | Starlink
-      - 🇺🇸 US-9 | Starlink
+      - 🇺🇸 US-11 | Starlink
       - 🇩🇰 DK-1 | Starlink
-      - 🇺🇸 US-10 | Starlink
+      - 🇺🇸 US-12 | Starlink
       - 🇵🇱 PL-4 | Starlink
       - 🇦🇹 AT-3 | Starlink
       - 🇫🇮 FI-1 | Starlink
       - 🇩🇪 DE-5 | Starlink
-      - 🇺🇸 US-11 | Starlink
+      - 🇺🇸 US-13 | Starlink
       - 🇵🇱 PL-5 | Starlink
       - 🇩🇪 DE-6 | Starlink
       - 🇩🇪 DE-7 | Starlink

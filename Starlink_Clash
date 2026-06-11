@@ -1,4 +1,4 @@
-# Last update: 11.06.2026 21:02:22
+# Last update: 12.06.2026 00:38:29
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -121,131 +121,176 @@ dns:
       - +.googleapis.com
       - +.gvt1.com
 proxies:
-- {name: "🇬🇪 GE-1 | Starlink", type: "vless", server: "r1.mizulina.top", port: 22231, uuid: "afcac633-0e1a-46c3-bef2-cc01cc0097c8", encryption: "none", network: "tcp", security: "tls", servername: "", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", flow: "xtls-rprx-vision", tls: true, insecure: "0", allowInsecure: "0", headerType: "none"}
-- {name: "🇬🇪 GE-2 | Starlink", type: "vless", server: "85.234.114.53", port: 22231, uuid: "afcac633-0e1a-46c3-bef2-cc01cc0097c8", encryption: "none", network: "tcp", security: "tls", sni: "r1.mizulina.top", servername: "r1.mizulina.top", skip-cert-verify: false, fp: "edge", client-fingerprint: "edge", flow: "xtls-rprx-vision", tls: true, insecure: "0", allowInsecure: "0", headerType: "none"}
-- {name: "🇬🇪 GE-3 | Starlink", type: "vless", server: "r1.mizulina.top", port: 22231, uuid: "afcac633-0e1a-46c3-bef2-cc01cc0097c8", encryption: "none", network: "tcp", security: "tls", sni: "r1.mizulina.top", servername: "r1.mizulina.top", skip-cert-verify: false, fp: "edge", client-fingerprint: "edge", flow: "xtls-rprx-vision", tls: true, insecure: "0", allowInsecure: "0", headerType: "none"}
-- {name: "🇯🇵 JP-1 | Starlink", type: "vless", server: "13.193.215.148", port: 57921, uuid: "f4e306dd-7919-41a1-bc29-5a37408e92a6", encryption: "none", network: "tcp", security: "reality", sni: "www.nvidia.com", fp: "firefox", flow: "xtls-rprx-vision", reality-opts: {public-key: "MZUXW6zSUtYRBiP7Zu7v6A5AjhrbSgOOz731CJhE3EQ", short-id: "2c35f2ac05bf15a0", server-name: "www.nvidia.com"}, tls: true, pbk: "MZUXW6zSUtYRBiP7Zu7v6A5AjhrbSgOOz731CJhE3EQ", sid: "2c35f2ac05bf15a0", headerType: "none"}
-- {name: "🇬🇪 GE-4 | Starlink", type: "vless", server: "85.234.114.53", port: 443, uuid: "afcac633-0e1a-46c3-bef2-cc01cc0097c8", encryption: "none", network: "tcp", security: "tls", sni: "r1.mizulina.top", servername: "r1.mizulina.top", skip-cert-verify: false, flow: "xtls-rprx-vision", tls: true, insecure: "0", allowInsecure: "0", headerType: "none"}
-- {name: "🇹🇼 TW-1 | Starlink", type: "ss", server: "account-center.zzdy25.com", port: 47777, password: "a5115845-cc23-4082-905e-869fe212dfef", cipher: "chacha20-ietf-poly1305", udp: true}
-- {name: "🇹🇼 TW-2 | Starlink", type: "ss", server: "account-center.zzdy25.com", port: 38320, password: "a5115845-cc23-4082-905e-869fe212dfef", cipher: "chacha20-ietf-poly1305", udp: true}
-- {name: "🇺🇸 US-1 | Starlink", type: "vless", server: "34.222.27.94", port: 42824, uuid: "52a8ef22-2670-4119-8623-98c0baa7ae74", encryption: "none", network: "tcp", security: "reality", sni: "www.nvidia.com", fp: "firefox", flow: "xtls-rprx-vision", reality-opts: {public-key: "dgRCtQunFv3gRWN29nDbzyGVzXTWuMUa0bvWZxq0B3o", short-id: "66a5ca7fd2bca7da", server-name: "www.nvidia.com"}, tls: true, pbk: "dgRCtQunFv3gRWN29nDbzyGVzXTWuMUa0bvWZxq0B3o", sid: "66a5ca7fd2bca7da", headerType: "none"}
-- {name: "🇲🇾 MY-1 | Starlink", type: "vless", server: "136.0.110.35", port: 16865, uuid: "08d4e275-eb67-4878-949c-79a39e10cca1", encryption: "none", network: "tcp", security: "tls", servername: "", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", tls: true, alpn: ["h2", "http/1.1"], insecure: "0", allowInsecure: "0", headerType: "none"}
-- {name: "🇦🇺 AU-1 | Starlink", type: "hysteria2", server: "192.9.179.140", port: 51000, password: "d1db0080-669a-4357-ab9f-ab16719ed736", skip-cert-verify: true, tls: {server_name: "cn.cremedelamer.com", insecure: true, enabled: true}, insecure: "1", allowInsecure: "1"}
-- {name: "🇬🇧 GB-1 | Starlink", type: "vless", server: "1.sdwan.realm-sync.com", port: 5457, uuid: "8faf6e38-0531-4d63-91f0-2aba5b9ff864", encryption: "none", network: "tcp", security: "reality", sni: "swcdn.apple.com", fp: "chrome", flow: "xtls-rprx-vision", reality-opts: {public-key: "8Ct9wBZLha-ePZMWbSau9ViKgbwlCgEsbGMjNnoVDzw", short-id: "9da3779ceafd", server-name: "swcdn.apple.com"}, tls: true, pbk: "8Ct9wBZLha-ePZMWbSau9ViKgbwlCgEsbGMjNnoVDzw", sid: "9da3779ceafd", headerType: "none"}
-- {name: "🇷🇺 RU-1 | Starlink", type: "vmess", server: "6654c734ccab8f440ff0825eb443dc7f.qos.onl", port: 10057, uuid: "52f9cbfb-5bb3-3dd3-b947-725e365c59f3", network: "ws", ws-opts: {path: "/", headers: {"Host": "v2pr9feoh0z86anj2gz9onnjg9viuev0j.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇩🇪 DE-1 | Starlink", type: "vmess", server: "planb.mojcn.com", port: 16617, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇯🇵 JP-2 | Starlink", type: "vmess", server: "m.cnmjin.net", port: 16617, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇯🇵 JP-3 | Starlink", type: "vmess", server: "t.cnmjcn.cyou", port: 16617, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇸🇬 SG-1 | Starlink", type: "vmess", server: "planb.mojcn.com", port: 16618, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇸🇬 SG-2 | Starlink", type: "vmess", server: "m.cnmjin.net", port: 16618, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇸🇬 SG-3 | Starlink", type: "vmess", server: "t.cnmjcn.cyou", port: 16618, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇭🇰 HK-1 | Starlink", type: "vmess", server: "planb.mojcn.com", port: 16632, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇭🇰 HK-2 | Starlink", type: "vmess", server: "m.cnmjin.net", port: 16632, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇭🇰 HK-3 | Starlink", type: "vmess", server: "t.cnmjcn.cyou", port: 16632, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇭🇰 HK-4 | Starlink", type: "vmess", server: "planb.mojcn.com", port: 16622, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇭🇰 HK-5 | Starlink", type: "vmess", server: "m.cnmjin.net", port: 16622, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇭🇰 HK-6 | Starlink", type: "vmess", server: "t.cnmjcn.cyou", port: 16622, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇮🇳 IN-1 | Starlink", type: "vmess", server: "planb.mojcn.com", port: 16626, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇹🇼 TW-3 | Starlink", type: "vmess", server: "planb.mojcn.com", port: 16616, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇹🇼 TW-4 | Starlink", type: "vmess", server: "m.cnmjin.net", port: 16616, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇹🇼 TW-5 | Starlink", type: "vmess", server: "t.cnmjcn.cyou", port: 16616, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇺🇸 US-2 | Starlink", type: "vmess", server: "planb.mojcn.com", port: 16648, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇺🇸 US-3 | Starlink", type: "vmess", server: "m.cnmjin.net", port: 16648, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇺🇸 US-4 | Starlink", type: "vmess", server: "t.cnmjcn.cyou", port: 16648, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇨🇦 CA-1 | Starlink", type: "vmess", server: "planb.mojcn.com", port: 16641, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇨🇦 CA-2 | Starlink", type: "vmess", server: "m.cnmjin.net", port: 16641, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇨🇦 CA-3 | Starlink", type: "vmess", server: "t.cnmjcn.cyou", port: 16641, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇩🇪 DE-2 | Starlink", type: "vmess", server: "planb.mojcn.com", port: 16644, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇩🇪 DE-3 | Starlink", type: "vmess", server: "m.cnmjin.net", port: 16644, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇬🇧 GB-2 | Starlink", type: "vmess", server: "planb.mojcn.com", port: 16645, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇬🇧 GB-3 | Starlink", type: "vmess", server: "m.cnmjin.net", port: 16645, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
-- {name: "🇬🇧 GB-4 | Starlink", type: "vmess", server: "t.cnmjcn.cyou", port: 16645, uuid: "4228ebcc-a69f-4758-92ba-550aaacff0ba", network: "ws", ws-opts: {path: "/", headers: {"Host": "878b8c78bbd5beb168529474eb3d0b3c.mobgslb.tbcache.com"}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
+- {name: "🇸🇬 SG-1 | Starlink", type: "vless", server: "13.213.109.65", port: 443, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇯🇵 JP-1 | Starlink", type: "vless", server: "43.206.192.78", port: 443, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇸🇬 SG-2 | Starlink", type: "vmess", server: "gzfad01.odxxplay.com", port: 7357, uuid: "a9c70c5d-7844-4f38-bf7c-09c64b202f5c", network: "tcp", alterId: 0, cipher: "auto", tls: false, insecure: "0"}
+- {name: "🇸🇬 SG-3 | Starlink", type: "vmess", server: "gzfad01.odxxplay.com", port: 16080, uuid: "a9c70c5d-7844-4f38-bf7c-09c64b202f5c", network: "tcp", alterId: 0, cipher: "auto", tls: false, insecure: "0"}
+- {name: "🇺🇸 US-1 | Starlink", type: "vless", server: "ava.game.naver.com.cf.novantunnel.life", port: 443, uuid: "01785ba0-a548-4357-91d7-6b6cdd24e88c", encryption: "none", network: "ws", security: "tls", sni: "ava.game.naver.com.cf.novantunnel.life", servername: "ava.game.naver.com.cf.novantunnel.life", skip-cert-verify: false, ws-opts: {path: "/Novan-AE26", headers: {"Host": "ava.game.naver.com.cf.novantunnel.life"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇭🇰 HK-1 | Starlink", type: "vmess", server: "hkbgpnolixx01.odxxplay.com", port: 48389, uuid: "a9c70c5d-7844-4f38-bf7c-09c64b202f5c", network: "tcp", alterId: 0, cipher: "auto", tls: false, insecure: "0"}
+- {name: "🇺🇸 US-2 | Starlink", type: "vless", server: "104.17.0.1", port: 443, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇫🇷 FR-1 | Starlink", type: "trojan", server: "104.17.238.76", port: 443, password: "407ecce0-dc85-465f-89f5-e520e9378baf", network: "ws", security: "tls", sni: "ld.223350.xyz", servername: "ld.223350.xyz", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/?ed=2048", headers: {"Host": "ld.223350.xyz"}}, insecure: "0", allowInsecure: "0"}
+- {name: "🇫🇷 FR-2 | Starlink", type: "vless", server: "104.19.87.194", port: 443, uuid: "407ecce0-dc85-465f-89f5-e520e9378baf", encryption: "none", network: "ws", security: "tls", sni: "ld.223350.xyz", servername: "ld.223350.xyz", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/?ed=2048", headers: {"Host": "ld.223350.xyz"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇯🇵 JP-2 | Starlink", type: "vmess", server: "gzfad01.odxxplay.com", port: 28748, uuid: "a9c70c5d-7844-4f38-bf7c-09c64b202f5c", network: "tcp", alterId: 0, cipher: "auto", tls: false, insecure: "0"}
+- {name: "🇺🇸 US-3 | Starlink", type: "vless", server: "104.18.0.3", port: 443, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇨🇳 CN-1 | Starlink", type: "vmess", server: "gzfad01.odxxplay.com", port: 8746, uuid: "a9c70c5d-7844-4f38-bf7c-09c64b202f5c", network: "tcp", alterId: 0, cipher: "auto", tls: false, insecure: "0"}
+- {name: "🇫🇷 FR-3 | Starlink", type: "vless", server: "162.159.43.131", port: 443, uuid: "407ecce0-dc85-465f-89f5-e520e9378baf", encryption: "none", network: "ws", security: "tls", sni: "ld.223350.xyz", servername: "ld.223350.xyz", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/?ed=2048", headers: {"Host": "ld.223350.xyz"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇨🇳 CN-2 | Starlink", type: "vmess", server: "hkbgpnolixx01.odxxplay.com", port: 2476, uuid: "a9c70c5d-7844-4f38-bf7c-09c64b202f5c", network: "tcp", alterId: 0, cipher: "auto", tls: false, insecure: "0"}
+- {name: "🇺🇸 US-4 | Starlink", type: "vless", server: "104.19.0.5", port: 443, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇫🇷 FR-4 | Starlink", type: "vless", server: "162.159.49.145", port: 443, uuid: "407ecce0-dc85-465f-89f5-e520e9378baf", encryption: "none", network: "ws", security: "tls", sni: "ld.223350.xyz", servername: "ld.223350.xyz", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/?ed=2048", headers: {"Host": "ld.223350.xyz"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-5 | Starlink", type: "vless", server: "162.159.40.181", port: 2096, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇺🇸 US-6 | Starlink", type: "vless", server: "108.162.198.11", port: 443, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇺🇸 US-7 | Starlink", type: "vless", server: "108.162.198.7", port: 443, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇺🇸 US-8 | Starlink", type: "vless", server: "108.162.198.11", port: 2096, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇺🇸 US-9 | Starlink", type: "vless", server: "nether2cxc.ignorelist.com", port: 443, uuid: "d78c12c4-6927-40b8-8550-ed9be00334da", encryption: "none", network: "tcp", security: "reality", sni: "nether2cxc.ignorelist.com", fp: "chrome", flow: "xtls-rprx-vision", reality-opts: {public-key: "MNfRDUdBmptd-zKqgIljosss5-oNO44Lt68hgVwa_Qo", short-id: "22f2d3f943dfcb40", server-name: "nether2cxc.ignorelist.com"}, tls: true, pbk: "MNfRDUdBmptd-zKqgIljosss5-oNO44Lt68hgVwa_Qo", sid: "22f2d3f943dfcb40", headerType: "none"}
+- {name: "🇬🇧 GB-1 | Starlink", type: "vless", server: "138.68.150.88", port: 443, uuid: "2c53af1c-c440-38f0-94f1-8bc32a4274f8", encryption: "none", network: "tcp", security: "reality", sni: "learn.microsoft.com", fp: "random", flow: "xtls-rprx-vision", reality-opts: {public-key: "SAgG_t0cdKBPSvJzlIjrwTRjtBjfaUZnpYWhXyxEHSg", short-id: "2fe2afb9c7978f36", server-name: "learn.microsoft.com"}, tls: true, pbk: "SAgG_t0cdKBPSvJzlIjrwTRjtBjfaUZnpYWhXyxEHSg", sid: "2fe2afb9c7978f36", headerType: "none"}
+- {name: "🇩🇪 DE-1 | Starlink", type: "vless", server: "151.101.194.219", port: 80, uuid: "cabbfe13-038b-4dbb-9c45-5079c829abfa", encryption: "none", network: "ws", security: "none", ws-opts: {path: "/", headers: {"Host": "max-gb1.global.ssl.fastly.net"}}}
+- {name: "🇩🇪 DE-2 | Starlink", type: "vless", server: "151.101.0.1", port: 80, uuid: "cabbfe13-038b-4dbb-9c45-5079c829abfa", encryption: "none", network: "ws", security: "none", sni: "max-gb1.global.ssl.fastly.net", ws-opts: {path: "/", headers: {"Host": "max-gb1.global.ssl.fastly.net"}}}
+- {name: "🇩🇪 DE-3 | Starlink", type: "vless", server: "151.101.130.219", port: 80, uuid: "cabbfe13-038b-4dbb-9c45-5079c829abfa", encryption: "none", network: "ws", security: "none", ws-opts: {path: "/", headers: {"Host": "max-gb1.global.ssl.fastly.net"}}}
+- {name: "🇺🇸 US-10 | Starlink", type: "vless", server: "103.31.4.1", port: 443, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇫🇷 FR-5 | Starlink", type: "vless", server: "104.24.9.6", port: 443, uuid: "407ecce0-dc85-465f-89f5-e520e9378baf", encryption: "none", network: "ws", security: "tls", sni: "ld.223350.xyz", servername: "ld.223350.xyz", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/?ed=2048", headers: {"Host": "ld.223350.xyz"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-11 | Starlink", type: "vless", server: "104.19.0.1", port: 443, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇺🇸 US-12 | Starlink", type: "vless", server: "na.877774.xyz", port: 443, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇺🇸 US-13 | Starlink", type: "vless", server: "104.18.0.5", port: 443, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇺🇸 US-14 | Starlink", type: "vless", server: "1.sdwan.realm-sync.com", port: 60776, uuid: "8faf6e38-0531-4d63-91f0-2aba5b9ff864", encryption: "none", network: "tcp", security: "reality", sni: "swcdn.apple.com", fp: "random", flow: "xtls-rprx-vision", reality-opts: {public-key: "rPR7TUpmOpwShZeyLs2QFa46zzCBNkNdYkxe7-trUUc", short-id: "63290ae7179078", server-name: "swcdn.apple.com"}, tls: true, pbk: "rPR7TUpmOpwShZeyLs2QFa46zzCBNkNdYkxe7-trUUc", sid: "63290ae7179078", headerType: "none"}
+- {name: "🇺🇸 US-15 | Starlink", type: "vless", server: "newyorkcity.instasup.ir", port: 1005, uuid: "ad356e93-cc14-417d-9f4e-32376d03f5b7", encryption: "none", network: "tcp", security: "reality", sni: "yahoo.com", fp: "firefox", reality-opts: {public-key: "aEyXUqZ4doy7Qse745h5IKGo31Jc2YEK3QOVaOuPPns", short-id: "4f2087146c1f587a", server-name: "yahoo.com"}, tls: true, pbk: "aEyXUqZ4doy7Qse745h5IKGo31Jc2YEK3QOVaOuPPns", sid: "4f2087146c1f587a", headerType: "none"}
+- {name: "🇫🇮 FI-1 | Starlink", type: "vless", server: "2.26.116.183", port: 47200, uuid: "ffaa8e95-74e2-4ef4-8974-69dd3651b6f9", encryption: "none", network: "tcp", security: "reality", sni: "stats.vk-portal.net", fp: "firefox", flow: "xtls-rprx-vision", reality-opts: {public-key: "aom9XGtg9tre2RGo8XkCaRqlE02nrZ4smmnpLpzidRE", short-id: "b2a9bd658fc81dc6", server-name: "stats.vk-portal.net"}, tls: true, pbk: "aom9XGtg9tre2RGo8XkCaRqlE02nrZ4smmnpLpzidRE", sid: "b2a9bd658fc81dc6", headerType: "none"}
+- {name: "🇺🇸 US-16 | Starlink", type: "vmess", server: "gzfad01.odxxplay.com", port: 64407, uuid: "a9c70c5d-7844-4f38-bf7c-09c64b202f5c", network: "tcp", alterId: 0, cipher: "auto", tls: false, insecure: "0"}
+- {name: "🇹🇭 TH-1 | Starlink", type: "vless", server: "47.87.65.216", port: 443, uuid: "3e7f67de-648e-4871-b51a-a225214d41ee", encryption: "none", network: "tcp", security: "reality", sni: "api.digital-help-prd.autodesk.com", fp: "random", reality-opts: {public-key: "TRP10HqKUXEQ3O-cfsq93DycfBmbJe9KM36yvSa8Mmw", short-id: "", server-name: "api.digital-help-prd.autodesk.com"}, tls: true, pbk: "TRP10HqKUXEQ3O-cfsq93DycfBmbJe9KM36yvSa8Mmw", headerType: "none"}
+- {name: "🇺🇸 US-17 | Starlink", type: "vless", server: "108.162.198.18", port: 443, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇳🇱 NL-1 | Starlink", type: "vless", server: "nl08.abvpn.ru", port: 443, uuid: "95e118b4-4352-4218-8493-f20cc7fc467a", encryption: "none", network: "ws", security: "tls", servername: "", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/websocket", headers: {"Host": "nl08.abvpn.ru"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇩🇪 DE-4 | Starlink", type: "vless", server: "speedtest.net", port: 80, uuid: "0058c215-ab1e-400c-a403-b5b2fda7e846", encryption: "none", network: "ws", security: "none", ws-opts: {path: "/", headers: {"Host": "max-gb1.global.ssl.fastly.net"}}}
+- {name: "🇺🇸 US-18 | Starlink", type: "vmess", server: "hkbgpnolixx01.odxxplay.com", port: 62215, uuid: "a9c70c5d-7844-4f38-bf7c-09c64b202f5c", network: "tcp", alterId: 0, cipher: "auto", tls: false, insecure: "0"}
+- {name: "🇷🇺 RU-1 | Starlink", type: "vless", server: "213.165.56.102", port: 443, uuid: "0a12381a-e241-4b63-a03c-1a5a45a95977", encryption: "none", network: "tcp", security: "reality", sni: "freede.aiage.work", fp: "firefox", flow: "xtls-rprx-vision", reality-opts: {public-key: "A_bQLZE6D32TJUdAf9doQTPaTUXyJjPXLSklplG4V1g", short-id: "c8813f516bbb12c4", server-name: "freede.aiage.work"}, tls: true, pbk: "A_bQLZE6D32TJUdAf9doQTPaTUXyJjPXLSklplG4V1g", sid: "c8813f516bbb12c4", headerType: "none"}
+- {name: "🇫🇮 FI-2 | Starlink", type: "vless", server: "132.243.223.219", port: 8443, uuid: "785c7771-8d7f-48ca-bbc2-1a22e360d4d0", encryption: "none", network: "grpc", security: "reality", sni: "max.ru", fp: "chrome", grpc-opts: {grpc-service-name: "max.ru"}, reality-opts: {public-key: "TdT90qbeyM7WO0QCztOhKDGKOi2qaFFif0hO0cfK1E4", short-id: "ea1058117be12087", server-name: "max.ru"}, tls: true, pbk: "TdT90qbeyM7WO0QCztOhKDGKOi2qaFFif0hO0cfK1E4", sid: "ea1058117be12087", serviceName: "max.ru", mode: "gun"}
+- {name: "🇩🇪 DE-5 | Starlink", type: "vless", server: "167.82.0.1", port: 80, uuid: "cabbfe13-038b-4dbb-9c45-5079c829abfa", encryption: "none", network: "ws", security: "none", ws-opts: {path: "/", headers: {"Host": "max-gb1.global.ssl.fastly.net"}}}
+- {name: "🇩🇪 DE-6 | Starlink", type: "vless", server: "199.232.197.131", port: 80, uuid: "0058c215-ab1e-400c-a403-b5b2fda7e846", encryption: "none", network: "ws", security: "none", ws-opts: {path: "/", headers: {"Host": "max-gb1.global.ssl.fastly.net"}}}
+- {name: "🇯🇵 JP-3 | Starlink", type: "vmess", server: "cu1.ainivp.com", port: 33105, uuid: "9204afcd-026e-781f-1abc-c03efabd1344", network: "ws", servername: "cu1.ainivp.com", ws-opts: {path: "/ray", headers: {"Host": "cu1.ainivp.com"}}, alterId: 0, cipher: "auto", tls: true, insecure: "0"}
+- {name: "🇨🇦 CA-1 | Starlink", type: "trojan", server: "103.177.136.45", port: 47909, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "is.01.naiun.bilibili.com", servername: "is.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇨🇦 CA-2 | Starlink", type: "trojan", server: "103.177.136.42", port: 41943, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "az.01.naiun.bilibili.com", servername: "az.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇨🇦 CA-3 | Starlink", type: "trojan", server: "103.177.136.42", port: 48697, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "gh.01.naiun.bilibili.com", servername: "gh.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇨🇦 CA-4 | Starlink", type: "trojan", server: "103.177.136.42", port: 47909, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "is.01.naiun.bilibili.com", servername: "is.01.naiun.bilibili.com", skip-cert-verify: true, insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇨🇦 CA-5 | Starlink", type: "trojan", server: "103.177.136.42", port: 46424, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "de.01.naiun.bilibili.com", servername: "de.01.naiun.bilibili.com", skip-cert-verify: true, insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇨🇦 CA-6 | Starlink", type: "trojan", server: "103.177.136.45", port: 41943, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "az.01.naiun.bilibili.com", servername: "az.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇺🇸 US-19 | Starlink", type: "vless", server: "108.162.193.44", port: 8443, uuid: "67333988-86fe-4849-ba4e-9c89a05a0033", encryption: "none", network: "xhttp", security: "tls", sni: "scs.iraqecell.ir", servername: "scs.iraqecell.ir", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇺🇸 US-20 | Starlink", type: "vless", server: "162.159.198.1", port: 443, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇺🇸 US-21 | Starlink", type: "vless", server: "104.17.0.5", port: 443, uuid: "c135158e-5869-4397-8116-6695ca18cd48", encryption: "none", network: "ws", security: "tls", sni: "cfnode-1xg.pages.dev", servername: "cfnode-1xg.pages.dev", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "cfnode-1xg.pages.dev"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇩🇪 DE-7 | Starlink", type: "vless", server: "159.195.60.65", port: 443, uuid: "c897facf-2836-4538-be6e-25386fb49284", encryption: "none", network: "tcp", security: "reality", sni: "free1.anotherboring.top", fp: "firefox", flow: "xtls-rprx-vision", reality-opts: {public-key: "vTtRZ_FeFQoAigFr_pmVc_O85RaE9H8aVL0SitFYcmI", short-id: "53cd45d26d7b53fe", server-name: "free1.anotherboring.top"}, tls: true, pbk: "vTtRZ_FeFQoAigFr_pmVc_O85RaE9H8aVL0SitFYcmI", sid: "53cd45d26d7b53fe", headerType: "none"}
 proxy-groups:
   - name: 选择线路
     type: select
     proxies:
       - 自动选择⚡️
-      - 🇬🇪 GE-1 | Starlink
-      - 🇬🇪 GE-2 | Starlink
-      - 🇬🇪 GE-3 | Starlink
-      - 🇯🇵 JP-1 | Starlink
-      - 🇬🇪 GE-4 | Starlink
-      - 🇹🇼 TW-1 | Starlink
-      - 🇹🇼 TW-2 | Starlink
-      - 🇺🇸 US-1 | Starlink
-      - 🇲🇾 MY-1 | Starlink
-      - 🇦🇺 AU-1 | Starlink
-      - 🇬🇧 GB-1 | Starlink
-      - 🇷🇺 RU-1 | Starlink
-      - 🇩🇪 DE-1 | Starlink
-      - 🇯🇵 JP-2 | Starlink
-      - 🇯🇵 JP-3 | Starlink
       - 🇸🇬 SG-1 | Starlink
+      - 🇯🇵 JP-1 | Starlink
       - 🇸🇬 SG-2 | Starlink
       - 🇸🇬 SG-3 | Starlink
+      - 🇺🇸 US-1 | Starlink
       - 🇭🇰 HK-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇭🇰 HK-3 | Starlink
-      - 🇭🇰 HK-4 | Starlink
-      - 🇭🇰 HK-5 | Starlink
-      - 🇭🇰 HK-6 | Starlink
-      - 🇮🇳 IN-1 | Starlink
-      - 🇹🇼 TW-3 | Starlink
-      - 🇹🇼 TW-4 | Starlink
-      - 🇹🇼 TW-5 | Starlink
       - 🇺🇸 US-2 | Starlink
+      - 🇫🇷 FR-1 | Starlink
+      - 🇫🇷 FR-2 | Starlink
+      - 🇯🇵 JP-2 | Starlink
       - 🇺🇸 US-3 | Starlink
+      - 🇨🇳 CN-1 | Starlink
+      - 🇫🇷 FR-3 | Starlink
+      - 🇨🇳 CN-2 | Starlink
       - 🇺🇸 US-4 | Starlink
+      - 🇫🇷 FR-4 | Starlink
+      - 🇺🇸 US-5 | Starlink
+      - 🇺🇸 US-6 | Starlink
+      - 🇺🇸 US-7 | Starlink
+      - 🇺🇸 US-8 | Starlink
+      - 🇺🇸 US-9 | Starlink
+      - 🇬🇧 GB-1 | Starlink
+      - 🇩🇪 DE-1 | Starlink
+      - 🇩🇪 DE-2 | Starlink
+      - 🇩🇪 DE-3 | Starlink
+      - 🇺🇸 US-10 | Starlink
+      - 🇫🇷 FR-5 | Starlink
+      - 🇺🇸 US-11 | Starlink
+      - 🇺🇸 US-12 | Starlink
+      - 🇺🇸 US-13 | Starlink
+      - 🇺🇸 US-14 | Starlink
+      - 🇺🇸 US-15 | Starlink
+      - 🇫🇮 FI-1 | Starlink
+      - 🇺🇸 US-16 | Starlink
+      - 🇹🇭 TH-1 | Starlink
+      - 🇺🇸 US-17 | Starlink
+      - 🇳🇱 NL-1 | Starlink
+      - 🇩🇪 DE-4 | Starlink
+      - 🇺🇸 US-18 | Starlink
+      - 🇷🇺 RU-1 | Starlink
+      - 🇫🇮 FI-2 | Starlink
+      - 🇩🇪 DE-5 | Starlink
+      - 🇩🇪 DE-6 | Starlink
+      - 🇯🇵 JP-3 | Starlink
       - 🇨🇦 CA-1 | Starlink
       - 🇨🇦 CA-2 | Starlink
       - 🇨🇦 CA-3 | Starlink
-      - 🇩🇪 DE-2 | Starlink
-      - 🇩🇪 DE-3 | Starlink
-      - 🇬🇧 GB-2 | Starlink
-      - 🇬🇧 GB-3 | Starlink
-      - 🇬🇧 GB-4 | Starlink
+      - 🇨🇦 CA-4 | Starlink
+      - 🇨🇦 CA-5 | Starlink
+      - 🇨🇦 CA-6 | Starlink
+      - 🇺🇸 US-19 | Starlink
+      - 🇺🇸 US-20 | Starlink
+      - 🇺🇸 US-21 | Starlink
+      - 🇩🇪 DE-7 | Starlink
   - name: 自动选择⚡️
     type: url-test
     proxies:
-      - 🇬🇪 GE-1 | Starlink
-      - 🇬🇪 GE-2 | Starlink
-      - 🇬🇪 GE-3 | Starlink
-      - 🇯🇵 JP-1 | Starlink
-      - 🇬🇪 GE-4 | Starlink
-      - 🇹🇼 TW-1 | Starlink
-      - 🇹🇼 TW-2 | Starlink
-      - 🇺🇸 US-1 | Starlink
-      - 🇲🇾 MY-1 | Starlink
-      - 🇦🇺 AU-1 | Starlink
-      - 🇬🇧 GB-1 | Starlink
-      - 🇷🇺 RU-1 | Starlink
-      - 🇩🇪 DE-1 | Starlink
-      - 🇯🇵 JP-2 | Starlink
-      - 🇯🇵 JP-3 | Starlink
       - 🇸🇬 SG-1 | Starlink
+      - 🇯🇵 JP-1 | Starlink
       - 🇸🇬 SG-2 | Starlink
       - 🇸🇬 SG-3 | Starlink
+      - 🇺🇸 US-1 | Starlink
       - 🇭🇰 HK-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇭🇰 HK-3 | Starlink
-      - 🇭🇰 HK-4 | Starlink
-      - 🇭🇰 HK-5 | Starlink
-      - 🇭🇰 HK-6 | Starlink
-      - 🇮🇳 IN-1 | Starlink
-      - 🇹🇼 TW-3 | Starlink
-      - 🇹🇼 TW-4 | Starlink
-      - 🇹🇼 TW-5 | Starlink
       - 🇺🇸 US-2 | Starlink
+      - 🇫🇷 FR-1 | Starlink
+      - 🇫🇷 FR-2 | Starlink
+      - 🇯🇵 JP-2 | Starlink
       - 🇺🇸 US-3 | Starlink
+      - 🇨🇳 CN-1 | Starlink
+      - 🇫🇷 FR-3 | Starlink
+      - 🇨🇳 CN-2 | Starlink
       - 🇺🇸 US-4 | Starlink
+      - 🇫🇷 FR-4 | Starlink
+      - 🇺🇸 US-5 | Starlink
+      - 🇺🇸 US-6 | Starlink
+      - 🇺🇸 US-7 | Starlink
+      - 🇺🇸 US-8 | Starlink
+      - 🇺🇸 US-9 | Starlink
+      - 🇬🇧 GB-1 | Starlink
+      - 🇩🇪 DE-1 | Starlink
+      - 🇩🇪 DE-2 | Starlink
+      - 🇩🇪 DE-3 | Starlink
+      - 🇺🇸 US-10 | Starlink
+      - 🇫🇷 FR-5 | Starlink
+      - 🇺🇸 US-11 | Starlink
+      - 🇺🇸 US-12 | Starlink
+      - 🇺🇸 US-13 | Starlink
+      - 🇺🇸 US-14 | Starlink
+      - 🇺🇸 US-15 | Starlink
+      - 🇫🇮 FI-1 | Starlink
+      - 🇺🇸 US-16 | Starlink
+      - 🇹🇭 TH-1 | Starlink
+      - 🇺🇸 US-17 | Starlink
+      - 🇳🇱 NL-1 | Starlink
+      - 🇩🇪 DE-4 | Starlink
+      - 🇺🇸 US-18 | Starlink
+      - 🇷🇺 RU-1 | Starlink
+      - 🇫🇮 FI-2 | Starlink
+      - 🇩🇪 DE-5 | Starlink
+      - 🇩🇪 DE-6 | Starlink
+      - 🇯🇵 JP-3 | Starlink
       - 🇨🇦 CA-1 | Starlink
       - 🇨🇦 CA-2 | Starlink
       - 🇨🇦 CA-3 | Starlink
-      - 🇩🇪 DE-2 | Starlink
-      - 🇩🇪 DE-3 | Starlink
-      - 🇬🇧 GB-2 | Starlink
-      - 🇬🇧 GB-3 | Starlink
-      - 🇬🇧 GB-4 | Starlink
+      - 🇨🇦 CA-4 | Starlink
+      - 🇨🇦 CA-5 | Starlink
+      - 🇨🇦 CA-6 | Starlink
+      - 🇺🇸 US-19 | Starlink
+      - 🇺🇸 US-20 | Starlink
+      - 🇺🇸 US-21 | Starlink
+      - 🇩🇪 DE-7 | Starlink
     url: https://www.gstatic.com/generate_204
     interval: 300
 rules:

@@ -1,4 +1,4 @@
-# Last update: 13.06.2026 20:12:35
+# Last update: 13.06.2026 21:57:08
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -121,221 +121,113 @@ dns:
       - +.googleapis.com
       - +.gvt1.com
 proxies:
-- {name: "🇮🇳 IN-1 | Starlink", type: "hysteria2", server: "140.245.27.220", port: 51000, password: "940f51d6-e0a4-4add-b96b-328e4a84b642", skip-cert-verify: true, tls: {server_name: "cn.cremedelamer.com", insecure: true, enabled: true}, insecure: "1", allowInsecure: "1"}
-- {name: "🇬🇧 GB-1 | Starlink", type: "vless", server: "167.104.223.68", port: 7443, uuid: "1c0277ad-bb4d-496f-bc0c-40ccee03fca5", encryption: "none", network: "tcp", security: "reality", sni: "www.microsoft.com", fp: "chrome", flow: "xtls-rprx-vision", reality-opts: {public-key: "5QAO98ot2U7TcGs_f6EEaQjCzNOJLNHqPf6smYsdFVI", short-id: "d82fb387", server-name: "www.microsoft.com"}, tls: true, pbk: "5QAO98ot2U7TcGs_f6EEaQjCzNOJLNHqPf6smYsdFVI", sid: "d82fb387", headerType: "none"}
-- {name: "🇨🇦 CA-1 | Starlink", type: "trojan", server: "103.177.136.45", port: 48697, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "gh.01.naiun.bilibili.com", servername: "gh.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
-- {name: "🇨🇦 CA-2 | Starlink", type: "trojan", server: "103.177.136.45", port: 45553, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "ch.01.naiun.bilibili.com", servername: "ch.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
-- {name: "🇩🇪 DE-1 | Starlink", type: "vless", server: "192.0.63.255", port: 2083, uuid: "8ccf871b-6586-44ad-9b4c-e7c6097eac59", encryption: "none", network: "ws", security: "tls", sni: "liz1.jooje.lat", servername: "liz1.jooje.lat", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/?ed=2560", headers: {"Host": "liz1.jooje.lat"}}, tls: true, insecure: "0", allowInsecure: "0"}
-- {name: "🇳🇱 NL-1 | Starlink", type: "vless", server: "109.207.169.133", port: 443, uuid: "3bb03d0d-d44d-47e9-9611-0f4a3a29498f", encryption: "none", network: "tcp", security: "reality", sni: "top00679mos.rtnode.site", fp: "firefox", flow: "xtls-rprx-vision", reality-opts: {public-key: "1I1LX9Xy1jX6UhX-GIKG96lOLbBwO6RORlvTjXhPZRA", short-id: "fdb96bd18013db72", server-name: "top00679mos.rtnode.site"}, tls: true, pbk: "1I1LX9Xy1jX6UhX-GIKG96lOLbBwO6RORlvTjXhPZRA", sid: "fdb96bd18013db72", headerType: "none"}
-- {name: "🇳🇱 NL-2 | Starlink", type: "hysteria2", server: "888275.nl01-cherry.online", port: 8449, password: "efe3901e-b309-43f3-843a-f4f871670cf3", skip-cert-verify: false, tls: {server_name: "sni.nl01-cherry.online", insecure: false, enabled: true}, insecure: "0", allowInsecure: "0"}
-- {name: "🇨🇦 CA-3 | Starlink", type: "trojan", server: "103.177.136.42", port: 47909, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "is.01.naiun.bilibili.com", servername: "is.01.naiun.bilibili.com", skip-cert-verify: true, insecure: "1", allowInsecure: "1", headerType: "none"}
-- {name: "🇨🇦 CA-4 | Starlink", type: "trojan", server: "103.177.136.42", port: 45553, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "ch.01.naiun.bilibili.com", servername: "ch.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
-- {name: "🇩🇪 DE-2 | Starlink", type: "vless", server: "sw.pink-perfect.ru", port: 443, uuid: "8ea0665e-dee3-418c-8822-1f70f350f2db", encryption: "none", network: "tcp", security: "reality", sni: "yandex.net", fp: "qq", flow: "xtls-rprx-vision", reality-opts: {public-key: "2fgsbEAn-ALVpjnE4ZTPrzaZY70vVplYwldCnslInE0", short-id: "86b80f1e713a33ad", server-name: "yandex.net"}, tls: true, pbk: "2fgsbEAn-ALVpjnE4ZTPrzaZY70vVplYwldCnslInE0", sid: "86b80f1e713a33ad", headerType: "none"}
-- {name: "🇭🇰 HK-1 | Starlink", type: "vless", server: "186.246.19.177", port: 10444, uuid: "bbaaff1e-c914-4817-9d33-58be35a3bee6", encryption: "none", network: "tcp", security: "reality", sni: "api-maps.yandex.ru", fp: "firefox", flow: "xtls-rprx-vision", reality-opts: {public-key: "praGYag8YPbz_rcd_Pa6Fqsi_IiQtO3e1AosYBcu6h4", short-id: "378086fbdb7c61cd", server-name: "api-maps.yandex.ru"}, tls: true, pbk: "praGYag8YPbz_rcd_Pa6Fqsi_IiQtO3e1AosYBcu6h4", sid: "378086fbdb7c61cd", headerType: "none"}
-- {name: "🇨🇦 CA-5 | Starlink", type: "trojan", server: "103.177.136.45", port: 46424, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "de.01.naiun.bilibili.com", servername: "de.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
-- {name: "🇨🇦 CA-6 | Starlink", type: "trojan", server: "103.177.136.45", port: 41943, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "az.01.naiun.bilibili.com", servername: "az.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
-- {name: "🇫🇷 FR-1 | Starlink", type: "vless", server: "173.245.59.35", port: 443, uuid: "65d3f9b3-d289-4a8e-9c87-90bba156de30", encryption: "none", network: "ws", security: "tls", sni: "ld.235231.xyz", servername: "ld.235231.xyz", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/?ed=2048", headers: {"Host": "ld.235231.xyz"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇩🇪 DE-3 | Starlink", type: "vless", server: "159.195.60.65", port: 443, uuid: "c897facf-2836-4538-be6e-25386fb49284", encryption: "none", network: "tcp", security: "reality", sni: "free1.anotherboring.top", fp: "firefox", flow: "xtls-rprx-vision", reality-opts: {public-key: "vTtRZ_FeFQoAigFr_pmVc_O85RaE9H8aVL0SitFYcmI", short-id: "53cd45d26d7b53fe", server-name: "free1.anotherboring.top"}, tls: true, pbk: "vTtRZ_FeFQoAigFr_pmVc_O85RaE9H8aVL0SitFYcmI", sid: "53cd45d26d7b53fe", headerType: "none"}
+- {name: "🇯🇵 JP-1 | Starlink", type: "vmess", server: "8.211.149.30", port: 443, uuid: "bc82b8e0-026b-4b7e-8fa7-69977b6d9dc0", network: "ws", servername: "polartime.link", ws-opts: {path: "/ws/", headers: {"Host": "polartime.link"}}, alterId: 0, cipher: "auto", tls: true, insecure: "0"}
+- {name: "🇬🇧 GB-1 | Starlink", type: "vless", server: "18.138.34.221", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇲🇩 MD-1 | Starlink", type: "vless", server: "cf.090227.xyz", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇸🇬 SG-1 | Starlink", type: "vless", server: "161.118.213.45", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇬🇧 GB-2 | Starlink", type: "vless", server: "138.2.64.229", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇸🇨 SC-1 | Starlink", type: "vless", server: "140.245.101.81", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇯🇵 JP-2 | Starlink", type: "vless", server: "168.138.46.67", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇰🇷 KR-1 | Starlink", type: "vless", server: "161.118.158.9", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇻🇳 VN-1 | Starlink", type: "hysteria2", server: "180.93.128.92", port: 443, password: "qQe1z5kU8kN6SlKnDt9Ru3Qp", skip-cert-verify: true, tls: {server_name: "vpn-vn-001.fastervpn.world", insecure: true, enabled: true}, insecure: "1", allowInsecure: "1"}
-- {name: "🇩🇪 DE-4 | Starlink", type: "vless", server: "45.67.215.134", port: 8443, uuid: "d4eb1900-6515-494e-85c5-306bb9594f56", encryption: "none", network: "xhttp", security: "tls", sni: "vo.new-persian-song.ir", servername: "vo.new-persian-song.ir", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", tls: true, insecure: "0", allowInsecure: "0", mode: "auto"}
-- {name: "🇳🇱 NL-3 | Starlink", type: "vless", server: "85.17.244.114", port: 443, uuid: "9bc87bd9-0d37-4ba6-9601-408b22902fff", encryption: "none", network: "xhttp", security: "reality", sni: "5post-gate.x5.ru", fp: "chrome", reality-opts: {public-key: "akcAXaW7GNwXT6bTrtD6oZIY9rdEzW4TfZvYqDRzsTc", short-id: "a8f3c1d7e9b4c2f6", server-name: "5post-gate.x5.ru"}, tls: true, pbk: "akcAXaW7GNwXT6bTrtD6oZIY9rdEzW4TfZvYqDRzsTc", sid: "a8f3c1d7e9b4c2f6", mode: "auto"}
-- {name: "🇳🇱 NL-4 | Starlink", type: "vless", server: "nl08.abvpn.ru", port: 443, uuid: "95e118b4-4352-4218-8493-f20cc7fc467a", encryption: "none", network: "ws", security: "tls", servername: "", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/websocket", headers: {"Host": "nl08.abvpn.ru"}}, tls: true, insecure: "0", allowInsecure: "0"}
-- {name: "🇰🇷 KR-1 | Starlink", type: "vmess", server: "cu2.ainivp.com", port: 33200, uuid: "9204afcd-026e-781f-1abc-c03efabd1344", network: "ws", servername: "cu2.ainivp.com", ws-opts: {path: "/ray", headers: {"Host": "cu2.ainivp.com"}}, alterId: 0, cipher: "auto", tls: true, insecure: "0"}
-- {name: "🇬🇧 GB-2 | Starlink", type: "vless", server: "1.sdwan.realm-sync.com", port: 5457, uuid: "48959fe8-4a5e-4996-bc87-8d66398e6860", encryption: "none", network: "tcp", security: "reality", sni: "swcdn.apple.com", fp: "chrome", flow: "xtls-rprx-vision", reality-opts: {public-key: "8Ct9wBZLha-ePZMWbSau9ViKgbwlCgEsbGMjNnoVDzw", short-id: "9da3779ceafd", server-name: "swcdn.apple.com"}, tls: true, pbk: "8Ct9wBZLha-ePZMWbSau9ViKgbwlCgEsbGMjNnoVDzw", sid: "9da3779ceafd", headerType: "none"}
+- {name: "🇰🇷 KR-2 | Starlink", type: "vless", server: "64.110.71.6", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇰🇷 KR-3 | Starlink", type: "vless", server: "144.24.73.232", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇸🇬 SG-2 | Starlink", type: "vless", server: "8.219.154.217", port: 8443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-1 | Starlink", type: "vless", server: "69.63.212.251", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-2 | Starlink", type: "vless", server: "154.17.1.231", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-3 | Starlink", type: "vless", server: "64.186.225.11", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-4 | Starlink", type: "vless", server: "154.17.24.174", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-5 | Starlink", type: "vless", server: "154.17.4.159", port: 2053, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-6 | Starlink", type: "vless", server: "154.17.26.200", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-7 | Starlink", type: "vless", server: "154.17.11.153", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇬🇧 GB-3 | Starlink", type: "vless", server: "52.76.97.123", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇫🇷 FR-1 | Starlink", type: "vless", server: "cf.877774.xyz", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇰🇷 KR-4 | Starlink", type: "vless", server: "64.110.74.109", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇰🇷 KR-5 | Starlink", type: "vless", server: "193.123.232.91", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-8 | Starlink", type: "vless", server: "154.17.6.235", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-9 | Starlink", type: "vless", server: "154.21.95.59", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-10 | Starlink", type: "vless", server: "69.63.222.124", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇯🇵 JP-3 | Starlink", type: "vless", server: "156.246.92.195", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-11 | Starlink", type: "vless", server: "69.63.216.10", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-12 | Starlink", type: "vless", server: "154.26.180.8", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇫🇷 FR-2 | Starlink", type: "vless", server: "yx.cloudflare.182682.xyz", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-13 | Starlink", type: "vless", server: "64.186.234.108", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇰🇷 KR-6 | Starlink", type: "vless", server: "152.70.254.197", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇰🇷 KR-7 | Starlink", type: "vless", server: "152.67.210.234", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇫🇷 FR-3 | Starlink", type: "vless", server: "mfa.gov.ua", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇫🇷 FR-4 | Starlink", type: "vless", server: "cf.130519.xyz", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇯🇵 JP-4 | Starlink", type: "vless", server: "217.142.254.144", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-14 | Starlink", type: "vless", server: "64.186.248.118", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-15 | Starlink", type: "vless", server: "1.sdwan.realm-sync.com", port: 60776, uuid: "48959fe8-4a5e-4996-bc87-8d66398e6860", encryption: "none", network: "tcp", security: "reality", sni: "swcdn.apple.com", fp: "random", flow: "xtls-rprx-vision", reality-opts: {public-key: "rPR7TUpmOpwShZeyLs2QFa46zzCBNkNdYkxe7-trUUc", short-id: "63290ae7179078", server-name: "swcdn.apple.com"}, tls: true, pbk: "rPR7TUpmOpwShZeyLs2QFa46zzCBNkNdYkxe7-trUUc", sid: "63290ae7179078", headerType: "none"}
+- {name: "🇸🇬 SG-3 | Starlink", type: "vless", server: "213.35.127.18", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇳🇱 NL-1 | Starlink", type: "vless", server: "nl08.abvpn.ru", port: 443, uuid: "95e118b4-4352-4218-8493-f20cc7fc467a", encryption: "none", network: "ws", security: "tls", servername: "", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/websocket", headers: {"Host": "nl08.abvpn.ru"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇬🇧 GB-4 | Starlink", type: "vless", server: "134.185.93.231", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇬🇧 GB-5 | Starlink", type: "vless", server: "140.245.62.90", port: 2096, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇬🇧 GB-6 | Starlink", type: "vless", server: "140.245.59.102", port: 8443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-16 | Starlink", type: "vless", server: "69.63.223.47", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇬🇧 GB-7 | Starlink", type: "vless", server: "140.245.107.0", port: 8443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇫🇷 FR-5 | Starlink", type: "vless", server: "cloudflare-ip.mofashi.ltd", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇯🇵 JP-5 | Starlink", type: "vless", server: "45.77.129.86", port: 2053, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-17 | Starlink", type: "vless", server: "154.21.82.135", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇫🇷 FR-6 | Starlink", type: "vless", server: "saas.sin.fan", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇰🇷 KR-8 | Starlink", type: "vless", server: "130.162.132.38", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-18 | Starlink", type: "vless", server: "64.186.231.175", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-19 | Starlink", type: "vless", server: "69.63.193.64", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-20 | Starlink", type: "vless", server: "154.17.9.145", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇰🇷 KR-9 | Starlink", type: "vless", server: "152.70.239.74", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇯🇵 JP-6 | Starlink", type: "vless", server: "66.245.218.44", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇬🇧 GB-8 | Starlink", type: "vless", server: "149.28.159.222", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇩🇪 DE-1 | Starlink", type: "vless", server: "159.195.60.65", port: 443, uuid: "c897facf-2836-4538-be6e-25386fb49284", encryption: "none", network: "tcp", security: "reality", sni: "free1.anotherboring.top", fp: "firefox", flow: "xtls-rprx-vision", reality-opts: {public-key: "vTtRZ_FeFQoAigFr_pmVc_O85RaE9H8aVL0SitFYcmI", short-id: "53cd45d26d7b53fe", server-name: "free1.anotherboring.top"}, tls: true, pbk: "vTtRZ_FeFQoAigFr_pmVc_O85RaE9H8aVL0SitFYcmI", sid: "53cd45d26d7b53fe", headerType: "none"}
+- {name: "🇸🇬 SG-4 | Starlink", type: "vless", server: "139.180.143.248", port: 8443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇸🇬 SG-5 | Starlink", type: "vless", server: "139.180.220.7", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇰🇷 KR-10 | Starlink", type: "vless", server: "141.164.35.94", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇬🇧 GB-9 | Starlink", type: "vless", server: "45.77.241.64", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-21 | Starlink", type: "vless", server: "45.59.184.32", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇰🇷 KR-11 | Starlink", type: "vless", server: "158.180.71.69", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇬🇧 GB-10 | Starlink", type: "vless", server: "138.2.87.237", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇬🇧 GB-11 | Starlink", type: "vless", server: "47.82.178.58", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-22 | Starlink", type: "vless", server: "sw.pink-perfect.ru", port: 443, uuid: "8ea0665e-dee3-418c-8822-1f70f350f2db", encryption: "none", network: "tcp", security: "reality", sni: "yandex.net", fp: "qq", flow: "xtls-rprx-vision", reality-opts: {public-key: "2fgsbEAn-ALVpjnE4ZTPrzaZY70vVplYwldCnslInE0", short-id: "86b80f1e713a33ad", server-name: "yandex.net"}, tls: true, pbk: "2fgsbEAn-ALVpjnE4ZTPrzaZY70vVplYwldCnslInE0", sid: "86b80f1e713a33ad", headerType: "none"}
+- {name: "🇬🇧 GB-12 | Starlink", type: "vless", server: "139.180.222.3", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇬🇧 GB-13 | Starlink", type: "vless", server: "129.150.48.17", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇺🇸 US-23 | Starlink", type: "vmess", server: "45.63.75.211", port: 44855, uuid: "5164f226-f833-4e5b-8903-094a3460cd41", network: "ws", ws-opts: {path: "/5164f226", headers: {"Host": ""}}, alterId: 0, cipher: "auto", tls: false, insecure: "0"}
+- {name: "🇬🇧 GB-14 | Starlink", type: "vless", server: "45.38.42.11", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇯🇵 JP-7 | Starlink", type: "vless", server: "69.84.182.13", port: 443, uuid: "33b83411-cf14-48af-8105-ff8370f7a3d5", encryption: "none", network: "ws", security: "tls", sni: "jp1-jp1.aiopen.sbs", servername: "jp1-jp1.aiopen.sbs", skip-cert-verify: false, ws-opts: {path: "/kbjc/jp1", headers: {"Host": "jp1-jp1.aiopen.sbs"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇸🇬 SG-6 | Starlink", type: "vless", server: "104.253.175.202", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇫🇷 FR-7 | Starlink", type: "vless", server: "69.84.182.13", port: 443, uuid: "33b83411-cf14-48af-8105-ff8370f7a3d5", encryption: "none", network: "ws", security: "tls", servername: "", skip-cert-verify: false, ws-opts: {path: "/kbjc/fr1", headers: {"Host": "fr-1-fr-1.aiopen.sbs"}}, tls: true, insecure: "0", allowInsecure: "0"}
+- {name: "🇬🇧 GB-15 | Starlink", type: "vless", server: "45.38.42.245", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇬🇧 GB-16 | Starlink", type: "vless", server: "217.60.248.94", port: 2053, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇸🇬 SG-7 | Starlink", type: "vless", server: "149.28.142.169", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇬🇧 GB-17 | Starlink", type: "vless", server: "46.8.226.108", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇮🇳 IN-1 | Starlink", type: "vless", server: "cdn3-25.vk-cdnvideo.com", port: 8443, uuid: "931729a8-3c20-4841-89a1-f18dc9ce0a6f", encryption: "none", network: "tcp", security: "tls", servername: "", skip-cert-verify: true, tls: true, insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇨🇦 CA-1 | Starlink", type: "trojan", server: "103.177.136.42", port: 46424, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "de.01.naiun.bilibili.com", servername: "de.01.naiun.bilibili.com", skip-cert-verify: true, insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇨🇦 CA-2 | Starlink", type: "trojan", server: "103.177.136.42", port: 45553, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "ch.01.naiun.bilibili.com", servername: "ch.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇨🇦 CA-3 | Starlink", type: "trojan", server: "103.177.136.42", port: 47909, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "is.01.naiun.bilibili.com", servername: "is.01.naiun.bilibili.com", skip-cert-verify: true, insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇨🇦 CA-4 | Starlink", type: "trojan", server: "103.177.136.45", port: 48697, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "gh.01.naiun.bilibili.com", servername: "gh.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇨🇦 CA-5 | Starlink", type: "trojan", server: "103.177.136.45", port: 46424, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "de.01.naiun.bilibili.com", servername: "de.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇨🇦 CA-6 | Starlink", type: "trojan", server: "103.177.136.45", port: 47909, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "is.01.naiun.bilibili.com", servername: "is.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇨🇦 CA-7 | Starlink", type: "trojan", server: "103.177.136.45", port: 45553, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "ch.01.naiun.bilibili.com", servername: "ch.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇨🇦 CA-8 | Starlink", type: "trojan", server: "103.177.136.45", port: 41943, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "az.01.naiun.bilibili.com", servername: "az.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
+- {name: "🇬🇧 GB-18 | Starlink", type: "vless", server: "158.178.230.113", port: 8443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇯🇵 JP-8 | Starlink", type: "vless", server: "64.110.101.250", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
+- {name: "🇬🇧 GB-19 | Starlink", type: "vless", server: "1.sdwan.realm-sync.com", port: 5457, uuid: "48959fe8-4a5e-4996-bc87-8d66398e6860", encryption: "none", network: "tcp", security: "reality", sni: "swcdn.apple.com", fp: "chrome", flow: "xtls-rprx-vision", reality-opts: {public-key: "8Ct9wBZLha-ePZMWbSau9ViKgbwlCgEsbGMjNnoVDzw", short-id: "9da3779ceafd", server-name: "swcdn.apple.com"}, tls: true, pbk: "8Ct9wBZLha-ePZMWbSau9ViKgbwlCgEsbGMjNnoVDzw", sid: "9da3779ceafd", headerType: "none"}
 - {name: "🇨🇳 CN-1 | Starlink", type: "vless", server: "1.sdwan.realm-sync.com", port: 54387, uuid: "e0c3a80e-6290-4c29-9605-fbd6c4fb3322", encryption: "none", network: "tcp", security: "reality", sni: "swcdn.apple.com", fp: "chrome", flow: "xtls-rprx-vision", reality-opts: {public-key: "qqb-vrDIPSrFIithw497zM-LmGUEcTo-dqAjhHi6kyY", short-id: "f810", server-name: "swcdn.apple.com"}, tls: true, pbk: "qqb-vrDIPSrFIithw497zM-LmGUEcTo-dqAjhHi6kyY", sid: "f810", headerType: "none"}
-- {name: "🇯🇵 JP-1 | Starlink", type: "vless", server: "1.sdwan.realm-sync.com", port: 5454, uuid: "48959fe8-4a5e-4996-bc87-8d66398e6860", encryption: "none", network: "tcp", security: "reality", sni: "swcdn.apple.com", fp: "chrome", flow: "xtls-rprx-vision", reality-opts: {public-key: "7Mb18pl7fH3NvhVevIVTgRdPlAorUucOWMlUaTrDV0o", short-id: "4265cc8365", server-name: "swcdn.apple.com"}, tls: true, pbk: "7Mb18pl7fH3NvhVevIVTgRdPlAorUucOWMlUaTrDV0o", sid: "4265cc8365", headerType: "none"}
-- {name: "🇸🇬 SG-1 | Starlink", type: "vless", server: "1.sdwan.realm-sync.com", port: 55567, uuid: "48959fe8-4a5e-4996-bc87-8d66398e6860", encryption: "none", network: "tcp", security: "reality", sni: "www.discoverasr.com", fp: "chrome", flow: "xtls-rprx-vision", reality-opts: {public-key: "0soGDTguByd3I9e2nLuzkw5BOHELZ_AHHDkA0Zx3JRA", short-id: "f3f70ca767", server-name: "www.discoverasr.com"}, tls: true, pbk: "0soGDTguByd3I9e2nLuzkw5BOHELZ_AHHDkA0Zx3JRA", sid: "f3f70ca767", headerType: "none"}
-- {name: "🇦🇪 AE-1 | Starlink", type: "vless", server: "31.56.188.60", port: 7443, uuid: "6e41151e-ae07-4ea6-910e-7a3986b7bc0d", encryption: "none", network: "tcp", security: "reality", sni: "mi.com", fp: "firefox", flow: "xtls-rprx-vision", reality-opts: {public-key: "5QAO98ot2U7TcGs_f6EEaQjCzNOJLNHqPf6smYsdFVI", short-id: "d82fb387", server-name: "mi.com"}, tls: true, pbk: "5QAO98ot2U7TcGs_f6EEaQjCzNOJLNHqPf6smYsdFVI", sid: "d82fb387", headerType: "none"}
-- {name: "🇭🇰 HK-2 | Starlink", type: "trojan", server: "45.38.42.156", port: 2053, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇭🇰 HK-3 | Starlink", type: "trojan", server: "45.39.190.143", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇭🇰 HK-4 | Starlink", type: "trojan", server: "45.136.14.61", port: 2053, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇭🇰 HK-5 | Starlink", type: "trojan", server: "45.38.42.198", port: 2053, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇭🇰 HK-6 | Starlink", type: "trojan", server: "45.38.42.245", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇭🇰 HK-7 | Starlink", type: "trojan", server: "104.253.175.16", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇭🇰 HK-8 | Starlink", type: "trojan", server: "46.8.226.197", port: 8443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇭🇰 HK-9 | Starlink", type: "trojan", server: "104.253.175.99", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇭🇰 HK-10 | Starlink", type: "trojan", server: "45.39.190.66", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇭🇰 HK-11 | Starlink", type: "trojan", server: "217.60.248.94", port: 2053, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-2 | Starlink", type: "trojan", server: "38.207.130.242", port: 8443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-3 | Starlink", type: "trojan", server: "45.76.222.30", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-4 | Starlink", type: "trojan", server: "45.32.26.252", port: 8443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-5 | Starlink", type: "trojan", server: "156.246.92.139", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-6 | Starlink", type: "trojan", server: "64.176.36.17", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-7 | Starlink", type: "trojan", server: "217.142.254.144", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-8 | Starlink", type: "trojan", server: "168.138.46.67", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-9 | Starlink", type: "trojan", server: "8.211.161.198", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-10 | Starlink", type: "trojan", server: "64.110.101.250", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-11 | Starlink", type: "trojan", server: "45.32.24.190", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-12 | Starlink", type: "trojan", server: "167.179.101.103", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-13 | Starlink", type: "trojan", server: "158.101.78.162", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-14 | Starlink", type: "trojan", server: "47.79.94.192", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-15 | Starlink", type: "trojan", server: "168.138.212.80", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-16 | Starlink", type: "trojan", server: "45.77.129.86", port: 2053, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-17 | Starlink", type: "trojan", server: "13.192.18.59", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-18 | Starlink", type: "trojan", server: "138.2.62.8", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇯🇵 JP-19 | Starlink", type: "trojan", server: "156.246.92.195", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-2 | Starlink", type: "trojan", server: "168.110.113.248", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-3 | Starlink", type: "trojan", server: "130.162.132.38", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-4 | Starlink", type: "trojan", server: "158.180.71.69", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-5 | Starlink", type: "trojan", server: "144.24.64.178", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-6 | Starlink", type: "trojan", server: "146.56.187.1", port: 8443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-7 | Starlink", type: "trojan", server: "161.118.158.9", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-8 | Starlink", type: "trojan", server: "141.164.35.94", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-9 | Starlink", type: "trojan", server: "15.164.84.61", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-10 | Starlink", type: "trojan", server: "141.164.51.88", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-11 | Starlink", type: "trojan", server: "193.123.232.91", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-12 | Starlink", type: "trojan", server: "158.247.211.170", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-13 | Starlink", type: "trojan", server: "64.110.71.6", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-14 | Starlink", type: "trojan", server: "144.24.73.232", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-15 | Starlink", type: "trojan", server: "152.70.239.74", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-16 | Starlink", type: "trojan", server: "158.180.72.60", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-17 | Starlink", type: "trojan", server: "152.67.210.234", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-18 | Starlink", type: "trojan", server: "130.162.130.105", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇰🇷 KR-19 | Starlink", type: "trojan", server: "146.56.188.74", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-2 | Starlink", type: "trojan", server: "146.235.16.191", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-3 | Starlink", type: "trojan", server: "161.118.213.45", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-4 | Starlink", type: "trojan", server: "139.180.220.7", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-5 | Starlink", type: "trojan", server: "207.148.125.245", port: 8443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-6 | Starlink", type: "trojan", server: "139.180.143.248", port: 8443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-7 | Starlink", type: "trojan", server: "149.28.142.169", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-8 | Starlink", type: "trojan", server: "213.35.127.18", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-9 | Starlink", type: "trojan", server: "134.185.93.231", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-10 | Starlink", type: "trojan", server: "45.77.241.64", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-11 | Starlink", type: "trojan", server: "66.42.51.60", port: 8443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-12 | Starlink", type: "trojan", server: "140.245.62.90", port: 2096, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-13 | Starlink", type: "trojan", server: "8.219.154.217", port: 8443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-14 | Starlink", type: "trojan", server: "138.2.64.229", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-15 | Starlink", type: "trojan", server: "138.2.87.237", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-16 | Starlink", type: "trojan", server: "139.180.222.3", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-17 | Starlink", type: "trojan", server: "140.245.101.81", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-18 | Starlink", type: "trojan", server: "158.178.230.113", port: 8443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-19 | Starlink", type: "trojan", server: "149.28.159.222", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-20 | Starlink", type: "trojan", server: "168.138.165.174", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-21 | Starlink", type: "trojan", server: "140.245.59.102", port: 8443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇸🇬 SG-22 | Starlink", type: "trojan", server: "47.82.178.58", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-1 | Starlink", type: "trojan", server: "154.17.24.174", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-2 | Starlink", type: "trojan", server: "64.186.231.175", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-3 | Starlink", type: "trojan", server: "69.63.216.10", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-4 | Starlink", type: "trojan", server: "154.26.187.44", port: 8443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-5 | Starlink", type: "trojan", server: "69.63.212.251", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-6 | Starlink", type: "trojan", server: "69.63.193.64", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-7 | Starlink", type: "trojan", server: "154.17.9.145", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-8 | Starlink", type: "trojan", server: "69.63.212.210", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-9 | Starlink", type: "trojan", server: "64.186.234.108", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-10 | Starlink", type: "trojan", server: "154.26.180.8", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-11 | Starlink", type: "trojan", server: "154.17.8.66", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-12 | Starlink", type: "trojan", server: "64.186.248.118", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-13 | Starlink", type: "trojan", server: "69.63.223.47", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-14 | Starlink", type: "trojan", server: "154.17.1.231", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-15 | Starlink", type: "trojan", server: "154.17.233.100", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-16 | Starlink", type: "trojan", server: "64.186.248.160", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-17 | Starlink", type: "trojan", server: "154.17.12.91", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-18 | Starlink", type: "trojan", server: "45.59.184.32", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-19 | Starlink", type: "trojan", server: "64.186.225.11", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-20 | Starlink", type: "trojan", server: "154.17.22.207", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-21 | Starlink", type: "trojan", server: "154.17.4.159", port: 2053, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-22 | Starlink", type: "trojan", server: "69.63.222.124", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-23 | Starlink", type: "trojan", server: "154.17.11.153", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-24 | Starlink", type: "trojan", server: "154.21.95.59", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-25 | Starlink", type: "trojan", server: "154.17.26.200", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
-- {name: "🇺🇸 US-26 | Starlink", type: "trojan", server: "154.21.82.135", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "hhcm.hhxaf.cc.cd", servername: "hhcm.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "hhcm.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 proxy-groups:
   - name: 选择线路
     type: select
     proxies:
       - 自动选择⚡️
-      - 🇮🇳 IN-1 | Starlink
-      - 🇬🇧 GB-1 | Starlink
-      - 🇨🇦 CA-1 | Starlink
-      - 🇨🇦 CA-2 | Starlink
-      - 🇩🇪 DE-1 | Starlink
-      - 🇳🇱 NL-1 | Starlink
-      - 🇳🇱 NL-2 | Starlink
-      - 🇨🇦 CA-3 | Starlink
-      - 🇨🇦 CA-4 | Starlink
-      - 🇩🇪 DE-2 | Starlink
-      - 🇭🇰 HK-1 | Starlink
-      - 🇨🇦 CA-5 | Starlink
-      - 🇨🇦 CA-6 | Starlink
-      - 🇫🇷 FR-1 | Starlink
-      - 🇩🇪 DE-3 | Starlink
-      - 🇻🇳 VN-1 | Starlink
-      - 🇩🇪 DE-4 | Starlink
-      - 🇳🇱 NL-3 | Starlink
-      - 🇳🇱 NL-4 | Starlink
-      - 🇰🇷 KR-1 | Starlink
-      - 🇬🇧 GB-2 | Starlink
-      - 🇨🇳 CN-1 | Starlink
       - 🇯🇵 JP-1 | Starlink
+      - 🇬🇧 GB-1 | Starlink
+      - 🇲🇩 MD-1 | Starlink
       - 🇸🇬 SG-1 | Starlink
-      - 🇦🇪 AE-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇭🇰 HK-3 | Starlink
-      - 🇭🇰 HK-4 | Starlink
-      - 🇭🇰 HK-5 | Starlink
-      - 🇭🇰 HK-6 | Starlink
-      - 🇭🇰 HK-7 | Starlink
-      - 🇭🇰 HK-8 | Starlink
-      - 🇭🇰 HK-9 | Starlink
-      - 🇭🇰 HK-10 | Starlink
-      - 🇭🇰 HK-11 | Starlink
+      - 🇬🇧 GB-2 | Starlink
+      - 🇸🇨 SC-1 | Starlink
       - 🇯🇵 JP-2 | Starlink
-      - 🇯🇵 JP-3 | Starlink
-      - 🇯🇵 JP-4 | Starlink
-      - 🇯🇵 JP-5 | Starlink
-      - 🇯🇵 JP-6 | Starlink
-      - 🇯🇵 JP-7 | Starlink
-      - 🇯🇵 JP-8 | Starlink
-      - 🇯🇵 JP-9 | Starlink
-      - 🇯🇵 JP-10 | Starlink
-      - 🇯🇵 JP-11 | Starlink
-      - 🇯🇵 JP-12 | Starlink
-      - 🇯🇵 JP-13 | Starlink
-      - 🇯🇵 JP-14 | Starlink
-      - 🇯🇵 JP-15 | Starlink
-      - 🇯🇵 JP-16 | Starlink
-      - 🇯🇵 JP-17 | Starlink
-      - 🇯🇵 JP-18 | Starlink
-      - 🇯🇵 JP-19 | Starlink
+      - 🇰🇷 KR-1 | Starlink
+      - 🇻🇳 VN-1 | Starlink
       - 🇰🇷 KR-2 | Starlink
       - 🇰🇷 KR-3 | Starlink
-      - 🇰🇷 KR-4 | Starlink
-      - 🇰🇷 KR-5 | Starlink
-      - 🇰🇷 KR-6 | Starlink
-      - 🇰🇷 KR-7 | Starlink
-      - 🇰🇷 KR-8 | Starlink
-      - 🇰🇷 KR-9 | Starlink
-      - 🇰🇷 KR-10 | Starlink
-      - 🇰🇷 KR-11 | Starlink
-      - 🇰🇷 KR-12 | Starlink
-      - 🇰🇷 KR-13 | Starlink
-      - 🇰🇷 KR-14 | Starlink
-      - 🇰🇷 KR-15 | Starlink
-      - 🇰🇷 KR-16 | Starlink
-      - 🇰🇷 KR-17 | Starlink
-      - 🇰🇷 KR-18 | Starlink
-      - 🇰🇷 KR-19 | Starlink
       - 🇸🇬 SG-2 | Starlink
-      - 🇸🇬 SG-3 | Starlink
-      - 🇸🇬 SG-4 | Starlink
-      - 🇸🇬 SG-5 | Starlink
-      - 🇸🇬 SG-6 | Starlink
-      - 🇸🇬 SG-7 | Starlink
-      - 🇸🇬 SG-8 | Starlink
-      - 🇸🇬 SG-9 | Starlink
-      - 🇸🇬 SG-10 | Starlink
-      - 🇸🇬 SG-11 | Starlink
-      - 🇸🇬 SG-12 | Starlink
-      - 🇸🇬 SG-13 | Starlink
-      - 🇸🇬 SG-14 | Starlink
-      - 🇸🇬 SG-15 | Starlink
-      - 🇸🇬 SG-16 | Starlink
-      - 🇸🇬 SG-17 | Starlink
-      - 🇸🇬 SG-18 | Starlink
-      - 🇸🇬 SG-19 | Starlink
-      - 🇸🇬 SG-20 | Starlink
-      - 🇸🇬 SG-21 | Starlink
-      - 🇸🇬 SG-22 | Starlink
       - 🇺🇸 US-1 | Starlink
       - 🇺🇸 US-2 | Starlink
       - 🇺🇸 US-3 | Starlink
@@ -343,120 +235,92 @@ proxy-groups:
       - 🇺🇸 US-5 | Starlink
       - 🇺🇸 US-6 | Starlink
       - 🇺🇸 US-7 | Starlink
+      - 🇬🇧 GB-3 | Starlink
+      - 🇫🇷 FR-1 | Starlink
+      - 🇰🇷 KR-4 | Starlink
+      - 🇰🇷 KR-5 | Starlink
       - 🇺🇸 US-8 | Starlink
       - 🇺🇸 US-9 | Starlink
       - 🇺🇸 US-10 | Starlink
+      - 🇯🇵 JP-3 | Starlink
       - 🇺🇸 US-11 | Starlink
       - 🇺🇸 US-12 | Starlink
+      - 🇫🇷 FR-2 | Starlink
       - 🇺🇸 US-13 | Starlink
+      - 🇰🇷 KR-6 | Starlink
+      - 🇰🇷 KR-7 | Starlink
+      - 🇫🇷 FR-3 | Starlink
+      - 🇫🇷 FR-4 | Starlink
+      - 🇯🇵 JP-4 | Starlink
       - 🇺🇸 US-14 | Starlink
       - 🇺🇸 US-15 | Starlink
+      - 🇸🇬 SG-3 | Starlink
+      - 🇳🇱 NL-1 | Starlink
+      - 🇬🇧 GB-4 | Starlink
+      - 🇬🇧 GB-5 | Starlink
+      - 🇬🇧 GB-6 | Starlink
       - 🇺🇸 US-16 | Starlink
+      - 🇬🇧 GB-7 | Starlink
+      - 🇫🇷 FR-5 | Starlink
+      - 🇯🇵 JP-5 | Starlink
       - 🇺🇸 US-17 | Starlink
+      - 🇫🇷 FR-6 | Starlink
+      - 🇰🇷 KR-8 | Starlink
       - 🇺🇸 US-18 | Starlink
       - 🇺🇸 US-19 | Starlink
       - 🇺🇸 US-20 | Starlink
+      - 🇰🇷 KR-9 | Starlink
+      - 🇯🇵 JP-6 | Starlink
+      - 🇬🇧 GB-8 | Starlink
+      - 🇩🇪 DE-1 | Starlink
+      - 🇸🇬 SG-4 | Starlink
+      - 🇸🇬 SG-5 | Starlink
+      - 🇰🇷 KR-10 | Starlink
+      - 🇬🇧 GB-9 | Starlink
       - 🇺🇸 US-21 | Starlink
+      - 🇰🇷 KR-11 | Starlink
+      - 🇬🇧 GB-10 | Starlink
+      - 🇬🇧 GB-11 | Starlink
       - 🇺🇸 US-22 | Starlink
+      - 🇬🇧 GB-12 | Starlink
+      - 🇬🇧 GB-13 | Starlink
       - 🇺🇸 US-23 | Starlink
-      - 🇺🇸 US-24 | Starlink
-      - 🇺🇸 US-25 | Starlink
-      - 🇺🇸 US-26 | Starlink
+      - 🇬🇧 GB-14 | Starlink
+      - 🇯🇵 JP-7 | Starlink
+      - 🇸🇬 SG-6 | Starlink
+      - 🇫🇷 FR-7 | Starlink
+      - 🇬🇧 GB-15 | Starlink
+      - 🇬🇧 GB-16 | Starlink
+      - 🇸🇬 SG-7 | Starlink
+      - 🇬🇧 GB-17 | Starlink
+      - 🇮🇳 IN-1 | Starlink
+      - 🇨🇦 CA-1 | Starlink
+      - 🇨🇦 CA-2 | Starlink
+      - 🇨🇦 CA-3 | Starlink
+      - 🇨🇦 CA-4 | Starlink
+      - 🇨🇦 CA-5 | Starlink
+      - 🇨🇦 CA-6 | Starlink
+      - 🇨🇦 CA-7 | Starlink
+      - 🇨🇦 CA-8 | Starlink
+      - 🇬🇧 GB-18 | Starlink
+      - 🇯🇵 JP-8 | Starlink
+      - 🇬🇧 GB-19 | Starlink
+      - 🇨🇳 CN-1 | Starlink
   - name: 自动选择⚡️
     type: url-test
     proxies:
-      - 🇮🇳 IN-1 | Starlink
-      - 🇬🇧 GB-1 | Starlink
-      - 🇨🇦 CA-1 | Starlink
-      - 🇨🇦 CA-2 | Starlink
-      - 🇩🇪 DE-1 | Starlink
-      - 🇳🇱 NL-1 | Starlink
-      - 🇳🇱 NL-2 | Starlink
-      - 🇨🇦 CA-3 | Starlink
-      - 🇨🇦 CA-4 | Starlink
-      - 🇩🇪 DE-2 | Starlink
-      - 🇭🇰 HK-1 | Starlink
-      - 🇨🇦 CA-5 | Starlink
-      - 🇨🇦 CA-6 | Starlink
-      - 🇫🇷 FR-1 | Starlink
-      - 🇩🇪 DE-3 | Starlink
-      - 🇻🇳 VN-1 | Starlink
-      - 🇩🇪 DE-4 | Starlink
-      - 🇳🇱 NL-3 | Starlink
-      - 🇳🇱 NL-4 | Starlink
-      - 🇰🇷 KR-1 | Starlink
-      - 🇬🇧 GB-2 | Starlink
-      - 🇨🇳 CN-1 | Starlink
       - 🇯🇵 JP-1 | Starlink
+      - 🇬🇧 GB-1 | Starlink
+      - 🇲🇩 MD-1 | Starlink
       - 🇸🇬 SG-1 | Starlink
-      - 🇦🇪 AE-1 | Starlink
-      - 🇭🇰 HK-2 | Starlink
-      - 🇭🇰 HK-3 | Starlink
-      - 🇭🇰 HK-4 | Starlink
-      - 🇭🇰 HK-5 | Starlink
-      - 🇭🇰 HK-6 | Starlink
-      - 🇭🇰 HK-7 | Starlink
-      - 🇭🇰 HK-8 | Starlink
-      - 🇭🇰 HK-9 | Starlink
-      - 🇭🇰 HK-10 | Starlink
-      - 🇭🇰 HK-11 | Starlink
+      - 🇬🇧 GB-2 | Starlink
+      - 🇸🇨 SC-1 | Starlink
       - 🇯🇵 JP-2 | Starlink
-      - 🇯🇵 JP-3 | Starlink
-      - 🇯🇵 JP-4 | Starlink
-      - 🇯🇵 JP-5 | Starlink
-      - 🇯🇵 JP-6 | Starlink
-      - 🇯🇵 JP-7 | Starlink
-      - 🇯🇵 JP-8 | Starlink
-      - 🇯🇵 JP-9 | Starlink
-      - 🇯🇵 JP-10 | Starlink
-      - 🇯🇵 JP-11 | Starlink
-      - 🇯🇵 JP-12 | Starlink
-      - 🇯🇵 JP-13 | Starlink
-      - 🇯🇵 JP-14 | Starlink
-      - 🇯🇵 JP-15 | Starlink
-      - 🇯🇵 JP-16 | Starlink
-      - 🇯🇵 JP-17 | Starlink
-      - 🇯🇵 JP-18 | Starlink
-      - 🇯🇵 JP-19 | Starlink
+      - 🇰🇷 KR-1 | Starlink
+      - 🇻🇳 VN-1 | Starlink
       - 🇰🇷 KR-2 | Starlink
       - 🇰🇷 KR-3 | Starlink
-      - 🇰🇷 KR-4 | Starlink
-      - 🇰🇷 KR-5 | Starlink
-      - 🇰🇷 KR-6 | Starlink
-      - 🇰🇷 KR-7 | Starlink
-      - 🇰🇷 KR-8 | Starlink
-      - 🇰🇷 KR-9 | Starlink
-      - 🇰🇷 KR-10 | Starlink
-      - 🇰🇷 KR-11 | Starlink
-      - 🇰🇷 KR-12 | Starlink
-      - 🇰🇷 KR-13 | Starlink
-      - 🇰🇷 KR-14 | Starlink
-      - 🇰🇷 KR-15 | Starlink
-      - 🇰🇷 KR-16 | Starlink
-      - 🇰🇷 KR-17 | Starlink
-      - 🇰🇷 KR-18 | Starlink
-      - 🇰🇷 KR-19 | Starlink
       - 🇸🇬 SG-2 | Starlink
-      - 🇸🇬 SG-3 | Starlink
-      - 🇸🇬 SG-4 | Starlink
-      - 🇸🇬 SG-5 | Starlink
-      - 🇸🇬 SG-6 | Starlink
-      - 🇸🇬 SG-7 | Starlink
-      - 🇸🇬 SG-8 | Starlink
-      - 🇸🇬 SG-9 | Starlink
-      - 🇸🇬 SG-10 | Starlink
-      - 🇸🇬 SG-11 | Starlink
-      - 🇸🇬 SG-12 | Starlink
-      - 🇸🇬 SG-13 | Starlink
-      - 🇸🇬 SG-14 | Starlink
-      - 🇸🇬 SG-15 | Starlink
-      - 🇸🇬 SG-16 | Starlink
-      - 🇸🇬 SG-17 | Starlink
-      - 🇸🇬 SG-18 | Starlink
-      - 🇸🇬 SG-19 | Starlink
-      - 🇸🇬 SG-20 | Starlink
-      - 🇸🇬 SG-21 | Starlink
-      - 🇸🇬 SG-22 | Starlink
       - 🇺🇸 US-1 | Starlink
       - 🇺🇸 US-2 | Starlink
       - 🇺🇸 US-3 | Starlink
@@ -464,25 +328,77 @@ proxy-groups:
       - 🇺🇸 US-5 | Starlink
       - 🇺🇸 US-6 | Starlink
       - 🇺🇸 US-7 | Starlink
+      - 🇬🇧 GB-3 | Starlink
+      - 🇫🇷 FR-1 | Starlink
+      - 🇰🇷 KR-4 | Starlink
+      - 🇰🇷 KR-5 | Starlink
       - 🇺🇸 US-8 | Starlink
       - 🇺🇸 US-9 | Starlink
       - 🇺🇸 US-10 | Starlink
+      - 🇯🇵 JP-3 | Starlink
       - 🇺🇸 US-11 | Starlink
       - 🇺🇸 US-12 | Starlink
+      - 🇫🇷 FR-2 | Starlink
       - 🇺🇸 US-13 | Starlink
+      - 🇰🇷 KR-6 | Starlink
+      - 🇰🇷 KR-7 | Starlink
+      - 🇫🇷 FR-3 | Starlink
+      - 🇫🇷 FR-4 | Starlink
+      - 🇯🇵 JP-4 | Starlink
       - 🇺🇸 US-14 | Starlink
       - 🇺🇸 US-15 | Starlink
+      - 🇸🇬 SG-3 | Starlink
+      - 🇳🇱 NL-1 | Starlink
+      - 🇬🇧 GB-4 | Starlink
+      - 🇬🇧 GB-5 | Starlink
+      - 🇬🇧 GB-6 | Starlink
       - 🇺🇸 US-16 | Starlink
+      - 🇬🇧 GB-7 | Starlink
+      - 🇫🇷 FR-5 | Starlink
+      - 🇯🇵 JP-5 | Starlink
       - 🇺🇸 US-17 | Starlink
+      - 🇫🇷 FR-6 | Starlink
+      - 🇰🇷 KR-8 | Starlink
       - 🇺🇸 US-18 | Starlink
       - 🇺🇸 US-19 | Starlink
       - 🇺🇸 US-20 | Starlink
+      - 🇰🇷 KR-9 | Starlink
+      - 🇯🇵 JP-6 | Starlink
+      - 🇬🇧 GB-8 | Starlink
+      - 🇩🇪 DE-1 | Starlink
+      - 🇸🇬 SG-4 | Starlink
+      - 🇸🇬 SG-5 | Starlink
+      - 🇰🇷 KR-10 | Starlink
+      - 🇬🇧 GB-9 | Starlink
       - 🇺🇸 US-21 | Starlink
+      - 🇰🇷 KR-11 | Starlink
+      - 🇬🇧 GB-10 | Starlink
+      - 🇬🇧 GB-11 | Starlink
       - 🇺🇸 US-22 | Starlink
+      - 🇬🇧 GB-12 | Starlink
+      - 🇬🇧 GB-13 | Starlink
       - 🇺🇸 US-23 | Starlink
-      - 🇺🇸 US-24 | Starlink
-      - 🇺🇸 US-25 | Starlink
-      - 🇺🇸 US-26 | Starlink
+      - 🇬🇧 GB-14 | Starlink
+      - 🇯🇵 JP-7 | Starlink
+      - 🇸🇬 SG-6 | Starlink
+      - 🇫🇷 FR-7 | Starlink
+      - 🇬🇧 GB-15 | Starlink
+      - 🇬🇧 GB-16 | Starlink
+      - 🇸🇬 SG-7 | Starlink
+      - 🇬🇧 GB-17 | Starlink
+      - 🇮🇳 IN-1 | Starlink
+      - 🇨🇦 CA-1 | Starlink
+      - 🇨🇦 CA-2 | Starlink
+      - 🇨🇦 CA-3 | Starlink
+      - 🇨🇦 CA-4 | Starlink
+      - 🇨🇦 CA-5 | Starlink
+      - 🇨🇦 CA-6 | Starlink
+      - 🇨🇦 CA-7 | Starlink
+      - 🇨🇦 CA-8 | Starlink
+      - 🇬🇧 GB-18 | Starlink
+      - 🇯🇵 JP-8 | Starlink
+      - 🇬🇧 GB-19 | Starlink
+      - 🇨🇳 CN-1 | Starlink
     url: https://www.gstatic.com/generate_204
     interval: 300
 rules:

@@ -1,4 +1,4 @@
-# Last update: 28.06.2026 04:26:25
+# Last update: 28.06.2026 05:29:01
 mixed-port: 7897
 allow-lan: false
 mode: rule
@@ -141,7 +141,6 @@ proxies:
 - {name: "🇱🇹 LT-7 | Starlink", type: "vless", server: "45.194.10.35", port: 8443, uuid: "3e7cede4-721a-4807-b0a2-5fe6586af907", encryption: "none", network: "tcp", security: "reality", sni: "storage.yandex.net", fp: "chrome", flow: "xtls-rprx-vision", reality-opts: {public-key: "L3X1eh1Jq_6PKJ6LlwjgiWq0XNaDOqCVKgIElJ5nkVA", short-id: "2cfb5a0ae8ab0cb0", server-name: "storage.yandex.net"}, tls: true, pbk: "L3X1eh1Jq_6PKJ6LlwjgiWq0XNaDOqCVKgIElJ5nkVA", sid: "2cfb5a0ae8ab0cb0", headerType: "none"}
 - {name: "🇺🇸 US-1 | Starlink", type: "vless", server: "reseau.proxy.rlwy.net", port: 55784, uuid: "3c4ebe9f-8d9c-4275-b422-0a8a1d8b660f", encryption: "none", network: "xhttp", security: "none", mode: "auto", extra: "{\"xPaddingBytes\":\"100-1000\"}"}
 - {name: "🇿🇦 ZA-1 | Starlink", type: "trojan", server: "103.177.136.42", port: 47909, password: "4f4d1167-ef14-4304-9bce-0740472503ef", network: "tcp", security: "tls", sni: "is.01.naiun.bilibili.com", servername: "is.01.naiun.bilibili.com", skip-cert-verify: true, fp: "chrome", insecure: "1", allowInsecure: "1", headerType: "none"}
-- {name: "🇳🇱 NL-1 | Starlink", type: "vless", server: "nl2-unlimited.q09.ir", port: 1020, uuid: "bf7c81f8-ff8a-43e7-a87b-353838d89ad7", encryption: "none", network: "tcp", security: "reality", sni: "yahoo.com", fp: "chrome", flow: "xtls-rprx-vision", reality-opts: {public-key: "jILgyIiDR7xY8WDrU9EMx_iXUi6nKr3LapCgglBVBAU", short-id: "3fa2fdb7dce16b8b", server-name: "yahoo.com"}, tls: true, pbk: "jILgyIiDR7xY8WDrU9EMx_iXUi6nKr3LapCgglBVBAU", sid: "3fa2fdb7dce16b8b", headerType: "none"}
 - {name: "🇺🇸 US-2 | Starlink", type: "trojan", server: "69.63.212.210", port: 443, password: "eeb6823c-b926-4ea2-866a-5542edd26e59", network: "ws", security: "tls", sni: "tjsp.hhxaf.cc.cd", servername: "tjsp.hhxaf.cc.cd", skip-cert-verify: false, fp: "chrome", ws-opts: {path: "/", headers: {"Host": "tjsp.hhxaf.cc.cd"}}, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇺🇸 US-3 | Starlink", type: "vless", server: "69.63.211.169", port: 443, uuid: "eeb6823c-b926-4ea2-866a-5542edd26e59", encryption: "none", network: "ws", security: "tls", sni: "t1s1.rittbo.kdns.fr", servername: "t1s1.rittbo.kdns.fr", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "t1s1.rittbo.kdns.fr"}}, tls: true, insecure: "0", allowInsecure: "0", ech: "cloudflare-ech.com+https://dns.alidns.com/dns-query"}
 - {name: "🇩🇪 DE-2 | Starlink", type: "vless", server: "45.130.125.6", port: 443, uuid: "ac006062-f051-43c6-bd4c-f409285c8635", encryption: "none", network: "xhttp", security: "tls", sni: "germany4.alibaba1405.org", servername: "germany4.alibaba1405.org", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", tls: true, insecure: "0", allowInsecure: "0", mode: "auto"}
@@ -161,8 +160,8 @@ proxies:
 - {name: "🇸🇬 SG-2 | Starlink", type: "vless", server: "43.163.77.140", port: 443, uuid: "03d73bc8-01a9-46a7-90b9-3d27065ed328", encryption: "none", network: "ws", security: "tls", sni: "c.eoa.ccwu.cc", servername: "c.eoa.ccwu.cc", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "c.eoa.ccwu.cc"}}, tls: true, insecure: "0", allowInsecure: "0"}
 - {name: "🇸🇬 SG-3 | Starlink", type: "vless", server: "43.153.208.246", port: 7788, uuid: "03d73bc8-01a9-46a7-90b9-3d27065ed328", encryption: "none", network: "ws", security: "tls", sni: "c.eoa.ccwu.cc", servername: "c.eoa.ccwu.cc", skip-cert-verify: false, fp: "chrome", client-fingerprint: "chrome", ws-opts: {path: "/", headers: {"Host": "c.eoa.ccwu.cc"}}, tls: true, insecure: "0", allowInsecure: "0"}
 - {name: "🇸🇪 SE-1 | Starlink", type: "vless", server: "192.71.82.2", port: 443, uuid: "a5c05c1e-aa68-443f-8598-09800244bd4b", encryption: "none", network: "ws", security: "tls", sni: "kingcloud.biack.ir", servername: "kingcloud.biack.ir", skip-cert-verify: false, fp: "firefox", client-fingerprint: "firefox", ws-opts: {path: "/LiL"}, tls: true, insecure: "0", allowInsecure: "0"}
-- {name: "🇳🇱 NL-2 | Starlink", type: "trojan", server: "45.131.4.118", port: 443, password: "MiTiVPN", network: "ws", security: "tls", sni: "95r.ir", servername: "95r.ir", skip-cert-verify: false, ws-opts: {path: "/MiTiVPN=Se", headers: {"Host": "95r.ir"}}, insecure: "0", allowInsecure: "0"}
-- {name: "🇳🇱 NL-3 | Starlink", type: "vless", server: "2.26.2.173", port: 443, uuid: "dbfa97b8-f4fb-4687-96dc-a5a2aebfae11", encryption: "none", network: "tcp", security: "reality", sni: "nl01.port-server.online", fp: "firefox", flow: "xtls-rprx-vision", reality-opts: {public-key: "aG121VHPQfsuK_DYqAxQkh6moKXKqYQT2JFxNDjFBjo", short-id: "44cac987d1070b5b", server-name: "nl01.port-server.online"}, tls: true, pbk: "aG121VHPQfsuK_DYqAxQkh6moKXKqYQT2JFxNDjFBjo", sid: "44cac987d1070b5b", headerType: "none"}
+- {name: "🇳🇱 NL-1 | Starlink", type: "trojan", server: "45.131.4.118", port: 443, password: "MiTiVPN", network: "ws", security: "tls", sni: "95r.ir", servername: "95r.ir", skip-cert-verify: false, ws-opts: {path: "/MiTiVPN=Se", headers: {"Host": "95r.ir"}}, insecure: "0", allowInsecure: "0"}
+- {name: "🇳🇱 NL-2 | Starlink", type: "vless", server: "2.26.2.173", port: 443, uuid: "dbfa97b8-f4fb-4687-96dc-a5a2aebfae11", encryption: "none", network: "tcp", security: "reality", sni: "nl01.port-server.online", fp: "firefox", flow: "xtls-rprx-vision", reality-opts: {public-key: "aG121VHPQfsuK_DYqAxQkh6moKXKqYQT2JFxNDjFBjo", short-id: "44cac987d1070b5b", server-name: "nl01.port-server.online"}, tls: true, pbk: "aG121VHPQfsuK_DYqAxQkh6moKXKqYQT2JFxNDjFBjo", sid: "44cac987d1070b5b", headerType: "none"}
 - {name: "🇸🇬 SG-4 | Starlink", type: "vless", server: "163.128.98.179", port: 443, uuid: "f68eda7b-a93a-437e-8b35-3bb6c675b025", encryption: "none", network: "tcp", security: "reality", sni: "www.apple.com", fp: "safari", flow: "xtls-rprx-vision", reality-opts: {public-key: "EAxetkUM_1nerrjiX8yM7ceiOZccVFbYRiRt9ALDWzw", short-id: "12ec278197ed73d9", server-name: "www.apple.com"}, tls: true, pbk: "EAxetkUM_1nerrjiX8yM7ceiOZccVFbYRiRt9ALDWzw", sid: "12ec278197ed73d9", headerType: "none"}
 - {name: "🇸🇬 SG-5 | Starlink", type: "vless", server: "163.128.98.252", port: 443, uuid: "6aeb24c8-efc1-4a8a-8b70-f4373c57cdc2", encryption: "none", network: "tcp", security: "reality", sni: "www.apple.com", fp: "safari", flow: "xtls-rprx-vision", reality-opts: {public-key: "bOl3cE95DyTP45SarBNVL9VSwvAQETENlm0iMNaxLyo", short-id: "93a993bbc8b86684", server-name: "www.apple.com"}, tls: true, pbk: "bOl3cE95DyTP45SarBNVL9VSwvAQETENlm0iMNaxLyo", sid: "93a993bbc8b86684", headerType: "none"}
 - {name: "🇺🇸 US-10 | Starlink", type: "vless", server: "38.244.20.69", port: 443, uuid: "057f3c26-0fe7-4315-aabc-90c79d413d70", encryption: "none", network: "tcp", security: "reality", sni: "www.apple.com", fp: "safari", flow: "xtls-rprx-vision", reality-opts: {public-key: "JlcNtRODuC4k8GhBFuXwjps9cRe3asq453_RLd3o9E8", short-id: "e9e3098b62530266", server-name: "www.apple.com"}, tls: true, pbk: "JlcNtRODuC4k8GhBFuXwjps9cRe3asq453_RLd3o9E8", sid: "e9e3098b62530266", headerType: "none"}
@@ -199,7 +198,6 @@ proxy-groups:
       - 🇱🇹 LT-7 | Starlink
       - 🇺🇸 US-1 | Starlink
       - 🇿🇦 ZA-1 | Starlink
-      - 🇳🇱 NL-1 | Starlink
       - 🇺🇸 US-2 | Starlink
       - 🇺🇸 US-3 | Starlink
       - 🇩🇪 DE-2 | Starlink
@@ -219,8 +217,8 @@ proxy-groups:
       - 🇸🇬 SG-2 | Starlink
       - 🇸🇬 SG-3 | Starlink
       - 🇸🇪 SE-1 | Starlink
+      - 🇳🇱 NL-1 | Starlink
       - 🇳🇱 NL-2 | Starlink
-      - 🇳🇱 NL-3 | Starlink
       - 🇸🇬 SG-4 | Starlink
       - 🇸🇬 SG-5 | Starlink
       - 🇺🇸 US-10 | Starlink
@@ -255,7 +253,6 @@ proxy-groups:
       - 🇱🇹 LT-7 | Starlink
       - 🇺🇸 US-1 | Starlink
       - 🇿🇦 ZA-1 | Starlink
-      - 🇳🇱 NL-1 | Starlink
       - 🇺🇸 US-2 | Starlink
       - 🇺🇸 US-3 | Starlink
       - 🇩🇪 DE-2 | Starlink
@@ -275,8 +272,8 @@ proxy-groups:
       - 🇸🇬 SG-2 | Starlink
       - 🇸🇬 SG-3 | Starlink
       - 🇸🇪 SE-1 | Starlink
+      - 🇳🇱 NL-1 | Starlink
       - 🇳🇱 NL-2 | Starlink
-      - 🇳🇱 NL-3 | Starlink
       - 🇸🇬 SG-4 | Starlink
       - 🇸🇬 SG-5 | Starlink
       - 🇺🇸 US-10 | Starlink

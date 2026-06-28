@@ -519,6 +519,62 @@ def parse_vmess(line, line_number=None):
 # -----------------------------------------------------------
 # VLESS Parser
 # -----------------------------------------------------------
+def normalize_vless_for_clash(node):
+    clean = {}
+
+    # core required fields
+    clean["name"] = node.get("name", "")
+    clean["type"] = "vless"
+    clean["server"] = node.get("server", "")
+    clean["port"] = node.get("port", 0)
+    clean["uuid"] = node.get("uuid", "")
+
+    # clash standard fields
+    clean["alterId"] = 0
+    clean["cipher"] = "auto"
+    clean["udp"] = True
+
+    # transport
+    clean["network"] = node.get("network", "tcp")
+
+    # security mapping
+    if node.get("security") == "reality":
+        clean["tls"] = True
+    elif node.get("tls"):
+        clean["tls"] = True
+    else:
+        clean["tls"] = False
+
+    # sni
+    clean["servername"] = node.get("sni") or node.get("servername", "")
+
+    # reality ONLY inside object
+    if node.get("reality-opts"):
+        clean["reality-opts"] = node["reality-opts"]
+
+    # websocket / grpc
+    if "ws-opts" in node:
+        clean["ws-opts"] = node["ws-opts"]
+
+    if "grpc-opts" in node:
+        clean["grpc-opts"] = node["grpc-opts"]
+
+    # fingerprint (ONLY one field)
+    if node.get("fp"):
+        clean["client-fingerprint"] = node["fp"]
+    elif node.get("client-fingerprint"):
+        clean["client-fingerprint"] = node["client-fingerprint"]
+
+    # flow (important for vision)
+    if node.get("flow"):
+        clean["flow"] = node["flow"]
+
+    # skip-cert-verify mapping
+    clean["skip-cert-verify"] = node.get("skip-cert-verify", False)
+
+    return clean
+
+# ---------------- Main VMESS parser ----------------
 def parse_vless(line, line_number=None):
     try:
         if not line.startswith("vless://"):
@@ -722,7 +778,15 @@ def parse_hysteria2(line, line_number=None):
         query = dict(urllib.parse.parse_qsl(parsed.query))
         name = urllib.parse.unquote(parsed.fragment or "Hysteria2 Node")
 
-        if not host or not port:
+        if port == 0 and "mport" in query:
+            mport = query["mport"]
+        
+            if "-" in mport:
+                port = safe_int(mport.split("-", 1)[0])
+            else:
+                port = safe_int(mport)
+
+        if not host or port is None:
             return None
 
         node = {
@@ -772,6 +836,7 @@ def parse_hysteria2(line, line_number=None):
     except Exception:
         print(f"[warn] ❗Hysteria2 parse error -> Line {line_number}")
         return None
+        
 # -----------------------------------------------------------
 # ANYTLS Parser
 # -----------------------------------------------------------

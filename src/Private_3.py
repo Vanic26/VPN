@@ -833,6 +833,7 @@ def parse_hysteria2(line, line_number=None):
     except Exception:
         print(f"[warn] ❗Hysteria2 parse error -> Line {line_number}")
         return None
+        
 # -----------------------------------------------------------
 # ANYTLS Parser
 # -----------------------------------------------------------
@@ -1727,4 +1728,3 @@ def upload_to_textdb(final_output):
 # ---------------- Entry ----------------
 if __name__ == "__main__":
     main()
-    

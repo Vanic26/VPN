@@ -370,16 +370,15 @@ def merge_dynamic_fields(node, data):
     reserved = {
         # common normalized fields
         "name", "server", "port", "uuid", "password",
-        "insecure", "allowInsecure", "sni",
         "cipher", "network", "tls", "alterId",
-        "servername", "type", "encryption",
+        "type", "encryption",
 
+        # tls / security fields
+        "sni", "servername", "server_name", "insecure", "allowInsecure", "security", "type", "flow",
+        
         # raw fields (already normalized)
         "v", "ps", "add", "id", "aid", "net",
-        "scy", "host", "path", "tls", "sni",
-
-        # protocol transport fields
-        "security", "type", "flow",
+        "scy", "host", "path",
 
         # ignore metadata
         "metadata"
@@ -1658,28 +1657,41 @@ def main():
         except Exception as e_local:
             print(f"[FATAL] ⚠️ Failed to load ClashTemplate -> {e_local}")
             sys.exit(1)
-            
-        # -------- TLS SNI normalization --------
+
+        # ---------------- Preferred key order ----------------
+        INFO_ORDER = [
+            "name", "type", "server", "port", "uuid", "password",
+            "encryption", "network", "security", "udp", "sni",
+            "skip-cert-verify", "fp", "client-fingerprint",
+            "path", "ws-opts", "grpc-opts", "h2-opts"
+        ]
+        
+        # ---------------- Function to reorder keys ----------------
         def reorder_info(node):
 
             node = copy.deepcopy(node)
-
-            # Convert internal TLS format
+        
+            print("BEFORE:", node.get("type"), node.get("tls"))
+        
+            # Convert internal TLS format to Clash format
             if isinstance(node.get("tls"), dict):
-            
+        
                 tls = node["tls"]
-            
+        
                 if tls.get("server_name"):
                     node["sni"] = tls["server_name"]
-            
+        
                 if tls.get("insecure") is True:
                     node["skip-cert-verify"] = True
-            
-                # remove internal TLS object
+        
+                # Remove internal Karing/sing-box style TLS object
                 node.pop("tls", None)
-            
-            # remove unnecessary fields
+        
+            # Remove query leftovers
             node.pop("insecure", None)
+            node.pop("allowInsecure", None)
+        
+            print("AFTER:", node.get("type"), node.get("sni"), node.get("tls"))
         
             ordered = OrderedDict()
         
@@ -1693,38 +1705,11 @@ def main():
                     else:
                         ordered[key] = val
         
+            # Add remaining fields
             for key in node:
                 if key not in ordered:
                     ordered[key] = node[key]
         
-            return ordered
-
-        # ---------------- Preferred key order ----------------
-        INFO_ORDER = [
-            "name", "type", "server", "port", "uuid", "password",
-            "encryption", "network", "security", "sni",
-            "skip-cert-verify", "fp", "client-fingerprint",
-            "path", "ws-opts", "grpc-opts", "h2-opts"
-        ]
-        
-        # ---------------- Function to reorder keys ----------------
-        def reorder_info(node):
-            ordered = OrderedDict()
-            # Add preferred keys only if they exist in the node
-            for key in INFO_ORDER:
-                if key in node:
-                    val = node[key]
-                    # Convert string to list only if original value is a list or comma string
-                    if key in ("alpn") and isinstance(val, str):
-                        # Only split if val is not empty
-                        val_list = [x.strip() for x in val.split(",") if x.strip()]
-                        ordered[key] = val_list if val_list else val
-                    else:
-                        ordered[key] = val
-            # Append extra keys not in preferred order
-            for key in node:
-                if key not in ordered:
-                    ordered[key] = node[key]
             return ordered
         
         # Apply to all renamed nodes

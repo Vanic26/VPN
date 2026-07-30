@@ -370,6 +370,7 @@ def merge_dynamic_fields(node, data):
     reserved = {
         # common normalized fields
         "name", "server", "port", "uuid", "password",
+        "insecure", "allowInsecure", "sni",
         "cipher", "network", "tls", "alterId",
         "servername", "type", "encryption",
 

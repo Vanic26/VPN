@@ -921,14 +921,9 @@ def parse_anytls(line, line_number=None):
         if "insecure" in query:
             tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
 
-        if "allowInsecure" in query:
-            tls["insecure"] = query["allowInsecure"].lower() in ("1", "true", "yes")
-
-        if tls:
-            tls["enabled"] = True
-            node["tls"] = tls
-            node["skip-cert-verify"] = tls.get("insecure", False)
-
+            if insecure:
+                node["skip-cert-verify"] = True
+        
         # ---------------- ALPN ----------------
         if "alpn" in query:
             node["alpn"] = query["alpn"].split(",")
@@ -1660,6 +1655,39 @@ def main():
         except Exception as e_local:
             print(f"[FATAL] ⚠️ Failed to load ClashTemplate -> {e_local}")
             sys.exit(1)
+            
+        # -------- TLS SNI normalization --------
+        def reorder_info(node):
+
+            node = copy.deepcopy(node)
+        
+            if "tls" in node and isinstance(node["tls"], dict):
+        
+                tls = node["tls"]
+        
+                if "server_name" in tls:
+                    node["sni"] = tls["server_name"]
+        
+                # remove tls block for Clash compatibility
+                node.pop("tls", None)
+        
+            ordered = OrderedDict()
+        
+            for key in INFO_ORDER:
+                if key in node:
+                    val = node[key]
+        
+                    if key == "alpn" and isinstance(val, str):
+                        val_list = [x.strip() for x in val.split(",") if x.strip()]
+                        ordered[key] = val_list if val_list else val
+                    else:
+                        ordered[key] = val
+        
+            for key in node:
+                if key not in ordered:
+                    ordered[key] = node[key]
+        
+            return ordered
 
         # ---------------- Preferred key order ----------------
         INFO_ORDER = [

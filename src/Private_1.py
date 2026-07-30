@@ -921,8 +921,10 @@ def parse_anytls(line, line_number=None):
         if "insecure" in query:
             tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
 
-            if insecure:
-                node["skip-cert-verify"] = True
+        if tls:
+            tls["enabled"] = True
+            node["tls"] = tls
+            node["skip-cert-verify"] = tls.get("insecure", False)
         
         # ---------------- ALPN ----------------
         if "alpn" in query:
@@ -1660,16 +1662,23 @@ def main():
         def reorder_info(node):
 
             node = copy.deepcopy(node)
-        
-            if "tls" in node and isinstance(node["tls"], dict):
-        
+
+            # Convert internal TLS format
+            if isinstance(node.get("tls"), dict):
+            
                 tls = node["tls"]
-        
-                if "server_name" in tls:
+            
+                if tls.get("server_name"):
                     node["sni"] = tls["server_name"]
-        
-                # remove tls block for Clash compatibility
+            
+                if tls.get("insecure") is True:
+                    node["skip-cert-verify"] = True
+            
+                # remove internal TLS object
                 node.pop("tls", None)
+            
+            # remove unnecessary fields
+            node.pop("insecure", None)
         
             ordered = OrderedDict()
         

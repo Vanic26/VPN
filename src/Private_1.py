@@ -824,7 +824,6 @@ def parse_hysteria2(line, line_number=None):
         
         elif "insecure" in query:
             tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
-                "1", "true", "yes"
         
         if tls:
             tls["enabled"] = True

@@ -1672,7 +1672,7 @@ def main():
         def reorder_info(node):
             node = copy.deepcopy(node)
             
-            # Convert internal TLS format to Clash format
+            # Convert internal TLS format
             if isinstance(node.get("tls"), dict):
         
                 tls = node["tls"]
@@ -1683,7 +1683,7 @@ def main():
                 if tls.get("insecure") is True:
                     node["skip-cert-verify"] = True
                     
-                # Remove internal Karing/sing-box style TLS object
+                # Remove internal TLS object
                 node.pop("tls", None)
         
             # Remove query leftovers

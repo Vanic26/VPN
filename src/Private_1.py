@@ -820,14 +820,11 @@ def parse_hysteria2(line, line_number=None):
             tls["insecure"] = True
         
         elif "allowInsecure" in query:
-            tls["insecure"] = query["allowInsecure"].lower() in (
-                "1", "true", "yes"
-            )
+            tls["insecure"] = query["allowInsecure"].lower() in ("1", "true", "yes")
         
         elif "insecure" in query:
-            tls["insecure"] = query["insecure"].lower() in (
+            tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
                 "1", "true", "yes"
-            )
         
         if tls:
             tls["enabled"] = True

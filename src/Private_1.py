@@ -924,7 +924,9 @@ def parse_anytls(line, line_number=None):
         if tls:
             tls["enabled"] = True
             node["tls"] = tls
-            node["skip-cert-verify"] = tls.get("insecure", False)
+        
+            if tls.get("insecure") is True:
+                node["skip-cert-verify"] = True
         
         # ---------------- ALPN ----------------
         if "alpn" in query:
@@ -1687,6 +1689,9 @@ def main():
             # Remove query leftovers
             node.pop("insecure", None)
             node.pop("allowInsecure", None)
+            
+            if node.get("skip-cert-verify") is False:
+                node.pop("skip-cert-verify", None)
             ordered = OrderedDict()
         
             for key in INFO_ORDER:
@@ -1710,10 +1715,6 @@ def main():
         normalized_nodes = [normalize_mux(n) for n in renamed_nodes]
         info_ordered = [reorder_info(n) for n in normalized_nodes]
         info_ordered_dicts = [dict(n) for n in info_ordered]
-        for x in info_ordered_dicts:
-            if x.get("type") == "anytls":
-                print("FINAL BEFORE YAML:")
-                print(json.dumps(x, indent=2, ensure_ascii=False))
 
         # Line by line YAML proxies output format
         def make_single_line_yaml(proxies):

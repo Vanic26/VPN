@@ -132,10 +132,10 @@ def normalize_node(n):
 
     # ---------------- sni ----------------
     sni = (
-        n.get("sni")
+        tls_obj.get("server_name")
+        or n.get("sni")
         or n.get("servername")
         or n.get("server_name")
-        or tls_obj.get("server_name")
         or ""
     )
 
@@ -917,7 +917,6 @@ def parse_anytls(line, line_number=None):
 
         if "sni" in query:
             tls["server_name"] = query["sni"]
-            node["servername"] = query["sni"]
 
         if "insecure" in query:
             tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")

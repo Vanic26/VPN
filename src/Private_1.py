@@ -810,36 +810,31 @@ def parse_hysteria2(line, line_number=None):
         # ---------------------------------------------------
         # TLS
         # ---------------------------------------------------
-        tls = {
-            "enabled": True
-        }
-
+        tls = {}
+        
         if "sni" in query:
             tls["server_name"] = query["sni"]
-            node["sni"] = query["sni"]
-
-        # pinSHA256 -> fingerprint
+        
         if "pinSHA256" in query:
             node["fingerprint"] = query["pinSHA256"]
-
-            # Karing imports certificate pinning as insecure=true
             tls["insecure"] = True
-
+        
         elif "allowInsecure" in query:
             tls["insecure"] = query["allowInsecure"].lower() in (
                 "1", "true", "yes"
             )
-
+        
         elif "insecure" in query:
             tls["insecure"] = query["insecure"].lower() in (
                 "1", "true", "yes"
             )
-
-        else:
-            tls["insecure"] = False
-
-        node["tls"] = tls
-        node["skip-cert-verify"] = tls["insecure"]
+        
+        if tls:
+            tls["enabled"] = True
+            node["tls"] = tls
+        
+            if tls.get("insecure") is True:
+                node["skip-cert-verify"] = True
 
         # ---------------------------------------------------
         # OBFS
@@ -976,22 +971,23 @@ def parse_tuic(line, line_number=None):
 
         # ---------------- TLS ----------------
         tls = {}
-
+        
         if "sni" in query:
             tls["server_name"] = query["sni"]
-            node["servername"] = query["sni"]
-
+        
         if "insecure" in query:
             tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
-
+        
         if "allowInsecure" in query:
             tls["insecure"] = query["allowInsecure"].lower() in ("1", "true", "yes")
-
+                
         if tls:
             tls["enabled"] = True
             node["tls"] = tls
-            node["skip-cert-verify"] = tls.get("insecure", False)
-
+        
+            if tls.get("insecure") is True:
+                node["skip-cert-verify"] = True
+                
         # ---------------- ALPN ----------------
         if "alpn" in query:
             node["alpn"] = query["alpn"].split(",")

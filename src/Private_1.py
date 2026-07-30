@@ -1668,11 +1668,8 @@ def main():
         
         # ---------------- Function to reorder keys ----------------
         def reorder_info(node):
-
             node = copy.deepcopy(node)
-        
-            print("BEFORE:", node.get("type"), node.get("tls"))
-        
+            
             # Convert internal TLS format to Clash format
             if isinstance(node.get("tls"), dict):
         
@@ -1683,16 +1680,13 @@ def main():
         
                 if tls.get("insecure") is True:
                     node["skip-cert-verify"] = True
-        
+                    
                 # Remove internal Karing/sing-box style TLS object
                 node.pop("tls", None)
         
             # Remove query leftovers
             node.pop("insecure", None)
             node.pop("allowInsecure", None)
-        
-            print("AFTER:", node.get("type"), node.get("sni"), node.get("tls"))
-        
             ordered = OrderedDict()
         
             for key in INFO_ORDER:
@@ -1716,6 +1710,10 @@ def main():
         normalized_nodes = [normalize_mux(n) for n in renamed_nodes]
         info_ordered = [reorder_info(n) for n in normalized_nodes]
         info_ordered_dicts = [dict(n) for n in info_ordered]
+        for x in info_ordered_dicts:
+            if x.get("type") == "anytls":
+                print("FINAL BEFORE YAML:")
+                print(json.dumps(x, indent=2, ensure_ascii=False))
 
         # Line by line YAML proxies output format
         def make_single_line_yaml(proxies):

@@ -499,11 +499,7 @@ def parse_vless(line, line_number=None):
                 node["client-fingerprint"] = query["fp"]
 
         elif query.get("security") == "reality":
-            print("\n[DEBUG REALITY PARSER HIT]")
-            print(query)
-        
-            tls = {"enabled": True}
-                
+            tls = {"enabled": True}  
             sni = query.get("sni") or query.get("peer")
         
             if sni:
@@ -519,9 +515,6 @@ def parse_vless(line, line_number=None):
                 tls["insecure"] = True
         
             node["tls"] = tls
-            print("\n[DEBUG REALITY TLS OUTPUT]")
-            print(tls)
-        
             node["reality-opts"] = {
                 "public-key": query.get("pbk", ""),
                 "short-id": query.get("sid", "")
@@ -539,11 +532,7 @@ def parse_vless(line, line_number=None):
 
         if node.get("network") == "grpc":
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
-        print("\n[DEBUG BEFORE MERGE_DYNAMIC_FIELDS]")
-        print(yaml.dump(node, allow_unicode=True, sort_keys=False))
         node = merge_dynamic_fields(node, query)
-        print("\n[DEBUG AFTER MERGE_DYNAMIC_FIELDS]")
-        print(yaml.dump(node, allow_unicode=True, sort_keys=False))
         return node
 
     except Exception as e:
@@ -1590,21 +1579,7 @@ def main():
             res = rename_node(n, country_counter, cn_to_cc)
             if res:
                 renamed_nodes.append(res)
-        
-        
-        print("\n[DEBUG VLESS AFTER RENAME]")
-        
-        found = False
-        
-        for n in renamed_nodes:
-            if n.get("type") == "vless" and "reality-opts" in n:
-                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
-                found = True
-                break
-        
-        if not found:
-            print("No VLESS Reality node found")
-            
+                break 
         else:
                 skipped_nodes += 1
 
@@ -1672,7 +1647,12 @@ def main():
                 normalize_mux(n)
             )
                     
-        normalized_nodes = [normalize_mux(n) for n in renamed_nodes] 
+        normalized_nodes = [normalize_mux(n) for n in renamed_nodes]
+        print("\n[DEBUG VLESS AFTER NORMALIZE_MUX]")
+        for n in normalized_nodes:
+            if n.get("type") == "vless" and "reality-opts" in n:
+                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
+                break
         info_ordered = [reorder_info(n) for n in normalized_nodes]
         info_ordered_dicts = [dict(n) for n in info_ordered]
         # Remove internal parser metadata before final export

@@ -767,23 +767,18 @@ def parse_anytls(line, line_number=None):
             "server": host,
             "port": int(port),
             "password": password,
+            "udp": True,
         }
 
-        # ---------------- TLS ----------------
-        tls = {}
-
+        # ---------------- TLS / SNI ----------------
         if "sni" in query:
-            tls["server_name"] = query["sni"]
-
-        if "insecure" in query:
-            tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
-
-        if tls:
-            tls["enabled"] = True
-            node["tls"] = tls
+            node["sni"] = query["sni"]
         
-            if tls.get("insecure") is True:
-                node["skip-cert-verify"] = True
+        if "insecure" in query:
+            node["skip-cert-verify"] = (
+                query["insecure"].lower()
+                in ("1", "true", "yes")
+            )
         
         # ---------------- ALPN ----------------
         if "alpn" in query:

@@ -524,6 +524,8 @@ def parse_vless(line, line_number=None):
         if node.get("network") == "grpc":
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
 
+        print("\n[DEBUG VLESS BEFORE MERGE]")
+        print(json.dumps(node, indent=2, ensure_ascii=False))
         node = merge_dynamic_fields(node, query)
         return node
 

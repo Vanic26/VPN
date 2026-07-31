@@ -1580,6 +1580,30 @@ def main():
             res = rename_node(n, country_counter, cn_to_cc)
             if res:
                 renamed_nodes.append(res)
+
+        # ---------------- Renamed nodes ----------------
+        renamed_nodes = []
+        cn_to_cc = load_cn_to_cc()
+        skipped_nodes = 0
+        
+        for n in filtered_nodes:
+            res = rename_node(n, country_counter, cn_to_cc)
+            if res:
+                renamed_nodes.append(res)
+        
+        
+        print("\n[DEBUG VLESS AFTER RENAME]")
+        
+        found = False
+        
+        for n in renamed_nodes:
+            if n.get("type") == "vless" and "reality-opts" in n:
+                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
+                found = True
+                break
+        
+        if not found:
+            print("No VLESS Reality node found")
             else:
                 skipped_nodes += 1
 

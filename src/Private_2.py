@@ -519,6 +519,8 @@ def parse_vless(line, line_number=None):
                 tls["insecure"] = True
         
             node["tls"] = tls
+            print("\n[DEBUG REALITY TLS OUTPUT]")
+            print(tls)
         
             node["reality-opts"] = {
                 "public-key": query.get("pbk", ""),

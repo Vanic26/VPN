@@ -499,17 +499,30 @@ def parse_vless(line, line_number=None):
                 node["client-fingerprint"] = query["fp"]
 
         elif query.get("security") == "reality":
-
-            print("\n[DEBUG REALITY QUERY]")
-            print(query)
-            tls = {"enabled": True}
+            tls = {
+                "enabled": True
+            }
+        
             sni = query.get("sni") or query.get("peer")
-
+        
             if sni:
                 tls["server_name"] = sni
-                
+        
+            if query.get("fp"):
+                tls["utls"] = {
+                    "enabled": True,
+                    "fingerprint": query.get("fp")
+                }
+        
+            if query.get("insecure") in ("1", "true"):
+                tls["insecure"] = True
+        
             node["tls"] = tls
-            node["reality-opts"] = {"public-key": query.get("pbk", ""), "short-id": query.get("sid", ""), "server-name": sni or ""}
+        
+            node["reality-opts"] = {
+                "public-key": query.get("pbk", ""),
+                "short-id": query.get("sid", "")
+            }
 
         # Network
         if "type" in query:

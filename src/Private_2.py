@@ -600,7 +600,6 @@ def parse_vless(line, line_number=None):
         
             if query.get("fp"):
                 node["client-fingerprint"] = query["fp"]
-                        node["client-fingerprint"] = query["fp"]
 
         elif query.get("security") == "reality":
             tls = {"enabled": True}

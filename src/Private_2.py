@@ -1230,6 +1230,7 @@ def rename_node(p, country_counter, CN_TO_CC):
 
     # Original name
     original_name = str(p.get("name", "") or "").strip()
+    backup = copy.deepcopy(p)
     host = p.get("server") or p.get("add") or ""
 
     # Detect ipv6 tag
@@ -1364,6 +1365,13 @@ def rename_node(p, country_counter, CN_TO_CC):
             country_counter[cc] += 1
             index = country_counter[cc]
             p["name"] = build_name(flag, cc, index, ipv6_tag)
+
+            # Restore everything except name
+            old_name = p["name"]
+            p.clear()
+            p.update(backup)
+            p["name"] = old_name
+            
             return p
 
 # ---------------- Load proxies ----------------
@@ -1463,6 +1471,9 @@ def load_proxies(url, retries=5):
                         node = parse_node_line(line, idx)
 
                         if node:
+                            # Preserve original parsed data
+                            node["_original"] = copy.deepcopy(node)
+                        
                             nodes.append(node)
                             protocol = (
                                 line.split("://")[0].upper()

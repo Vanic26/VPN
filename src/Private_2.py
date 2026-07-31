@@ -1643,6 +1643,9 @@ def main():
         print("_original exists:",
                 any("_original" in n for n in info_ordered))
         info_ordered_dicts = [dict(n) for n in info_ordered]
+        # Remove internal parser metadata before final export
+        for n in info_ordered_dicts:
+            n.pop("_original", None)
         if len(info_ordered_dicts) >= 10:
             print("\n[DEBUG BEFORE YAML EXPORT] 10th node:")
             print(yaml.dump(info_ordered_dicts[9], allow_unicode=True, sort_keys=False))

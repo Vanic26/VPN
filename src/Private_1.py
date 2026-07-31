@@ -90,19 +90,24 @@ def deduplicate_nodes(nodes):
         if not n:
             continue
 
-        if not n["_auth"]:
+        auth = (
+            n.get("uuid")
+            or n.get("password")
+            or ""
+        )
+
+        if not auth:
             unique_nodes.append(n)
             continue
 
         key = (
-            n["type"],
-            n["server"],
-            n["port"],
-            n["_auth"],
-            n["_security"],
-            n["_sni"],
-            n["_network"],
-            n["_path"],
+            n.get("type", ""),
+            n.get("server", ""),
+            n.get("port", ""),
+            auth,
+            str(n.get("tls", "")),
+            str(n.get("servername", "")),
+            str(n.get("network", "")),
         )
 
         if key in seen:
@@ -110,17 +115,6 @@ def deduplicate_nodes(nodes):
             continue
 
         seen.add(key)
-
-        # cleanup temp fields
-        for k in [
-            "_auth",
-            "_security",
-            "_sni",
-            "_network",
-            "_path",
-        ]:
-            n.pop(k, None)
-
         unique_nodes.append(n)
 
     return unique_nodes, removed

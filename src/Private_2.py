@@ -1579,7 +1579,12 @@ def main():
             res = rename_node(n, country_counter, cn_to_cc)
             if res:
                 renamed_nodes.append(res)
-                break 
+        print("\n[DEBUG VLESS AFTER RENAME]")
+
+        for n in renamed_nodes:
+            if n.get("type") == "vless" and "reality-opts" in n:
+                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
+                break
         else:
                 skipped_nodes += 1
 
@@ -1646,7 +1651,12 @@ def main():
             normalized_nodes.append(
                 normalize_mux(n)
             )
-                    
+            
+        print("\n[DEBUG BEFORE NORMALIZE_MUX]")
+        for n in renamed_nodes:
+            if n.get("type") == "vless" and "reality-opts" in n:
+                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
+                break            
         normalized_nodes = [normalize_mux(n) for n in renamed_nodes]
         print("\n[DEBUG VLESS AFTER NORMALIZE_MUX]")
         for n in normalized_nodes:

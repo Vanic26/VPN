@@ -542,15 +542,16 @@ def normalize_vless_for_clash(node):
     clean["network"] = node.get("network", "tcp")
 
     # security mapping
-    if node.get("security") == "reality":
-        clean["tls"] = True
-    elif node.get("tls"):
+    if node.get("tls"):
         clean["tls"] = True
     else:
         clean["tls"] = False
 
     # sni
-    clean["servername"] = node.get("sni") or node.get("servername", "")
+    if isinstance(node.get("tls"), dict):
+        clean["servername"] = node["tls"].get("server_name", "")
+    else:
+        clean["servername"] = node.get("sni") or node.get("servername", "")
 
     # reality ONLY inside object
     if node.get("reality-opts"):
@@ -637,7 +638,7 @@ def parse_vless(line, line_number=None):
         }
         
         # preserve important raw fields
-        for key in ["security", "flow", "sni", "fp"]:
+        for key in ["security", "flow", "fp"]:
             if key in query and query[key] != "":
                 node[key] = query[key]
 
@@ -690,7 +691,7 @@ def parse_vless(line, line_number=None):
         else:
             print(f"[warn] ❗VLESS parse error -> {e}")
         return None
-
+        
 # -----------------------------------------------------------
 # TROJAN Parser
 # -----------------------------------------------------------

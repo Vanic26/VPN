@@ -539,10 +539,11 @@ def parse_vless(line, line_number=None):
 
         if node.get("network") == "grpc":
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
-
-        print("\n[DEBUG VLESS BEFORE MERGE]")
-        print(json.dumps(node, indent=2, ensure_ascii=False))
+        print("\n[DEBUG BEFORE MERGE_DYNAMIC_FIELDS]")
+        print(yaml.dump(node, allow_unicode=True, sort_keys=False))
         node = merge_dynamic_fields(node, query)
+        print("\n[DEBUG AFTER MERGE_DYNAMIC_FIELDS]")
+        print(yaml.dump(node, allow_unicode=True, sort_keys=False))
         return node
 
     except Exception as e:
@@ -1442,9 +1443,6 @@ def load_proxies(url, retries=5):
             # ---------- Parse YAML ----------
             if sub_type == "YAML":
                 try:
-                    print("\n[DEBUG RAW YAML BEFORE PARSE]")
-                    print(text[:1000])
-            
                     data = yaml.safe_load(text)
             
                     if data and "proxies" in data:
@@ -1496,9 +1494,6 @@ def load_proxies(url, retries=5):
                             node["_original"] = copy.deepcopy(node)
                         
                             nodes.append(node)
-                            if node.get("server") == "130.162.220.137":
-                                print("\n[DEBUG AFTER APPEND]")
-                                print(yaml.dump(node, allow_unicode=True, sort_keys=False))
                             protocol = (
                                 line.split("://")[0].upper()
                                 if "://" in line
@@ -1546,9 +1541,6 @@ def main():
             all_nodes.extend(nodes)
 
         print(f"[collect] 📋 Total [{len(all_nodes)}] nodes successfully parsed and collected from all subscriptions")
-        if len(all_nodes) >= 12:
-            print("\n[DEBUG BEFORE FILTER] 12th node:")
-            print(yaml.dump(all_nodes[9], allow_unicode=True, sort_keys=False))
 
         # ---------------- Latency filter ----------------
         if USE_LATENCY:
@@ -1603,10 +1595,7 @@ def main():
         if skipped_nodes > 0:
             print(f"[rename] ⚠️ Skipped ({skipped_nodes}) nodes that could not be assigned a name or include forbidden emoji")
         print(f"[rename] 🖨️ Final [{len(renamed_nodes)}] nodes remain after name correction")
-        if len(renamed_nodes) >= 12:
-            print("\n[DEBUG AFTER RENAME] 12th node:")
-            print(yaml.dump(renamed_nodes[9], allow_unicode=True, sort_keys=False))
-
+        
         if not renamed_nodes:
             print("[FATAL] 🅾️ valid nodes after processing. Abort upload.")
             sys.exit(1)
@@ -1658,21 +1647,12 @@ def main():
                 normalize_mux(n)
             )
                     
-        normalized_nodes = [normalize_mux(n) for n in renamed_nodes]
-        print("\n[DEBUG CHECK BEFORE REORDER]")
-        print("_original exists:",
-                any("_original" in n for n in normalized_nodes))    
+        normalized_nodes = [normalize_mux(n) for n in renamed_nodes] 
         info_ordered = [reorder_info(n) for n in normalized_nodes]
-        print("\n[DEBUG CHECK AFTER REORDER]")
-        print("_original exists:",
-                any("_original" in n for n in info_ordered))
         info_ordered_dicts = [dict(n) for n in info_ordered]
         # Remove internal parser metadata before final export
         for n in info_ordered_dicts:
             n.pop("_original", None)
-        if len(info_ordered_dicts) >= 12:
-            print("\n[DEBUG BEFORE YAML EXPORT] 12th node:")
-            print(yaml.dump(info_ordered_dicts[9], allow_unicode=True, sort_keys=False))
 
         # Line by line YAML proxies output format
         def make_single_line_yaml(proxies):

@@ -1604,7 +1604,8 @@ def main():
         
         if not found:
             print("No VLESS Reality node found")
-            else:
+            
+        else:
                 skipped_nodes += 1
 
         if USE_ONLY_GEOIP:

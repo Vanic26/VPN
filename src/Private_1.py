@@ -666,7 +666,7 @@ def parse_vless(line, line_number=None):
                 tls["server_name"] = sni
                 
             node["tls"] = tls
-            node["reality-opts"] = {"public-key": query.get("pbk", ""), "short-id": query.get("sid", ""), "server-name": sni or "")}
+            node["reality-opts"] = {"public-key": query.get("pbk", ""), "short-id": query.get("sid", ""), "server-name": sni or ""}
 
         # Network
         if "type" in query:

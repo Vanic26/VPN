@@ -275,7 +275,7 @@ def merge_dynamic_fields(node, data):
         
         # raw fields (already normalized)
         "v", "ps", "add", "id", "aid", "net",
-        "scy", "host", "path",
+        "scy", "host", "path", "pbk", "sid",
 
         # ignore metadata
         "metadata"

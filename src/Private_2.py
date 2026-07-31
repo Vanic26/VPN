@@ -1614,6 +1614,9 @@ def main():
         normalized_nodes = [normalize_mux(n) for n in renamed_nodes]
         info_ordered = [reorder_info(n) for n in normalized_nodes]
         info_ordered_dicts = [dict(n) for n in info_ordered]
+        if len(info_ordered_dicts) >= 10:
+            print("\n[DEBUG BEFORE YAML EXPORT] 10th node:")
+            print(yaml.dump(info_ordered_dicts[9], allow_unicode=True, sort_keys=False))
 
         # Line by line YAML proxies output format
         def make_single_line_yaml(proxies):

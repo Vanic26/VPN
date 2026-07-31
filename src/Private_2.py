@@ -1588,7 +1588,7 @@ def main():
             print(f"[rename] ⚠️ Skipped ({skipped_nodes}) nodes that could not be assigned a name or include forbidden emoji")
         print(f"[rename] 🖨️ Final [{len(renamed_nodes)}] nodes remain after name correction")
         if len(renamed_nodes) >= 10:
-            print("\n[DEBUG AFTER RENAME] 10th node:")
+            print("\n[DEBUG AFTER RENAME] 12th node:")
             print(yaml.dump(renamed_nodes[9], allow_unicode=True, sort_keys=False))
 
         if not renamed_nodes:
@@ -1655,7 +1655,7 @@ def main():
         for n in info_ordered_dicts:
             n.pop("_original", None)
         if len(info_ordered_dicts) >= 10:
-            print("\n[DEBUG BEFORE YAML EXPORT] 10th node:")
+            print("\n[DEBUG BEFORE YAML EXPORT] 12th node:")
             print(yaml.dump(info_ordered_dicts[9], allow_unicode=True, sort_keys=False))
 
         # Line by line YAML proxies output format

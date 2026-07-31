@@ -1569,9 +1569,6 @@ def main():
             res = rename_node(n, country_counter, cn_to_cc)
             if res:
                 renamed_nodes.append(res)
-                break
-        else:
-                skipped_nodes += 1
 
         if USE_ONLY_GEOIP:
             print(

@@ -1480,6 +1480,9 @@ def load_proxies(url, retries=5):
                             node["_original"] = copy.deepcopy(node)
                         
                             nodes.append(node)
+                            if node.get("server") == "130.162.220.137":
+                                print("\n[DEBUG AFTER APPEND]")
+                                print(yaml.dump(node, allow_unicode=True, sort_keys=False))
                             protocol = (
                                 line.split("://")[0].upper()
                                 if "://" in line

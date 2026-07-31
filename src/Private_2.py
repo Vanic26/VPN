@@ -95,7 +95,7 @@ def deduplicate_nodes(nodes):
             or n.get("password")
             or ""
         )
-        
+
         if not auth:
             unique_nodes.append(n)
             continue
@@ -109,8 +109,8 @@ def deduplicate_nodes(nodes):
             str(n.get("servername", "")),
             str(n.get("network", "")),
         )
-        
-                if key in seen:
+
+        if key in seen:
             removed += 1
             continue
 

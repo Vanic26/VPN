@@ -577,30 +577,30 @@ def parse_vless(line, line_number=None):
             "server": host,
             "port": int(port),
             "uuid": uuid,
-            "encryption": query.get("encryption", "none"),
+            "udp": True,
         }
         
         # preserve important raw fields
-        for key in ["security", "flow", "fp"]:
-            if key in query and query[key] != "":
+        for key in ["flow"]:
+            if key in query and query[key]:
                 node[key] = query[key]
 
         # Security (TLS / Reality)
         if query.get("security") == "tls":
-            tls = {"enabled": True}
+
+            node["tls"] = True
+        
             sni = query.get("sni") or query.get("peer")
         
             if sni:
-                tls["server_name"] = sni
-            insecure = (query.get("allowInsecure") or query.get("insecure") or "0").lower() in ("1", "true", "yes")
+                node["servername"] = sni
         
-            if insecure:
-                tls["insecure"] = True
+            if query.get("allowInsecure") in ("1", "true"):
                 node["skip-cert-verify"] = True
-            node["tls"] = tls
         
-            if "fp" in query:
+            if query.get("fp"):
                 node["client-fingerprint"] = query["fp"]
+                        node["client-fingerprint"] = query["fp"]
 
         elif query.get("security") == "reality":
             tls = {"enabled": True}

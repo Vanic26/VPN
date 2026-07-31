@@ -1567,8 +1567,12 @@ def main():
         
         for n in filtered_nodes:
             res = rename_node(n, country_counter, cn_to_cc)
+        
             if res:
                 renamed_nodes.append(res)
+            else:
+                print("\n[DEBUG RENAME FAILED]")
+                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
 
         # ---------------- Renamed nodes ----------------
         renamed_nodes = []

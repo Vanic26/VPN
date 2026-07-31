@@ -1418,30 +1418,41 @@ def load_proxies(url, retries=5):
             # ---------- Parse YAML ----------
             if sub_type == "YAML":
                 try:
+                    print("\n[DEBUG RAW YAML BEFORE PARSE]")
+                    print(text[:1000])
+            
                     data = yaml.safe_load(text)
-
+            
                     if data and "proxies" in data:
                         for idx, p in enumerate(data["proxies"], start=1):
+            
+                            if idx == 10:
+                                print("\n[DEBUG YAML SAFE_LOAD RESULT 10th]")
+                                print(yaml.dump(
+                                    p,
+                                    allow_unicode=True,
+                                    sort_keys=False
+                                ))
+            
                             original_name = str(p.get("name", "") or "").strip()
-                    
+            
                             if not original_name:
                                 p["name"] = f"Node-{idx}"
-                    
-                            # remove metadata
+            
                             p.pop("metadata", None)
-                    
+            
                             nodes.append(p)
-                    
+            
                             protocol = str(p.get("type", "NODE")).upper()
-                    
+            
                             print(
                                 f"[parse] 🔎 YAML to {protocol} node: {idx} parsed",
                                 flush=True
                             )
-
+            
                     else:
                         print("[warn] 😭 YAML structure invalid or empty", flush=True)
-
+            
                 except Exception:
                     print("[warn] 😭 YAML parsing failed", flush=True)
 

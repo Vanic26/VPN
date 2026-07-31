@@ -499,10 +499,11 @@ def parse_vless(line, line_number=None):
                 node["client-fingerprint"] = query["fp"]
 
         elif query.get("security") == "reality":
-            tls = {
-                "enabled": True
-            }
+            print("\n[DEBUG REALITY PARSER HIT]")
+            print(query)
         
+            tls = {"enabled": True}
+                
             sni = query.get("sni") or query.get("peer")
         
             if sni:

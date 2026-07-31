@@ -374,7 +374,7 @@ def merge_dynamic_fields(node, data):
         "type", "encryption",
 
         # tls / security fields
-        "sni", "servername", "server_name", "insecure", "allowInsecure", "security", "type", "flow",
+        "sni", "servername", "server_name", "insecure", "allowInsecure", "security", "flow",
         
         # raw fields (already normalized)
         "v", "ps", "add", "id", "aid", "net",
@@ -473,14 +473,21 @@ def parse_vmess(line, line_number=None):
         tls_val = data.get("tls")
 
         if isinstance(tls_val, str):
-            tls_raw = tls_val.lower()
+            tls_enabled = tls_val.lower() in ("tls", "1", "true", "yes")
         else:
-            tls_raw = str(tls_val).lower()
+            tls_enabled = bool(tls_val)
         
-        node["tls"] = tls_raw in ("tls", "1", "true", "yes")
-
-        if node["tls"]:
-            node["servername"] = data.get("sni") or data.get("host") or ""
+        if tls_enabled:
+            tls = {
+                "enabled": True
+            }
+        
+            sni = data.get("sni") or data.get("host")
+        
+            if sni:
+                tls["server_name"] = sni
+        
+            node["tls"] = tls
 
         # ---------------- Network Handling ----------------
         net = node["network"]
@@ -636,14 +643,30 @@ def parse_vless(line, line_number=None):
 
         # Security (TLS / Reality)
         if query.get("security") == "tls":
-            node["tls"] = True
-            node["servername"] = query.get("sni", "")
-            node["skip-cert-verify"] = query.get("allowInsecure", "0") in ("1", "true", "yes")
+            tls = {"enabled": True}
+            sni = query.get("sni") or query.get("peer")
+        
+            if sni:
+                tls["server_name"] = sni
+            insecure = (query.get("allowInsecure") or query.get("insecure") or "0").lower() in ("1", "true", "yes")
+        
+            if insecure:
+                tls["insecure"] = True
+                node["skip-cert-verify"] = True
+            node["tls"] = tls
+        
             if "fp" in query:
                 node["client-fingerprint"] = query["fp"]
+
         elif query.get("security") == "reality":
-            node["reality-opts"] = {"public-key": query.get("pbk", ""), "short-id": query.get("sid", ""), "server-name": query.get("sni", "")}
-            node["tls"] = True
+            tls = {"enabled": True}
+            sni = query.get("sni") or query.get("peer")
+
+            if sni:
+                tls["server_name"] = sni
+                
+            node["tls"] = tls
+            node["reality-opts"] = {"public-key": query.get("pbk", ""), "short-id": query.get("sid", ""), "server-name": sni or "")}
 
         # Network
         if "type" in query:
@@ -721,13 +744,16 @@ def parse_trojan(line, line_number=None):
         }
 
         # TLS / Security
-        node["skip-cert-verify"] = query.get("allowInsecure", "0").lower() in ("1", "true", "yes")
-        node["security"] = query.get("security", "tls")
-
+        tls = {"enabled": True}
         sni = query.get("sni") or query.get("peer")
+        
         if sni:
-            node["sni"] = sni
-            node["servername"] = sni
+            tls["server_name"] = sni
+        tls["insecure"] = query.get("allowInsecure", "0").lower() in ("1", "true", "yes")
+        node["tls"] = tls
+        
+        if tls["insecure"]:
+            node["skip-cert-verify"] = True
 
         # Fingerprint
         if "fp" in query:
@@ -1235,6 +1261,58 @@ def parse_ssr(line, line_number=None):
         return None
 
 # -----------------------------------------------------------
+# SOCKS / SOCKS5 Parser
+# -----------------------------------------------------------
+def parse_socks(line, line_number=None):
+    try:
+        if line.startswith("socks5://"):
+            raw = line[len("socks5://"):].strip()
+            
+        elif line.startswith("socks://"):
+            raw = line[len("socks://"):].strip()
+
+        # -------- tag --------
+        tag = ""
+
+        if "#" in raw:
+            raw, tag = raw.split("#", 1)
+            tag = urllib.parse.unquote(tag.strip())
+
+        raw = raw.strip()
+
+        username = ""
+        password = ""
+
+        # -------- auth --------
+        if "@" in raw:
+            auth, srvp = raw.rsplit("@", 1)
+
+            if ":" in auth:
+                username, password = auth.split(":", 1)
+            else:
+                username = auth
+        else:
+            srvp = raw
+
+        # -------- server / port --------
+        server, port = parse_server_port(srvp)
+
+        node = {
+            "type": "socks",
+            "name": tag or "SOCKS Node",
+            "server": server,
+            "port": port,
+            "username": username,
+            "password": password,
+        }
+
+        return node
+
+    except Exception as e:
+        print(f"[warn] ❗SOCKS parse error -> Line {line_number}: {e}")
+        return None
+
+# -----------------------------------------------------------
 # Normalize MUX
 # -----------------------------------------------------------
 def normalize_mux(node):
@@ -1289,6 +1367,9 @@ def parse_node_line(line, line_number=None):
         
         if line.startswith("ssr://"):
             return parse_ssr(line, line_number)
+
+        if line.startswith(("socks://", "socks5://")):
+            return parse_socks(line, line_number)
 
         return None
 

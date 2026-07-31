@@ -370,7 +370,7 @@ def merge_dynamic_fields(node, data):
     reserved = {
         # common normalized fields
         "name", "server", "port", "uuid", "password",
-        "cipher", "network", "tls", "alterId",
+        "cipher", "network", "tls", "alterId", "fp", "client-fingerprint",
         "type", "encryption", "headerType", "quicSecurity",
 
         # tls / security fields
@@ -523,64 +523,6 @@ def parse_vmess(line, line_number=None):
 # -----------------------------------------------------------
 # VLESS Parser
 # -----------------------------------------------------------
-def normalize_vless_for_clash(node):
-    clean = {}
-
-    # core required fields
-    clean["name"] = node.get("name", "")
-    clean["type"] = "vless"
-    clean["server"] = node.get("server", "")
-    clean["port"] = node.get("port", 0)
-    clean["uuid"] = node.get("uuid", "")
-
-    # clash standard fields
-    clean["alterId"] = 0
-    clean["cipher"] = "auto"
-    clean["udp"] = True
-
-    # transport
-    clean["network"] = node.get("network", "tcp")
-
-    # security mapping
-    if node.get("tls"):
-        clean["tls"] = True
-    else:
-        clean["tls"] = False
-
-    # sni
-    if isinstance(node.get("tls"), dict):
-        clean["servername"] = node["tls"].get("server_name", "")
-    else:
-        clean["servername"] = node.get("sni") or node.get("servername", "")
-
-    # reality ONLY inside object
-    if node.get("reality-opts"):
-        clean["reality-opts"] = node["reality-opts"]
-
-    # websocket / grpc
-    if "ws-opts" in node:
-        clean["ws-opts"] = node["ws-opts"]
-
-    if "grpc-opts" in node:
-        clean["grpc-opts"] = node["grpc-opts"]
-
-    # fingerprint (ONLY one field)
-    if node.get("fp"):
-        clean["client-fingerprint"] = node["fp"]
-    elif node.get("client-fingerprint"):
-        clean["client-fingerprint"] = node["client-fingerprint"]
-    clean.pop("fp", None)
-
-    # flow (important for vision)
-    if node.get("flow"):
-        clean["flow"] = node["flow"]
-
-    # skip-cert-verify mapping
-    clean["skip-cert-verify"] = node.get("skip-cert-verify", False)
-
-    return clean
-
-# ---------------- Main VMESS parser ----------------
 def parse_vless(line, line_number=None):
     try:
         if not line.startswith("vless://"):
@@ -1737,31 +1679,17 @@ def main():
 
         # ---------------- Preferred key order ----------------
         INFO_ORDER = [
-            "name", "type", "server", "port", "uuid", "password",
-            "encryption", "network", "security", "udp", "sni",
-            "skip-cert-verify", "fp", "client-fingerprint",
-            "path", "ws-opts", "grpc-opts", "h2-opts"
+            "name",
+            "type",
+            "server",
+            "port",
+            "uuid",
+            "password"
         ]
         
         # ---------------- Function to reorder keys ----------------
         def reorder_info(node):
             node = copy.deepcopy(node)
-        
-            # Convert internal TLS format
-            if isinstance(node.get("tls"), dict):
-                tls = node.pop("tls")
-        
-                if tls.get("server_name"):
-                    node["servername"] = tls["server_name"]
-        
-                if tls.get("insecure") is True:
-                    node["skip-cert-verify"] = True
-        
-            # Remove internal fields
-            node.pop("security", None)
-            node.pop("sni", None)
-            node.pop("insecure", None)
-            node.pop("allowInsecure", None)
         
             ordered = OrderedDict()
         
@@ -1776,6 +1704,11 @@ def main():
             return ordered
         
         # Apply to all renamed nodes
+        normalized_nodes = [
+            normalize_mux(copy.deepcopy(n))
+            for n in renamed_nodes
+        ]
+            
         normalized_nodes = [normalize_mux(n) for n in renamed_nodes]
         info_ordered = [reorder_info(n) for n in normalized_nodes]
         info_ordered_dicts = [dict(n) for n in info_ordered]

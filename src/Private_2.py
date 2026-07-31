@@ -1650,13 +1650,6 @@ def main():
         info_ordered = [reorder_info(n) for n in normalized_nodes]
         info_ordered_dicts = [dict(n) for n in info_ordered]
 
-        print("\n[DEBUG BEFORE YAML EXPORT]")
-
-        for n in info_ordered_dicts:
-            if n.get("type") == "vless" and "reality-opts" in n:
-                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
-                break
-
         # Remove internal parser metadata before final export
         for n in info_ordered_dicts:
             n.pop("_original", None)
@@ -1682,6 +1675,12 @@ def main():
         
             return "\n".join(lines)
 
+        print("\n[DEBUG FINAL EXPORT CHECK]")
+
+        for n in info_ordered_dicts:
+            if n.get("type") == "vless" and "reality-opts" in n:
+                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
+                break
         # ---------------- Convert to YAML ----------------
         proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)    #If multiple lines format is needed, Delete Line by line YAML proxies output format code block, proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
         proxy_names_block = "\n".join([f"      - {unquote(p['name'])}" for p in info_ordered_dicts])

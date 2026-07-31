@@ -371,7 +371,7 @@ def merge_dynamic_fields(node, data):
         # common normalized fields
         "name", "server", "port", "uuid", "password",
         "cipher", "network", "tls", "alterId",
-        "type", "encryption",
+        "type", "encryption", "headerType", "quicSecurity",
 
         # tls / security fields
         "sni", "servername", "server_name", "insecure", "allowInsecure", "security", "flow",
@@ -569,6 +569,7 @@ def normalize_vless_for_clash(node):
         clean["client-fingerprint"] = node["fp"]
     elif node.get("client-fingerprint"):
         clean["client-fingerprint"] = node["client-fingerprint"]
+    clean.pop("fp", None)
 
     # flow (important for vision)
     if node.get("flow"):
@@ -1745,40 +1746,29 @@ def main():
         # ---------------- Function to reorder keys ----------------
         def reorder_info(node):
             node = copy.deepcopy(node)
-            
+        
             # Convert internal TLS format
             if isinstance(node.get("tls"), dict):
-        
-                tls = node["tls"]
+                tls = node.pop("tls")
         
                 if tls.get("server_name"):
-                    node["sni"] = tls["server_name"]
+                    node["servername"] = tls["server_name"]
         
                 if tls.get("insecure") is True:
                     node["skip-cert-verify"] = True
-                    
-                # Remove internal TLS object
-                node.pop("tls", None)
         
-            # Remove query leftovers
+            # Remove internal fields
+            node.pop("security", None)
+            node.pop("sni", None)
             node.pop("insecure", None)
             node.pop("allowInsecure", None)
-            
-            if node.get("skip-cert-verify") is False:
-                node.pop("skip-cert-verify", None)
+        
             ordered = OrderedDict()
         
             for key in INFO_ORDER:
                 if key in node:
-                    val = node[key]
+                    ordered[key] = node[key]
         
-                    if key == "alpn" and isinstance(val, str):
-                        val_list = [x.strip() for x in val.split(",") if x.strip()]
-                        ordered[key] = val_list if val_list else val
-                    else:
-                        ordered[key] = val
-        
-            # Add remaining fields
             for key in node:
                 if key not in ordered:
                     ordered[key] = node[key]

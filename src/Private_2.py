@@ -1676,9 +1676,11 @@ def main():
             return "\n".join(lines)
 
         print("\n[DEBUG FINAL EXPORT CHECK]")
-
-        for n in info_ordered_dicts:
-            if n.get("type") == "vless" and "reality-opts" in n:
+        print("Total nodes:", len(info_ordered_dicts))
+        
+        for i, n in enumerate(info_ordered_dicts, start=1):
+            if n.get("type") == "vless":
+                print("\nFound VLESS node:", i)
                 print(yaml.dump(n, allow_unicode=True, sort_keys=False))
                 break
         # ---------------- Convert to YAML ----------------

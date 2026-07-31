@@ -1649,6 +1649,11 @@ def main():
          
         info_ordered = [reorder_info(n) for n in normalized_nodes]
         info_ordered_dicts = [dict(n) for n in info_ordered]
+        print("\n[DEBUG AFTER DICT CONVERSION COUNT]")
+        print("Total:", len(info_ordered_dicts))
+        
+        for i, n in enumerate(info_ordered_dicts[:5], start=1):
+            print("\nNODE", i, n.get("type"), n.get("name"))
 
         # Remove internal parser metadata before final export
         for n in info_ordered_dicts:

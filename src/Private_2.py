@@ -1505,9 +1505,9 @@ def main():
             all_nodes.extend(nodes)
 
         print(f"[collect] 📋 Total [{len(all_nodes)}] nodes successfully parsed and collected from all subscriptions")
-        if all_nodes:
-            print("\n[DEBUG BEFORE FILTER] First node:")
-            print(yaml.dump(all_nodes[0], allow_unicode=True, sort_keys=False))
+        if len(all_nodes) >= 10:
+            print("\n[DEBUG BEFORE FILTER] 10th node:")
+            print(yaml.dump(all_nodes[9], allow_unicode=True, sort_keys=False))
 
         # ---------------- Latency filter ----------------
         if USE_LATENCY:
@@ -1562,9 +1562,9 @@ def main():
         if skipped_nodes > 0:
             print(f"[rename] ⚠️ Skipped ({skipped_nodes}) nodes that could not be assigned a name or include forbidden emoji")
         print(f"[rename] 🖨️ Final [{len(renamed_nodes)}] nodes remain after name correction")
-        if renamed_nodes:
-            print("\n[DEBUG AFTER RENAME] First node:")
-            print(yaml.dump(renamed_nodes[0], allow_unicode=True, sort_keys=False))
+        if len(renamed_nodes) >= 10:
+            print("\n[DEBUG AFTER RENAME] 10th node:")
+            print(yaml.dump(renamed_nodes[9], allow_unicode=True, sort_keys=False))
 
         if not renamed_nodes:
             print("[FATAL] 🅾️ valid nodes after processing. Abort upload.")

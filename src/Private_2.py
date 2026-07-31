@@ -1640,7 +1640,7 @@ def main():
             return "\n".join(lines)
 
         # ---------------- Convert to YAML ----------------
-        proxies_yaml_block = make_single_line_yaml(info_ordered_dicts)    #If multiple lines format is needed, Delete Line by line YAML proxies output format code block, proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
+        proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)    #If multiple lines format is needed, Delete Line by line YAML proxies output format code block, proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
         proxy_names_block = "\n".join([f"      - {unquote(p['name'])}" for p in info_ordered_dicts])
 
         # ---------------- Replace placeholders ----------------

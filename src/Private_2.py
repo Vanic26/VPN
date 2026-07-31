@@ -1543,8 +1543,8 @@ def main():
             all_nodes.extend(nodes)
 
         print(f"[collect] 📋 Total [{len(all_nodes)}] nodes successfully parsed and collected from all subscriptions")
-        if len(all_nodes) >= 10:
-            print("\n[DEBUG BEFORE FILTER] 10th node:")
+        if len(all_nodes) >= 12:
+            print("\n[DEBUG BEFORE FILTER] 12th node:")
             print(yaml.dump(all_nodes[9], allow_unicode=True, sort_keys=False))
 
         # ---------------- Latency filter ----------------

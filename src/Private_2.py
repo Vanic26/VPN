@@ -1653,24 +1653,16 @@ def main():
             )
          
         normalized_nodes = [normalize_mux(n) for n in renamed_nodes]
-        print("\n[DEBUG BEFORE REORDER_INFO]")
-
-        for n in normalized_nodes:
-            if n.get("type") == "vless" and "reality-opts" in n:
-                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
-                break
-        
-        
         info_ordered = [reorder_info(n) for n in normalized_nodes]
+        info_ordered_dicts = [dict(n) for n in info_ordered]
+
+        print("\n[DEBUG AFTER DICT CONVERSION]")
         
-        
-        print("\n[DEBUG AFTER REORDER_INFO]")
-        
-        for n in info_ordered:
+        for n in info_ordered_dicts:
             if n.get("type") == "vless" and "reality-opts" in n:
                 print(yaml.dump(n, allow_unicode=True, sort_keys=False))
                 break
-        info_ordered_dicts = [dict(n) for n in info_ordered]
+                
         # Remove internal parser metadata before final export
         for n in info_ordered_dicts:
             n.pop("_original", None)

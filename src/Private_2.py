@@ -1635,13 +1635,13 @@ def main():
             )
                     
         normalized_nodes = [normalize_mux(n) for n in renamed_nodes]
-            print("\n[DEBUG CHECK BEFORE REORDER]")
-            print("_original exists:",
-                  any("_original" in n for n in normalized_nodes))
+        print("\n[DEBUG CHECK BEFORE REORDER]")
+        print("_original exists:",
+                any("_original" in n for n in normalized_nodes))    
         info_ordered = [reorder_info(n) for n in normalized_nodes]
-            print("\n[DEBUG CHECK AFTER REORDER]")
-            print("_original exists:",
-                  any("_original" in n for n in info_ordered))
+        print("\n[DEBUG CHECK AFTER REORDER]")
+        print("_original exists:",
+                any("_original" in n for n in info_ordered))
         info_ordered_dicts = [dict(n) for n in info_ordered]
         if len(info_ordered_dicts) >= 10:
             print("\n[DEBUG BEFORE YAML EXPORT] 10th node:")

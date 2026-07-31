@@ -1,31 +1,12 @@
-import os
-import sys
-import time
-import yaml
-import copy
-import subprocess
-import tempfile
-import requests
-import socket
-import threading
-import concurrent.futures
-import traceback
-from collections import defaultdict, OrderedDict
-from datetime import datetime, timedelta, timezone
-import base64
-import re
-import json
-import urllib.parse
-from urllib.parse import unquote, urlparse, parse_qs
+import os, sys, time, yaml, requests, socket, threading, concurrent.futures, traceback, base64, re, copy, json, urllib.parse
+from collections import defaultdict, OrderedDict; from datetime import datetime, timedelta, timezone; from urllib.parse import unquote, urlparse, parse_qs
 
 # ---------------- Config ----------------
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-OUTPUT_FILE = os.path.join(REPO_ROOT, "Starlink")
-OUTPUT_FILE_CLASH = os.path.join(REPO_ROOT, "Starlink_Clash")
-SOURCES_FILE = os.path.join(REPO_ROOT, "SOURCES_STARLINK")
+SECRET_SOURCE = os.environ.get("SECRET_SOURCE_2", "").strip()
 CLASH_TEMPLATE = os.path.join(REPO_ROOT, "ClashTemplate.ini")
-TEXTDB_API = "https://textdb.online/update/?key=Starlink_SHFX&value={}"
-TEXTDB_API2 = "https://textdb.online/update/?key=Starlink_Clash_SHFX&value={}"
+TEMP_FILE = "/tmp/temp2.yaml"
+TEXTDB_API = os.environ.get("TEXTDB_API_2", "").strip()
 USE_ONLY_GEOIP = os.getenv("USE_ONLY_GEOIP", "false").lower() == "true"
 
 # ---------------- Inputs ----------------
@@ -44,14 +25,13 @@ USE_DUPLICATE_FILTER = use_dup_env == "true"
 session = requests.Session()
 session.headers.update({"User-Agent": "Subscription-Updater/1.0"})
 
-# ---------------- Helper Locks & Caches ----------------
+# ---------------- Helper ----------------
 geoip_lock = threading.Lock()
 counter_lock = threading.Lock()
 
 geoip_cache = {}
 country_counter = defaultdict(int)
 
-# ---------------- Helper Functions ----------------
 def resolve_ip(host):
     try:
         infos = socket.getaddrinfo(host, None)
@@ -152,10 +132,10 @@ def normalize_node(n):
 
     # ---------------- sni ----------------
     sni = (
-        n.get("sni")
+        tls_obj.get("server_name")
+        or n.get("sni")
         or n.get("servername")
         or n.get("server_name")
-        or tls_obj.get("server_name")
         or ""
     )
 
@@ -200,54 +180,26 @@ def deduplicate_nodes(nodes):
     unique_nodes = []
     removed = 0
 
-    for n in nodes:
-        # --- basic ---
-        server = str(n.get("server", "")).strip()
-        port = int(n.get("port", 0))
-        user = str(n.get("uuid") or n.get("password") or "").strip()
-        node_type = str(n.get("type", "")).strip()
+    for raw_node in nodes:
 
-        if not user:
+        n = normalize_node(raw_node)
+
+        if not n:
+            continue
+
+        if not n["_auth"]:
             unique_nodes.append(n)
             continue
 
-        # --- security detection ---
-        if n.get("reality-opts"):
-            security = "reality"
-        elif n.get("tls") is True:
-            security = "tls"
-        else:
-            security = ""
-
-        # --- SNI (Clash uses 'servername' OR 'sni') ---
-        sni = (
-            n.get("sni")
-            or n.get("servername")
-            or ""
-        )
-        sni = str(sni).strip()
-
-        # --- transport / path ---
-        network = str(n.get("network", "")).strip()
-        path = ""
-
-        if network == "ws":
-            path = str(n.get("ws-opts", {}).get("path", "")).strip()
-        elif network == "grpc":
-            path = str(n.get("grpc-opts", {}).get("serviceName", "")).strip()
-        else:
-            path = str(n.get("path", "")).strip()
-
-        # --- final dedup key ---
         key = (
-            node_type,   # hysteria2 vs vless MUST be separated
-            server,
-            port,
-            user,
-            security,
-            sni,
-            network,
-            path,
+            n["type"],
+            n["server"],
+            n["port"],
+            n["_auth"],
+            n["_security"],
+            n["_sni"],
+            n["_network"],
+            n["_path"],
         )
 
         if key in seen:
@@ -255,6 +207,17 @@ def deduplicate_nodes(nodes):
             continue
 
         seen.add(key)
+
+        # cleanup temp fields
+        for k in [
+            "_auth",
+            "_security",
+            "_sni",
+            "_network",
+            "_path",
+        ]:
+            n.pop(k, None)
+
         unique_nodes.append(n)
 
     return unique_nodes, removed
@@ -322,38 +285,7 @@ def geo_ip(host_or_ip):
                 geoip_cache[ip] = ("unknown", "UN")
 
         return "unknown", "UN"
-
-# ---------------- IPv6 Detection with Cache ----------------
-ipv6_cache = {}
-ipv6_cache_lock = threading.Lock()
-
-def has_ipv6(host, port, timeout=2.0):
-    """
-    Check if a host:port is reachable via IPv6.
-    Uses caching to avoid repeated lookups for the same host:port.
-    """
-    cache_key = f"{host}:{port}"
-    with ipv6_cache_lock:
-        if cache_key in ipv6_cache:
-            return ipv6_cache[cache_key]
-
-    reachable = False
-    try:
-        infos = socket.getaddrinfo(host, port, socket.AF_INET6, socket.SOCK_STREAM)
-        for info in infos:
-            ip = info[4][0]
-            sock = socket.create_connection((ip, port), timeout=timeout)
-            sock.close()
-            reachable = True
-            break
-    except Exception:
-        reachable = False
-
-    with ipv6_cache_lock:
-        ipv6_cache[cache_key] = reachable
-
-    return reachable
-
+    
 def country_to_flag(cc):
     """Convert ISO 3166 two-letter code to emoji flag"""
     if not cc or len(cc) != 2:
@@ -380,18 +312,24 @@ def load_cn_to_cc():
 
 def build_name(flag, cc, index, ipv6_tag=False):
     suffix = " [ipv6]" if ipv6_tag else ""
-    return f"{flag} {cc}-{index}{suffix} | Starlink"
+    return f"{flag} {cc}-{index}{suffix} | PrivateSub_2"
 
 # ---------------- Load sources ----------------
 def load_sources():
-    if not os.path.exists(SOURCES_FILE):
-        print(f"[FATAL] ⚠️ Source not found at {SOURCES_FILE}")
+    if not SECRET_SOURCE:
+        print("[FATAL] ⚠️ Secret source is missing or empty")
         sys.exit(1)
-    with open(SOURCES_FILE, "r", encoding="utf-8") as f:
-        sources = [line.strip() for line in f if line.strip() and not line.startswith("#")]
+
+    sources = [
+        line.strip()
+        for line in SECRET_SOURCE.splitlines()
+        if line.strip() and not line.strip().startswith("#")
+    ]
+
     if not sources:
-        print(f"[FATAL] 🕵️ Source is empty. Please check the secret or file content.")
+        print("[FATAL] 🕵️ Secret source exists but contains no valid sources")
         sys.exit(1)
+
     return sources
 
 # -----------------------------------------------------------
@@ -432,15 +370,15 @@ def merge_dynamic_fields(node, data):
     reserved = {
         # common normalized fields
         "name", "server", "port", "uuid", "password",
-        "cipher", "network", "tls", "alterId",
-        "servername", "type", "encryption",
+        "cipher", "network", "tls", "alterId", "fp", "client-fingerprint",
+        "type", "encryption", "headerType", "quicSecurity",
 
+        # tls / security fields
+        "sni", "servername", "server_name", "insecure", "allowInsecure", "security", "flow",
+        
         # raw fields (already normalized)
         "v", "ps", "add", "id", "aid", "net",
-        "scy", "host", "path", "tls", "sni",
-
-        # protocol transport fields
-        "security", "type", "flow",
+        "scy", "host", "path",
 
         # ignore metadata
         "metadata"
@@ -535,14 +473,21 @@ def parse_vmess(line, line_number=None):
         tls_val = data.get("tls")
 
         if isinstance(tls_val, str):
-            tls_raw = tls_val.lower()
+            tls_enabled = tls_val.lower() in ("tls", "1", "true", "yes")
         else:
-            tls_raw = str(tls_val).lower()
+            tls_enabled = bool(tls_val)
         
-        node["tls"] = tls_raw in ("tls", "1", "true", "yes")
-
-        if node["tls"]:
-            node["servername"] = data.get("sni") or data.get("host") or ""
+        if tls_enabled:
+            tls = {
+                "enabled": True
+            }
+        
+            sni = data.get("sni") or data.get("host")
+        
+            if sni:
+                tls["server_name"] = sni
+        
+            node["tls"] = tls
 
         # ---------------- Network Handling ----------------
         net = node["network"]
@@ -632,24 +577,39 @@ def parse_vless(line, line_number=None):
             "server": host,
             "port": int(port),
             "uuid": uuid,
-            "encryption": query.get("encryption", "none"),
+            "udp": True,
         }
         
         # preserve important raw fields
-        for key in ["security", "flow", "sni", "fp"]:
-            if key in query and query[key] != "":
+        for key in ["flow"]:
+            if key in query and query[key]:
                 node[key] = query[key]
 
         # Security (TLS / Reality)
         if query.get("security") == "tls":
+
             node["tls"] = True
-            node["servername"] = query.get("sni", "")
-            node["skip-cert-verify"] = query.get("allowInsecure", "0") in ("1", "true", "yes")
-            if "fp" in query:
+        
+            sni = query.get("sni") or query.get("peer")
+        
+            if sni:
+                node["servername"] = sni
+        
+            if query.get("allowInsecure") in ("1", "true"):
+                node["skip-cert-verify"] = True
+        
+            if query.get("fp"):
                 node["client-fingerprint"] = query["fp"]
+
         elif query.get("security") == "reality":
-            node["reality-opts"] = {"public-key": query.get("pbk", ""), "short-id": query.get("sid", ""), "server-name": query.get("sni", "")}
-            node["tls"] = True
+            tls = {"enabled": True}
+            sni = query.get("sni") or query.get("peer")
+
+            if sni:
+                tls["server_name"] = sni
+                
+            node["tls"] = tls
+            node["reality-opts"] = {"public-key": query.get("pbk", ""), "short-id": query.get("sid", ""), "server-name": sni or ""}
 
         # Network
         if "type" in query:
@@ -673,50 +633,80 @@ def parse_vless(line, line_number=None):
         else:
             print(f"[warn] ❗VLESS parse error -> {e}")
         return None
-
+        
 # -----------------------------------------------------------
 # TROJAN Parser
 # -----------------------------------------------------------
 def parse_trojan(line, line_number=None):
     try:
-        if not line.startswith("trojan://"):
-            return None
+        if not line.startswith("trojan://"): return None
 
-        parsed = urlparse(line)
+        # Split node name from LAST '#'
+        name = ""
+        if "#" in line:
+            line, name = line.rsplit("#", 1)
+            name = urllib.parse.unquote(name.strip())
 
-        host = parsed.hostname
-        port = parsed.port
-        password = unquote(parsed.username or "")
+        core = line[len("trojan://"):]
 
-        query = {
-            k: v[-1]
-            for k, v in parse_qs(parsed.query).items()
-        }
+        if "@" not in core: return None
+        password, rest = core.split("@", 1)
 
-        name = unquote(parsed.fragment) if parsed.fragment else ""
+        # Query params
+        query = {}
+        if "?" in rest:
+            host_port, q = rest.split("?", 1)
+            query = {k: v[-1] for k, v in urllib.parse.parse_qs(q).items()}
+        else:
+            host_port = rest
+
+        # Remove optional trailing slash
+        host_port = host_port.rstrip("/")
+
+        # IPv6
+        if host_port.startswith("["):
+            end = host_port.find("]")
+            if end == -1: return None
+
+            host = host_port[1:end]
+
+            if len(host_port) <= end + 2: return None
+            port = host_port[end + 2:]
+
+        # IPv4 / domain
+        else:
+            if ":" not in host_port: return None
+            host, port = host_port.rsplit(":", 1)
 
         node = {
             "type": "trojan",
             "name": name or "Trojan Node",
             "server": host.strip(),
-            "port": int(port),
-            "password": password.strip(),
+            "port": int(port.strip()),
+            "password": urllib.parse.unquote(password.strip()),
         }
 
         # TLS / Security
-        node["skip-cert-verify"] = query.get("allowInsecure", "0") in ("1", "true", "yes")
-        node["security"] = query.get("security", "tls")
-
+        tls = {"enabled": True}
         sni = query.get("sni") or query.get("peer")
+        
         if sni:
-            node["sni"] = sni
-            node["servername"] = sni
+            tls["server_name"] = sni
+        tls["insecure"] = query.get("allowInsecure", "0").lower() in ("1", "true", "yes")
+        node["tls"] = tls
+        
+        if tls["insecure"]:
+            node["skip-cert-verify"] = True
+
+        # Fingerprint
+        if "fp" in query:
+            node["client-fingerprint"] = query["fp"]
 
         # Network
         if "type" in query:
             node["network"] = query["type"]
 
-        # WS
+        # WebSocket
         if node.get("network") == "ws":
             ws_opts = {"path": urllib.parse.unquote(query.get("path", "/"))}
             if "host" in query:
@@ -725,16 +715,13 @@ def parse_trojan(line, line_number=None):
 
         # gRPC
         elif node.get("network") == "grpc":
-            node["grpc-opts"] = {
-                "grpc-service-name": query.get("serviceName", "")
-            }
+            node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
 
         node = merge_dynamic_fields(node, query)
-
         return node
 
-    except Exception:
-        print(f"[warn] ❗Trojan parse error -> Line {line_number}")
+    except Exception as e:
+        print(f"[warn] ❗Trojan parse error -> Line {line_number}: {e}")
         return None
 
 # -----------------------------------------------------------
@@ -792,36 +779,27 @@ def parse_hysteria2(line, line_number=None):
         # ---------------------------------------------------
         # TLS
         # ---------------------------------------------------
-        tls = {
-            "enabled": True
-        }
-
+        tls = {}
+        
         if "sni" in query:
             tls["server_name"] = query["sni"]
-            node["sni"] = query["sni"]
-
-        # pinSHA256 -> fingerprint
+        
         if "pinSHA256" in query:
             node["fingerprint"] = query["pinSHA256"]
-
-            # Karing imports certificate pinning as insecure=true
             tls["insecure"] = True
-
+        
         elif "allowInsecure" in query:
-            tls["insecure"] = query["allowInsecure"].lower() in (
-                "1", "true", "yes"
-            )
-
+            tls["insecure"] = query["allowInsecure"].lower() in ("1", "true", "yes")
+        
         elif "insecure" in query:
-            tls["insecure"] = query["insecure"].lower() in (
-                "1", "true", "yes"
-            )
-
-        else:
-            tls["insecure"] = False
-
-        node["tls"] = tls
-        node["skip-cert-verify"] = tls["insecure"]
+            tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
+        
+        if tls:
+            tls["enabled"] = True
+            node["tls"] = tls
+        
+            if tls.get("insecure") is True:
+                node["skip-cert-verify"] = True
 
         # ---------------------------------------------------
         # OBFS
@@ -899,19 +877,17 @@ def parse_anytls(line, line_number=None):
 
         if "sni" in query:
             tls["server_name"] = query["sni"]
-            node["servername"] = query["sni"]
 
         if "insecure" in query:
             tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
 
-        if "allowInsecure" in query:
-            tls["insecure"] = query["allowInsecure"].lower() in ("1", "true", "yes")
-
         if tls:
             tls["enabled"] = True
             node["tls"] = tls
-            node["skip-cert-verify"] = tls.get("insecure", False)
-
+        
+            if tls.get("insecure") is True:
+                node["skip-cert-verify"] = True
+        
         # ---------------- ALPN ----------------
         if "alpn" in query:
             node["alpn"] = query["alpn"].split(",")
@@ -960,22 +936,23 @@ def parse_tuic(line, line_number=None):
 
         # ---------------- TLS ----------------
         tls = {}
-
+        
         if "sni" in query:
             tls["server_name"] = query["sni"]
-            node["servername"] = query["sni"]
-
+        
         if "insecure" in query:
             tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
-
+        
         if "allowInsecure" in query:
             tls["insecure"] = query["allowInsecure"].lower() in ("1", "true", "yes")
-
+                
         if tls:
             tls["enabled"] = True
             node["tls"] = tls
-            node["skip-cert-verify"] = tls.get("insecure", False)
-
+        
+            if tls.get("insecure") is True:
+                node["skip-cert-verify"] = True
+                
         # ---------------- ALPN ----------------
         if "alpn" in query:
             node["alpn"] = query["alpn"].split(",")
@@ -1497,53 +1474,6 @@ def rename_node(p, country_counter, CN_TO_CC):
             p["name"] = build_name(flag, cc, index, ipv6_tag)
             return p
 
-# ---------------- Check Sub: type ----------------
-def quote_nonascii_strings(yaml_text):
-    """
-    Wrap values containing non-ASCII characters in quotes to ensure YAML parses correctly.
-    """
-    def replacer(match):
-        key, value = match.groups()
-        # If value contains non-ASCII or spaces, wrap in quotes
-        if any(ord(c) > 127 for c in value) or " " in value:
-            value = f'"{value}"'
-        return f"{key}: {value}"
-    
-    # Match key: value pairs inside inline { ... } mappings
-    return re.sub(r"(\b[\w\-]+):\s*([^,}\n]+)", replacer, yaml_text)
-
-# -----------------------------------------------------------
-# Mux for clash
-# -----------------------------------------------------------
-def convert_mux_for_clash(nodes):
-    converted = []
-
-    for n in nodes:
-        node = copy.deepcopy(n)
-
-        if "mux" in node:
-            val = node["mux"]
-            if str(val).lower() in ["0", "false"]:
-                node["mux"] = False
-            elif str(val).lower() in ["1", "true"]:
-                node["mux"] = True
-            else:
-                node["mux"] = False
-
-        if "plugin-opts" in node and isinstance(node["plugin-opts"], dict):
-            if "mux" in node["plugin-opts"]:
-                val = node["plugin-opts"]["mux"]
-                if str(val).lower() in ["0", "false"]:
-                    node["plugin-opts"]["mux"] = False
-                elif str(val).lower() in ["1", "true"]:
-                    node["plugin-opts"]["mux"] = True
-                else:
-                    node["plugin-opts"]["mux"] = False
-
-        converted.append(node)
-
-    return converted
-
 # ---------------- Load proxies ----------------
 def load_proxies(url, retries=5):
     attempt = 0
@@ -1663,6 +1593,10 @@ def load_proxies(url, retries=5):
 # ---------------- Main ----------------
 def main():
     try:
+        if not TEXTDB_API:
+            print("[FATAL] ⚠️ TEXTDB_API_1 secret is missing or empty")
+            sys.exit(1)
+            
         CN_TO_CC = load_cn_to_cc()
         sources = load_sources()
         print(f"[start] 🖥️ Loaded ({len(sources)}) subscription links from source")
@@ -1744,33 +1678,36 @@ def main():
 
         # ---------------- Preferred key order ----------------
         INFO_ORDER = [
-            "name", "type", "server", "port", "uuid", "password",
-            "encryption", "network", "security", "sni", "servername",
-            "skip-cert-verify", "fp", "client-fingerprint",
-            "path", "ws-opts", "grpc-opts", "h2-opts"
+            "name",
+            "type",
+            "server",
+            "port",
+            "uuid",
+            "password"
         ]
         
         # ---------------- Function to reorder keys ----------------
         def reorder_info(node):
+            node = copy.deepcopy(node)
+        
             ordered = OrderedDict()
-            # Add preferred keys only if they exist in the node
+        
             for key in INFO_ORDER:
                 if key in node:
-                    val = node[key]
-                    # Convert string to list only if original value is a list or comma string
-                    if key in ("alpn") and isinstance(val, str):
-                        # Only split if val is not empty
-                        val_list = [x.strip() for x in val.split(",") if x.strip()]
-                        ordered[key] = val_list if val_list else val
-                    else:
-                        ordered[key] = val
-            # Append extra keys not in preferred order
+                    ordered[key] = node[key]
+        
             for key in node:
                 if key not in ordered:
                     ordered[key] = node[key]
+        
             return ordered
         
         # Apply to all renamed nodes
+        normalized_nodes = [
+            normalize_mux(copy.deepcopy(n))
+            for n in renamed_nodes
+        ]
+            
         normalized_nodes = [normalize_mux(n) for n in renamed_nodes]
         info_ordered = [reorder_info(n) for n in normalized_nodes]
         info_ordered_dicts = [dict(n) for n in info_ordered]
@@ -1796,17 +1733,6 @@ def main():
         
             return "\n".join(lines)
 
-        # ---------------- Clash-compatible nodes ----------------
-        clash_nodes = convert_mux_for_clash(renamed_nodes)
-        clash_info_ordered = [reorder_info(n) for n in clash_nodes]
-        clash_info_dicts = [dict(n) for n in clash_info_ordered]
-
-        clash_proxies_yaml = make_single_line_yaml(clash_info_dicts)
-        clash_proxy_names = "\n".join([f"      - {unquote(p['name'])}" for p in clash_info_dicts])
-
-        clash_output_text = template_text.replace("{{PROXIES}}", clash_proxies_yaml)
-        clash_output_text = clash_output_text.replace("{{PROXY_NAMES}}", clash_proxy_names)
-
         # ---------------- Convert to YAML ----------------
         proxies_yaml_block = make_single_line_yaml(info_ordered_dicts)    #If multiple lines format is needed, Delete Line by line YAML proxies output format code block, proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
         proxy_names_block = "\n".join([f"      - {unquote(p['name'])}" for p in info_ordered_dicts])
@@ -1821,17 +1747,13 @@ def main():
         local_time = utc_now + offset
         timestamp = local_time.strftime("%d.%m.%Y %H:%M:%S")
 
-        # ---------------- Write output ----------------
-        with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-            f.write(f"# Last update: {timestamp}\n" + output_text)
-        print(f"[done] 💾 Wrote {OUTPUT_FILE}")
-
-        with open(OUTPUT_FILE_CLASH, "w", encoding="utf-8") as f:
-            f.write(f"# Last update: {timestamp}\n" + clash_output_text)
-        print(f"[done] 💾 Wrote {OUTPUT_FILE_CLASH}")
+        # ---------------- Final output ----------------
+        final_output = f"# Last update: {timestamp}\n" + output_text
+        with open(TEMP_FILE, "w", encoding="utf-8") as f: f.write(final_output)
+        print(f"[done] 💾 Generated subscription -> {TEMP_FILE}")
 
         # Upload to textdb only after all upper processes successful processing
-        upload_to_textdb()
+        upload_to_textdb(final_output)
 
     except Exception as e:
         print("[⚠️FATAL ERROR in main]", str(e))
@@ -1839,52 +1761,33 @@ def main():
         sys.exit(1)
 
 # ---------------- Upload to TextDB ----------------
-def upload_to_textdb():
+def upload_to_textdb(final_output):
     try:
-        # Step 1: Read freshly generated subscription file (local, not GitHub raw)
-        with open(OUTPUT_FILE, "r", encoding="utf-8") as f:
-            output_text = f.read()
+        if not TEXTDB_API:
+            print("[FATAL] ⚠️ TEXTDB_API secret is missing or empty")
+            sys.exit(1)
 
-        # Step 2: Delete old data
-        delete_resp = session.post(TEXTDB_API, data={"value": ""})
+        base_url = TEXTDB_API.split("&value=")[0]
+
+        # Step 1: Delete old data
+        delete_resp = session.post(base_url, data={"value": ""})
+
         if delete_resp.status_code == 200:
-            print("[info] 🗑️ Successfully deleted old data1 on textdb")
+            print("[info] 🗑️ Successfully deleted old data on textdb")
         else:
-            print(f"[warn] ❌ Failed to delete old data1 on textdb: {delete_resp.status_code}")
+            print(f"[warn] ❌ Failed to delete old data on textdb: {delete_resp.status_code}")
             print(f"[warn] ❗Response: {delete_resp.text}")
 
         # Wait 3 seconds
         time.sleep(3)
 
-        # Step 3: Upload new data
-        upload_resp = session.post(TEXTDB_API, data={"value": output_text})
+        # Step 2: Upload new data
+        upload_resp = session.post(base_url, data={"value": final_output})
+
         if upload_resp.status_code == 200:
-            print("[info] 📤 Successfully uploaded new data1 on textdb")
+            print("[info] 📤 Successfully uploaded new data on textdb")
         else:
-            print(f"[warn] ❌Failed to upload new data1 on textdb: {upload_resp.status_code}")
-            print(f"[warn] ❗Response: {upload_resp.text}")
-
-        # Step 1: Read freshly generated subscription file (local, not GitHub raw)
-        with open(OUTPUT_FILE_CLASH, "r", encoding="utf-8") as f:
-            output_text = f.read()
-
-        # Step 2: Delete old data
-        delete_resp = session.post(TEXTDB_API2, data={"value": ""})
-        if delete_resp.status_code == 200:
-            print("[info] 🗑️ Successfully deleted old data2 on textdb")
-        else:
-            print(f"[warn] ❌ Failed to delete old data2 on textdb: {delete_resp.status_code}")
-            print(f"[warn] ❗Response: {delete_resp.text}")
-
-        # Wait 3 seconds
-        time.sleep(3)
-
-        # Step 3: Upload new data
-        upload_resp = session.post(TEXTDB_API2, data={"value": output_text})
-        if upload_resp.status_code == 200:
-            print("[info] 📤 Successfully uploaded new data2 on textdb")
-        else:
-            print(f"[warn] ❌Failed to upload new data2 on textdb: {upload_resp.status_code}")
+            print(f"[warn] ❌ Failed to upload new data on textdb: {upload_resp.status_code}")
             print(f"[warn] ❗Response: {upload_resp.text}")
 
     except Exception as e:
@@ -1893,4 +1796,3 @@ def upload_to_textdb():
 # ---------------- Entry ----------------
 if __name__ == "__main__":
     main()
-    

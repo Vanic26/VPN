@@ -1623,11 +1623,17 @@ def main():
             return ordered
         
         # Apply to all renamed nodes
-        normalized_nodes = [
-            normalize_mux(copy.deepcopy(n))
-            for n in renamed_nodes
-        ]
-            
+        normalized_nodes = []
+        for n in renamed_nodes:
+            n = copy.deepcopy(n)
+        
+            # remove debug backup before export
+            n.pop("_original", None)
+        
+            normalized_nodes.append(
+                normalize_mux(n)
+            )
+                    
         normalized_nodes = [normalize_mux(n) for n in renamed_nodes]
         info_ordered = [reorder_info(n) for n in normalized_nodes]
         info_ordered_dicts = [dict(n) for n in info_ordered]

@@ -1564,15 +1564,14 @@ def main():
         renamed_nodes = []
         cn_to_cc = load_cn_to_cc()
         skipped_nodes = 0
-        
+                
         for n in filtered_nodes:
             res = rename_node(n, country_counter, cn_to_cc)
-        
             if res:
                 renamed_nodes.append(res)
-            else:
-                print("\n[DEBUG RENAME FAILED]")
-                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
+                break
+        else:
+                skipped_nodes += 1
 
         if USE_ONLY_GEOIP:
             print(

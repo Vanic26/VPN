@@ -1587,7 +1587,7 @@ def main():
         if skipped_nodes > 0:
             print(f"[rename] ⚠️ Skipped ({skipped_nodes}) nodes that could not be assigned a name or include forbidden emoji")
         print(f"[rename] 🖨️ Final [{len(renamed_nodes)}] nodes remain after name correction")
-        if len(renamed_nodes) >= 10:
+        if len(renamed_nodes) >= 12:
             print("\n[DEBUG AFTER RENAME] 12th node:")
             print(yaml.dump(renamed_nodes[9], allow_unicode=True, sort_keys=False))
 
@@ -1654,7 +1654,7 @@ def main():
         # Remove internal parser metadata before final export
         for n in info_ordered_dicts:
             n.pop("_original", None)
-        if len(info_ordered_dicts) >= 10:
+        if len(info_ordered_dicts) >= 12:
             print("\n[DEBUG BEFORE YAML EXPORT] 12th node:")
             print(yaml.dump(info_ordered_dicts[9], allow_unicode=True, sort_keys=False))
 

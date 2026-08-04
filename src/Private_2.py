@@ -518,13 +518,6 @@ def parse_vless(line, line_number=None):
                 "short-id": query.get("sid", "")
             }
             
-            if "tls" in node:
-                node["tls"]["reality"] = {
-                    "enabled": True,
-                    "public_key": query.get("pbk", ""),
-                    "short_id": query.get("sid", "")
-                }
-
         # Network
         if "type" in query:
             node["network"] = query["type"]

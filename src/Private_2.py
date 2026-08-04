@@ -557,151 +557,60 @@ def parse_trojan(line, line_number=None):
         if not line.startswith("trojan://"):
             return None
 
-        # Split node name from LAST '#'
-        name = ""
-        if "#" in line:
-            line, name = line.rsplit("#", 1)
-            name = urllib.parse.unquote(name.strip())
+        parsed = urlparse(line)
+        host = parsed.hostname
+        port = parsed.port
+        password = unquote(parsed.username or "")
+        query = {
+            k: v[-1]
+            for k, v in parse_qs(parsed.query, keep_blank_values=True).items()
+        }
 
-        core = line[len("trojan://"):]
-
-        if "@" not in core:
-            return None
-
-        password, rest = core.split("@", 1)
-
-        # Query params
-        query = {}
-        if "?" in rest:
-            host_port, q = rest.split("?", 1)
-            query = {
-                k: v[-1]
-                for k, v in urllib.parse.parse_qs(
-                    q,
-                    keep_blank_values=True
-                ).items()
-            }
-
-        else:
-            host_port = rest
-
-        # Remove trailing slash
-        host_port = host_port.rstrip("/")
-
-        # IPv6
-        if host_port.startswith("["):
-            end = host_port.find("]")
-
-            if end == -1:
-                return None
-            host = host_port[1:end]
-
-            if len(host_port) <= end + 2:
-                return None
-            port = host_port[end + 2:]
-
-        # IPv4 / domain
-        else:
-            if ":" not in host_port:
-                return None
-            host, port = host_port.rsplit(":", 1)
+        name = unquote(parsed.fragment) if parsed.fragment else ""
 
         node = {
             "type": "trojan",
             "name": name or "Trojan Node",
             "server": host.strip(),
-            "port": int(port.strip()),
-            "password": urllib.parse.unquote(
-                password.strip()
-            ),
+            "port": int(port),
+            "password": password.strip(),
         }
 
         # TLS
-        tls = {
-            "enabled": True
-        }
-
+        node["skip-cert-verify"] = query.get("allowInsecure", "0") in ("1", "true", "yes")
+        node["security"] = query.get("security", "tls")
         sni = query.get("sni") or query.get("peer")
-
+        
         if sni:
-            tls["server_name"] = sni
-
-        tls["insecure"] = query.get(
-            "allowInsecure",
-            "0"
-        ).lower() in (
-            "1",
-            "true",
-            "yes"
-        )
+            node["sni"] = sni
+            node["servername"] = sni
 
         # uTLS
         if query.get("fp"):
-
-            tls["utls"] = {
-                "enabled": True
-            }
-
             node["client-fingerprint"] = query["fp"]
 
-        node["tls"] = tls
-
-        if tls["insecure"]:
-            node["skip-cert-verify"] = True
-
-        # Transport
+        # Network
         network = query.get("type")
+
+        if network:
+            node["network"] = network
 
         # WebSocket
         if network == "ws":
-
-            transport = {
-                "type": "ws",
-                "path": urllib.parse.unquote(
-                    query.get(
-                        "path",
-                        "/"
-                    )
-                )
-            }
-
-            host_header = (
-                query.get("host")
-                or sni
-            )
+            ws_opts = {"path": urllib.parse.unquote(query.get("path", "/"))}
+            host_header = (query.get("host") or sni)
 
             if host_header:
+                ws_opts["headers"] = {"Host": query["host"]}
 
-                transport["headers"] = {
-                    "Host": [
-                        host_header
-                    ]
-                }
-
-            node["transport"] = transport
+            node["ws-opts"] = ws_opts
 
         # gRPC
         elif network == "grpc":
-            node["transport"] = {
-                "type": "grpc",
-                "service_name": query.get(
-                    "serviceName",
-                    ""
-                )
-            }
 
-        # Remove converted fields
-        for key in (
-            "sni",
-            "peer",
-            "allowInsecure",
-            "fp",
-            "type",
-            "path",
-            "host",
-            "serviceName"
-        ):
-            query.pop(key, None)
+            node["grpc-opts"] = {
+                "grpc-service-name": query.get("serviceName", "")
+            }
 
         # Dynamic fields
         node = merge_dynamic_fields(node, query)
@@ -711,7 +620,6 @@ def parse_trojan(line, line_number=None):
     except Exception as e:
         print(f"[warn] ❗Trojan parse error -> Line {line_number}: {e}")
         return None
-
 # -----------------------------------------------------------
 # HYSTERIA2 Parser
 # -----------------------------------------------------------

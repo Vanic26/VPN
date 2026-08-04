@@ -1639,22 +1639,25 @@ def main():
                 normalize_mux(n)
             )
 
-        print("\n[DEBUG ALL HY2 AFTER NORMALIZE]")
-        hy2_count = 0
-        
-        for i, n in enumerate(normalized_nodes, start=1):
+        print("\n[DEBUG HY2 AFTER REORDER]")
+
+        for i, n in enumerate(info_ordered, start=1):
             if n.get("type") == "hysteria2":
-                hy2_count += 1
-                print(f"\n--- HY2 NODE {hy2_count} (Index {i}) ---")
+                print(f"\n--- HY2 NODE {i} ---")
                 print(yaml.dump(n, allow_unicode=True, sort_keys=False))
-        
-        print(f"\nTotal HY2 nodes: {hy2_count}")
         
         info_ordered = [reorder_info(n) for n in normalized_nodes]
         info_ordered_dicts = [
             remove_empty_fields(dict(n))
             for n in info_ordered
         ]
+
+        print("\n[DEBUG HY2 AFTER REMOVE EMPTY]")
+
+        for i, n in enumerate(info_ordered_dicts, start=1):
+            if n.get("type") == "hysteria2":
+                print(f"\n--- HY2 NODE {i} ---")
+                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
 
         # Remove internal parser metadata before final export
         for n in info_ordered_dicts:

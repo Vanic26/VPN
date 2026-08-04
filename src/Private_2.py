@@ -1101,9 +1101,12 @@ def parse_socks(line, line_number=None):
     try:
         if line.startswith("socks5://"):
             raw = line[len("socks5://"):].strip()
-            
+
         elif line.startswith("socks://"):
             raw = line[len("socks://"):].strip()
+
+        else:
+            return None
 
         # -------- tag --------
         tag = ""
@@ -1113,18 +1116,31 @@ def parse_socks(line, line_number=None):
             tag = urllib.parse.unquote(tag.strip())
 
         raw = raw.strip()
-
         username = ""
         password = ""
+
+        # -------- query --------
+        query = {}
+
+        if "?" in raw:
+            raw, query_raw = raw.split("?", 1)
+
+            query = {
+                k: v[-1]
+                for k, v in urllib.parse.parse_qs(query_raw, keep_blank_values=True).items()
+            }
 
         # -------- auth --------
         if "@" in raw:
             auth, srvp = raw.rsplit("@", 1)
 
+            auth = urllib.parse.unquote(auth)
+
             if ":" in auth:
                 username, password = auth.split(":", 1)
             else:
                 username = auth
+
         else:
             srvp = raw
 
@@ -1140,9 +1156,18 @@ def parse_socks(line, line_number=None):
             "password": password,
         }
 
+        # Remove empty auth fields
+        if not username:
+            node.pop("username", None)
+
+        if not password:
+            node.pop("password", None)
+
         # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)
+
         node["_key_order"] = list(node.keys())
+
         return node
 
     except Exception as e:

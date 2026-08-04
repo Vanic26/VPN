@@ -476,6 +476,7 @@ def parse_vless(line, line_number=None):
             "uuid": uuid,
             "udp": True,
         }
+        node["_raw_query"] = query.copy()
         
         # preserve important raw fields
         for key in ["flow"]:
@@ -532,6 +533,9 @@ def parse_vless(line, line_number=None):
 
         if node.get("network") == "grpc":
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
+
+        print("\n[DEBUG VLESS RAW QUERY]")
+        print(node.get("_raw_query"))
         node = merge_dynamic_fields(node, query)
         return node
 

@@ -613,6 +613,8 @@ def parse_trojan(line, line_number=None):
         if query.get("fp"):
             tls["utls"] = {
                 "enabled": True
+            }
+
         node["tls"] = tls
         
         if tls["insecure"]:

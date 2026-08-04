@@ -369,10 +369,7 @@ def parse_vmess(line, line_number=None):
             tls_enabled = bool(tls_val)
         
         if tls_enabled:
-            tls = {
-                "enabled": True
-            }
-        
+            tls = {"enabled": True}
             sni = data.get("sni") or data.get("host")
         
             if sni:
@@ -387,23 +384,13 @@ def parse_vmess(line, line_number=None):
         net = node["network"]
 
         if net == "ws":
-            node["ws-opts"] = {
-                "path": data.get("path") or "/",
-                "headers": {
-                    "Host": data.get("host") or ""
-                }
-            }
+            node["ws-opts"] = {"path": data.get("path") or "/", "headers": {"Host": data.get("host") or ""}}
 
         elif net == "grpc":
-            node["grpc-opts"] = {
-                "grpc-service-name": data.get("path") or ""
-            }
+            node["grpc-opts"] = {"grpc-service-name": data.get("path") or ""}
 
         elif net == "h2":
-            node["h2-opts"] = {
-                "path": data.get("path") or "/",
-                "host": [data.get("host") or ""]
-            }
+            node["h2-opts"] = {"path": data.get("path") or "/", "host": [data.get("host") or ""]}
 
         # ---------------- Remove duplicate core fields ----------------
         for key in (
@@ -449,6 +436,7 @@ def parse_vless(line, line_number=None):
         if "?" in rest:
             host_port, q = rest.split("?", 1)
             query = dict(urllib.parse.parse_qsl(q))
+            
         else:
             host_port = rest
 
@@ -493,9 +481,7 @@ def parse_vless(line, line_number=None):
         # Security (TLS / Reality)
         if query.get("security") == "tls":
             node["tls"] = True
-            node["skip-cert-verify"] = (
-                query.get("allowInsecure", "0") in ("1", "true")
-            )
+            node["skip-cert-verify"] = (query.get("allowInsecure", "0") in ("1", "true"))
         
             sni = query.get("sni") or query.get("peer")
             if sni:
@@ -505,9 +491,7 @@ def parse_vless(line, line_number=None):
 
         elif query.get("security") == "reality":
             node["tls"] = True
-            node["skip-cert-verify"] = (
-                query.get("insecure", "0") in ("1", "true")
-            )
+            node["skip-cert-verify"] = (query.get("insecure", "0") in ("1", "true"))
         
             if query.get("sni"):
                 node["servername"] = query["sni"]
@@ -515,10 +499,7 @@ def parse_vless(line, line_number=None):
             if query.get("fp"):
                 node["client-fingerprint"] = query["fp"]
         
-            node["reality-opts"] = {
-                "public-key": query.get("pbk", ""),
-                "short-id": query.get("sid", "")
-            }
+            node["reality-opts"] = {"public-key": query.get("pbk", ""), "short-id": query.get("sid", "")}
             
         # Network
         if "type" in query:
@@ -601,10 +582,7 @@ def parse_trojan(line, line_number=None):
 
         # gRPC
         elif network == "grpc":
-
-            node["grpc-opts"] = {
-                "grpc-service-name": query.get("serviceName", "")
-            }
+            node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
 
         # Dynamic fields
         node = merge_dynamic_fields(node, query)
@@ -889,10 +867,8 @@ def parse_plugin(plugin_str: str):
 
     # 🔥 fix escaped chars
     plugin_str = plugin_str.replace("\\=", "=").replace("\\\\", "\\")
-
     parts = plugin_str.split(";")
     plugin = parts[0].strip()
-
     opts = {}
 
     for p in parts[1:]:
@@ -933,10 +909,10 @@ def parse_server_port(srvp: str):
 
         server = srvp[1:end]
         port = srvp[end + 2:]
+        
     else:
         if ":" not in srvp:
             raise ValueError("Missing port")
-
         server, port = srvp.rsplit(":", 1)
 
     return server, int(port)
@@ -965,10 +941,7 @@ def parse_ss(line, line_number=None):
         
             query = {
                 k: v[-1]
-                for k, v in urllib.parse.parse_qs(
-                    query_raw,
-                    keep_blank_values=True
-                ).items()
+                for k, v in urllib.parse.parse_qs(query_raw, keep_blank_values=True).items()
             }
         
             if "plugin" in query:
@@ -983,7 +956,6 @@ def parse_ss(line, line_number=None):
         if "@" in core:
             # base64(method:password)@server:port
             b64_part, srvp = core.split("@", 1)
-        
             decoded = decode_base64(b64_part)
         
             if ":" not in decoded:
@@ -1056,9 +1028,7 @@ def parse_ssr(line, line_number=None):
             return None
 
         server, port, protocol, method, obfs, pwd_b64 = main.rsplit(":", 5)
-
         password = decode_base64(pwd_b64)
-
         name = ""
 
         if "remarks" in qs:
@@ -1133,7 +1103,6 @@ def parse_socks(line, line_number=None):
         # -------- auth --------
         if "@" in raw:
             auth, srvp = raw.rsplit("@", 1)
-
             auth = urllib.parse.unquote(auth)
 
             if ":" in auth:
@@ -1165,9 +1134,7 @@ def parse_socks(line, line_number=None):
 
         # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)
-
         node["_key_order"] = list(node.keys())
-
         return node
 
     except Exception as e:

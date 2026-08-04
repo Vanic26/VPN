@@ -234,19 +234,13 @@ def load_sources():
 # -----------------------------------------------------------
 def decode_base64(data: str) -> str:
     try:
-        data = data.strip()
+        data = urllib.parse.unquote(data.strip())
         data += "=" * (-len(data) % 4)
-        return base64.urlsafe_b64decode(data).decode("utf-8")
+
+        return base64.urlsafe_b64decode(data).decode("utf-8", errors="ignore")
+
     except Exception:
         return ""
-
-def safe_int(value, default=0):
-    try:
-        if value is None or value == "":
-            return default
-        return int(value)
-    except Exception:
-        return default
 
 # -----------------------------------------------------------
 # Helper: Generic dynamic query merger
@@ -965,26 +959,33 @@ def parse_ss(line, line_number=None):
         # -------- query --------
         plugin = None
         plugin_opts = None
-        query = ""
+        query = {}
 
         if "?" in raw:
-            core, query = raw.split("?", 1)
-
-            for part in query.split("&"):
-                if part.startswith("plugin="):
-                    plugin_raw = part[len("plugin="):]
-                    plugin, plugin_opts = parse_plugin(plugin_raw)
-                    break
+            core, query_raw = raw.split("?", 1)
+        
+            query = {
+                k: v[-1]
+                for k, v in urllib.parse.parse_qs(
+                    query_raw,
+                    keep_blank_values=True
+                ).items()
+            }
+        
+            if "plugin" in query:
+                plugin, plugin_opts = parse_plugin(
+                    query["plugin"]
+                )
+        
         else:
             core = raw
-
         core = core.strip()
 
         # -------- decode --------
-        if "@" in core:
-            # base64(method:password)@server:port
-            b64_part, srvp = core.split("@", 1)
-            decoded = decode_base64(b64_part)
+        if "@" in core and ":" in core.split("@")[0]:
+            decoded = core
+        else:
+            decoded = decode_base64(core)
 
             if ":" not in decoded:
                 raise ValueError("Invalid userinfo")

@@ -500,22 +500,19 @@ def parse_vless(line, line_number=None):
                 node["client-fingerprint"] = query["fp"]
 
         elif query.get("security") == "reality":
-            tls = {"enabled": True}  
-            sni = query.get("sni") or query.get("peer")
+
+            node["tls"] = True
         
-            if sni:
-                tls["server_name"] = sni
+            node["skip-cert-verify"] = (
+                query.get("insecure", "0") in ("1", "true")
+            )
+        
+            if query.get("sni"):
+                node["servername"] = query["sni"]
         
             if query.get("fp"):
-                tls["utls"] = {
-                    "enabled": True,
-                    "fingerprint": query.get("fp")
-                }
+                node["client-fingerprint"] = query["fp"]
         
-            if query.get("insecure") in ("1", "true"):
-                tls["insecure"] = True
-        
-            node["tls"] = tls
             node["reality-opts"] = {
                 "public-key": query.get("pbk", ""),
                 "short-id": query.get("sid", "")

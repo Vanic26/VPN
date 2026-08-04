@@ -1548,12 +1548,6 @@ def main():
             if res:
                 renamed_nodes.append(res)
 
-        print("\n[DEBUG HY2 AFTER RENAME]")
-        for n in renamed_nodes:
-            if n.get("type") == "hysteria2":
-                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
-                break
-
         if USE_ONLY_GEOIP:
             print(
                 f"[rename] 🌍 GeoIP-only mode: Failed to rename {geoip_primary_fail} nodes and fallback to Name-based detection"
@@ -1644,26 +1638,33 @@ def main():
             normalized_nodes.append(
                 normalize_mux(n)
             )
-         
-        info_ordered = [reorder_info(n) for n in normalized_nodes]
-        info_ordered_dicts = [
-            remove_empty_fields(dict(n))
-            for n in info_ordered
-        ]
-        print("\n[DEBUG ALL HY2 AFTER RENAME]")
+
+        print("\n[DEBUG ALL HY2 AFTER NORMALIZE]")
         hy2_count = 0
-        for i, n in enumerate(renamed_nodes, start=1):
+        
+        for i, n in enumerate(normalized_nodes, start=1):
             if n.get("type") == "hysteria2":
                 hy2_count += 1
                 print(f"\n--- HY2 NODE {hy2_count} (Index {i}) ---")
                 print(yaml.dump(n, allow_unicode=True, sort_keys=False))
         
         print(f"\nTotal HY2 nodes: {hy2_count}")
+        
+        info_ordered = [reorder_info(n) for n in normalized_nodes]
+        info_ordered_dicts = [
+            remove_empty_fields(dict(n))
+            for n in info_ordered
+        ]
 
         # Remove internal parser metadata before final export
         for n in info_ordered_dicts:
             n.pop("_original", None)
             n.pop("_raw_query", None)
+        print("\n[DEBUG ALL HY2 FINAL EXPORT]")
+        for i, n in enumerate(info_ordered_dicts, start=1):
+            if n.get("type") == "hysteria2":
+                print(f"\n--- HY2 FINAL NODE {i} ---")
+                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
 
         # Line by line YAML proxies output format
         def make_single_line_yaml(proxies):

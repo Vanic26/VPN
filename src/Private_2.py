@@ -992,10 +992,6 @@ def parse_ss(line, line_number=None):
 
             cipher, password = decoded.split(":", 1)
 
-        else:
-            # SIP002 full base64
-            decoded = decode_base64(core)
-
             if "@" not in decoded:
                 raise ValueError("Invalid SIP002 format")
 

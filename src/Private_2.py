@@ -1650,6 +1650,10 @@ def main():
                 print(yaml.dump(n, allow_unicode=True, sort_keys=False))
 
         # Line by line YAML proxies output format
+        def make_single_line_yaml(proxies):
+            lines = []
+            for p in proxies:
+        # Convert nested dicts safely
         def to_yaml_value(v):
 
             if isinstance(v, dict):

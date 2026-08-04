@@ -1638,15 +1638,15 @@ def main():
             normalized_nodes.append(
                 normalize_mux(n)
             )
-
+        
+        info_ordered = [reorder_info(n) for n in normalized_nodes]
         print("\n[DEBUG HY2 AFTER REORDER]")
 
         for i, n in enumerate(info_ordered, start=1):
             if n.get("type") == "hysteria2":
                 print(f"\n--- HY2 NODE {i} ---")
                 print(yaml.dump(n, allow_unicode=True, sort_keys=False))
-        
-        info_ordered = [reorder_info(n) for n in normalized_nodes]
+                
         info_ordered_dicts = [
             remove_empty_fields(dict(n))
             for n in info_ordered

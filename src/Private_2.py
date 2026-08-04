@@ -1573,6 +1573,10 @@ def main():
             res = rename_node(n, country_counter, cn_to_cc)
             if res:
                 renamed_nodes.append(res)
+            
+                print("\n[DEBUG AFTER RENAME RAW QUERY CHECK]")
+                if res.get("type") == "vless":
+                    print(res.get("_raw_query"))
 
         if USE_ONLY_GEOIP:
             print(

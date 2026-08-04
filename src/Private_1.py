@@ -268,7 +268,7 @@ def merge_dynamic_fields(node, data):
         # common normalized fields
         "name", "server", "port", "uuid", "password",
         "cipher", "network", "tls", "alterId", "fp", "client-fingerprint",
-        "type", "encryption", "headerType", "quicSecurity",
+        "type", "encryption", "headerType", "quicSecurity", "server_ports", "mport",
 
         # tls / security fields
         "sni", "servername", "server_name", "insecure", "allowInsecure", "security", "flow",
@@ -414,7 +414,7 @@ def parse_vmess(line, line_number=None):
         return node
 
     except Exception as e:
-        print(f"[warn] ❗Vmess parse error -> Line {line_number} | {e}")
+        print(f"[warn] ❗Vmess parse error -> Line {line_number}: {e}")
         return None
         
 # -----------------------------------------------------------
@@ -476,6 +476,7 @@ def parse_vless(line, line_number=None):
             "uuid": uuid,
             "udp": True,
         }
+        node["_raw_query"] = query.copy()
         
         # preserve important raw fields
         for key in ["flow"]:
@@ -484,42 +485,34 @@ def parse_vless(line, line_number=None):
 
         # Security (TLS / Reality)
         if query.get("security") == "tls":
-
             node["tls"] = True
+            node["skip-cert-verify"] = (
+                query.get("allowInsecure", "0") in ("1", "true")
+            )
         
             sni = query.get("sni") or query.get("peer")
-        
             if sni:
                 node["servername"] = sni
-        
-            if query.get("allowInsecure") in ("1", "true"):
-                node["skip-cert-verify"] = True
-        
             if query.get("fp"):
                 node["client-fingerprint"] = query["fp"]
 
         elif query.get("security") == "reality":
-            tls = {"enabled": True}  
-            sni = query.get("sni") or query.get("peer")
+            node["tls"] = True
+            node["skip-cert-verify"] = (
+                query.get("insecure", "0") in ("1", "true")
+            )
         
-            if sni:
-                tls["server_name"] = sni
+            if query.get("sni"):
+                node["servername"] = query["sni"]
         
             if query.get("fp"):
-                tls["utls"] = {
-                    "enabled": True,
-                    "fingerprint": query.get("fp")
-                }
+                node["client-fingerprint"] = query["fp"]
         
-            if query.get("insecure") in ("1", "true"):
-                tls["insecure"] = True
-        
-            node["tls"] = tls
             node["reality-opts"] = {
                 "public-key": query.get("pbk", ""),
                 "short-id": query.get("sid", "")
             }
-
+            
         # Network
         if "type" in query:
             node["network"] = query["type"]
@@ -532,14 +525,13 @@ def parse_vless(line, line_number=None):
 
         if node.get("network") == "grpc":
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
+
         node = merge_dynamic_fields(node, query)
         return node
 
     except Exception as e:
         if line_number:
-            print(f"[warn] ❗VLESS parse error -> Line {line_number}")
-        else:
-            print(f"[warn] ❗VLESS parse error -> {e}")
+            print(f"[warn] ❗VLESS parse error -> Line {line_number}: {e}")
         return None
         
 # -----------------------------------------------------------
@@ -685,29 +677,35 @@ def parse_hysteria2(line, line_number=None):
             ]
 
         # ---------------------------------------------------
-        # TLS
+        # TLS / Hysteria2 Clash Meta compatible
         # ---------------------------------------------------
         tls = {}
         
-        if "sni" in query:
+        if query.get("sni"):
             tls["server_name"] = query["sni"]
         
-        if "pinSHA256" in query:
+        if query.get("pinSHA256"):
             node["fingerprint"] = query["pinSHA256"]
-            tls["insecure"] = True
         
-        elif "allowInsecure" in query:
-            tls["insecure"] = query["allowInsecure"].lower() in ("1", "true", "yes")
+        # Hysteria2 insecure
+        insecure = False
+        if query.get("insecure", "").lower() in ("1", "true", "yes"):
+            insecure = True
         
-        elif "insecure" in query:
-            tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
+        if query.get("allowInsecure", "").lower() in ("1", "true", "yes"):
+            insecure = True
         
-        if tls:
-            tls["enabled"] = True
-            node["tls"] = tls
+        # Hysteria2 pinSHA256 requires insecure TLS mode
+        if query.get("pinSHA256"):
+            insecure = True
         
-            if tls.get("insecure") is True:
-                node["skip-cert-verify"] = True
+        tls["insecure"] = insecure
+        tls["enabled"] = True
+        
+        node["tls"] = tls
+        
+        if insecure:
+            node["skip-cert-verify"] = True
 
         # ---------------------------------------------------
         # OBFS
@@ -737,16 +735,7 @@ def parse_hysteria2(line, line_number=None):
         if "down" in query:
             node["down"] = query["down"]
 
-        # ---------------------------------------------------
-        # Prevent duplicate fields
-        # ---------------------------------------------------
-        query.pop("sni", None)
-        query.pop("insecure", None)
-        query.pop("allowInsecure", None)
-        query.pop("pinSHA256", None)
-
         node = merge_dynamic_fields(node, query)
-
         return node
 
     except Exception as e:
@@ -1606,6 +1595,36 @@ def main():
             "password"
         ]
         
+        # ---------------- Remove empyt fields ----------------
+        def remove_empty_fields(obj):
+            if isinstance(obj, dict):
+                cleaned = {}
+        
+                for k, v in obj.items():
+                    v = remove_empty_fields(v)
+        
+                    if v is None:
+                        continue
+        
+                    if isinstance(v, str) and v == "":
+                        continue
+        
+                    if isinstance(v, dict) and not v:
+                        continue
+        
+                    cleaned[k] = v
+        
+                return cleaned
+        
+            elif isinstance(obj, list):
+                return [
+                    remove_empty_fields(x)
+                    for x in obj
+                    if x is not None
+                ]
+        
+            return obj
+            
         # ---------------- Function to reorder keys ----------------
         def reorder_info(node):
             node = copy.deepcopy(node)
@@ -1626,20 +1645,21 @@ def main():
         normalized_nodes = []
         for n in renamed_nodes:
             n = copy.deepcopy(n)
-        
-            # remove debug backup before export
-            n.pop("_original", None)
-        
+
             normalized_nodes.append(
                 normalize_mux(n)
             )
          
         info_ordered = [reorder_info(n) for n in normalized_nodes]
-        info_ordered_dicts = [dict(n) for n in info_ordered]
+        info_ordered_dicts = [
+            remove_empty_fields(dict(n))
+            for n in info_ordered
+        ]
 
         # Remove internal parser metadata before final export
         for n in info_ordered_dicts:
             n.pop("_original", None)
+            n.pop("_raw_query", None)
 
         # Line by line YAML proxies output format
         def make_single_line_yaml(proxies):

@@ -1684,7 +1684,7 @@ def main():
         # ---------------- Final output ----------------
         final_output = f"# Last update: {timestamp}\n" + output_text
         with open(TEMP_FILE, "w", encoding="utf-8") as f: f.write(final_output)
-        print(f"[done] 💾Final subscription generated using clash template
+        print(f"[done] 💾Final subscription generated using clash template")
 
         # Upload to textdb only after all upper processes successful processing
         upload_to_textdb(final_output)

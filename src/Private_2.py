@@ -677,18 +677,31 @@ def parse_hysteria2(line, line_number=None):
             ]
 
         # ---------------------------------------------------
-        # TLS / Clash Meta compatible
+        # TLS / Hysteria2 Clash Meta compatible
         # ---------------------------------------------------
-        if "sni" in query and query["sni"]:
-            node["sni"] = query["sni"]
+        tls = {}
         
-        if "pinSHA256" in query and query["pinSHA256"]:
+        if query.get("sni"):
+            tls["server_name"] = query["sni"]
+        
+        if query.get("pinSHA256"):
             node["fingerprint"] = query["pinSHA256"]
         
-        if query.get("insecure", "").lower() in ("1", "true", "yes"):
-            node["skip-cert-verify"] = True
+        # Hysteria2 insecure
+        insecure = False
         
-        elif query.get("allowInsecure", "").lower() in ("1", "true", "yes"):
+        if query.get("insecure", "").lower() in ("1", "true", "yes"):
+            insecure = True
+        
+        if query.get("allowInsecure", "").lower() in ("1", "true", "yes"):
+            insecure = True
+        
+        tls["insecure"] = insecure
+        tls["enabled"] = True
+        
+        node["tls"] = tls
+        
+        if insecure:
             node["skip-cert-verify"] = True
 
         # ---------------------------------------------------
@@ -719,7 +732,9 @@ def parse_hysteria2(line, line_number=None):
         if "down" in query:
             node["down"] = query["down"]
 
-        node = merge_dynamic_fields(node, query)
+        print("\n[DEBUG HY2 BEFORE MERGE]")
+        print(yaml.dump(node, allow_unicode=True, sort_keys=False))
+                node = merge_dynamic_fields(node, query)
         return node
 
     except Exception as e:

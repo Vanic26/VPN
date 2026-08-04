@@ -1642,7 +1642,7 @@ def main():
             return ordered
         
         # Apply to all renamed nodes
-        normalized_nodes = [for n in renamed_nodes: n = copy.deepcopy(n) normalized_nodes.append(normalize_mux(n))
+        normalized_nodes = [for n in renamed_nodes: n = copy.deepcopy(n) normalized_nodes.append(normalize_mux(n))]
         info_ordered = [reorder_info(n) for n in normalized_nodes]    
         info_ordered_dicts = [remove_empty_fields(dict(n)) for n in info_ordered]
 

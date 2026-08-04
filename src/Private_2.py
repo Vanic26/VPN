@@ -1720,7 +1720,7 @@ def main():
             print("\nNODE", i)
             print(yaml.dump(n, allow_unicode=True, sort_keys=False))
         # ---------------- Convert to YAML ----------------
-        proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)    #If multiple lines format is needed, Delete Line by line YAML proxies output format code block, proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
+        proxies_yaml_block = make_single_line_yaml(info_ordered_dicts)    #If multiple lines format is needed, Delete Line by line YAML proxies output format code block, proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
         print("\n[DEBUG YAML STRING CHECK]")
         print(proxies_yaml_block[:3000])
         proxy_names_block = "\n".join([f"      - {unquote(p['name'])}" for p in info_ordered_dicts])

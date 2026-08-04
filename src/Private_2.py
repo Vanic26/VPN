@@ -674,23 +674,19 @@ def parse_hysteria2(line, line_number=None):
         # mport / server_ports
         # ---------------------------------------------------
         if "mport" in query:
-            node["server_ports"] = [
-                query["mport"].replace("-", ":")
-            ]
+            node["mport"] = query["mport"]
 
         # ---------------------------------------------------
-        # TLS / Hysteria2 Clash Meta compatible
+        # TLS/SNI handeling
         # ---------------------------------------------------
         
         # SNI
         if query.get("sni"):
             node["sni"] = query["sni"]
-        
-        
+                
         # Certificate fingerprint
         if query.get("pinSHA256"):
             node["fingerprint"] = query["pinSHA256"]
-        
         
         # Insecure TLS
         insecure = False
@@ -704,7 +700,6 @@ def parse_hysteria2(line, line_number=None):
         # pinSHA256 usually works with insecure mode
         if query.get("pinSHA256"):
             insecure = True
-        
         
         if insecure:
             node["skip-cert-verify"] = True
@@ -1586,7 +1581,7 @@ def main():
         try:
             with open(CLASH_TEMPLATE, "r", encoding="utf-8") as f:
                 template_text = f.read()
-            print("[INFO] Loaded ClashTemplate from local file")
+            print("[INFO] Loaded ClashTemplate")
         except Exception as e_local:
             print(f"[FATAL] ⚠️ Failed to load ClashTemplate -> {e_local}")
             sys.exit(1)
@@ -1689,7 +1684,7 @@ def main():
         # ---------------- Final output ----------------
         final_output = f"# Last update: {timestamp}\n" + output_text
         with open(TEMP_FILE, "w", encoding="utf-8") as f: f.write(final_output)
-        print(f"[done] 💾 Generated subscription -> {TEMP_FILE}")
+        print(f"[done] 💾Final subscription generated using clash template
 
         # Upload to textdb only after all upper processes successful processing
         upload_to_textdb(final_output)

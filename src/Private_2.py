@@ -1653,24 +1653,24 @@ def main():
         def make_single_line_yaml(proxies):
             lines = []
             for p in proxies:
-        # Convert nested dicts safely
-        def to_yaml_value(v):
+                # Convert nested dicts safely
+                def to_yaml_value(v):
 
-            if isinstance(v, dict):
-                inner = ", ".join(
-                    f"{k}: {to_yaml_value(vv)}"
-                    for k, vv in v.items()
-                )
-                return "{" + inner + "}"
-        
-            elif isinstance(v, list):
-                return "[" + ", ".join(
-                    json.dumps(x, ensure_ascii=False)
-                    for x in v
-                ) + "]"
-        
-            else:
-                return json.dumps(v, ensure_ascii=False)
+                    if isinstance(v, dict):
+                        inner = ", ".join(
+                            f"{k}: {to_yaml_value(vv)}"
+                            for k, vv in v.items()
+                        )
+                        return "{" + inner + "}"
+                
+                    elif isinstance(v, list):
+                        return "[" + ", ".join(
+                            json.dumps(x, ensure_ascii=False)
+                            for x in v
+                        ) + "]"
+                
+                    else:
+                        return json.dumps(v, ensure_ascii=False)
         
                 parts = []
                 for k, v in p.items():

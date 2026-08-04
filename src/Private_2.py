@@ -268,7 +268,7 @@ def merge_dynamic_fields(node, data):
         # common normalized fields
         "name", "server", "port", "uuid", "password",
         "cipher", "network", "tls", "alterId", "fp", "client-fingerprint",
-        "type", "encryption", "headerType", "quicSecurity",
+        "type", "encryption", "headerType", "quicSecurity", "server_ports", "mport",
 
         # tls / security fields
         "sni", "servername", "server_name", "insecure", "allowInsecure", "security", "flow",
@@ -414,7 +414,7 @@ def parse_vmess(line, line_number=None):
         return node
 
     except Exception as e:
-        print(f"[warn] ❗Vmess parse error -> Line {line_number} | {e}")
+        print(f"[warn] ❗Vmess parse error -> Line {line_number}: {e}")
         return None
         
 # -----------------------------------------------------------
@@ -531,9 +531,7 @@ def parse_vless(line, line_number=None):
 
     except Exception as e:
         if line_number:
-            print(f"[warn] ❗VLESS parse error -> Line {line_number}")
-        else:
-            print(f"[warn] ❗VLESS parse error -> {e}")
+            print(f"[warn] ❗VLESS parse error -> Line {line_number}: {e}")
         return None
         
 # -----------------------------------------------------------
@@ -722,7 +720,6 @@ def parse_hysteria2(line, line_number=None):
             node["down"] = query["down"]
 
         node = merge_dynamic_fields(node, query)
-
         return node
 
     except Exception as e:

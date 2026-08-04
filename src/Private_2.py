@@ -536,11 +536,7 @@ def parse_trojan(line, line_number=None):
         host = parsed.hostname
         port = parsed.port
         password = unquote(parsed.username or "")
-        query = {
-            k: v[-1]
-            for k, v in parse_qs(parsed.query, keep_blank_values=True).items()
-        }
-
+        query = {k: v[-1] for k, v in parse_qs(parsed.query, keep_blank_values=True).items()}
         name = unquote(parsed.fragment) if parsed.fragment else ""
 
         node = {
@@ -606,7 +602,6 @@ def parse_hysteria2(line, line_number=None):
             line = "hysteria2://" + line[len("hy2://"):]
 
         parsed = urllib.parse.urlparse(line)
-
         password = urllib.parse.unquote(parsed.username or "")
         host = parsed.hostname
         port = parsed.port
@@ -720,7 +715,6 @@ def parse_anytls(line, line_number=None):
             return None
 
         parsed = urllib.parse.urlparse(line)
-
         password = urllib.parse.unquote(parsed.username or "")
         host = parsed.hostname
         port = parsed.port
@@ -775,12 +769,11 @@ def parse_tuic(line, line_number=None):
             return None
 
         parsed = urllib.parse.urlparse(line)
-
         uuid = urllib.parse.unquote(parsed.username or "")
         password = urllib.parse.unquote(parsed.password or "")
         host = parsed.hostname
         port = parsed.port
-        query = dict(urllib.parse.parse_qsl(parsed.query))
+        query = {k: v[-1] for k, v in urllib.parse.parse_qs(parsed.query, keep_blank_values=True).items()}
         name = urllib.parse.unquote(parsed.fragment or "TUIC Node")
 
         if not host or not port or not uuid:
@@ -796,43 +789,56 @@ def parse_tuic(line, line_number=None):
         }
 
         # ---------------- TLS ----------------
-        tls = {}
-        
-        if "sni" in query:
-            tls["server_name"] = query["sni"]
-        
-        if "insecure" in query:
-            tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
-        
-        if "allowInsecure" in query:
-            tls["insecure"] = query["allowInsecure"].lower() in ("1", "true", "yes")
-                
-        if tls:
-            tls["enabled"] = True
-            node["tls"] = tls
-        
-            if tls.get("insecure") is True:
-                node["skip-cert-verify"] = True
-                
+        tls = {"enabled": True}
+        sni = query.get("sni")
+
+        if sni:
+            tls["server_name"] = sni
+        insecure = (query.get("insecure") or query.get("allowInsecure") or "false")
+        tls["insecure"] = str(insecure).lower() in ("1", "true", "yes")
+
+        # uTLS fingerprint support
+        if query.get("fp"):
+            tls["utls"] = {"enabled": True}
+            node["client-fingerprint"] = query["fp"]
+        node["tls"] = tls
+
+        if tls["insecure"]:
+            node["skip-cert-verify"] = True
+
         # ---------------- ALPN ----------------
         if "alpn" in query:
-            node["alpn"] = query["alpn"].split(",")
+            node["alpn"] = [x.strip() for x in query["alpn"].split(",") if x.strip()]
 
-        # ---------------- congestion ----------------
+        # ---------------- Congestion ----------------
         if "congestion_control" in query:
-            node["congestion-controller"] = query["congestion_control"]
+            node["congestion-controller"] = (query["congestion_control"])
 
-        # ---------------- udp relay ----------------
+        # ---------------- UDP relay ----------------
         if "udp_relay_mode" in query:
-            node["udp-relay-mode"] = query["udp_relay_mode"]
+            node["udp-relay-mode"] = (query["udp_relay_mode"])
 
-        # ---------------- reduce rtt ----------------
+        # ---------------- Reduce RTT ----------------
         if "reduce_rtt" in query:
-            node["reduce-rtt"] = query["reduce_rtt"].lower() in ("1", "true", "yes")
+            node["reduce-rtt"] = str(query["reduce_rtt"]).lower() in ("1", "true", "yes")
 
-        # ---------------- disable sni ----------------
+        # ---------------- Disable SNI ----------------
         if "disable_sni" in query:
-            node["disable-sni"] = query["disable_sni"].lower() in ("1", "true", "yes")
+            node["disable-sni"] = str(query["disable_sni"]).lower() in ("1", "true", "yes")
+
+        # ---------------- Remove converted fields ----------------
+        for key in (
+            "sni",
+            "insecure",
+            "allowInsecure",
+            "fp",
+            "alpn",
+            "congestion_control",
+            "udp_relay_mode",
+            "reduce_rtt",
+            "disable_sni"
+        ):
+            query.pop(key, None)
 
         # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)
@@ -840,7 +846,9 @@ def parse_tuic(line, line_number=None):
         return node
 
     except Exception as e:
-        print(f"[warn] ❗TUIC parse error -> Line {line_number}")
+        print(
+            f"[warn] ❗TUIC parse error -> Line {line_number}: {e}"
+        )
         return None
 
 # -----------------------------------------------------------
@@ -938,11 +946,7 @@ def parse_ss(line, line_number=None):
 
         if "?" in raw:
             core, query_raw = raw.split("?", 1)
-        
-            query = {
-                k: v[-1]
-                for k, v in urllib.parse.parse_qs(query_raw, keep_blank_values=True).items()
-            }
+            query = {k: v[-1] for k, v in urllib.parse.parse_qs(query_raw, keep_blank_values=True).items()}
         
             if "plugin" in query:
                 plugin, plugin_opts = parse_plugin(query["plugin"])
@@ -960,7 +964,6 @@ def parse_ss(line, line_number=None):
         
             if ":" not in decoded:
                 raise ValueError("Invalid userinfo")
-        
             cipher, password = decoded.split(":", 1)
         
         else:
@@ -969,12 +972,10 @@ def parse_ss(line, line_number=None):
         
             if "@" not in decoded:
                 raise ValueError("Invalid SS format")
-        
             userinfo, srvp = decoded.split("@", 1)
         
             if ":" not in userinfo:
                 raise ValueError("Invalid userinfo")
-        
             cipher, password = userinfo.split(":", 1)
 
         # -------- server / port --------
@@ -1013,21 +1014,27 @@ def parse_ssr(line, line_number=None):
     try:
         if not line.startswith("ssr://"):
             return None
-
         decoded = decode_base64(line[6:]).strip()
 
+        if not decoded:
+            return None
+
+        # ---------------- Query ----------------
         if "/?" in decoded:
             main, query_str = decoded.split("/?", 1)
-            qs = dict(urllib.parse.parse_qsl(query_str))
+            qs = {k: v[-1] for k, v in urllib.parse.parse_qs(query_str,keep_blank_values=True).items()}
+
         else:
             main = decoded
             qs = {}
 
-        # ---------------- IPv6 safe ----------------
-        if main.count(":") < 5:
+        # ---------------- Parse Core ----------------
+        try:
+            server, port, protocol, method, obfs, pwd_b64 = (main.rsplit(":", 5))
+
+        except ValueError:
             return None
 
-        server, port, protocol, method, obfs, pwd_b64 = main.rsplit(":", 5)
         password = decode_base64(pwd_b64)
         name = ""
 
@@ -1038,14 +1045,14 @@ def parse_ssr(line, line_number=None):
             "type": "ssr",
             "name": name or "SSR Node",
             "server": server,
-            "port": int(port),
+            "port": safe_int(port),
             "protocol": protocol,
             "cipher": method,
             "obfs": obfs,
-            "password": password
+            "password": password,
         }
 
-        # ---------------- optional fields ----------------
+        # ---------------- Optional Fields ----------------
         if "group" in qs:
             node["group"] = decode_base64(qs["group"])
 
@@ -1055,13 +1062,22 @@ def parse_ssr(line, line_number=None):
         if "protoparam" in qs:
             node["protocol-param"] = decode_base64(qs["protoparam"])
 
+        # ---------------- Remove Converted Fields ----------------
+        for key in (
+            "remarks",
+            "group",
+            "obfsparam",
+            "protoparam"
+        ):
+            qs.pop(key, None)
+
         # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, qs)
         node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
-        print(f"[warn] ❗SSR parse error -> Line {line_number}")
+        print(f"[warn] ❗SSR parse error -> Line {line_number}: {e}")
         return None
 
 # -----------------------------------------------------------
@@ -1084,7 +1100,6 @@ def parse_socks(line, line_number=None):
         if "#" in raw:
             raw, tag = raw.split("#", 1)
             tag = urllib.parse.unquote(tag.strip())
-
         raw = raw.strip()
         username = ""
         password = ""
@@ -1094,11 +1109,7 @@ def parse_socks(line, line_number=None):
 
         if "?" in raw:
             raw, query_raw = raw.split("?", 1)
-
-            query = {
-                k: v[-1]
-                for k, v in urllib.parse.parse_qs(query_raw, keep_blank_values=True).items()
-            }
+            query = {k: v[-1] for k, v in urllib.parse.parse_qs(query_raw, keep_blank_values=True).items()}
 
         # -------- auth --------
         if "@" in raw:

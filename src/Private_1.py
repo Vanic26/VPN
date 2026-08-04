@@ -316,8 +316,7 @@ def merge_dynamic_fields(node, data):
 # -----------------------------------------------------------
 # VMESS Parser
 # -----------------------------------------------------------
-def normalize_vmess_json(data):
-
+def normalize_vmess_json(query):
     normalized = {}
 
     for k, v in data.items():
@@ -352,7 +351,7 @@ def parse_vmess(line, line_number=None):
         data = json.loads(decoded)
 
         # Normalize ALL values (critical fix)
-        data = normalize_vmess_json(data)
+        data = normalize_vmess_json(query)
 
         # ---------------- Core Fields ----------------
         node = {

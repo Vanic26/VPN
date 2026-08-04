@@ -674,8 +674,8 @@ def parse_hysteria2(line, line_number=None):
         # mport / server_ports
         # ---------------------------------------------------
         if "mport" in query:
-        node["ports"] = query["mport"]
-        node["mport"] = query["mport"]
+            node["ports"] = query["mport"]
+            node["mport"] = query["mport"]
 
         # ---------------------------------------------------
         # TLS/SNI handeling

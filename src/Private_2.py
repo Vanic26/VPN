@@ -915,9 +915,12 @@ def parse_plugin(plugin_str: str):
             
             elif key == "mux":
                 v = str(val).lower()
-            
                 if v in ["0", "false"]:
-                    opts[key] = 0
+                    opts[key] = False
+                elif v in ["1", "true"]:
+                    opts[key] = True
+                else:
+                    opts[key] = smart_cast(val)
                 elif v in ["1", "true"]:
                     opts[key] = 1
                 else:
@@ -968,6 +971,7 @@ def parse_ss(line, line_number=None):
         # -------- query --------
         plugin = None
         plugin_opts = None
+        query = ""
 
         if "?" in raw:
             core, query = raw.split("?", 1)

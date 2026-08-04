@@ -485,24 +485,19 @@ def parse_vless(line, line_number=None):
 
         # Security (TLS / Reality)
         if query.get("security") == "tls":
-
             node["tls"] = True
+            node["skip-cert-verify"] = (
+                query.get("allowInsecure", "0") in ("1", "true")
+            )
         
             sni = query.get("sni") or query.get("peer")
-        
             if sni:
                 node["servername"] = sni
-        
-            if query.get("allowInsecure") in ("1", "true"):
-                node["skip-cert-verify"] = True
-        
             if query.get("fp"):
                 node["client-fingerprint"] = query["fp"]
 
         elif query.get("security") == "reality":
-
             node["tls"] = True
-        
             node["skip-cert-verify"] = (
                 query.get("insecure", "0") in ("1", "true")
             )
@@ -1570,10 +1565,6 @@ def main():
             res = rename_node(n, country_counter, cn_to_cc)
             if res:
                 renamed_nodes.append(res)
-            
-                print("\n[DEBUG AFTER RENAME RAW QUERY CHECK]")
-                if res.get("type") == "vless":
-                    print(res.get("_raw_query"))
 
         if USE_ONLY_GEOIP:
             print(
@@ -1671,11 +1662,6 @@ def main():
             remove_empty_fields(dict(n))
             for n in info_ordered
         ]
-        print("\n[DEBUG AFTER DICT CONVERSION COUNT]")
-        print("Total:", len(info_ordered_dicts))
-        
-        for i, n in enumerate(info_ordered_dicts[:5], start=1):
-            print("\nNODE", i, n.get("type"), n.get("name"))
 
         # Remove internal parser metadata before final export
         for n in info_ordered_dicts:
@@ -1703,16 +1689,8 @@ def main():
         
             return "\n".join(lines)
 
-        print("\n[DEBUG FINAL EXPORT CHECK]")
-        print("Total nodes:", len(info_ordered_dicts))
-        
-        for i, n in enumerate(info_ordered_dicts, start=1):
-            print("\nNODE", i)
-            print(yaml.dump(n, allow_unicode=True, sort_keys=False))
         # ---------------- Convert to YAML ----------------
         proxies_yaml_block = make_single_line_yaml(info_ordered_dicts)    #If multiple lines format is needed, Delete Line by line YAML proxies output format code block, proxies_yaml_block = yaml.dump(info_ordered_dicts, allow_unicode=True, default_flow_style=False, sort_keys=False)
-        print("\n[DEBUG YAML STRING CHECK]")
-        print(proxies_yaml_block[:3000])
         proxy_names_block = "\n".join([f"      - {unquote(p['name'])}" for p in info_ordered_dicts])
 
         # ---------------- Replace placeholders ----------------

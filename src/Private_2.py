@@ -1650,11 +1650,6 @@ def main():
                 n.pop("insecure", None)
                 n.pop("pinSHA256", None)
 
-        print("\n[DEBUG FINAL HY2 RAW]")
-        for n in info_ordered:
-            if n.get("type") == "hysteria2":
-                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
-
         # Line by line YAML proxies output format
         def make_single_line_yaml(proxies):
             lines = []

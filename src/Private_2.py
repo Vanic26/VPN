@@ -679,8 +679,6 @@ def parse_hysteria2(line, line_number=None):
         # ---------------------------------------------------
         # TLS/SNI handeling
         # ---------------------------------------------------
-        
-        # SNI
         if query.get("sni"):
             node["sni"] = query["sni"]
                 
@@ -732,13 +730,13 @@ def parse_hysteria2(line, line_number=None):
         if "down" in query:
             node["down"] = query["down"]
 
-        query.pop("pinSHA256", None)
-        query.pop("sni", None)
-        query.pop("insecure", None)
-        query.pop("allowInsecure", None)
+        # Preserve original HY2 fields
+        for key, value in query.items():
+            if key not in node:
+                node[key] = value
 
         # ---------------- Dynamic Fields ----------------
-        node = merge_dynamic_fields(node, query)
+        node = merge_dynamic_fields(node, query)       
         node["_key_order"] = list(node.keys())
         return node
 
@@ -1645,6 +1643,11 @@ def main():
         for n in info_ordered_dicts:
             n.pop("_original", None)
             n.pop("_key_order", None)
+
+        print("\n[DEBUG FINAL HY2 RAW]")
+        for n in info_ordered:
+            if n.get("type") == "hysteria2":
+                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
 
         # Line by line YAML proxies output format
         def make_single_line_yaml(proxies):

@@ -317,7 +317,6 @@ def merge_dynamic_fields(node, data):
 # VMESS Parser
 # -----------------------------------------------------------
 def normalize_vmess_json(data):
-
     normalized = {}
 
     for k, v in data.items():
@@ -364,6 +363,7 @@ def parse_vmess(line, line_number=None):
             "alterId": safe_int(data.get("aid")),
             "cipher": data.get("scy") or "auto",
             "network": data.get("net") or "tcp",
+            "udp": True,
         }
 
         # ---------------- TLS Handling ----------------
@@ -383,6 +383,9 @@ def parse_vmess(line, line_number=None):
         
             if sni:
                 tls["server_name"] = sni
+
+            if data.get("fp"):
+                tls["fingerprint"] = data["fp"]
         
             node["tls"] = tls
 
@@ -408,8 +411,19 @@ def parse_vmess(line, line_number=None):
                 "host": [data.get("host") or ""]
             }
 
+        # ---------------- Remove duplicate core fields ----------------
+        for key in (
+            "ps",
+            "add",
+            "port",
+            "id",
+            "aid",
+            "net"
+        ):
+            data.pop(key, None)
+
         # ---------------- Dynamic Fields ----------------
-        node = merge_dynamic_fields(node, query)
+        node = merge_dynamic_fields(node, data)
         node["_key_order"] = list(node.keys())
         return node
 

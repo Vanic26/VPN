@@ -689,11 +689,14 @@ def parse_hysteria2(line, line_number=None):
         
         # Hysteria2 insecure
         insecure = False
-        
         if query.get("insecure", "").lower() in ("1", "true", "yes"):
             insecure = True
         
         if query.get("allowInsecure", "").lower() in ("1", "true", "yes"):
+            insecure = True
+        
+        # Hysteria2 pinSHA256 requires insecure TLS mode
+        if query.get("pinSHA256"):
             insecure = True
         
         tls["insecure"] = insecure

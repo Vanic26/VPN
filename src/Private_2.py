@@ -621,7 +621,8 @@ def parse_trojan(line, line_number=None):
             node["skip-cert-verify"] = True
 
         # Fingerprint
-        if "fp" in query:
+        if query.get("fp"):
+            tls["utls"] = {"enabled": True}
             node["client-fingerprint"] = query["fp"]
 
         # Network
@@ -647,10 +648,24 @@ def parse_trojan(line, line_number=None):
 
         # gRPC
         elif node.get("network") == "grpc":
-            node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
+            node["transport"] = {
+                "type": "grpc",
+                "service_name": query.get("serviceName", "")
+            }
 
-        node.pop("network", None)
-
+        # Remove fields already converted
+        for key in (
+            "sni",
+            "peer",
+            "allowInsecure",
+            "fp",
+            "type",
+            "path",
+            "host",
+            "serviceName"
+        ):
+            query.pop(key, None)
+        
         # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)
         node["_key_order"] = list(node.keys())

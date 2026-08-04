@@ -599,23 +599,40 @@ def parse_trojan(line, line_number=None):
             "server": host.strip(),
             "port": int(port.strip()),
             "password": urllib.parse.unquote(password.strip()),
+            "udp": True,
         }
 
         # TLS / Security
-        tls = {"enabled": True}
+        tls = {
+            "enabled": True
+        }
+        
         sni = query.get("sni") or query.get("peer")
         
         if sni:
             tls["server_name"] = sni
-        tls["insecure"] = query.get("allowInsecure", "0").lower() in ("1", "true", "yes")
+        
+        # Handle insecure / allowInsecure
+        insecure = False
+        
+        if query.get("allowInsecure", "").lower() in ("1", "true", "yes"):
+            insecure = True
+        
+        if query.get("insecure", "").lower() in ("1", "true", "yes"):
+            insecure = True
+        
+        tls["insecure"] = insecure
         node["tls"] = tls
         
-        if tls["insecure"]:
+        if insecure:
             node["skip-cert-verify"] = True
 
         # Fingerprint
-        if "fp" in query:
+        if query.get("fp"):
             node["client-fingerprint"] = query["fp"]
+        
+        elif query.get("fingerprint"):
+            node["client-fingerprint"] = query["fingerprint"]
 
         # Network
         if "type" in query:
@@ -631,6 +648,19 @@ def parse_trojan(line, line_number=None):
         # gRPC
         elif node.get("network") == "grpc":
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
+
+        # ---------------- Remove consumed query fields ----------------
+        for key in (
+            "sni",
+            "peer",
+            "allowInsecure",
+            "fp",
+            "type",
+            "path",
+            "host",
+            "serviceName"
+        ):
+            query.pop(key, None)
 
         # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)

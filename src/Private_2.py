@@ -1548,6 +1548,12 @@ def main():
             if res:
                 renamed_nodes.append(res)
 
+        print("\n[DEBUG HY2 AFTER RENAME]")
+        for n in renamed_nodes:
+            if n.get("type") == "hysteria2":
+                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
+                break
+
         if USE_ONLY_GEOIP:
             print(
                 f"[rename] 🌍 GeoIP-only mode: Failed to rename {geoip_primary_fail} nodes and fallback to Name-based detection"
@@ -1644,6 +1650,11 @@ def main():
             remove_empty_fields(dict(n))
             for n in info_ordered
         ]
+        print("\n[DEBUG FINAL HY2 CHECK]")
+        for n in info_ordered_dicts:
+            if n.get("type") == "hysteria2":
+                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
+                break
 
         # Remove internal parser metadata before final export
         for n in info_ordered_dicts:

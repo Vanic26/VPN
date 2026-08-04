@@ -365,7 +365,6 @@ def parse_vmess(line, line_number=None):
             "cipher": data.get("scy") or "auto",
             "network": data.get("net") or "tcp",
         }
-        node["_key_order"] = list(node.keys())
 
         # ---------------- TLS Handling ----------------
         tls_val = data.get("tls")
@@ -409,9 +408,9 @@ def parse_vmess(line, line_number=None):
                 "host": [data.get("host") or ""]
             }
 
-        # ---------------- Dynamic Fields (Safe) ----------------
-        node = merge_dynamic_fields(node, data)
-
+        # ---------------- Dynamic Fields ----------------
+        node = merge_dynamic_fields(node, query)
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -477,7 +476,6 @@ def parse_vless(line, line_number=None):
             "uuid": uuid,
             "udp": True,
         }
-        node["_key_order"] = list(node.keys())
         
         # preserve important raw fields
         for key in ["flow"]:
@@ -527,7 +525,9 @@ def parse_vless(line, line_number=None):
         if node.get("network") == "grpc":
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
 
+        # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -586,7 +586,6 @@ def parse_trojan(line, line_number=None):
             "port": int(port.strip()),
             "password": urllib.parse.unquote(password.strip()),
         }
-        node["_key_order"] = list(node.keys())
 
         # TLS / Security
         tls = {"enabled": True}
@@ -619,7 +618,9 @@ def parse_trojan(line, line_number=None):
         elif node.get("network") == "grpc":
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
 
+        # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -668,7 +669,6 @@ def parse_hysteria2(line, line_number=None):
             "password": password,
             "udp": True,
         }
-        node["_key_order"] = list(node.keys())
 
         # ---------------------------------------------------
         # mport / server_ports
@@ -742,7 +742,9 @@ def parse_hysteria2(line, line_number=None):
         query.pop("insecure", None)
         query.pop("allowInsecure", None)
 
+        # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -776,7 +778,6 @@ def parse_anytls(line, line_number=None):
             "password": password,
             "udp": True,
         }
-        node["_key_order"] = list(node.keys())
 
         # ---------------- TLS / SNI ----------------
         if "sni" in query:
@@ -796,9 +797,9 @@ def parse_anytls(line, line_number=None):
         if "fp" in query:
             node["client-fingerprint"] = query["fp"]
 
-        # dynamic fields
+        # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)
-
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -833,7 +834,6 @@ def parse_tuic(line, line_number=None):
             "uuid": uuid,
             "password": password,
         }
-        node["_key_order"] = list(node.keys())
 
         # ---------------- TLS ----------------
         tls = {}
@@ -874,8 +874,9 @@ def parse_tuic(line, line_number=None):
         if "disable_sni" in query:
             node["disable-sni"] = query["disable_sni"].lower() in ("1", "true", "yes")
 
+        # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)
-
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -1032,7 +1033,6 @@ def parse_ss(line, line_number=None):
             "password": password,
             "udp": True,
         }
-        node["_key_order"] = list(node.keys())
 
         if plugin:
             node["plugin"] = plugin
@@ -1040,6 +1040,9 @@ def parse_ss(line, line_number=None):
         if plugin_opts:
             node["plugin-opts"] = plugin_opts
 
+        # ---------------- Dynamic Fields ----------------
+        node = merge_dynamic_fields(node, query)
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -1086,7 +1089,6 @@ def parse_ssr(line, line_number=None):
             "obfs": obfs,
             "password": password
         }
-        node["_key_order"] = list(node.keys())
 
         # ---------------- optional fields ----------------
         if "group" in qs:
@@ -1098,8 +1100,9 @@ def parse_ssr(line, line_number=None):
         if "protoparam" in qs:
             node["protocol-param"] = decode_base64(qs["protoparam"])
 
+        # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, qs)
-
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -1151,8 +1154,10 @@ def parse_socks(line, line_number=None):
             "username": username,
             "password": password,
         }
-        node["_key_order"] = list(node.keys())
 
+        # ---------------- Dynamic Fields ----------------
+        node = merge_dynamic_fields(node, query)
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -1585,17 +1590,7 @@ def main():
         except Exception as e_local:
             print(f"[FATAL] ⚠️ Failed to load ClashTemplate -> {e_local}")
             sys.exit(1)
-
-        # ---------------- Preferred key order ----------------
-        INFO_ORDER = [
-            "name",
-            "type",
-            "server",
-            "port",
-            "uuid",
-            "password"
-        ]
-        
+  
         # ---------------- Remove empyt fields ----------------
         def remove_empty_fields(obj):
             if isinstance(obj, dict):
@@ -1630,57 +1625,31 @@ def main():
         def reorder_info(node):
             node = copy.deepcopy(node)
             ordered = OrderedDict()
-            original_order = node.pop("_key_order", [])
+            original_order = node.get("_key_order", [])
         
-            # Follow original parser/source order
+            # Restore original parser order
             for key in original_order:
                 if key in node:
                     ordered[key] = node[key]
         
-            # Add fields created later
+            # Add fields without recorded order
             for key in node:
-                if key not in ordered:
+                if key not in ordered and key != "_key_order":
                     ordered[key] = node[key]
         
+            # remove internal field
+            ordered.pop("_key_order", None)
             return ordered
         
         # Apply to all renamed nodes
-        normalized_nodes = []
-        for n in renamed_nodes:
-            n = copy.deepcopy(n)
-
-            normalized_nodes.append(
-                normalize_mux(n)
-            )
-        
-        info_ordered = [reorder_info(n) for n in normalized_nodes]
-        print("\n[DEBUG HY2 AFTER REORDER]")
-
-        for i, n in enumerate(info_ordered, start=1):
-            if n.get("type") == "hysteria2":
-                print(f"\n--- HY2 NODE {i} ---")
-                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
-                
-        info_ordered_dicts = [
-            remove_empty_fields(dict(n))
-            for n in info_ordered
-        ]
-
-        print("\n[DEBUG HY2 AFTER REMOVE EMPTY]")
-
-        for i, n in enumerate(info_ordered_dicts, start=1):
-            if n.get("type") == "hysteria2":
-                print(f"\n--- HY2 NODE {i} ---")
-                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
+        normalized_nodes = [for n in renamed_nodes: n = copy.deepcopy(n) normalized_nodes.append(normalize_mux(n))
+        info_ordered = [reorder_info(n) for n in normalized_nodes]    
+        info_ordered_dicts = [remove_empty_fields(dict(n)) for n in info_ordered]
 
         # Remove internal parser metadata before final export
         for n in info_ordered_dicts:
             n.pop("_original", None)
-        print("\n[DEBUG ALL HY2 FINAL EXPORT]")
-        for i, n in enumerate(info_ordered_dicts, start=1):
-            if n.get("type") == "hysteria2":
-                print(f"\n--- HY2 FINAL NODE {i} ---")
-                print(yaml.dump(n, allow_unicode=True, sort_keys=False))
+            n.pop("_key_order", None)
 
         # Line by line YAML proxies output format
         def make_single_line_yaml(proxies):

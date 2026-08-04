@@ -980,33 +980,30 @@ def parse_ss(line, line_number=None):
         core = core.strip()
 
         # -------- decode --------
-        srvp = None
-
-        # Format:
-        # method:password@server:port
-        if "@" in core and ":" in core.split("@")[0]:
-            userinfo, srvp = core.split("@", 1)
-            cipher, password = userinfo.split(":", 1)
-
+        if "@" in core:
+            # base64(method:password)@server:port
+            b64_part, srvp = core.split("@", 1)
+        
+            decoded = decode_base64(b64_part)
+        
+            if ":" not in decoded:
+                raise ValueError("Invalid userinfo")
+        
+            cipher, password = decoded.split(":", 1)
+        
         else:
-
+            # SIP002 full base64
             decoded = decode_base64(core)
-
-            if not decoded:
-                raise ValueError("Base64 decode failed")
-
-            # SIP002:
-            # method:password@server:port
-            if "@" in decoded:
-                userinfo, srvp = decoded.split("@", 1)
-
-                if ":" not in userinfo:
-                    raise ValueError("Invalid userinfo")
-                cipher, password = userinfo.split(":", 1)
-
-            else:
-
+        
+            if "@" not in decoded:
                 raise ValueError("Invalid SS format")
+        
+            userinfo, srvp = decoded.split("@", 1)
+        
+            if ":" not in userinfo:
+                raise ValueError("Invalid userinfo")
+        
+            cipher, password = userinfo.split(":", 1)
 
         # -------- server / port --------
         server, port = parse_server_port(srvp)

@@ -921,17 +921,11 @@ def parse_plugin(plugin_str: str):
                     opts[key] = True
                 else:
                     opts[key] = smart_cast(val)
-                elif v in ["1", "true"]:
-                    opts[key] = 1
-                else:
-                    opts[key] = int(v) if v.isdigit() else 0
-            
+        
             else:
                 opts[key] = smart_cast(val)
         else:
-            # flags like "tls"
             opts[p.strip()] = True
-
     return plugin, opts
 
 # ---------------- Server / Port ----------------

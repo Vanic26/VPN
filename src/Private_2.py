@@ -735,8 +735,6 @@ def parse_hysteria2(line, line_number=None):
         if "down" in query:
             node["down"] = query["down"]
 
-        print("\n[DEBUG HY2 BEFORE MERGE]")
-        print(yaml.dump(node, allow_unicode=True, sort_keys=False))
         node = merge_dynamic_fields(node, query)
         return node
 

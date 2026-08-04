@@ -408,9 +408,9 @@ def parse_vmess(line, line_number=None):
                 "host": [data.get("host") or ""]
             }
 
-        # ---------------- Dynamic Fields (Safe) ----------------
-        node = merge_dynamic_fields(node, data)
-
+        # ---------------- Dynamic Fields ----------------
+        node = merge_dynamic_fields(node, query)
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -476,7 +476,6 @@ def parse_vless(line, line_number=None):
             "uuid": uuid,
             "udp": True,
         }
-        node["_raw_query"] = query.copy()
         
         # preserve important raw fields
         for key in ["flow"]:
@@ -526,7 +525,9 @@ def parse_vless(line, line_number=None):
         if node.get("network") == "grpc":
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
 
+        # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -617,7 +618,9 @@ def parse_trojan(line, line_number=None):
         elif node.get("network") == "grpc":
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
 
+        # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -671,38 +674,31 @@ def parse_hysteria2(line, line_number=None):
         # mport / server_ports
         # ---------------------------------------------------
         if "mport" in query:
+            node["ports"] = query["mport"]
             node["mport"] = query["mport"]
-            node["server_ports"] = [
-                query["mport"].replace("-", ":")
-            ]
 
         # ---------------------------------------------------
-        # TLS / Hysteria2 Clash Meta compatible
+        # TLS/SNI handeling
         # ---------------------------------------------------
-        tls = {}
-        
         if query.get("sni"):
-            tls["server_name"] = query["sni"]
-        
+            node["sni"] = query["sni"]
+                
+        # Certificate fingerprint
         if query.get("pinSHA256"):
             node["fingerprint"] = query["pinSHA256"]
         
-        # Hysteria2 insecure
+        # Insecure TLS
         insecure = False
+        
         if query.get("insecure", "").lower() in ("1", "true", "yes"):
             insecure = True
         
         if query.get("allowInsecure", "").lower() in ("1", "true", "yes"):
             insecure = True
         
-        # Hysteria2 pinSHA256 requires insecure TLS mode
+        # pinSHA256 usually works with insecure mode
         if query.get("pinSHA256"):
             insecure = True
-        
-        tls["insecure"] = insecure
-        tls["enabled"] = True
-        
-        node["tls"] = tls
         
         if insecure:
             node["skip-cert-verify"] = True
@@ -735,7 +731,14 @@ def parse_hysteria2(line, line_number=None):
         if "down" in query:
             node["down"] = query["down"]
 
-        node = merge_dynamic_fields(node, query)
+        # Preserve original HY2 fields
+        for key, value in query.items():
+            if key not in node:
+                node[key] = value
+
+        # ---------------- Dynamic Fields ----------------
+        node = merge_dynamic_fields(node, query)       
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -788,9 +791,9 @@ def parse_anytls(line, line_number=None):
         if "fp" in query:
             node["client-fingerprint"] = query["fp"]
 
-        # dynamic fields
+        # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)
-
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -865,8 +868,9 @@ def parse_tuic(line, line_number=None):
         if "disable_sni" in query:
             node["disable-sni"] = query["disable_sni"].lower() in ("1", "true", "yes")
 
+        # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)
-
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -1030,6 +1034,9 @@ def parse_ss(line, line_number=None):
         if plugin_opts:
             node["plugin-opts"] = plugin_opts
 
+        # ---------------- Dynamic Fields ----------------
+        node = merge_dynamic_fields(node, query)
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -1087,8 +1094,9 @@ def parse_ssr(line, line_number=None):
         if "protoparam" in qs:
             node["protocol-param"] = decode_base64(qs["protoparam"])
 
+        # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, qs)
-
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -1141,6 +1149,9 @@ def parse_socks(line, line_number=None):
             "password": password,
         }
 
+        # ---------------- Dynamic Fields ----------------
+        node = merge_dynamic_fields(node, query)
+        node["_key_order"] = list(node.keys())
         return node
 
     except Exception as e:
@@ -1569,21 +1580,11 @@ def main():
         try:
             with open(CLASH_TEMPLATE, "r", encoding="utf-8") as f:
                 template_text = f.read()
-            print("[INFO] Loaded ClashTemplate from local file")
+            print("[INFO] Loaded ClashTemplate")
         except Exception as e_local:
             print(f"[FATAL] ⚠️ Failed to load ClashTemplate -> {e_local}")
             sys.exit(1)
-
-        # ---------------- Preferred key order ----------------
-        INFO_ORDER = [
-            "name",
-            "type",
-            "server",
-            "port",
-            "uuid",
-            "password"
-        ]
-        
+  
         # ---------------- Remove empyt fields ----------------
         def remove_empty_fields(obj):
             if isinstance(obj, dict):
@@ -1617,38 +1618,37 @@ def main():
         # ---------------- Function to reorder keys ----------------
         def reorder_info(node):
             node = copy.deepcopy(node)
-        
             ordered = OrderedDict()
+            original_order = node.get("_key_order", [])
         
-            for key in INFO_ORDER:
+            # Restore original parser order
+            for key in original_order:
                 if key in node:
                     ordered[key] = node[key]
         
+            # Add fields without recorded order
             for key in node:
-                if key not in ordered:
+                if key not in ordered and key != "_key_order":
                     ordered[key] = node[key]
         
+            # remove internal field
+            ordered.pop("_key_order", None)
             return ordered
         
         # Apply to all renamed nodes
-        normalized_nodes = []
-        for n in renamed_nodes:
-            n = copy.deepcopy(n)
-
-            normalized_nodes.append(
-                normalize_mux(n)
-            )
-         
+        normalized_nodes = [normalize_mux(copy.deepcopy(n)) for n in renamed_nodes]
         info_ordered = [reorder_info(n) for n in normalized_nodes]
-        info_ordered_dicts = [
-            remove_empty_fields(dict(n))
-            for n in info_ordered
-        ]
+        info_ordered_dicts = [remove_empty_fields(dict(n)) for n in info_ordered]
 
         # Remove internal parser metadata before final export
         for n in info_ordered_dicts:
             n.pop("_original", None)
-            n.pop("_raw_query", None)
+            n.pop("_key_order", None)
+        
+            # Remove raw HY2 URL-only fields
+            if n.get("type") == "hysteria2":
+                n.pop("insecure", None)
+                n.pop("pinSHA256", None)
 
         # Line by line YAML proxies output format
         def make_single_line_yaml(proxies):
@@ -1656,9 +1656,20 @@ def main():
             for p in proxies:
                 # Convert nested dicts safely
                 def to_yaml_value(v):
+
                     if isinstance(v, dict):
-                        inner = ", ".join(f"{k}: {json.dumps(vv, ensure_ascii=False)}" for k, vv in v.items())
+                        inner = ", ".join(
+                            f"{k}: {to_yaml_value(vv)}"
+                            for k, vv in v.items()
+                        )
                         return "{" + inner + "}"
+                
+                    elif isinstance(v, list):
+                        return "[" + ", ".join(
+                            json.dumps(x, ensure_ascii=False)
+                            for x in v
+                        ) + "]"
+                
                     else:
                         return json.dumps(v, ensure_ascii=False)
         
@@ -1688,7 +1699,7 @@ def main():
         # ---------------- Final output ----------------
         final_output = f"# Last update: {timestamp}\n" + output_text
         with open(TEMP_FILE, "w", encoding="utf-8") as f: f.write(final_output)
-        print(f"[done] 💾 Generated subscription -> {TEMP_FILE}")
+        print(f"[done] 💾Final subscription generated using clash template")
 
         # Upload to textdb only after all upper processes successful processing
         upload_to_textdb(final_output)

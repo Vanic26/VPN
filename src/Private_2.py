@@ -674,7 +674,8 @@ def parse_hysteria2(line, line_number=None):
         # mport / server_ports
         # ---------------------------------------------------
         if "mport" in query:
-            node["mport"] = query["mport"]
+        node["ports"] = query["mport"]
+        node["mport"] = query["mport"]
 
         # ---------------------------------------------------
         # TLS/SNI handeling
@@ -1643,6 +1644,11 @@ def main():
         for n in info_ordered_dicts:
             n.pop("_original", None)
             n.pop("_key_order", None)
+        
+            # Remove raw HY2 URL-only fields
+            if n.get("type") == "hysteria2":
+                n.pop("insecure", None)
+                n.pop("pinSHA256", None)
 
         print("\n[DEBUG FINAL HY2 RAW]")
         for n in info_ordered:

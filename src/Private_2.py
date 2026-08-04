@@ -679,30 +679,30 @@ def parse_hysteria2(line, line_number=None):
         # ---------------------------------------------------
         # TLS / Hysteria2 Clash Meta compatible
         # ---------------------------------------------------
-        tls = {}
         
+        # SNI
         if query.get("sni"):
-            tls["server_name"] = query["sni"]
+            node["sni"] = query["sni"]
         
+        
+        # Certificate fingerprint
         if query.get("pinSHA256"):
             node["fingerprint"] = query["pinSHA256"]
         
-        # Hysteria2 insecure
+        
+        # Insecure TLS
         insecure = False
+        
         if query.get("insecure", "").lower() in ("1", "true", "yes"):
             insecure = True
         
         if query.get("allowInsecure", "").lower() in ("1", "true", "yes"):
             insecure = True
         
-        # Hysteria2 pinSHA256 requires insecure TLS mode
+        # pinSHA256 usually works with insecure mode
         if query.get("pinSHA256"):
             insecure = True
         
-        tls["insecure"] = insecure
-        tls["enabled"] = True
-        
-        node["tls"] = tls
         
         if insecure:
             node["skip-cert-verify"] = True

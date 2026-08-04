@@ -608,6 +608,11 @@ def parse_trojan(line, line_number=None):
         if sni:
             tls["server_name"] = sni
         tls["insecure"] = query.get("allowInsecure", "0").lower() in ("1", "true", "yes")
+        
+        # uTLS fingerprint support
+        if query.get("fp"):
+            tls["utls"] = {
+                "enabled": True
         node["tls"] = tls
         
         if tls["insecure"]:
@@ -621,16 +626,28 @@ def parse_trojan(line, line_number=None):
         if "type" in query:
             node["network"] = query["type"]
 
-        # WebSocket
+        # WebSocket transport
         if node.get("network") == "ws":
-            ws_opts = {"path": urllib.parse.unquote(query.get("path", "/"))}
-            if "host" in query:
-                ws_opts["headers"] = {"Host": query["host"]}
-            node["ws-opts"] = ws_opts
+        
+            transport = {
+                "type": "ws",
+                "path": urllib.parse.unquote(query.get("path", "/"))
+            }
+        
+            if query.get("host"):
+                transport["headers"] = {
+                    "Host": [
+                        query["host"]
+                    ]
+                }
+        
+            node["transport"] = transport
 
         # gRPC
         elif node.get("network") == "grpc":
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
+
+        node.pop("network", None)
 
         # ---------------- Dynamic Fields ----------------
         node = merge_dynamic_fields(node, query)

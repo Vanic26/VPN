@@ -526,8 +526,6 @@ def parse_vless(line, line_number=None):
         if node.get("network") == "grpc":
             node["grpc-opts"] = {"grpc-service-name": query.get("serviceName", "")}
 
-        print("\n[DEBUG VLESS RAW QUERY]")
-        print(node.get("_raw_query"))
         node = merge_dynamic_fields(node, query)
         return node
 
@@ -681,29 +679,19 @@ def parse_hysteria2(line, line_number=None):
             ]
 
         # ---------------------------------------------------
-        # TLS
+        # TLS / Clash Meta compatible
         # ---------------------------------------------------
-        tls = {}
+        if "sni" in query and query["sni"]:
+            node["sni"] = query["sni"]
         
-        if "sni" in query:
-            tls["server_name"] = query["sni"]
-        
-        if "pinSHA256" in query:
+        if "pinSHA256" in query and query["pinSHA256"]:
             node["fingerprint"] = query["pinSHA256"]
-            tls["insecure"] = True
         
-        elif "allowInsecure" in query:
-            tls["insecure"] = query["allowInsecure"].lower() in ("1", "true", "yes")
+        if query.get("insecure", "").lower() in ("1", "true", "yes"):
+            node["skip-cert-verify"] = True
         
-        elif "insecure" in query:
-            tls["insecure"] = query["insecure"].lower() in ("1", "true", "yes")
-        
-        if tls:
-            tls["enabled"] = True
-            node["tls"] = tls
-        
-            if tls.get("insecure") is True:
-                node["skip-cert-verify"] = True
+        elif query.get("allowInsecure", "").lower() in ("1", "true", "yes"):
+            node["skip-cert-verify"] = True
 
         # ---------------------------------------------------
         # OBFS
@@ -732,14 +720,6 @@ def parse_hysteria2(line, line_number=None):
 
         if "down" in query:
             node["down"] = query["down"]
-
-        # ---------------------------------------------------
-        # Prevent duplicate fields
-        # ---------------------------------------------------
-        query.pop("sni", None)
-        query.pop("insecure", None)
-        query.pop("allowInsecure", None)
-        query.pop("pinSHA256", None)
 
         node = merge_dynamic_fields(node, query)
 

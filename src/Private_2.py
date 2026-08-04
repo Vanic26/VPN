@@ -1425,24 +1425,13 @@ def load_proxies(url, retries=5):
             
                     if data and "proxies" in data:
                         for idx, p in enumerate(data["proxies"], start=1):
-            
-                            if idx == 10:
-                                print("\n[DEBUG YAML SAFE_LOAD RESULT 10th]")
-                                print(yaml.dump(
-                                    p,
-                                    allow_unicode=True,
-                                    sort_keys=False
-                                ))
-            
                             original_name = str(p.get("name", "") or "").strip()
             
                             if not original_name:
                                 p["name"] = f"Node-{idx}"
             
                             p.pop("metadata", None)
-            
                             nodes.append(p)
-            
                             protocol = str(p.get("type", "NODE")).upper()
             
                             print(

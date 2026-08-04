@@ -1650,11 +1650,15 @@ def main():
             remove_empty_fields(dict(n))
             for n in info_ordered
         ]
-        print("\n[DEBUG FINAL HY2 CHECK]")
-        for n in info_ordered_dicts:
+        print("\n[DEBUG ALL HY2 AFTER RENAME]")
+        hy2_count = 0
+        for i, n in enumerate(renamed_nodes, start=1):
             if n.get("type") == "hysteria2":
+                hy2_count += 1
+                print(f"\n--- HY2 NODE {hy2_count} (Index {i}) ---")
                 print(yaml.dump(n, allow_unicode=True, sort_keys=False))
-                break
+        
+        print(f"\nTotal HY2 nodes: {hy2_count}")
 
         # Remove internal parser metadata before final export
         for n in info_ordered_dicts:

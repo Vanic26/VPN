@@ -614,6 +614,7 @@ def parse_trojan(line, line_number=None):
     except Exception as e:
         print(f"[warn] ❗Trojan parse error -> Line {line_number}: {e}")
         return None
+        
 # -----------------------------------------------------------
 # HYSTERIA2 Parser
 # -----------------------------------------------------------
@@ -909,15 +910,13 @@ def parse_plugin(plugin_str: str):
             
             elif key == "mux":
                 v = str(val).lower()
+            
                 if v in ["0", "false"]:
-                    opts[key] = False
+                    opts[key] = 0
                 elif v in ["1", "true"]:
-                    opts[key] = True
+                    opts[key] = 1
                 else:
                     opts[key] = smart_cast(val)
-        
-            else:
-                opts[key] = smart_cast(val)
         else:
             opts[p.strip()] = True
     return plugin, opts
@@ -973,34 +972,41 @@ def parse_ss(line, line_number=None):
             }
         
             if "plugin" in query:
-                plugin, plugin_opts = parse_plugin(
-                    query["plugin"]
-                )
+                plugin, plugin_opts = parse_plugin(query["plugin"])
+                query.pop("plugin", None)
         
         else:
             core = raw
         core = core.strip()
 
         # -------- decode --------
+        srvp = None
+
+        # Format:
+        # method:password@server:port
         if "@" in core and ":" in core.split("@")[0]:
-            decoded = core
+            userinfo, srvp = core.split("@", 1)
+            cipher, password = userinfo.split(":", 1)
+
         else:
+
             decoded = decode_base64(core)
 
-            if ":" not in decoded:
-                raise ValueError("Invalid userinfo")
+            if not decoded:
+                raise ValueError("Base64 decode failed")
 
-            cipher, password = decoded.split(":", 1)
+            # SIP002:
+            # method:password@server:port
+            if "@" in decoded:
+                userinfo, srvp = decoded.split("@", 1)
 
-            if "@" not in decoded:
-                raise ValueError("Invalid SIP002 format")
+                if ":" not in userinfo:
+                    raise ValueError("Invalid userinfo")
+                cipher, password = userinfo.split(":", 1)
 
-            userinfo, srvp = decoded.split("@", 1)
+            else:
 
-            if ":" not in userinfo:
-                raise ValueError("Invalid userinfo")
-
-            cipher, password = userinfo.split(":", 1)
+                raise ValueError("Invalid SS format")
 
         # -------- server / port --------
         server, port = parse_server_port(srvp)

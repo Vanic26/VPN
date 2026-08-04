@@ -365,6 +365,7 @@ def parse_vmess(line, line_number=None):
             "cipher": data.get("scy") or "auto",
             "network": data.get("net") or "tcp",
         }
+        node["_key_order"] = list(node.keys())
 
         # ---------------- TLS Handling ----------------
         tls_val = data.get("tls")
@@ -476,7 +477,7 @@ def parse_vless(line, line_number=None):
             "uuid": uuid,
             "udp": True,
         }
-        node["_raw_query"] = query.copy()
+        node["_key_order"] = list(node.keys())
         
         # preserve important raw fields
         for key in ["flow"]:
@@ -585,6 +586,7 @@ def parse_trojan(line, line_number=None):
             "port": int(port.strip()),
             "password": urllib.parse.unquote(password.strip()),
         }
+        node["_key_order"] = list(node.keys())
 
         # TLS / Security
         tls = {"enabled": True}
@@ -666,12 +668,12 @@ def parse_hysteria2(line, line_number=None):
             "password": password,
             "udp": True,
         }
+        node["_key_order"] = list(node.keys())
 
         # ---------------------------------------------------
         # mport / server_ports
         # ---------------------------------------------------
         if "mport" in query:
-            node["mport"] = query["mport"]
             node["server_ports"] = [
                 query["mport"].replace("-", ":")
             ]
@@ -735,6 +737,11 @@ def parse_hysteria2(line, line_number=None):
         if "down" in query:
             node["down"] = query["down"]
 
+        query.pop("pinSHA256", None)
+        query.pop("sni", None)
+        query.pop("insecure", None)
+        query.pop("allowInsecure", None)
+
         node = merge_dynamic_fields(node, query)
         return node
 
@@ -769,6 +776,7 @@ def parse_anytls(line, line_number=None):
             "password": password,
             "udp": True,
         }
+        node["_key_order"] = list(node.keys())
 
         # ---------------- TLS / SNI ----------------
         if "sni" in query:
@@ -825,6 +833,7 @@ def parse_tuic(line, line_number=None):
             "uuid": uuid,
             "password": password,
         }
+        node["_key_order"] = list(node.keys())
 
         # ---------------- TLS ----------------
         tls = {}
@@ -1023,6 +1032,7 @@ def parse_ss(line, line_number=None):
             "password": password,
             "udp": True,
         }
+        node["_key_order"] = list(node.keys())
 
         if plugin:
             node["plugin"] = plugin
@@ -1076,6 +1086,7 @@ def parse_ssr(line, line_number=None):
             "obfs": obfs,
             "password": password
         }
+        node["_key_order"] = list(node.keys())
 
         # ---------------- optional fields ----------------
         if "group" in qs:
@@ -1140,6 +1151,7 @@ def parse_socks(line, line_number=None):
             "username": username,
             "password": password,
         }
+        node["_key_order"] = list(node.keys())
 
         return node
 
@@ -1617,13 +1629,15 @@ def main():
         # ---------------- Function to reorder keys ----------------
         def reorder_info(node):
             node = copy.deepcopy(node)
-        
             ordered = OrderedDict()
+            original_order = node.pop("_key_order", [])
         
-            for key in INFO_ORDER:
+            # Follow original parser/source order
+            for key in original_order:
                 if key in node:
                     ordered[key] = node[key]
         
+            # Add fields created later
             for key in node:
                 if key not in ordered:
                     ordered[key] = node[key]
@@ -1662,7 +1676,6 @@ def main():
         # Remove internal parser metadata before final export
         for n in info_ordered_dicts:
             n.pop("_original", None)
-            n.pop("_raw_query", None)
         print("\n[DEBUG ALL HY2 FINAL EXPORT]")
         for i, n in enumerate(info_ordered_dicts, start=1):
             if n.get("type") == "hysteria2":

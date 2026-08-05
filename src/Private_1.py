@@ -1711,11 +1711,7 @@ def load_proxies(url, retries=5):
 
 # ---------------- Main ----------------
 def main():
-    try:
-        if not TEXTDB_API:
-            print("[FATAL] ⚠️ TEXTDB_API secret is missing or empty")
-            sys.exit(1)
-            
+    try:   
         CN_TO_CC = load_cn_to_cc()
         sources = load_sources()
         print(f"[start] 🖥️ Loaded ({len(sources)}) subscription links from source")

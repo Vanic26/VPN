@@ -425,28 +425,24 @@ def normalize_vmess_json(data):
     normalized = {}
 
     for k, v in data.items():
-
-        # null safety
         if v is None:
             normalized[k] = ""
 
-        # keep valid primitive types
         elif isinstance(v, (str, int, float, bool, list, dict)):
             normalized[k] = v
 
-        # weird objects
         else:
             normalized[k] = str(v)
 
     return normalized
-    
+
 # ---------------- Main VMESS parser ----------------
 def parse_vmess(line, line_number=None):
     try:
         if not line or not line.startswith("vmess://"):
             return None
-            
-        # ---------------- Decode ----------------
+
+        # Decode
         raw = line[8:]
         decoded = decode_base64(raw)
 
@@ -454,12 +450,11 @@ def parse_vmess(line, line_number=None):
             raise ValueError("Empty decode result")
 
         data = json.loads(decoded)
-
-        # Normalize ALL values (critical fix)
         data = normalize_vmess_json(data)
 
-        # ---------------- Core Fields ----------------
-        node = {
+        # ---------------- Core ----------------
+        network = (data.get("net") or data.get("type") or "tcp")
+        node = 
             "type": "vmess",
             "name": data.get("ps") or "VMESS Node",
             "server": data.get("add") or "",
@@ -467,60 +462,71 @@ def parse_vmess(line, line_number=None):
             "uuid": data.get("id") or "",
             "alterId": safe_int(data.get("aid")),
             "cipher": data.get("scy") or "auto",
-            "network": data.get("net") or "tcp",
+            "network": network,
             "udp": True,
         }
 
-        # ---------------- TLS Handling ----------------
+        # ---------------- TLS ----------------
         tls_val = data.get("tls")
-
-        if isinstance(tls_val, str):
-            tls_enabled = tls_val.lower() in ("tls", "1", "true", "yes")
-        else:
-            tls_enabled = bool(tls_val)
+        tls_enabled = False
         
+        if isinstance(tls_val, str):
+            tls_enabled = tls_val.lower() in (
+                "tls",
+                "1",
+                "true",
+                "yes"
+            )
+
+        elif isinstance(tls_val, bool):
+            tls_enabled = tls_val
+
         if tls_enabled:
             tls = {"enabled": True}
-            sni = data.get("sni") or data.get("host")
-        
+            sni = (data.get("sni") or data.get("host"))
+
             if sni:
                 tls["server_name"] = sni
-
-            if data.get("fp"):
-                tls["fingerprint"] = data["fp"]
-        
             node["tls"] = tls
 
-        # ---------------- Network Handling ----------------
-        net = node["network"]
+        # ---------------- Fingerprint ----------------
+        if data.get("fp"):
+            node["client-fingerprint"] = data["fp"]
 
-        if net == "ws":
-            node["ws-opts"] = {"path": data.get("path") or "/", "headers": {"Host": data.get("host") or ""}}
+        # ---------------- Network ----------------
+        if network == "ws":
+            ws_opts = {"path": data.get("path") or "/", "headers": {"Host": data.get("host") or ""}}
+            node["ws-opts"] = ws_opts
 
-        elif net == "grpc":
+        elif network == "grpc":
             node["grpc-opts"] = {"grpc-service-name": data.get("path") or ""}
 
-        elif net == "h2":
+        elif network == "h2":
             node["h2-opts"] = {"path": data.get("path") or "/", "host": [data.get("host") or ""]}
 
-        # ---------------- Remove duplicate core fields ----------------
+        # ---------------- Remove raw duplicate keys ----------------
         for key in (
             "ps",
             "add",
             "port",
             "id",
             "aid",
-            "net"
+            "net",
+            "type",
+            "tls"
         ):
+
             data.pop(key, None)
 
-        # ---------------- Dynamic Fields ----------------
+        # ---------------- Dynamic ----------------
         node = merge_dynamic_fields(node, data)
         node["_key_order"] = list(node.keys())
+        
         return node
 
     except Exception as e:
         print(f"[warn] ❗Vmess parse error -> Line {line_number}: {e}")
+
         return None
         
 # -----------------------------------------------------------

@@ -450,6 +450,41 @@ def parse_vmess(line, line_number=None):
         if not line or not line.startswith("vmess://"):
             return None
 
+        # VMESS URI FORMAT
+        if "@" in line:
+            parsed = urllib.parse.urlparse(line)
+            uuid = urllib.parse.unquote(parsed.username or "")
+            host = parsed.hostname
+            port = parsed.port
+            query = {k: v[-1] for k, v in urllib.parse.parse_qs(parsed.query, keep_blank_values=True).items()}
+            name = urllib.parse.unquote(parsed.fragment or "VMESS Node")
+
+            if not uuid or not host or not port:
+                return None
+
+            node = {
+                "type": "vmess",
+                "name": name,
+                "server": host,
+                "port": int(port),
+                "uuid": uuid,
+                "alterId": 0,
+                "cipher": query.get("encryption", "auto"),
+                "network": query.get("type", "tcp"),
+                "udp": True,
+            }
+
+            # TLS
+            security = query.get("security")
+            if security == "tls": node["tls"] = {"enabled": True}
+
+            # TCP
+            if node["network"] == "tcp": node["network"] = "tcp"
+            node = merge_dynamic_fields(node, query)
+            node["_key_order"] = list(node.keys())
+
+            return node
+
         # Decode
         raw = line[8:]
         decoded = decode_base64(raw)
@@ -696,9 +731,7 @@ def parse_trojan(line, line_number=None):
             ws_opts = {"path": urllib.parse.unquote(query.get("path", "/"))}
             host_header = (query.get("host") or sni)
 
-            if host_header:
-                ws_opts["headers"] = {"Host": query["host"]}
-
+            if host_header: ws_opts["headers"] = {"Host": host_header}
             node["ws-opts"] = ws_opts
 
         # gRPC
@@ -719,7 +752,7 @@ def parse_trojan(line, line_number=None):
 # -----------------------------------------------------------
 def parse_hysteria2(line, line_number=None):
     try:
-        if not (line.startswith("hysteria2://") or line.startswith("hy2://")):
+        if not (line.startswith("hysteria://") or line.startswith("hysteria2://") or line.startswith("hy2://")):
             return None
 
         # normalize
@@ -1278,6 +1311,69 @@ def parse_socks(line, line_number=None):
         return None
 
 # -----------------------------------------------------------
+# HTTP / HTTPS Proxy Parser
+# -----------------------------------------------------------
+def parse_http(line, line_number=None):
+    try:
+        if not (
+            line.startswith("http://")
+            or line.startswith("https://")
+        ):
+            return None
+
+        # ---------------- Parse URL ----------------
+        parsed = urllib.parse.urlparse(line)
+        host = parsed.hostname
+        port = parsed.port
+
+        if not host:
+            return None
+
+        # Default ports
+        if not port:
+            if parsed.scheme == "https":
+                port = 443
+
+            else:
+                port = 80
+
+        # ---------------- Authentication ----------------
+        username = urllib.parse.unquote(parsed.username or "")
+        password = urllib.parse.unquote(parsed.password or "")
+
+        # ---------------- Name ----------------
+        name = urllib.parse.unquote(parsed.fragment or "HTTP Node")
+        node = {
+            "type": "http",
+            "name": name,
+            "server": host,
+            "port": int(port),
+        }
+
+        # ---------------- Auth ----------------
+        if username:
+            node["username"] = username
+
+        if password:
+            node["password"] = password
+
+        # ---------------- TLS ----------------
+        if parsed.scheme == "https": node["tls"] = {"enabled": True}
+
+        # ---------------- Query fields ----------------
+        query = {k: v[-1] for k, v in urllib.parse.parse_qs(parsed.query, keep_blank_values=True).items()}
+
+        # ---------------- Dynamic Fields ----------------
+        node = merge_dynamic_fields(node, query)
+        node["_key_order"] = list(node.keys())
+
+        return node
+
+    except Exception as e:
+        print(f"[warn] ❗HTTP parse error -> Line {line_number}: {e}")
+        return None
+
+# -----------------------------------------------------------
 # Normalize MUX
 # -----------------------------------------------------------
 def normalize_mux(node):
@@ -1318,7 +1414,7 @@ def parse_node_line(line, line_number=None):
         if line.startswith("trojan://"):
             return parse_trojan(line, line_number)
         
-        if line.startswith("hysteria2://") or line.startswith("hy2://"):
+        if line.startswith(("hysteria://", "hysteria2://", "hy2://")):
             return parse_hysteria2(line, line_number)
         
         if line.startswith("anytls://"):
@@ -1335,6 +1431,9 @@ def parse_node_line(line, line_number=None):
 
         if line.startswith(("socks://", "socks5://")):
             return parse_socks(line, line_number)
+
+        if line.startswith(("http://", "https://")):
+            return parse_http(line, line_number)
 
         return None
 
@@ -1614,7 +1713,7 @@ def load_proxies(url, retries=5):
 def main():
     try:
         if not TEXTDB_API:
-            print("[FATAL] ⚠️ TEXTDB_API_1 secret is missing or empty")
+            print("[FATAL] ⚠️ TEXTDB_API secret is missing or empty")
             sys.exit(1)
             
         CN_TO_CC = load_cn_to_cc()

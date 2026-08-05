@@ -68,15 +68,135 @@ def tcp_latency_ms(host, port, timeout=2.0):
 
 def normalize_node(n):
     """
-    Non-destructive normalizer.
-    Used only for duplicate detection.
-    Original node data must never be modified.
+    Advanced non-destructive normalizer.
+    Purpose:
+    - Duplicate detection only
+    - Never used for final export
+    - Supports Clash + Sing-box/Karing formats
+    Original node remains untouched.
     """
-
     if not isinstance(n, dict):
         return None
+    n = copy.deepcopy(n)
 
-    return copy.deepcopy(n)
+    # Safe nested objects
+    tls_obj = n.get("tls")
+    if not isinstance(tls_obj, dict):
+        tls_obj = {}
+    transport_obj = n.get("transport")
+
+    if not isinstance(transport_obj, dict):
+        transport_obj = {}
+    ws_opts = n.get("ws-opts")
+
+    if not isinstance(ws_opts, dict):
+        ws_opts = {}
+    grpc_opts = n.get("grpc-opts")
+
+    if not isinstance(grpc_opts, dict):
+        grpc_opts = {}
+    reality_opts = n.get("reality-opts")
+
+    if not isinstance(reality_opts, dict):
+        reality_opts = {}
+    plugin_opts = n.get("plugin-opts")
+
+    if not isinstance(plugin_opts, dict):
+        plugin_opts = {}
+
+    # Server normalization
+    server = (n.get("server") or n.get("host") or "")
+    n["server"] = (
+        str(server)
+        .strip()
+        .lower()
+        .rstrip(".")
+    )
+
+    # Port normalization
+    try:
+        n["port"] = int(n.get("port") or n.get("server_port") or 0)
+    except Exception:
+        n["port"] = 0
+
+    # Protocol
+    n["type"] = (str(n.get("type") or "").strip().lower())
+
+    # ---------------------------------------------------
+    # Authentication
+    # VMESS -> uuid
+    # VLESS -> uuid
+    # Trojan/HY2/SS -> password
+    # ---------------------------------------------------
+    auth = (n.get("uuid") or n.get("password") or "")
+    n["_auth"] = (str(auth).strip())
+
+    # Security detection
+    if reality_opts:
+        n["_security"] = "reality"
+
+    elif tls_obj:
+        n["_security"] = "tls"
+
+    elif n.get("security"):
+        n["_security"] = str(n.get("security")).lower()
+
+    else:
+        n["_security"] = ""
+
+    # SNI detection
+    sni = (n.get("sni") or n.get("servername") or n.get("server_name") or tls_obj.get("server_name") or "")
+    n["_sni"] = str(sni).strip().lower()
+
+    # Network detection
+    network = (n.get("network") or transport_obj.get("type") or "")
+
+    if not network:
+        if ws_opts:
+            network = "ws"
+
+        elif grpc_opts:
+            network = "grpc"
+
+        else:
+            network = "tcp"
+
+    n["_network"] = (str(network).strip().lower())
+
+    # Path / service normalization
+    path = ""
+    if n["_network"] == "ws":
+        path = (ws_opts.get("path") or transport_obj.get("path") or n.get("path") or "")
+
+    elif n["_network"] == "grpc":
+        path = (grpc_opts.get("grpc-service-name") or grpc_opts.get("serviceName") or transport_obj.get("service_name") or n.get("serviceName") or "")
+
+
+    n["_path"] = (str(path).strip().lower())
+
+    # Reality public key / short id
+    reality_key = (reality_opts.get("public-key") or reality_opts.get("pbk") or n.get("pbk") or "")
+    reality_sid = (reality_opts.get("short-id") or reality_opts.get("sid") or n.get("sid") or "")
+    n["_reality_key"] = str(reality_key).strip()
+    n["_reality_sid"] = str(reality_sid).strip()
+
+    # HY2 special handling
+    n.pop("mport", None)
+    n.pop("server_ports", None)
+
+    # Remove unstable fields
+    for key in (
+        "name",
+        "tag",
+        "remark",
+        "ps",
+        "metadata",
+        "_original",
+        "_key_order"
+    ):
+        n.pop(key, None)
+
+    return n
 
 def deduplicate_nodes(nodes):
     seen = set()
@@ -84,38 +204,39 @@ def deduplicate_nodes(nodes):
     removed = 0
 
     for raw_node in nodes:
-
-        n = normalize_node(raw_node)
-
-        if not n:
+        normalized = normalize_node(raw_node)
+        if not normalized:
             continue
 
-        auth = (
-            n.get("uuid")
-            or n.get("password")
-            or ""
-        )
-
-        if not auth:
-            unique_nodes.append(n)
-            continue
-
+        # Build stable duplicate key
         key = (
-            n.get("type", ""),
-            n.get("server", ""),
-            n.get("port", ""),
-            auth,
-            str(n.get("tls", "")),
-            str(n.get("servername", "")),
-            str(n.get("network", "")),
+            normalized.get("type", ""),
+            normalized.get("server", ""),
+            normalized.get("port", ""),
+
+            # authentication
+            normalized.get("_auth", ""),
+
+            # TLS / Reality
+            normalized.get("_security", ""),
+            normalized.get("_sni", ""),
+
+            # transport
+            normalized.get("_network", ""),
+            normalized.get("_path", ""),
+
+            # Reality
+            normalized.get("_reality_key", ""),
+            normalized.get("_reality_sid", ""),
         )
 
         if key in seen:
             removed += 1
-            continue
-
+            continue 
         seen.add(key)
-        unique_nodes.append(n)
+
+        # Keep original node, not normalized copy
+        unique_nodes.append(raw_node)
 
     return unique_nodes, removed
 

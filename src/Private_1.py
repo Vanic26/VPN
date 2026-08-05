@@ -454,7 +454,7 @@ def parse_vmess(line, line_number=None):
 
         # ---------------- Core ----------------
         network = (data.get("net") or data.get("type") or "tcp")
-        node = 
+        node = {
             "type": "vmess",
             "name": data.get("ps") or "VMESS Node",
             "server": data.get("add") or "",

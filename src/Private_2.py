@@ -106,12 +106,7 @@ def normalize_node(n):
 
     # Server normalization
     server = (n.get("server") or n.get("host") or "")
-    n["server"] = (
-        str(server)
-        .strip()
-        .lower()
-        .rstrip(".")
-    )
+    n["server"] = (str(server).strip().lower().rstrip("."))
 
     # Port normalization
     try:
@@ -150,7 +145,6 @@ def normalize_node(n):
 
     # Network detection
     network = (n.get("network") or transport_obj.get("type") or "")
-
     if not network:
         if ws_opts:
             network = "ws"
@@ -160,7 +154,6 @@ def normalize_node(n):
 
         else:
             network = "tcp"
-
     n["_network"] = (str(network).strip().lower())
 
     # Path / service normalization
@@ -170,8 +163,6 @@ def normalize_node(n):
 
     elif n["_network"] == "grpc":
         path = (grpc_opts.get("grpc-service-name") or grpc_opts.get("serviceName") or transport_obj.get("service_name") or n.get("serviceName") or "")
-
-
     n["_path"] = (str(path).strip().lower())
 
     # Reality public key / short id
@@ -363,6 +354,14 @@ def decode_base64(data: str) -> str:
     except Exception:
         return ""
 
+def safe_int(value, default=0):
+    try:
+        if value is None or value == "":
+            return default
+        return int(value)
+    except Exception:
+        return default
+        
 # -----------------------------------------------------------
 # Helper: Generic dynamic query merger
 # -----------------------------------------------------------
@@ -374,7 +373,6 @@ def merge_dynamic_fields(node, data):
     - Supports ALPN parsing
     - Supports URL decoding
     """
-
     # ---------------- remove metadata universally ---------------- 
     node.pop("metadata", None)
 
@@ -435,28 +433,24 @@ def normalize_vmess_json(data):
     normalized = {}
 
     for k, v in data.items():
-
-        # null safety
         if v is None:
             normalized[k] = ""
 
-        # keep valid primitive types
         elif isinstance(v, (str, int, float, bool, list, dict)):
             normalized[k] = v
 
-        # weird objects
         else:
             normalized[k] = str(v)
 
     return normalized
-    
+
 # ---------------- Main VMESS parser ----------------
 def parse_vmess(line, line_number=None):
     try:
         if not line or not line.startswith("vmess://"):
             return None
-            
-        # ---------------- Decode ----------------
+
+        # Decode
         raw = line[8:]
         decoded = decode_base64(raw)
 
@@ -464,11 +458,10 @@ def parse_vmess(line, line_number=None):
             raise ValueError("Empty decode result")
 
         data = json.loads(decoded)
-
-        # Normalize ALL values (critical fix)
         data = normalize_vmess_json(data)
 
-        # ---------------- Core Fields ----------------
+        # ---------------- Core ----------------
+        network = (data.get("net") or data.get("type") or "tcp")
         node = {
             "type": "vmess",
             "name": data.get("ps") or "VMESS Node",
@@ -477,60 +470,71 @@ def parse_vmess(line, line_number=None):
             "uuid": data.get("id") or "",
             "alterId": safe_int(data.get("aid")),
             "cipher": data.get("scy") or "auto",
-            "network": data.get("net") or "tcp",
+            "network": network,
             "udp": True,
         }
 
-        # ---------------- TLS Handling ----------------
+        # ---------------- TLS ----------------
         tls_val = data.get("tls")
-
-        if isinstance(tls_val, str):
-            tls_enabled = tls_val.lower() in ("tls", "1", "true", "yes")
-        else:
-            tls_enabled = bool(tls_val)
+        tls_enabled = False
         
+        if isinstance(tls_val, str):
+            tls_enabled = tls_val.lower() in (
+                "tls",
+                "1",
+                "true",
+                "yes"
+            )
+
+        elif isinstance(tls_val, bool):
+            tls_enabled = tls_val
+
         if tls_enabled:
             tls = {"enabled": True}
-            sni = data.get("sni") or data.get("host")
-        
+            sni = (data.get("sni") or data.get("host"))
+
             if sni:
                 tls["server_name"] = sni
-
-            if data.get("fp"):
-                tls["fingerprint"] = data["fp"]
-        
             node["tls"] = tls
 
-        # ---------------- Network Handling ----------------
-        net = node["network"]
+        # ---------------- Fingerprint ----------------
+        if data.get("fp"):
+            node["client-fingerprint"] = data["fp"]
 
-        if net == "ws":
-            node["ws-opts"] = {"path": data.get("path") or "/", "headers": {"Host": data.get("host") or ""}}
+        # ---------------- Network ----------------
+        if network == "ws":
+            ws_opts = {"path": data.get("path") or "/", "headers": {"Host": data.get("host") or ""}}
+            node["ws-opts"] = ws_opts
 
-        elif net == "grpc":
+        elif network == "grpc":
             node["grpc-opts"] = {"grpc-service-name": data.get("path") or ""}
 
-        elif net == "h2":
+        elif network == "h2":
             node["h2-opts"] = {"path": data.get("path") or "/", "host": [data.get("host") or ""]}
 
-        # ---------------- Remove duplicate core fields ----------------
+        # ---------------- Remove raw duplicate keys ----------------
         for key in (
             "ps",
             "add",
             "port",
             "id",
             "aid",
-            "net"
+            "net",
+            "type",
+            "tls"
         ):
+
             data.pop(key, None)
 
-        # ---------------- Dynamic Fields ----------------
+        # ---------------- Dynamic ----------------
         node = merge_dynamic_fields(node, data)
         node["_key_order"] = list(node.keys())
+        
         return node
 
     except Exception as e:
         print(f"[warn] ❗Vmess parse error -> Line {line_number}: {e}")
+
         return None
         
 # -----------------------------------------------------------
@@ -1516,16 +1520,12 @@ def load_proxies(url, retries=5):
 
             if len(lines) == 1 and re.match(r'^[A-Za-z0-9+/=]+$', text.strip()):
                 try:
-                    decoded = base64.b64decode(
-                        text.strip() + "=" * (-len(text.strip()) % 4)
-                    ).decode("utf-8", errors="ignore")
-
+                    decoded = base64.b64decode(text.strip() + "=" * (-len(text.strip()) % 4)).decode("utf-8", errors="ignore")
                     decoded_lines = decoded.splitlines()
 
                     if len(decoded_lines) > 3 and "://" in decoded:
                         text = decoded
                         sub_type = "BASE64"
-
                         print("[fetch] 📥 Base64 subscription detected", flush=True)
 
                     else:
@@ -1559,11 +1559,7 @@ def load_proxies(url, retries=5):
                             p.pop("metadata", None)
                             nodes.append(p)
                             protocol = str(p.get("type", "NODE")).upper()
-            
-                            print(
-                                f"[parse] 🔎 YAML to {protocol} node: {idx} parsed",
-                                flush=True
-                            )
+                            print(f"[parse] 🔎 YAML to {protocol} node: {idx} parsed", flush=True)
             
                     else:
                         print("[warn] 😭 YAML structure invalid or empty", flush=True)
@@ -1594,8 +1590,7 @@ def load_proxies(url, retries=5):
                             )
 
                             if sub_type == "BASE64":
-                                print(
-                                    f"[parse] 🔎 Base64 to {protocol} node: {idx} parsed", flush=True )
+                                print(f"[parse] 🔎 Base64 to {protocol} node: {idx} parsed", flush=True )
                             else:
                                 print(f"[parse] 🔎 {protocol} node: {idx} parsed", flush=True )
 
@@ -1603,8 +1598,7 @@ def load_proxies(url, retries=5):
                             print(f"[skip] ⛔ Invalid or unsupported line ({idx})", flush=True)
 
                     except Exception:
-                        print(
-                            f"[warn] 😭 Error parsing line ({idx})", flush=True)
+                        print(f"[warn] 😭 Error parsing line ({idx})", flush=True)
 
             return nodes
 
@@ -1675,13 +1669,10 @@ def main():
                 renamed_nodes.append(res)
 
         if USE_ONLY_GEOIP:
-            print(
-                f"[rename] 🌍 GeoIP-only mode: Failed to rename {geoip_primary_fail} nodes and fallback to Name-based detection"
-            )
+            print(f"[rename] 🌍 GeoIP-only mode: Failed to rename {geoip_primary_fail} nodes and fallback to Name-based detection")
+            
         else:
-            print(
-                f"[rename] 🏷️ Name-based mode: Failed to rename ({name_primary_fail}) nodes and fallback to GeoIP detection"
-            )
+            print(f"[rename] 🏷️ Name-based mode: Failed to rename ({name_primary_fail}) nodes and fallback to GeoIP detection")
 
         if skipped_nodes > 0:
             print(f"[rename] ⚠️ Skipped ({skipped_nodes}) nodes that could not be assigned a name or include forbidden emoji")
@@ -1773,17 +1764,11 @@ def main():
                 def to_yaml_value(v):
 
                     if isinstance(v, dict):
-                        inner = ", ".join(
-                            f"{k}: {to_yaml_value(vv)}"
-                            for k, vv in v.items()
-                        )
+                        inner = ", ".join(f"{k}: {to_yaml_value(vv)}" for k, vv in v.items())
                         return "{" + inner + "}"
                 
                     elif isinstance(v, list):
-                        return "[" + ", ".join(
-                            json.dumps(x, ensure_ascii=False)
-                            for x in v
-                        ) + "]"
+                        return "[" + ", ".join(json.dumps(x, ensure_ascii=False) for x in v) + "]"
                 
                     else:
                         return json.dumps(v, ensure_ascii=False)

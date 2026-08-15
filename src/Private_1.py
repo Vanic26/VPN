@@ -660,6 +660,25 @@ def parse_vless(line, line_number=None):
                 node["client-fingerprint"] = query["fp"]
         
             node["reality-opts"] = {"public-key": query.get("pbk", ""), "short-id": query.get("sid", "")}
+
+        # ALPN
+        if query.get("alpn"):
+            alpn = []
+
+            for value in query["alpn"].split(","):
+                value = value.strip()
+                if not value:
+                    continue
+
+                # Deliberately remove HTTP/2
+                if value.lower() == "h2":
+                    continue
+
+                if value not in alpn:
+                    alpn.append(value)
+
+            if alpn:
+                node["alpn"] = alpn
             
         # Network
         if "type" in query:

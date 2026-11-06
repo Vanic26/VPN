@@ -1938,12 +1938,12 @@ def main():
         timestamp = local_time.strftime("%d.%m.%Y %H:%M:%S")
 
         # ---------------- Final output ----------------
-        with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-            f.write(f"# Last update: {timestamp}\n" + output_text)
+        final_output = f"# Last update: {timestamp}\n" + output_text
+        with open(TEMP_FILE, "w", encoding="utf-8") as f: f.write(final_output)
         print(f"[done] 💾 Final subscription generated using clash template")
 
         # Upload to textdb only after all upper processes successful processing
-        upload_to_textdb()
+        upload_to_textdb(final_output)
 
     except Exception as e:
         print("[⚠️ FATAL ERROR in main]", str(e))
@@ -1951,15 +1951,14 @@ def main():
         sys.exit(1)
 
 # ---------------- Upload to TextDB ----------------
-def upload_to_textdb():
+def upload_to_textdb(final_output):
     try:
-        # Read the freshly generated subscription (local, not GitHub raw).
-        with open(OUTPUT_FILE, "r", encoding="utf-8") as f:
-            output_text = f.read()
+        if not TEXTDB_API:
+            print("[FATAL] ⚠️ TEXTDB_API secret is missing or empty")
+            sys.exit(1)
 
-        if not output_text.strip():
-            raise ValueError("Subscription file is empty; TextDB update cancelled")
-
+        base_url = TEXTDB_API.split("&value=")[0]
+        
         #  Updates TextDB.
         upload_resp = session.post(TEXTDB_API, data={"value": output_text}, timeout=60)
 

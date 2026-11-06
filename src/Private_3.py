@@ -1960,7 +1960,7 @@ def upload_to_textdb(final_output):
         base_url = TEXTDB_API.split("&value=")[0]
         
         #  Updates TextDB.
-        upload_resp = session.post(TEXTDB_API, data={"value": output_text}, timeout=60)
+        upload_resp = session.post(base_url, data={"value": final_output}, timeout=60)
 
         # HTTP 200 alone is not proof of success: TextDB returns status=1 on success.
         if upload_resp.status_code != 200:
